@@ -832,11 +832,17 @@ optgroup {
 }
 table {
     border-collapse:collapse;
-	border: 1px solid #000;
+    border: 1px solid #4CAF50;
     border-spacing:0
 }
+tr:nth-child(even){background-color: #f2f2f2}
 td,th {
-    padding:0
+	border: 1px solid #4CAF50;
+    padding: 15px
+}
+th {
+  background-color: #4CAF50;
+  color: white;
 }
 body,button,input,select,textarea {
     color:#404040;
@@ -971,6 +977,7 @@ img {
     height:auto;
     max-width:100%
 }
+//设置表格渲染样式
 table {
     margin:0 0 1.5em;
     width:100%
