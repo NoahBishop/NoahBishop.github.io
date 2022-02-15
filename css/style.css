@@ -832,6 +832,7 @@ optgroup {
 }
 table {
     border-collapse:collapse;
+	border: 1px solid #000;
     border-spacing:0
 }
 td,th {
