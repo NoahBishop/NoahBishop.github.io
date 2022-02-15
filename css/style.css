@@ -832,16 +832,15 @@ optgroup {
 }
 table {
     border-collapse:collapse;
-    border: 1px solid #4CAF50;
+    border: 1px solid #000;
     border-spacing:0
 }
-tr:nth-child(even){background-color: #f2f2f2}
 td,th {
-	border: 1px solid #4CAF50;
+	border: 1px solid #000;
     padding: 14px
 }
 th {
-  background-color: #4CAF50;
+  background-color: #696969;
   color: white;
 }
 body,button,input,select,textarea {
