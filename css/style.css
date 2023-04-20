@@ -726,7 +726,7 @@ a:active,a:hover {
     outline:0
 }
 a:active {
-    cursor:url(https://morning.eu.org/img/cursor/normal.cur),alias
+    cursor:url(https://morning.eu.org/img/cursor/textto.cur),alias
 }
 abbr[title] {
     border-bottom:1px dotted
