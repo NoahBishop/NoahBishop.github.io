@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>404 - Page Not Found</title>
+    <style>
+        body {
+            background-color: #fe7676;
+            font-family: 'Lobster', cursive;
+            text-align: center;
+            color: #fdf0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 6em;
+            margin-top: 20vh;
+        }
+
+        p {
+            font-size: 2em;
+            margin-top: 5vh;
+            margin-bottom: 10vh;
+        }
+
+        a {
+            display: inline-block;
+            font-size: 1.5em;
+            padding: 10px 20px;
+            border: 3px solid #fdf0f0;
+            border-radius: 20px;
+            text-decoration: none;
+            color: #fdf0f0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        a:hover {
+            background-color: #fdf0f0;
+            color: #fe7676;
+        }
+
+        @media only screen and (max-width: 768px) {
+            h1 {
+                font-size: 4em;
+                margin-top: 15vh;
+            }
+
+            p {
+                font-size: 1.5em;
+                margin-top: 3vh;
+                margin-bottom: 7.5vh;
+            }
+        }
+    </style>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <h1>Oops!</h1>
+    <p>We can't find the page you're looking for.</p>
+    <a href="/">Take me to the homepage</a>
+    <script>
+        setTimeout(function () {
+            window.location.href = '/';
+        }, 3000);
+    </script>
+</body>
+
+</html>

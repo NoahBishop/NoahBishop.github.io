@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	
+		<title itemprop="name">
+			
+				(ch2) C++ Basic Features - Type | 
+						うさぎの手帳
+		</title>
+		
+			<link rel="shortcut icon" href="/images/favicon.ico">
+			
+				<meta http-equiv="x-dns-prefetch-control" content="on">
+				<link rel="stylesheet"
+					href="https://fonts.googleapis.com/css?family=Noto+SerifMerriweather|Merriweather+Sans|Source+Code+Pro|Ubuntu:400,700|Noto+Serif+SC"
+					media="all">
+				<link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+				<link rel="stylesheet" id="saukra_css-css" href="/css/style.css" type="text/css" media="all">
+				<link rel="stylesheet" href="/css/lib.min.css" media="all">
+				<link rel="stylesheet" href="/css/font.css" media="all">
+				<link rel="stylesheet" href="/css/insight.css" media="all">
+				<link rel="stylesheet" href="/css/jquery.fancybox.min.css" media="all">
+				<link rel="stylesheet" href="/css/zoom.css" media="all">
+				<link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+				<!--   <link rel="stylesheet" id="saukra_css-css" href="https://2heng.xin/wp-content/cache/autoptimize/css/autoptimize_ad42a61f4c7d4bdd9f91afcff6b5dda5.css
+" type="text/css" media="all"> -->
+				<script>
+					/*Initial Variables*/
+					var mashiro_option = new Object();
+					var mashiro_global = new Object();
+					mashiro_option.NProgressON = true;
+					/* 
+					* 邮箱信息之类的东西可以填在这里，这些js变量基本都作用于sakura-app.js
+					* 这样的设置仅是为了方便在基于PHP开发的主题中设置js变量，既然移植到了Node上，我想或许可以精简这一逻辑吧
+					*/
+					mashiro_option.email_domain = "";
+					mashiro_option.email_name = "";
+					mashiro_option.cookie_version_control = "";
+					mashiro_option.qzone_autocomplete = false;
+					mashiro_option.site_name = "桜荘そのうさぎ";
+					mashiro_option.author_name = "うさぎ";
+					mashiro_option.site_url = "https://morning.eu.org";
+					mashiro_option.v_appId = "EAyicHJhXmxJNEeuhACVujd4-gzGzoHsz";
+					mashiro_option.v_appKey = "09Tjj4It5DOhgboduuM40u7y";
+					mashiro_option.mathjax = "0";
+	//mashiro_option.qq_api_url = "https://api.mashiro.top/qqinfo/";
+	//mashiro_option.qq_avatar_api_url = "https://api.mashiro.top/qqinfo/";
+
+	// mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/moezx/cdn@3.4.5/css/lib.min.css";
+	// mashiro_option.float_player_on = true;
+
+					/*End of Initial Variables*/
+				</script>
+				<script type="text/javascript">
+					var bg = "https://morning.eu.org/images/cover/(1).jpg.webp,https://morning.eu.org/images/cover/(2).jpg.webp,https://morning.eu.org/images/cover/(3).jpg.webp,https://morning.eu.org/images/cover/(4).jpg.webp,https://morning.eu.org/images/cover/(5).jpg.webp,https://morning.eu.org/images/cover/(6).jpg.webp,https://morning.eu.org/images/cover/(7).jpg.webp,https://morning.eu.org/images/cover/(8).jpg.webp".split(",");
+					var bgindex = Math.floor(Math.random() * bg.length);
+					if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
+						alert('朋友，IE浏览器未适配哦~');
+					}
+				</script>
+				<script src="//code.bdstatic.com/npm/leancloud-storage@4.12.0/dist/av-min.js"></script>
+				<script src='//unpkg.com/valine@1.3.9/dist/Valine.min.js'></script>
+				<style type="text/css">
+					.hljs-ln {
+						border-collapse: collapse
+					}
+
+					.hljs-ln td {
+						padding: 0
+					}
+
+					.hljs-ln-n:before {
+						content: attr(data-line-number)
+					}
+				</style>
+				<style type="text/css">
+					.site-top .lower nav {
+						display: block !important;
+					}
+
+					.author-profile i,
+					.post-like a,
+					.post-share .show-share,
+					.sub-text,
+					.we-info a,
+					span.sitename,
+					.post-more i:hover,
+					#pagination a:hover,
+					.post-content a:hover,
+					.float-content i:hover {
+						color: #FE9600
+					}
+
+					.feature i,
+					.download,
+					.navigator i:hover,
+					.links ul li:before,
+					.ar-time i,
+					span.ar-circle,
+					.object,
+					.comment .comment-reply-link,
+					.siren-checkbox-radio:checked+.siren-checkbox-radioInput:after {
+						background: #FE9600
+					}
+
+					::-webkit-scrollbar-thumb {
+						background: #FE9600
+					}
+
+					.download,
+					.navigator i:hover,
+					.link-title,
+					.links ul li:hover,
+					#pagination a:hover,
+					.comment-respond input[type='submit']:hover {
+						border-color: #FE9600
+					}
+
+					.entry-content a:hover,
+					.site-info a:hover,
+					.comment h4 a,
+					#comments-navi a.prev,
+					#comments-navi a.next,
+					.comment h4 a:hover,
+					.site-top ul li a:hover,
+					.entry-title a:hover,
+					#archives-temp h3,
+					span.page-numbers.current,
+					.sorry li a:hover,
+					.site-title a:hover,
+					i.iconfont.js-toggle-search.iconsearch:hover,
+					.comment-respond input[type='submit']:hover {
+						color: #FE9600
+					}
+
+					.comments .comments-main {
+						display: block !important;
+					}
+
+					.comments .comments-hidden {
+						display: none !important;
+					}
+
+					background-position:center center;
+					background-attachment:inherit;
+					}
+				</style>
+<meta name="generator" content="Hexo 5.4.2"></head>
+<body class="page-template page-template-user page-template-page-analytics page-template-userpage-analytics-php page page-id-1297 chinese-font serif isWebKit">
+  <div class="scrollbar" id="bar">
+  </div>
+  <a href="#" class="cd-top faa-float animated"></a>
+  <section id="main-container">
+    <div class="headertop filter-dot">
+  <div id="banner_wave_1"></div>
+  <div id="banner_wave_2"></div>
+  <figure id="centerbg" class="centerbg">
+    <div class="focusinfo no-select">
+      <div class="header-tou">
+        <a target="_blank" rel="noopener" href="https://morning.eu.org">
+          <img src="https://morning.eu.org/images/custom/avatar.jpg">
+        </a>
+      </div>
+      <div class="header-info">
+        <p>
+          Live your life with passion! With some drive!
+        </p>
+        <div class="top-social_v2">
+          <li id="bg-pre">
+            <img class="flipx" src="/images/other/next-b.svg">
+          </li>
+          
+            
+              
+                  <li>
+                    <a href="https://github.com/NoahBishop" target="_blank" class="social-github" title="github">
+                      <img src="https://morning.eu.org/images/social/github.png">
+                    </a>
+                  </li>
+                  
+                    
+              
+                  <li>
+                    <a href="https://t.me/mega1037" target="_blank" class="social-github" title="telegram">
+                      <img src="https://morning.eu.org/images/social/telegram.png">
+                    </a>
+                  </li>
+                  
+                    
+              
+                  <li>
+                    <a href="https://music.163.com/#/user/home?id=305378376" target="_blank" class="social-github" title="netease">
+                      <img src="https://morning.eu.org/images/social/wangyiyun.png">
+                    </a>
+                  </li>
+                  
+                    
+              
+                  <li>
+                    <a href="https://www.twitter.com/noah_bishop_z" target="_blank" class="social-github" title="twitter">
+                      <img src="https://morning.eu.org/images/social/twitter.png">
+                    </a>
+                  </li>
+                  
+                    
+              
+                  <li>
+                    <a href="mailto:beiloquuw@gamil.com" target="_blank" class="social-github" title="email">
+                      <img src="https://morning.eu.org/images/social/email.svg">
+                    </a>
+                  </li>
+                  
+                    
+                      
+                        <li id="bg-next">
+                          <img src="/images/other/next-b.svg">
+                        </li>
+        </div>
+      </div>
+    </div>
+  </figure>
+  <div id="video-container" style="">
+    <video style="object-fit: fill" id="bgvideo" class="video" video-name="" src="" width="auto" preload="auto">
+    </video>
+    <div id="video-btn" class="loadvideo videolive">
+    </div>
+    <div id="video-add">
+    </div>
+    <div class="video-stu">
+    </div>
+  </div>
+  <div class="headertop-down faa-float animated" onclick="headertop_down()">
+    <span>
+      <i class="fa fa-chevron-down" aria-hidden="true">
+      </i>
+    </span>
+  </div>
+</div>
+    <div id="page" class="site wrapper">
+      <header class="site-header no-select gizle sabit" role="banner">
+  <div class="site-top">
+    <div class="site-branding">
+      <span class="site-title">
+        <span class="logolink moe-mashiro">
+          <a href="/">
+            <span class="sakurasono">桜荘その</span>
+            <span class="shironeko">うさぎ</span>
+          </a>
+        </span>
+      </span>
+    </div>
+    <div class="searchbox search-form-submit">
+      <i class="iconfont js-toggle-search iconsearch icon-search">
+      </i>
+    </div>
+    <div id="show-nav" class="showNav mobile-fit">
+      <div class="line line1">
+      </div>
+      <div class="line line2">
+      </div>
+      <div class="line line3">
+      </div>
+    </div>
+    <div class="lower-cantiner">
+      <div class="lower">
+        <nav class="mobile-fit-control hide">
+          <ul id="menu-new" class="menu">
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+                    首页
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+                    归档
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/categories/%E6%8A%80%E6%9C%AF/">
+                          <i class="fa fa-code" aria-hidden="true"></i>
+                          技术
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/%E7%94%9F%E6%B4%BB/">
+                          <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                          生活
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/%E8%B5%84%E6%BA%90/">
+                          <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                          资源
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/%E9%9A%8F%E6%83%B3/">
+                          <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                          随想
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/%E8%BD%AC%E8%BD%BD/">
+                          <i class="fa fa-book" aria-hidden="true"></i>
+                          转载
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="javascript:;">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+                    清单
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/music/">
+                          <i class="fa fa-headphones" aria-hidden="true"></i>
+                          歌单
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/comment/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+                    留言板
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/links/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+                    友人帐
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/donate/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
+                    赞赏
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-leaf faa-wrench" aria-hidden="true"></i>
+                    关于
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/about/">
+                          <i class="fa fa-meetup" aria-hidden="true"></i>
+                          我？
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/theme-sakura/">
+                          <i class="fa iconfont icon-sakura" aria-hidden="true"></i>
+                          主题
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/atom.xml">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-rss faa-pulse" aria-hidden="true"></i>
+                    RSS
+                  </span>
+                </a>
+                
+              </li>
+            
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/(2).jpg.webp');" src="" data-src="/images/cover/(2).jpg.webp">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      (ch2) C++ Basic Features - Type</h1>
+      <p class="entry-census">
+        <span>
+          <a href="morning.eu.org">
+            <img src="/images/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="morning.eu.org">Noah</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2021-12-19<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h1 id="C-Basic-Features-Type"><a href="#C-Basic-Features-Type" class="headerlink" title="C++ Basic Features - Type"></a>C++ Basic Features - Type</h1><p><em>Every widely used programming language provides a common set of features, which differ in detail from one language to another, this post briefly show the basic feature.</em></p>
+<h2 id="Variables-and-basic-type"><a href="#Variables-and-basic-type" class="headerlink" title="Variables and basic type"></a>Variables and basic type</h2><p>Type are fundamental to every programming language: the tell us what the data mean and what operations we can perform on those data.</p>
+<h3 id="Primitive-Built-in-Types"><a href="#Primitive-Built-in-Types" class="headerlink" title="Primitive Built-in Types"></a>Primitive Built-in Types</h3><p>C++ defines a set of Primitive Built-in Types that include <strong><em>arithmetic types</em></strong> and a special type called <strong><em>void</em></strong>, the arithmetic types represent character, integer, boolean values, floating-point numbers. The void type has no associated values and can be used in only a few circumstances, most commonly as the return type for functions that do not return a value. This table give the normally used types and details.</p>
+<table>
+<thead>
+<tr>
+<th>type</th>
+<th>meaning</th>
+<th>size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int</td>
+<td>integer</td>
+<td>32 bits</td>
+</tr>
+<tr>
+<td>long long</td>
+<td>long integer</td>
+<td>64 bits</td>
+</tr>
+<tr>
+<td>float</td>
+<td>single-precision-floating</td>
+<td>32 bits</td>
+</tr>
+<tr>
+<td>double</td>
+<td>double-precision-floating</td>
+<td>64 bits</td>
+</tr>
+<tr>
+<td>long double</td>
+<td>extended-precision-floating</td>
+<td>128 bits</td>
+</tr>
+<tr>
+<td>char</td>
+<td>character</td>
+<td>8 bits</td>
+</tr>
+<tr>
+<td>bool</td>
+<td>Boolean</td>
+<td>8 bits</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="c++">#include &lt;iostream&gt;
+
+int main()
+{
+ //you can use this statement check how many bytes for the type
+    //change int to another type you want
+    std::cout &lt;&lt; sizeof(int) &lt;&lt; std::endl;
+    return 0;
+}
+</code></pre>
+<p>The type of an object defines the data that an object might contain and what operations that object can perform. Among the operations that many types support is the ability to convert objects of the given type to other, related types. Type conversions happen automatically when we use an object of one type where an object of another type is expected.</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+
+int main()
+{
+ //only b = 0 can&#39;t make b is false
+    bool b = 10; // b is true
+    //actually, true equal to 1 and false equal to 0
+ int i = b; // i has value 1
+    //the fractional part will be lose
+ i = 3.14; // i has value 3
+ double pi = i; // pi has value 3.0
+ unsigned char c = -1; // assuming 8-bit chars, c has value 255
+ signed char c2 = 256; // assuming 8-bit chars, the value of c2 is undefined
+    unsigned u = 10;
+ int i = -42;
+    //the type of sum result is int
+ std::cout &lt;&lt; i + i &lt;&lt; std::endl; // prints -84
+    //the type of sum result is unsigned
+    //the int tpye has been convert to a unsigned before add operation
+ std::cout &lt;&lt; u + i &lt;&lt; std::endl; // if 32-bit ints, prints 4294967264
+    return 0;
+}
+</code></pre>
+<h3 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h3><p>A variable provides us with named storage that our programs can manipulate. Each variable in C++ has a type. The type determines the size and layout of the variable’s memory, the range of values that can be stored within that memory, and the set of operations that can be applied to the variable. C++ programmers tend to refer to variables as “variables” or “objects” interchangeably.</p>
+<p>The previous codes has explained how define a variable, but they are initialized, if you define a variable without an initializer, what that default value is depends on the type of the variable and may also depend on where the variable is defined. Some classes require that every object be explicitly initialized. The compiler will complain if we try to create an object of such a class with no initializer.</p>
+<p>The another notice is the <strong>difference between variable declarations and definitions</strong>. To allow programs to be written in logical parts, C++ supports what is commonly known as separate compilation. Separate compilation lets us split our programs into several files, each of which can be compiled independently. When we separate a program into multiple files, we need a way to share code across those files. A variable declaration specifies the type and name of a variable. A variable definition is a declaration. In addition to specifying the name and type, a definition also <strong>allocates storage</strong> and may <strong>provide the variable with an initial value.</strong></p>
+<pre><code class="c++">//extern keyword
+extern int i; // declares but does not define i
+int j; // declares and defines j
+extern double pi = 3.1416; // this is a error statement
+</code></pre>
+<p><strong>Identifiers</strong> in C++ can be composed of letters, digits, and the underscore character. The language imposes no limit on name length. Identifiers must begin with either a letter or an underscore. Identifiers are case-sensitive; upper- and lowercase letters are distinct, The standard also reserves a set of names for use in the standard library. The identifiers we define in our own programs may not contain two consecutive underscores, nor can an identifier begin with an underscore followed immediately by an uppercase letter. In addition, identifiers defined outside a function may not begin with an underscore.</p>
+<p>Conventions for Variable Names:</p>
+<ol>
+<li>An identifier should give some indication of its <strong><em>meaning</em></strong></li>
+<li>Variable names normally are <strong><em>lowercase</em></strong></li>
+<li>classes we define usually begin with an <strong><em>uppercase</em></strong> letter</li>
+<li>Identifiers with multiple words should visually distinguish each word, for example, <strong><em>student_loan</em></strong> or <strong><em>studentLoan</em></strong></li>
+</ol>
+<p>A <strong>scope</strong> is a part of the program in which a name has a particular meaning. Most scopes in C++ are delimited by curly braces. The same name can refer to different entities in different scopes. Names are visible from the point where they are declared until the end of the scope in which the declaration appears.</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+//The name main is defined outside any curly braces
+//names defined outside a function has global scope
+int a = 0;
+int main()
+{
+ int sum = 0;
+ // sum values from 1 through 10 inclusive
+ for (int val = 1; val &lt;= 10; ++val)
+  sum += val; // equivalent to sum = sum + val
+ std::cout &lt;&lt; &quot;Sum of 1 to 10 inclusive is &quot; &lt;&lt; sum &lt;&lt; std::endl;
+ return 0;
+}
+</code></pre>
+<p>Scopes can contain other scopes. The contained (or <strong>nested</strong>) scope is referred to as an inner scope, the containing scope is the outer scope. Once a name has been declared in a scope, that name can be used by scopes nested inside that scope. Names declared in the outer scope can also be redefined in an inner scope, this is a simple case.</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+// Program for illustration purposes only: It is bad style for a function
+// to use a global variable and also define a local variable with the same name
+int reused = 42; // reused has global scope
+int main()
+{
+ int unique = 0; // unique has block scope
+ // output #1: uses global reused; prints 42 0
+ std::cout &lt;&lt; reused &lt;&lt; &quot; &quot; &lt;&lt; unique &lt;&lt; std::endl;
+ int reused = 0; // new, local object named reused hides global reused
+ // output #2: uses local reused; prints 0 0
+ std::cout &lt;&lt; reused &lt;&lt; &quot; &quot; &lt;&lt; unique &lt;&lt; std::endl;
+ // output #3: explicitly requests the global reused; prints 42 0
+ std::cout &lt;&lt; ::reused &lt;&lt; &quot; &quot; &lt;&lt; unique &lt;&lt; std::endl;
+ return 0;
+}
+</code></pre>
+<h3 id="Compound-Types"><a href="#Compound-Types" class="headerlink" title="Compound Types"></a>Compound Types</h3><p>A compound type is a type that is defined in terms of another type. C++ has several compound types, two of which—<strong>references</strong> and <strong>pointers</strong>—we’ll cover in this chapter.</p>
+<p>A <strong>reference</strong> defines an alternative name for an object. A reference type “refers to” another type. We define a reference type by writing a declarator of the form &amp;d, where d is the name <strong>being declared</strong>: Once initialized, a reference remains bound to its <strong>initial object</strong>. There is no way to <strong>rebind</strong> a reference to refer to a different object. Because there is no way to rebind a reference, references must be <strong>initialized</strong>.</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+
+int main()
+{
+ int ival = 1024;
+ int&amp; refVal = ival; // refVal refers to (is another name for) ival
+ refVal = 100;
+ std::cout &lt;&lt; ival &lt;&lt; &quot; &quot; &lt;&lt; refVal &lt;&lt; std::endl; // will print 100 100
+    //error statement examples 
+    int &amp;refVal2; // error: a reference must be initialized
+    int &amp;refVal4 = 10; // error: initializer must be an object
+    double dval = 3.14;
+ int &amp;refVal5 = dval; // error: initializer must be an int object
+ return 0;
+}
+</code></pre>
+<p>A <strong>pointer</strong> is a compound type that “points to” another type. Like references, pointers are used for indirect access to other objects. Unlike a reference, <strong><em>a pointer is an object in its own right</em></strong>. Pointers can be <strong>assigned</strong> and <strong>copied</strong>; a single pointer can point to <strong>several different objects</strong> over its lifetime. Unlike a reference, a pointer need <strong>not</strong> be initialized at the time it is defined. Like other built-in types, pointers defined at block scope have undefined value if they are not initialized. the next case show how to use pointer:</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+
+int main()
+{
+ // create a empty pointer
+ int* ptr = nullptr;
+ // ptrToN holds the address of n; ptrToN is a pointer to n
+ //We get the address of an object by usin the address of operator 
+    //(the &amp; operator)
+ //note this is different from the reference
+ int n = 10;
+ int* ptrToN = &amp;n;
+ //print the address of n and value
+ std::cout &lt;&lt; &quot;address: &quot; &lt;&lt; ptrToN
+  &lt;&lt; &quot; value: &quot; &lt;&lt; *ptrToN &lt;&lt; std::endl;
+ //cahnge value of n by pointer, will print 100
+ *ptrToN = 100;
+ std::cout &lt;&lt; n &lt;&lt; std::endl;
+    //point to pointer
+    int ival = 1024;
+ int *pi = &amp;ival; // pi points to an int
+ int **ppi = &amp;pi; // ppi points to a pointer to an int
+ return 0;
+}
+</code></pre>
+<p>(notice: Because references are not objects, they don’t have addresses. Hence, we may not define a pointer to a reference.)</p>
+<p>The type <strong>void*</strong> is a special pointer type that can hold the address of <strong>any object</strong>. Like any other pointer, a void<em> pointer holds an address, but the type of the object at that address is <strong>unknown</strong>, so we <strong>cannot</strong> use a void</em>to operate on the object it addresses—we don’t know that object’s type, and the type determines what operations we can perform on the object. Generally, we use a void* pointer to deal with memory as memory, rather than using the pointer to access the object stored in that memory.</p>
+<h3 id="const-Qualifier"><a href="#const-Qualifier" class="headerlink" title="const Qualifier"></a>const Qualifier</h3><p>Sometimes we want to define a variable whose value we know cannot be changed. We can make a variable unchangeable by defining the variable’s type as <strong>const</strong>. Because we can’t change the value of a const object after we create it, it must be <strong>initialized</strong>.</p>
+<pre><code class="c++">const int n = 512;
+n = 1024;  // error: attempt to write to const object
+const int k; //error: k is uninitialized const
+</code></pre>
+<p>Sometimes we have a const variable that we want to share across multiple files, to share a const object among multiple files, you must define the variable as <strong>extern</strong>.</p>
+<p>As with any other object, we can bind a <strong>reference</strong> to an object of a <strong>const</strong> type. To do so we use a <strong>reference to const</strong>, which is a reference that refers to a const type. Unlike an ordinary reference, a reference to const cannot be used to change the object to which the reference is bound:</p>
+<pre><code class="c++">const int ci = 1024;
+const int &amp;r1 = ci; // ok: both reference and underlying object are const
+int &amp;r2 = ci; // error: non const reference to a const object
+</code></pre>
+<p>we noted that there are two exceptions to the rule that the type of a reference must match the type of the object to which it refers.</p>
+<pre><code class="c++">//this code can be compilation
+double dval = 3.14;
+const int &amp;ri = dval;
+//actually const int &amp;ri = dval; will be think as this
+//const int temp = dval; // create a temporary const int from the double
+//const int &amp;ri = temp;  //const int &amp;ri = temp; 
+</code></pre>
+<p>As with references, we can define pointers that point to either const or nonconst types. Like a reference to const, a <strong>pointer to const</strong> may not be used to change the object to which the pointer points. Next case show details.</p>
+<pre><code class="c++">const double pi = 3.14;   // pi is const; its value may not be changed
+double *ptr = &amp;pi;        // error: ptr is a plain pointer
+const double *cptr = &amp;pi; // ok: cptr may point to a double that is const
+*cptr = 42;               // error: cannot assign to *cptr
+double dval = 3.14;       // dval is a double; its value can be changed
+cptr = &amp;dval;             // ok: but can&#39;t change dval through cptr
+*cptr = 5472;             // error: cannot assign to *cptr
+</code></pre>
+<p>Unlike references, pointers are objects. Hence, as with any other object type, we can have a <strong>pointer that is itself const</strong>. Like any other const object, a <strong>const pointer</strong> must be initialized, and once initialized, its value (i.e., the address that it holds) may not be changed.</p>
+<pre><code class="c++">int errNumb = 0;
+int* const curErr = &amp;errNumb; // curErr will always point to errNumb
+const double pi = 3.14159;
+const double* const pip = &amp;pi; // pip is a const pointer to a const object
+</code></pre>
+<p>We use the term <strong>top-level const</strong> to indicate that the pointer itself is a const. When a pointer can point to a const object, we refer to that const as a <strong>low-level const</strong>.</p>
+<h3 id="Dealing-with-Types"><a href="#Dealing-with-Types" class="headerlink" title="Dealing with Types"></a>Dealing with Types</h3><p>A type alias is a name that is a synonym for another type. Type aliases let us simplify complicated type definitions, making those types easier to use. We can define a type alias in one of two ways. Traditionally, we use a <strong>typedef</strong>, the new standard introduced a second way to define a type alias, via an <strong>alias</strong><br><strong>declaration</strong>:</p>
+<pre><code class="c++">typedef long long ll;   // ll is a synonym for long long
+typedef long long *ptr; // ptr for long long*
+using ll = long long;   // ll is a synonym for long long
+</code></pre>
+<p>Under the new standard, we can let the compiler figure out the type for us by using the <strong>auto</strong> type specifier. Unlike type specifiers, such as double, that name a specific type, auto tells the compiler to deduce the type from the initializer. As with any other type specifier, we can define multiple variables using auto. Because a declaration can involve only a single base type, the initializers for all the variables in the declaration must have types that are <strong>consistent</strong> with each other:</p>
+<pre><code class="c++">int n1 = 10, n2 = 20;
+double n3 = 3.5, n4 = 9.5;
+ //type of item from the type returned by applying + to val1 and val2.
+ auto s1 = n1 + n3;  // s1&#39;s type is double
+ auto s2 = n1 + n2;  // s2;s type is int
+ auto k1 = 10, k3 = 19;   // ok
+ auto k2 = 10, *k4 = &amp;k2; // ok
+ //error C++ &#39;auto&#39; type is for this entity, but was previously implied to be int
+ auto k5 = 10, k6 = 3.14; 
+</code></pre>
+<p>Sometimes we want to define a variable with a type that the compiler deduces from an expression but do not want to use that expression to initialize the variable. For such cases, the new standard introduced a second type specifier, <strong>decltype</strong>, which returns the type of its operand.</p>
+<pre><code class="c++">const double m = 90.99, &amp;r = m, * p = &amp;m;
+decltype(m) ap = 184;           // ap has type const int
+decltype(r) x = m;              // x has type const int&amp; and is bound to x
+decltype(m) y;                  // error: y is a const and must be initialized
+decltype(r) z;                  // error: z is a reference and must be initialized
+decltype(*p) c;                 // error: c is int&amp; and must be initialized
+
+// decltype of a parenthesized variable is always a reference
+decltype((m)) d; // error: d is double&amp; and must be initialized
+decltype(m) e; // ok: e is an (uninitialized) double
+</code></pre>
+<h3 id="Defining-Our-Own-Data-Structures"><a href="#Defining-Our-Own-Data-Structures" class="headerlink" title="Defining Our Own Data Structures"></a>Defining Our Own Data Structures</h3><p>In C++ we define our own data types by defining a class. The library types string, istream, and ostream are all defined as classes, we will tell how to defined a full class in next several chapters, first we create a class that does not support any operations.</p>
+<pre><code class="c++">struct Sales_data {
+ std::string bookNo;
+ unsigned units_sold = 0;
+ double revenue = 0.0;
+};
+</code></pre>
+<p>Our class begins with the keyword <strong>struct</strong>, followed by the name of the class and a (possibly empty) class body. The class body is surrounded by curly braces and forms a new scope. The names defined inside the class must be unique within the class but can reuse names defined outside the class. The close curly that ends the class body must be followed by a semicolon. The <strong>semicolon</strong> is needed because we can define variables after the class body:</p>
+<pre><code class="c++">struct Sales_data { /* ... */ } accum, trans, *salesptr;
+// equivalent, but better way to define these objects
+struct Sales_data { /* ... */ };
+Sales_data accum, trans, *salesptr;
+</code></pre>
+<p>Generally, we define a class in a separate header file, typically, classes are stored in headers whose name derives from the name of the class. Headers often need to use facilities from other headers. For example,<br>because our Sales_data class has a string member, Sales_data.h must <strong>#include</strong> the string header. As we’ve seen, programs that use Sales_data also need to include the string header in order to use the <strong>bookNo</strong> member.</p>
+<p>As a result, programs that use Sales_data will include the string header twice: once <strong>directly</strong> and once as a side effect of including Sales_data.h. Because a header might be included <strong>more than once</strong>, we need to write our headers in a way that is safe even if the header is included multiple times.</p>
+<p>The most common technique for making it safe to include a header multiple times relies on the preprocessor. The preprocessor—which C++ inherits from C—is a program that runs before the compiler and changes the source text of our programs. Our programs already rely on one preprocessor facility, #include. When the preprocessor sees a #include, it <strong>replaces</strong> the #include with the <strong>contents of the specified header</strong>.</p>
+<p>C++ programs also use the preprocessor to define <strong>header guards</strong>. Header guards rely on preprocessor variables. Preprocessor variables have one of two possible states: <strong>defined</strong> or <strong>not defined</strong>. The <strong>#define</strong> directive takes a name and defines that name as a preprocessor variable. There are two other directives that test whether a given preprocessor variable has or has not been defined: <strong>#ifdef</strong> is true if the variable has been defined, and <strong>#ifndef</strong> is true if the variable has not been defined. If the test is true, then everything following the #ifdef or <strong>#ifndef</strong> is processed up to the matching <strong>#endif</strong>.</p>
+<pre><code class="c++">//Sales_data.h
+#ifndef SALES_DATA_H
+#define SALES_DATA_H
+#include &lt;string&gt;
+struct Sales_data {
+ std::string bookNo;
+ unsigned units_sold = 0;
+ double revenue = 0.0;
+};
+#endif
+</code></pre>
+<p>The first time Sales_data.h is included, the <strong>#ifndef</strong> test will succeed. The preprocessor will process the lines following #ifndef up to the #endif. As a result, the preprocessor variable SALES_DATA_H will be defined and the contents of Sales_data.h will be copied into our program. If we include Sales_data.h later on in the same file, the #ifndef directive will be false. The lines between it and the #endif directive will be ignored. this is a simple case to statistics sales of book:</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &quot;Sales_data.h&quot;
+
+int main()
+{
+ Sales_data book1, book2;
+ double price = 0;
+ // read the first transactions: ISBN, number of books sold, price per book
+ std::cin &gt;&gt; book1.bookNo &gt;&gt; book1.units_sold &gt;&gt; price;
+ book1.revenue = price * book1.units_sold;
+ // read the second transactions: ISBN, number of books sold, price per book
+ std::cin &gt;&gt; book2.bookNo &gt;&gt; book2.units_sold &gt;&gt; price;
+ book2.revenue = price * book2.units_sold;
+ //add operation
+ if (book1.bookNo == book2.bookNo) {
+  unsigned totalCnt = book1.units_sold + book2.units_sold;
+  double totalRevenue = book1.revenue + book2.revenue;
+  // print: ISBN, total sold, total revenue, average price per book
+  std::cout &lt;&lt; book1.bookNo &lt;&lt; &quot; &quot; &lt;&lt; totalCnt
+   &lt;&lt; &quot; &quot; &lt;&lt; totalRevenue &lt;&lt; &quot; &quot;;
+  if (totalCnt != 0)
+   std::cout &lt;&lt; totalRevenue / totalCnt &lt;&lt; std::endl;
+  else
+   std::cout &lt;&lt; &quot;(no sales)&quot; &lt;&lt; std::endl;
+  return 0;
+ }
+ else {
+  std::cout &lt;&lt; &quot;there are different books&quot; &lt;&lt; std::endl;
+  return -1;
+ }
+}
+</code></pre>
+<h2 id="Strings-Vectors-and-Arrays"><a href="#Strings-Vectors-and-Arrays" class="headerlink" title="Strings, Vectors, and Arrays"></a>Strings, Vectors, and Arrays</h2><p>In addition to the built-in types covered in previous, C++ defines a rich library of abstract data types. Among the most important library types are <strong>string</strong>, which supports variable-length character strings, and <strong>vector</strong>, which defines variable-size collections. Associated with string and vector are companion types known as <strong>iterators</strong>, which are used to access the characters in a string or the elements in a vector.</p>
+<p>Before beginning our exploration of the library types, we’ll look at a mechanism for simplifying access to the names defined in the library.</p>
+<h3 id="Namespace-using-Declarations"><a href="#Namespace-using-Declarations" class="headerlink" title="Namespace using Declarations"></a>Namespace using Declarations</h3><p>Up to now, our programs have explicitly indicated that each library name we use is in the <strong>std</strong> namespace. For example, to read from the standard input, we write <strong>std::cin</strong>. <strong>std::cin</strong> says that we want to use the name cin from the namespace <strong>std</strong>. there are easier ways to use namespace members. The safest way is a using declaration.</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+// using declaration; when we use the name cin, we get the one from the namespacestd
+using std::cin;
+int main()
+{
+ int i;
+ cin &gt;&gt; i; // ok: cin is a synonym for std::cin
+ cout &lt;&lt; i; // error: no using declaration; we must use the full name
+ std::cout &lt;&lt; i; // ok: explicitly use cout from namepsace std
+ return 0;
+}
+</code></pre>
+<p>Note “Headers Should <strong>Not</strong> Include using Declarations”, The reason is that the contents of a header are copied into the including program’s text. If a header has a using declaration, then every program that includes that header gets that same using declaration.</p>
+<h3 id="Library-string-Type"><a href="#Library-string-Type" class="headerlink" title="Library string Type"></a>Library string Type</h3><p>Each class defines how objects of its type can be initialized. A class may define many different ways to initialize objects of its type. examples:</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using std::string;
+
+int main()
+{
+ string s1;          // default initialization; s1 is the empty string
+ string s2 = s1;     // s2 is a copy of s1
+ string s3 = &quot;hello&quot;;// s3 is a copy of the string literal
+ string s4(10, &#39;A&#39;); // s4 is AAAAAAAAAA
+ string s5(s1);      // s5 is a copy of s1
+ string s6(&quot;hello&quot;); // s6 is a copy of the string literal
+ return 0;
+}
+</code></pre>
+<p>When we initialize a variable using =, we are asking the compiler to <strong>copy initialize</strong> the object by copying the initializer on the right-hand side into the object being created. Otherwise, when we omit the =, we use <strong>direct initialization</strong>.</p>
+<pre><code class="c++">string s5 = &quot;hiya&quot;; // copy initialization
+string s6(&quot;hiya&quot;);  // direct initialization
+string s7(10, &#39;c&#39;); // direct initialization; s7 is cccccccccc
+</code></pre>
+<p>Along with defining how objects are created and initialized, a class also defines the <strong>operations</strong> that objects of the class type can perform. The string <strong>input</strong> operator reads and discards any leading whitespace (e.g., spaces, newlines, tabs). It then reads characters until the next whitespace character is encountered. which mean when we read a string containing whitespace will cause error. we can use the <strong>getline</strong> function instead of the <strong>&gt;&gt;</strong> operator. The getline function takes an input stream and a string.</p>
+<pre><code class="c++">//input operations and output operations
+string str; //initlize a empty string
+cin &gt;&gt; str; //read from istream
+cout &lt;&lt; str &lt;&lt; endl; //write to output
+getline(cin, str);   //read a line
+cout &lt;&lt; str &lt;&lt; endl; //write to output
+</code></pre>
+<p>Sometimes we want get the information of string, such as if empty and the size of string, The <strong>empty</strong> function does what one would expect: It returns a bool indicating whether the string is empty. The <strong>size</strong> member returns the length of a string. It might be logical to expect that size returns an int or unsigned. Instead, size returns a <strong>string::size_type</strong> value.The string class—and most other library types—defines several <strong>companion types</strong>.<br>These companion types make it possible to use the library types in a machine independent manner. The type size_type is one of these companion types. To use the size_type defined by string, we use the scope operator to say that the name size_type is defined in the string class. Admittedly, it can be tedious to type <strong>string::size_type</strong>. Under the new standard, we can ask the compiler to provide the appropriate type by using <strong>auto</strong> or <strong>decltype</strong></p>
+<pre><code class="c++">auto emp = str.empty(); //check empty
+auto len = str.size();  //get size
+</code></pre>
+<p>The string class defines several operators that compare strings. These operators work by comparing the characters of the strings. The comparisons are case sensitive, uppercase and lowercase versions of a letter are different characters.</p>
+<pre><code class="c++">// all compare operation
+cout &lt;&lt; (str1 == str2) &lt;&lt; endl;
+cout &lt;&lt; (str1 != str2) &lt;&lt; endl;
+cout &lt;&lt; (str1 &gt;= str2) &lt;&lt; endl;
+cout &lt;&lt; (str1 &lt;= str2) &lt;&lt; endl;
+cout &lt;&lt; (str1 &gt; str2) &lt;&lt; endl;
+cout &lt;&lt; (str1 &lt; str2) &lt;&lt; endl;
+//Adding Two strings
+string s1 = &quot;hello, &quot;, s2 = &quot;world\n&quot;;
+string s3 = s1 + s2; // s3 is hello, world\n
+s1 += s2; // equivalent to s1 = s1 + s2
+//Adding Literals strings and strings
+string s1 = &quot;hello&quot;, s2 = &quot;world&quot;; 
+string s3 = s1 + &quot;, &quot; + s2 + &#39;\n&#39;; // ok
+string s4 = s1 + &quot;, &quot;; // ok: adding a string and a literal
+string s5 = &quot;hello&quot; + &quot;, &quot;; // error: no string operand
+string s6 = s1 + &quot;, &quot; + &quot;world&quot;; // ok: each + has a string operand
+string s7 = &quot;hello&quot; + &quot;, &quot; + s2; // error: can&#39;t add string literals
+</code></pre>
+<p>For historical reasons, and for compatibility with C, <strong>string literals</strong> are not standard library strings. It is important to remember that these types <strong>differ</strong> when you use string literals and library strings.</p>
+<hr>
+<p>Often we need to deal with the individual characters in a string. We might want to check to see whether a string contains any whitespace, or to change the characters to lowercase, or to see whether a given character is present, and so on.</p>
+<p>The one part of processing characters is knowing and/or changing the characteristics of a character. This part of the job is handled by a set of library functions, described in next Table. These functions are defined in the <strong>cctype</strong> header.</p>
+<table>
+<thead>
+<tr>
+<th>function name</th>
+<th>meanning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>isalnum</td>
+<td>Check if character is alphanumeric</td>
+</tr>
+<tr>
+<td>isalpha</td>
+<td>Check if character is alphabetic</td>
+</tr>
+<tr>
+<td>isblank</td>
+<td>Check if character is blank</td>
+</tr>
+<tr>
+<td>iscntrl</td>
+<td>Check if character is a control character</td>
+</tr>
+<tr>
+<td>isdigit</td>
+<td>Check if character is decimal digit</td>
+</tr>
+<tr>
+<td>isgraph</td>
+<td>Check if character has graphical representation</td>
+</tr>
+<tr>
+<td>islower</td>
+<td>Check if character is lowercase letter</td>
+</tr>
+<tr>
+<td>isprint</td>
+<td>Check if character is printable</td>
+</tr>
+<tr>
+<td>ispunct</td>
+<td>Check if character is a punctuation character</td>
+</tr>
+<tr>
+<td>isspace</td>
+<td>Check if character is a white-space</td>
+</tr>
+<tr>
+<td>isupper</td>
+<td>Check if character is uppercase letter</td>
+</tr>
+<tr>
+<td>isxdigit</td>
+<td>Check if character is hexadecimal digit</td>
+</tr>
+<tr>
+<td>tolower</td>
+<td>Convert uppercase letter to lowercase</td>
+</tr>
+<tr>
+<td>toupper</td>
+<td>Convert lowercase letter to uppercase</td>
+</tr>
+</tbody>
+</table>
+<p>Another of this kind of processing involves how we gain access to the characters themselves. Sometimes we need to process every character. Other times we need to process only a specific character, or we can stop processing once some condition is met.</p>
+<p>If we want to do something to every character in a string, by far the best approach is to use a statement introduced by the new standard: the <strong>range for</strong> statement.</p>
+<pre><code class="c++">string str = &quot;hello!!!&quot;;
+for (auto c : str) {   // for every char in str
+ cout &lt;&lt; c &lt;&lt; endl; // print the current character followed by a newline
+}
+//count the number of punctuation
+decltype(str.size()) punct = 0;
+for (auto c : str) {
+ if (ispunct(c)){ // if the character is punctuation
+  ++punct;
+ }
+}
+cout &lt;&lt; punct &lt;&lt; endl;
+</code></pre>
+<p>If we want to change the value of the characters in a string, we must define the loop variable as a reference type, Remember that a reference is just another name for a given object.</p>
+<pre><code class="c++">string str = &quot;hello!!!&quot;;
+for (auto &amp;c : str) {
+ c = toupper(c); // c is a reference, so the assignment changes the char in str
+}
+cout &lt;&lt; str &lt;&lt; endl;
+</code></pre>
+<p>A range for works well when we need to <strong>process every character</strong>. However, sometimes we need to access only a single character or to access characters until some condition is reached. There are two ways to access individual characters in a string: We can use a <strong>subscript</strong> or an <strong>iterator</strong>. The subscript operator (the [ ] operator) takes a <strong>string::size_type</strong> value that denotes the position of the character we want to access. Subscripts for strings start at zero, so str[0] is the first character, and the last character is in str[str.size() - 1]. we can rewrite previous as this:</p>
+<pre><code class="c++">for (decltype(str.size()) i = 0; i &lt; str.size(); i++)
+{
+ str[i] = toupper(str[i]);
+}
+cout &lt;&lt; str &lt;&lt; endl;
+</code></pre>
+<p>When we use a subscript, we must ensure that the subscript is in range. That is, the subscript must be &gt;= 0 and &lt; the size() of the string. One way to simplify code that uses subscripts is always to use a variable of type string::size_type as the subscript. Because that type is unsigned, we ensure that the subscript cannot be less than zero.</p>
+<h3 id="Library-vector-Type"><a href="#Library-vector-Type" class="headerlink" title="Library vector Type"></a>Library vector Type</h3><p>A <strong>vector</strong> is a collection of objects, all of which have the same type. Every object in the collection has an associated <strong>index</strong>, which gives access to that object. A vector is often referred to as a <strong>container</strong> because it “contains” other objects.</p>
+<p>A vector is a class <strong>template</strong>. C++ has both class and function templates. Writing a template requires a fairly deep understanding of C++. Indeed, we won’t see how to create our own templates now! Fortunately, we can use templates without knowing how to write them.</p>
+<p>For a class template, we specify which class to instantiate by supplying additional information, the nature of which depends on the template. How we specify the information is always the same: We supply it inside a pair of angle brackets following the template’s name. <strong>Note</strong> vector is a template, not a type. Types generated from vector must include the element type, for example, <code>vector&lt;int&gt;</code>.</p>
+<pre><code class="c++">#include &lt;string&gt;
+#include &lt;vector&gt;
+using std::string;
+using std::vector;
+
+int main()
+{
+ vector&lt;int&gt; ivec;             //ivec holds objects of type int
+ vector&lt;vector&lt;string&gt;&gt; strvec;//strvec holds objects of type vector&lt;string&gt;
+ return 0;
+}
+</code></pre>
+<p>As with any class type, the vector template controls how we define and initialize vectors. Next code lists the most common ways to define vectors.</p>
+<pre><code class="c++">#include &lt;vector&gt;
+using std::vector;
+
+int main()
+{
+ vector&lt;int&gt; ivec1; //default initlization, ivec1 is empty
+ vector&lt;int&gt; ivec2 = ivec1; //ivec2 is copy of ivec1
+ vector&lt;int&gt; ivec3(ivec1);  //ivec3 is copy of ivec1
+ vector&lt;int&gt; ivec4(5, 1);   //ivec4 have 5 element with value 1
+ vector&lt;int&gt; ivec5(5);      //ivec5 have 5 element with value initliazated
+ vector&lt;int&gt; ivec6{ 1,2,3,4,5 };   //ivec6 have 1,2,3,4,5
+ vector&lt;int&gt; ivec7 = { 1,2,3,4,5 };//ivec7 have 1,2,3,4,5
+ return 0;
+}
+</code></pre>
+<p>When we use parentheses, we are saying that the values we supply are to be used to construct the object. Thus, ivec4 and ivec5 use their initializers to determine the vector’s size, and its size and element values, respectively.</p>
+<p>When we use curly braces, {…}, we’re saying that, <strong>if possible</strong>, we want to <strong>list initialize</strong> the object. That is, if there is a way to use the values inside the curly braces as a list of element initializers, the class will do so. Only if it is not possible to list initialize the object will the <strong>other ways to initialize</strong> the object be considered.</p>
+<pre><code class="c++">vector&lt;string&gt; ivec8{10, &quot;hi&quot;}; // ivec8 has ten elements with value &quot;hi&quot;
+vector&lt;string&gt; ivec9{10};       // ivec9 has ten default-initialized elements
+</code></pre>
+<hr>
+<p>Directly initializing the element of a vector just feasible only if we have a small number of known initial values or we want make a copy of a vector. More commonly, we use the <code>push_back</code> method <strong>add elements</strong> when running. The <code>push_back</code> operation takes a value and “pushes” that value as a new last<br>element onto the “back” of the vector. This code will add 0 to 99 to a vector in sequence:</p>
+<pre><code class="c++">vector&lt;int&gt; ivec1; //default initlization, ivec1 is empty
+for (int i = 0; i &lt; 100; i++){
+ ivec1.push_back(i); // add to ivec1
+}
+</code></pre>
+<p>The standard requires that vector implementations can efficiently add elements at run time. Because vectors grow efficiently, it is often unnecessary and can result in poorer performance to define a vector of a specific size. Note we cannot use a range for if the body of the loop adds elements to the vector. The body of a range for must not change the size of the sequence over which it is iterating.</p>
+<p>In addition to push_back, vector provides only a few other operations, most of which are similar to the corresponding operations on strings. we can get full operations in <a href="https://www.cplusplus.com/reference/vector/vector/" target="_blank" rel="noopener">here</a>. We access the elements of a vector the same way that we access the characters in a string:</p>
+<pre><code class="c++">vector&lt;int&gt; v{1,2,3,4,5,6,7,8,9};
+for (auto &amp;i : v) // for each element in v (note: i is a reference)
+ i *= i; // square the element value
+for (auto i : v) // for each element in v
+ cout &lt;&lt; i &lt;&lt; &quot; &quot;; // print the element
+cout &lt;&lt; endl;
+</code></pre>
+<p>The <strong>empty</strong> and <strong>size</strong> members behave as do the corresponding string members: empty returns a bool indicating whether the vector has any elements, and size returns the number of elements in the vector. The size member returns a value of the <strong>size_type</strong> defined by the corresponding <strong>vector</strong> type.</p>
+<pre><code class="c++">//note vector is only a template
+vector&lt;int&gt;::size_type // ok
+vector::size_type      // error
+</code></pre>
+<p>Programmers new to C++ sometimes think that subscripting a vector adds elements; it does not. The following code intends to add ten elements to ivec:</p>
+<pre><code class="c++">vector&lt;int&gt; ivec; // empty vector
+for (decltype(ivec.size()) ix = 0; ix != 10; ++ix)
+  ivec[ix] = ix; // disaster: ivec has no elements
+</code></pre>
+<p>However, it is in error: ivec is an empty vector; there are no elements to subscript! As we’ve seen, the right way to write this loop is to use push_back like previous.</p>
+<h3 id="Introducing-Iterators"><a href="#Introducing-Iterators" class="headerlink" title="Introducing Iterators"></a>Introducing Iterators</h3><p>Although we can use subscripts to access the characters of a string or the elements in a vector, there is a more general mechanism—known as <strong>iterators</strong>—that we can use for the same purpose. All of the library containers have iterators, but only a few of them support the <strong>subscript</strong> operator.</p>
+<p>Like <strong>pointers</strong>, iterators give us indirect access to an object. We can use an iterator to fetch an element and iterators have operations to move from one element to another. As with pointers, an iterator may be valid or invalid. A valid iterator either denotes an element or denotes a position one past the last element in a container. All other iterator values are invalid. Unlike pointers, we do <strong>not</strong> use the <strong>address</strong>-of operator to obtain an iterator. Instead, types that have iterators have members that return iterators. This code show getting vector iterators.</p>
+<pre><code class="c++">vector&lt;int&gt; v;
+//In general, we do not care about the precise type that an iterator has.
+//In this example, we used auto to define b and e
+auto b = v.begin(), e = v.end();
+</code></pre>
+<p>The <strong>begin</strong> member returns an iterator that denotes the first element (or first character), The iterator returned by <strong>end</strong> is an iterator positioned <strong><em>“one past the end”</em></strong> of the associated container (or string). This iterator denotes a nonexistent element “off the end” of the container. If the container is <strong>empty</strong>, begin<br>returns the <strong>same</strong> iterator as the one returned by end.</p>
+<p>Iterators support only a few operations, which are listed in next code:</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &quot;Sales_data.h&quot;
+using std::cout; using std::cin; using std::endl;
+using std::string;
+using std::vector;
+
+int main()
+{
+ vector&lt;int&gt; v{ 1,2,3,4,5,6,7,8,9 };
+ //b++: Increments b to refer next element
+ //b--: Decrements b to refer previous element
+ //b != v.end(): Compare two iterator for inequality
+ for (auto b = v.begin(); b != v.end(); b++){
+  //*b get the reference to the element donated by b
+  *b *= *b;
+ }
+ Sales_data k;
+ k.bookNo = &quot;0-321-71411-3&quot;;
+ vector&lt;Sales_data&gt; sale = {k};
+ auto sb = sale.begin(), se = sale.end();
+ //equal to (*sb).bookNo will print 0-321-71411-3
+ cout &lt;&lt; sb-&gt;bookNo &lt;&lt; endl;
+ return 0;
+}
+</code></pre>
+<p>Like pointer, there ere also has const iterator, when you define a const container(such  as vector) or string, the begin and end members are const iterator. You also can use cbigin or cend to get a const iterator when you don not want change element.</p>
+<p>Except previous operation, they are some operations for special container. Iterators for string and vector support additional operations that can move an iterator multiple elements at a time. They also support all the relational operators. These operations, which are often referred to as iterator arithmetic, are described in the next Table.</p>
+<table>
+<thead>
+<tr>
+<th>operation</th>
+<th>meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iter + n</td>
+<td>iter donate to  next nth element</td>
+</tr>
+<tr>
+<td>iter - n</td>
+<td>iter donate to  front nth element</td>
+</tr>
+<tr>
+<td>iter += n</td>
+<td>iter donate to  next nth element</td>
+</tr>
+<tr>
+<td>iter -= n</td>
+<td>iter donate to  front nth element</td>
+</tr>
+<tr>
+<td>&lt;, &gt;, &lt;=, &gt;=</td>
+<td>compare</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h3><p>An <strong>array</strong> is a data structure that is similar to the library <strong>vector</strong> type, but size of a array is fixed, which mean we can not add new elements. Sometimes they offer better run-time performance for specialized applications.</p>
+<p>Arrays are a compound type, An array declarator has the form a[d], where <strong>a</strong> is the name being defined and <strong>d</strong> is the dimension of the array. the next code show how initial a array:</p>
+<pre><code class="c++">int p = 10;
+int a[10];   //array of ten ints
+int* b[10];  //array of ten points to int
+int d[p];    //error: p is not a constexpr
+int c[] = { 1,2,3 }; //array of three ints, 1 and 2 and 3
+</code></pre>
+<p>When we define an array, we must specify a <strong>type</strong> for the array. We cannot use <strong>auto</strong> to deduce the type from a list of initializers. As with vector, arrays hold objects. Thus, there are no arrays of references.</p>
+<p>Character arrays have an additional form of initialization. We can initialize such arrays from a string literal. When we use this form of initialization, it is important to remember that string literals end with a null character.</p>
+<p>In previous code, we see <code>int* b[10]</code> mean array of ten points to int, so how can we make a pointer point to a array? The next show:</p>
+<pre><code class="c++">int a[10];   //array of ten ints
+int(*p)[10] = &amp;a; //a pointer point to a
+int(&amp;r)[10] = a;  //a reference refer to a
+//By default, type modifiers bind right to left.
+</code></pre>
+<p>As with the library vector and string types, we can use a range for or the subscript operator to <strong>access</strong> <strong>elements</strong> of an array. As usual, the indices start at 0. When we use a variable to subscript an array, we normally should define that variable to have type <strong>size_t</strong>. size_t is a machine-specific unsigned type that is guaranteed to be large enough to hold the size of any object in memory.</p>
+<p>In C++ <strong>pointers</strong> and <strong>arrays</strong> are closely intertwined. In particular, as we’ll see, when we use an array, the compiler ordinarily converts the array to a pointer.</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+
+int main()
+{
+ int f = 10;
+ int a[10];   //array of ten ints
+ for (auto &amp;i : a) {
+  i = f--;
+ }
+ //p is a pointer point to the first element of a
+ auto p = a;
+ //will print 10
+ std::cout &lt;&lt; *p &lt;&lt; std::endl;
+ return 0;
+}
+</code></pre>
+<p>Array is not a class, so it is not has member donated to begin and end, c++ provide a way to get pointer to fist element and last element. We will use this function in  next code.</p>
+<p>Many C++ programs predate the standard library and do not use the string and vector types. Moreover, many C++ programs interface to programs written in C or other languages that cannot use the C++ library. Hence, programs written in modern C++ may have to interface to code that uses arrays and/or C-style character strings. The C++ library offers facilities to make the interface easier to manage.</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+using std::string; using std::vector; using std::begin; using std::end;
+
+int main()
+{
+ char str[] = &quot;Hello&quot;;
+ string s(str);  //c string to std string
+ const char* cs = s.c_str(); // std string to c string, must need const
+ int int_arr[] = { 0, 1, 2, 3, 4, 5 };
+ // ivec has six elements; each is a copy of the corresponding element in int_arr
+ vector&lt;int&gt; ivec(begin(int_arr), end(int_arr));
+ return 0;
+}
+</code></pre>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://morning.eu.org/images/custom/donate/404.jpg"></li>
+                <li class="wechat-code"><img src="https://morning.eu.org/images/custom/donate/404.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2021/12/20/c++%20c3/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="" data-src="/images/cover/(3).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="/images/cover/(3).jpg.webp">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                (ch3) C++ Basic Features - Operators And Statements</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2021/12/18/c++%20c1/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="" data-src="/images/cover/(1).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="/images/cover/(1).jpg.webp">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                (ch1) Getting Started C++</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+	window.onload = function(){
+		var valine = new Valine();
+		valine.init({
+			el: '#vcomments',
+			appId: "EAyicHJhXmxJNEeuhACVujd4-gzGzoHsz",
+			appKey: "09Tjj4It5DOhgboduuM40u7y",
+			avatar: 'wavatar',
+			path: window.location.pathname,
+			placeholder: "有什么想说的吗.."
+		})
+	}
+</script>
+
+
+
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="morning.eu.org" class="profile gravatar"><img src="/images/custom/avatar.jpg" itemprop="image" alt="Noah" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="morning.eu.org" itemprop="url" rel="author">Noah</a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i>life is perfact</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
+</div>
+
+
+
+    </div>    
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            // PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+    <!-- <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Noah Bishop<br>
+      powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer> -->
+<footer id="colophon" class="site-footer" role="contentinfo">
+  <div class="site-info">
+    <div class="footertext">
+      <div class="img-preload">
+        <img src="https://morning.eu.org/images/other/wordpress-rotating-ball-o.svg">
+        <img src="https://morning.eu.org/images/other/disqus-preloader.svg">
+      </div>
+      <p style="color: #666666;">&copy 2019-2023</p>
+    </div>
+    <div class="footer-device">
+      <p style="font-family: 'Ubuntu', sans-serif;">
+        <span style="color: #b9b9b9;">Theme <a href="https://github.com/honjun/hexo-theme-sakura" target="_blank"
+            style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Sakura</a> <i
+            class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i> by <a
+            href="https://2heng.xin/" target="_blank"
+            style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Mashiro</a>&<a
+            href="https://www.hojun.cn/" target="_blank"
+            style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Hojun</a>, Powered by Hexo,
+          Hosted by Coding Pages</a>
+        </span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+
+<!-- <script src="/js/tocbot.js"></script> -->
+<script type="text/javascript" src="/js/lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/InsightSearch.js"></script>
+<script type="text/javascript" src="/js/jquery.fancybox.min.js"></script>
+<script type="text/javascript" src="/js/zoom.min.js"></script>
+<script type="text/javascript" src="/js/sakura-app.js"></script>
+<script src="/js/botui.js"></script>
+<!-- 不蒜子 网页计数器 -->
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script> -->
+<script type="text/javascript">
+  /* <![CDATA[ */
+  if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+    var Poi = { "pjax": "1", "movies": { "url": "", "name": "", "live": "close" }, "windowheight": "fixed", "codelamp": "close", "ajaxurl": "", "order": "asc", "formpostion": "bottom" };
+  } else {
+    var Poi = { "pjax": "1", "movies": { "url": "", "name": "", "live": "open" }, "windowheight": "auto", "codelamp": "close", "ajaxurl": "", "order": "asc", "formpostion": "bottom" };
+  }
+/* ]]> */
+
+</script>
+<script>
+  $(document).ready(function () {
+    if ($(".toc").length > 0 && document.body.clientWidth > 1200) {
+      if ($(".pattern-center").length > 0) { //有图的情况
+        tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -400,
+          scrollSmoothOffset: -85
+        });
+      } else {
+        tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -85,
+          scrollSmoothOffset: -85
+        });
+      }
+      var offsetTop = $('.toc').offset().top - 95;
+      window.onscroll = function () {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+        if (scrollTop >= offsetTop) {
+          $('.toc').addClass('toc-fixed');
+        } else {
+          $('.toc').removeClass('toc-fixed');
+        }
+      }
+    }
+  });
+</script>
+    <div class="openNav no-select" style="height: 50px;">
+      <div class="iconflat no-select" style="width: 50px; height: 50px;">
+        <div class="icon"></div>
+      </div>
+      <div class="site-branding search-form-submit">
+        <i class="iconfont js-toggle-search iconsearch icon-search"></i>
+      </div>
+    </div>
+  </section>
+  <div id="mo-nav" class="">
+  <div class="m-avatar">
+    <img src="https://morning.eu.org/images/custom/avatar.jpg">
+  </div>
+  <p style="text-align: center; color: #333; font-weight: 900; font-family: 'Ubuntu', sans-serif; letter-spacing: 1.5px">桜荘そのうさぎ</p>
+  <p style="text-align: center; word-spacing: 20px;">
+    
+      
+        <a href="https://github.com/NoahBishop" class="fa fa-github" target="_blank" style="color: #333; margin-left:20px"></a>
+      
+        <a href="https://t.me/mega1037" class="fa fa-telegram" target="_blank" style="color: #25c6fe; margin-left:20px"></a>
+      
+        <a href="https://mailto:beiloquuw@gamil.com" class="fa fa-google" target="_blank" style="color: #dd4b39; margin-left:20px"></a>
+      
+    
+  </p>
+  <ul id="menu-new-1" class="menu">
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+            首页
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/archives">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+            归档
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/categories/%E6%8A%80%E6%9C%AF/">
+                  <i class="fa fa-code" aria-hidden="true"></i>
+                  技术
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/%E7%94%9F%E6%B4%BB/">
+                  <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                  生活
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/%E8%B5%84%E6%BA%90/">
+                  <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                  资源
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/%E9%9A%8F%E6%83%B3/">
+                  <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                  随想
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/%E8%BD%AC%E8%BD%BD/">
+                  <i class="fa fa-book" aria-hidden="true"></i>
+                  转载
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="javascript:;">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+            清单
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/music/">
+                  <i class="fa fa-headphones" aria-hidden="true"></i>
+                  歌单
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/comment/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+            留言板
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/links/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+            友人帐
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/donate/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
+            赞赏
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-leaf faa-wrench" aria-hidden="true"></i>
+            关于
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/about/">
+                  <i class="fa fa-meetup" aria-hidden="true"></i>
+                  我？
+                </a>
+              </li>
+            
+              <li>
+                <a href="/theme-sakura/">
+                  <i class="fa iconfont icon-sakura" aria-hidden="true"></i>
+                  主题
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/atom.xml">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-rss faa-pulse" aria-hidden="true"></i>
+            RSS
+          </span>
+        </a>
+        
+      </li>
+    
+  </ul>
+  <p style="text-align: center; font-size: 13px; color: #b9b9b9;">&copy 2019 hexo-sakura</p>
+</div>
+<button onclick="topFunction()" class="mobile-cd-top" id="moblieGoTop" title="Go to top" style="display: none;"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<style>
+  .aplayer .aplayer-lrc {
+    height: 35px;
+  }
+  .aplayer .aplayer-lrc p{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18px !important;
+  }
+  .aplayer .aplayer-lrc p.aplayer-lrc-current{
+    color: #FF1493;
+  }
+  .aplayer.aplayer-narrow .aplayer-body{
+    left: -66px !important;
+  }
+  .aplayer.aplayer-fixed .aplayer-lrc {
+    display: none;
+  }
+  .aplayer .aplayer-lrc.aplayer-lrc-hide {
+      display:none !important;
+  }
+  .aplayer.aplayer-fixed .lrc-show {
+    display: block;
+    background: rgba(255, 255, 255, 0.8);
+  }
+</style>
+<meting-js
+
+    id="7225712775"
+
+    server="netease"
+
+    type="playlist"
+
+    fixed="true"
+
+    autoplay="true"
+
+    loop="all"
+
+    order="random"
+
+    preload="auto"
+
+    volume="0.5"
+
+    mutex="true"
+
+</meting-js>
+<script>
+  $(function(){
+    $('body').on('click', '.aplayer', function(){
+      if($('.aplayer-button').hasClass('aplayer-play')) {
+        $('.aplayer-lrc').removeClass('lrc-show');
+      } else {
+        $('.aplayer-lrc').addClass('lrc-show');
+      }
+    })
+  });
+</script>
+</body>
+</html>
