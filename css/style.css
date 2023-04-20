@@ -726,7 +726,7 @@ a:active,a:hover {
     outline:0
 }
 a:active {
-    cursor:url(https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/cursor/work.cur),alias
+    cursor:url(https://morning.eu.org/img/cursor/normal.cur),alias
 }
 abbr[title] {
     border-bottom:1px dotted
@@ -853,7 +853,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 p {
     margin-bottom:1.5em;
-    cursor:url(https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/cursor/texto.cur),auto
+    cursor:url(https://morning.eu.org/images/cursor/normal.cur),auto
 }
 dfn,cite,em,i {
     font-style:italic
@@ -939,7 +939,7 @@ html {
 body {
     background:#fff;
     background-attachment:fixed;
-    cursor:url(https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/cursor/normal.cur),auto
+    cursor:url(https://morning.eu.org/images/cursor/normal.cur),auto
 }
 blockquote:before,blockquote:after,q:before,q:after {
     content:""
@@ -7334,7 +7334,7 @@ to {
     padding:2px;
     text-shadow:none;
     border-radius:0 0 5px 5px;
-    cursor:url(https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/cursor/texto.cur),auto
+    cursor:url(https://morning.eu.org/images/cursor/textto.cur),auto
 }
 .highlight-wrap code[data-rel]:before {
     color:#fff;
