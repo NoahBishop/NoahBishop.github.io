@@ -524,22 +524,22 @@ int main()
 
 int main()
 &#123;
-     //only b = 0 can&#39;t make b is false
+    //only b = 0 can&#39;t make b is false
     bool b = 10; // b is true
     //actually, true equal to 1 and false equal to 0
-     int i = b; // i has value 1
+    int i = b; // i has value 1
     //the fractional part will be lose
-     i = 3.14; // i has value 3
-     double pi = i; // pi has value 3.0
-     unsigned char c = -1; // assuming 8-bit chars, c has value 255
-     signed char c2 = 256; // assuming 8-bit chars, the value of c2 is undefined
+    i = 3.14; // i has value 3
+    double pi = i; // pi has value 3.0
+    unsigned char c = -1; // assuming 8-bit chars, c has value 255
+    signed char c2 = 256; // assuming 8-bit chars, the value of c2 is undefined
     unsigned u = 10;
-     int i = -42;
+    int i = -42;
     //the type of sum result is int
-     std::cout &lt;&lt; i + i &lt;&lt; std::endl; // prints -84
+    std::cout &lt;&lt; i + i &lt;&lt; std::endl; // prints -84
     //the type of sum result is unsigned
     //the int tpye has been convert to a unsigned before add operation
-     std::cout &lt;&lt; u + i &lt;&lt; std::endl; // if 32-bit ints, prints 4294967264
+    std::cout &lt;&lt; u + i &lt;&lt; std::endl; // if 32-bit ints, prints 4294967264
     return 0;
 &#125;
 </code></pre>
@@ -566,12 +566,12 @@ extern double pi = 3.1416; // this is a error statement
 int a = 0;
 int main()
 &#123;
-     int sum = 0;
-     // sum values from 1 through 10 inclusive
-     for (int val = 1; val &lt;= 10; ++val)
-      sum += val; // equivalent to sum = sum + val
-     std::cout &lt;&lt; &quot;Sum of 1 to 10 inclusive is &quot; &lt;&lt; sum &lt;&lt; std::endl;
-     return 0;
+    int sum = 0;
+    // sum values from 1 through 10 inclusive
+    for (int val = 1; val &lt;= 10; ++val)
+        sum += val; // equivalent to sum = sum + val
+    std::cout &lt;&lt; &quot;Sum of 1 to 10 inclusive is &quot; &lt;&lt; sum &lt;&lt; std::endl;
+    return 0;
 &#125;
 </code></pre>
 <p>Scopes can contain other scopes. The contained (or <strong>nested</strong>) scope is referred to as an inner scope, the containing scope is the outer scope. Once a name has been declared in a scope, that name can be used by scopes nested inside that scope. Names declared in the outer scope can also be redefined in an inner scope, this is a simple case.</p>
@@ -598,16 +598,16 @@ int main()
 
 int main()
 &#123;
-     int ival = 1024;
-     int&amp; refVal = ival; // refVal refers to (is another name for) ival
-     refVal = 100;
-     std::cout &lt;&lt; ival &lt;&lt; &quot; &quot; &lt;&lt; refVal &lt;&lt; std::endl; // will print 100 100
+    int ival = 1024;
+    int&amp; refVal = ival; // refVal refers to (is another name for) ival
+    refVal = 100;
+    std::cout &lt;&lt; ival &lt;&lt; &quot; &quot; &lt;&lt; refVal &lt;&lt; std::endl; // will print 100 100
     //error statement examples 
     int &amp;refVal2; // error: a reference must be initialized
     int &amp;refVal4 = 10; // error: initializer must be an object
     double dval = 3.14;
-     int &amp;refVal5 = dval; // error: initializer must be an int object
-     return 0;
+    int &amp;refVal5 = dval; // error: initializer must be an int object
+    return 0;
 &#125;
 </code></pre>
 <p>A <strong>pointer</strong> is a compound type that “points to” another type. Like references, pointers are used for indirect access to other objects. Unlike a reference, <strong><em>a pointer is an object in its own right</em></strong>. Pointers can be <strong>assigned</strong> and <strong>copied</strong>; a single pointer can point to <strong>several different objects</strong> over its lifetime. Unlike a reference, a pointer need <strong>not</strong> be initialized at the time it is defined. Like other built-in types, pointers defined at block scope have undefined value if they are not initialized. the next case show how to use pointer:</p>

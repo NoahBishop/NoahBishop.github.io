@@ -654,15 +654,15 @@ auto p = const_cast&lt;int*&gt;(a);
 
 int main()
 &#123;
- int num1, num2;
- while (std::cin &gt;&gt; num1 &gt;&gt; num2)&#123;
-  if (num2 == 0)&#123;
-   throw std::runtime_error(&quot;divisor can&#39;t be zero!&quot;);
-  &#125;else&#123;
-   std::cout &lt;&lt; num1 &lt;&lt; &quot;/&quot; &lt;&lt; num2 &lt;&lt; &quot;=&quot; &lt;&lt; num1 / num2 &lt;&lt; std::endl;
-  &#125;
- &#125;
- return 0;
+    int num1, num2;
+    while (std::cin &gt;&gt; num1 &gt;&gt; num2)&#123;
+        if (num2 == 0)&#123;
+            throw std::runtime_error(&quot;divisor can&#39;t be zero!&quot;);
+        &#125;else&#123;
+            std::cout &lt;&lt; num1 &lt;&lt; &quot;/&quot; &lt;&lt; num2 &lt;&lt; &quot;=&quot; &lt;&lt; num1 / num2 &lt;&lt; std::endl;
+        &#125;
+    &#125;
+    return 0;
 &#125;
 </code></pre>
 <p>Only throw error is no a good idea, we also need catch the error so that program will continued running, and report the error to user:</p>
@@ -670,22 +670,22 @@ int main()
 
 int main()
 &#123;
- int num1, num2;
- while (std::cin &gt;&gt; num1 &gt;&gt; num2) &#123;
-  try&#123;
-   if (num2 == 0) &#123;
-    throw std::runtime_error(&quot;divisor can&#39;t be zero!&quot;);
-   &#125;
-   else &#123;
-    std::cout &lt;&lt; num1 &lt;&lt; &quot;/&quot; &lt;&lt; num2 &lt;&lt; &quot;=&quot; &lt;&lt; num1 / num2 &lt;&lt; std::endl;
-   &#125;
-  &#125;
-  catch (std::runtime_error err)&#123;
-   std::cout &lt;&lt; err.what() &lt;&lt; std::endl;
-   std::cout &lt;&lt; &quot;please input a correct divisor&quot; &lt;&lt; std::endl;
-  &#125;
- &#125;
- return 0;
+    int num1, num2;
+    while (std::cin &gt;&gt; num1 &gt;&gt; num2) &#123;
+        try&#123;
+            if (num2 == 0) &#123;
+                throw std::runtime_error(&quot;divisor can&#39;t be zero!&quot;);
+            &#125;
+            else &#123;
+                std::cout &lt;&lt; num1 &lt;&lt; &quot;/&quot; &lt;&lt; num2 &lt;&lt; &quot;=&quot; &lt;&lt; num1 / num2 &lt;&lt; std::endl;
+            &#125;
+        &#125;
+        catch (std::runtime_error err)&#123;
+            std::cout &lt;&lt; err.what() &lt;&lt; std::endl;
+            std::cout &lt;&lt; &quot;please input a correct divisor&quot; &lt;&lt; std::endl;
+        &#125;
+    &#125;
+    return 0;
 &#125;
 </code></pre>
 <p>If no appropriate catch is found, execution is transferred to a library function named terminate. The behavior of that function is system dependent but is guaranteed to stop further execution of the program.</p>
@@ -702,21 +702,21 @@ int main()
 <h3 id="Function-Basics"><a href="#Function-Basics" class="headerlink" title="Function Basics"></a>Function Basics</h3><p>A <strong>function</strong> definition typically consists of a <strong>return type</strong>, a <strong>name</strong>, a list of zero or more <strong>parameters</strong>, and a <strong>body</strong>. The parameters are specified in a comma-separated list enclosed in parentheses. The actions that the function performs are specified in a statement block, referred to as the function body. example:</p>
 <pre><code class="c++">int fact(int n) &#123;
     //The factorial of n
- int sum = 1;
- while (n&gt;0)
- &#123;
-  sum *= n--;
- &#125;
- return sum;
+    int sum = 1;
+    while (n&gt;0)
+    &#123;
+        sum *= n--;
+    &#125;
+    return sum;
 &#125;
 </code></pre>
 <p>To <strong>call</strong> fact, we must supply an int value. The result of the call is also an int:</p>
 <pre><code class="c++">int main()
 &#123;
- int f = 0;
- std::cin &gt;&gt; f;
- std::cout &lt;&lt; fact(f) &lt;&lt; std::endl;
- return 0;
+    int f = 0;
+    std::cin &gt;&gt; f;
+    std::cout &lt;&lt; fact(f) &lt;&lt; std::endl;
+    return 0;
 &#125;
 </code></pre>
 <p>A function call does two things:</p>
@@ -734,13 +734,13 @@ int main()
 <p>The objects that correspond to ordinary local variables are created when the function’s control path passes through the variable’s definition. They are destroyed when control passes through the end of the block in which the variable is defined. Objects that exist only while a block is executing are known as <strong>automatic objects</strong>. After execution exits a block, the values of the automatic objects created in that block are undefined.</p>
 <p>It can be useful to have a local variable whose lifetime continues across calls to the function. We obtain such objects by defining a local variable as static. Each <strong>local static object</strong> is initialized <strong>before</strong> the first time execution passes through the object’s definition. Local statics are not destroyed when a function ends; they are destroyed when the program terminates. This program will print the numbers from 1 through 10 inclusive:</p>
 <pre><code class="c++">size_t count_calls()&#123;
- static size_t ctr = 0; // value will persist across calls
- return ++ctr;
+    static size_t ctr = 0; // value will persist across calls
+    return ++ctr;
 &#125;
 int main()&#123;
- for (size_t i = 0; i != 10; ++i)
-  cout &lt;&lt; count_calls() &lt;&lt; endl;
- return 0;
+    for (size_t i = 0; i != 10; ++i)
+        cout &lt;&lt; count_calls() &lt;&lt; endl;
+    return 0;
 &#125;
 </code></pre>
 <p>Like any other name, the name of a function must be declared before we can use it. As with variables, a function may be defined only once but may be declared multiple times. A function declaration is just like a function definition except that a declaration has no function body. In a declaration, a semicolon replaces the function body.</p>
@@ -750,27 +750,27 @@ int main()&#123;
 using std::cin; using std::cout; using std::endl;
 
 void toUper1(char c) &#123;
- c = toupper(c);
+    c = toupper(c);
 &#125;
 
 void toUper2(char &amp;c) &#123;
- c = toupper(c);
+    c = toupper(c);
 &#125;
 
 int main()&#123;
- char c = &#39;a&#39;;
- //no effect, because c in to toUper1 is a copy of c in in to main
- toUper1(c);
- cout &lt;&lt; c &lt;&lt; endl;// print a
- //effect, because c in to toUper1 is bound to c in in to main
- toUper2(c);
- cout &lt;&lt; c &lt;&lt; endl;//print A
- return 0;
+    char c = &#39;a&#39;;
+    //no effect, because c in to toUper1 is a copy of c in in to main
+    toUper1(c);
+    cout &lt;&lt; c &lt;&lt; endl;// print a
+    //effect, because c in to toUper1 is bound to c in in to main
+    toUper2(c);
+    cout &lt;&lt; c &lt;&lt; endl;//print A
+    return 0;
 &#125;
 </code></pre>
 <p>Pointers behave like any other nonreference type. When we copy a pointer, the value of the pointer is copied. After the copy, the two pointers are distinct. However, a pointer also gives us indirect access to the object to which that pointer points. We can change the value of that object by assigning through the pointer:</p>
 <pre><code class="c++">void toUper3(char *c) &#123;
- *c = toupper(*c);
+    *c = toupper(*c);
 &#125;
 //note in mian wo call this function need pass the address of c
 //toUper3(&amp;c)
@@ -788,37 +788,37 @@ void print(const int[10]); // dimension for documentation purposes (at best)
 using std::cin; using std::cout; using std::endl;
 
 void print(const int *beg, const int *end) &#123;
- while (beg != end)
- &#123;
-  cout &lt;&lt; *beg++ &lt;&lt; endl;
- &#125;
+    while (beg != end)
+    &#123;
+        cout &lt;&lt; *beg++ &lt;&lt; endl;
+    &#125;
 &#125;
 
 int main()&#123;
- int arr[4] = &#123; 2,4,2,4 &#125;;
- print(std::begin(arr), std::end(arr));
- return 0;
+    int arr[4] = &#123; 2,4,2,4 &#125;;
+    print(std::begin(arr), std::end(arr));
+    return 0;
 &#125;
 </code></pre>
 <p>Another approach for array arguments, which is common in C programs and older C++ programs, is to define a second parameter that indicates the size of the array. Using this approach, we’ll rewrite print as follows:</p>
 <pre><code class="c++">void print(const int ia[], size_t size)
 &#123;
- for (size_t i = 0; i != size; ++i) &#123;
-  cout &lt;&lt; ia[i] &lt;&lt; endl;
- &#125;
+    for (size_t i = 0; i != size; ++i) &#123;
+        cout &lt;&lt; ia[i] &lt;&lt; endl;
+    &#125;
 &#125;
 </code></pre>
 <p>In c++ multidimensional array is an array of arrays. As with any array, a multidimensional array is passed as a pointer to its first element. Because we are dealing with an array of arrays, that <strong>element</strong> is an <strong>array</strong>, so the <strong>pointer</strong> is <strong>a pointer to an array</strong>. The size of the second (and any subsequent) dimension is part of the element type and must be specified:</p>
 <pre><code class="c++">void print(int (*arr)[2], size_t size) &#123;
- for (size_t i = 0; i &lt; size; i++)
- &#123;
-  auto beg = std::begin(*arr), end = std::end(*arr);
-  while (beg != end)
-  &#123;
-   cout &lt;&lt; *beg++ &lt;&lt; endl;
-  &#125;
-  arr += 1;
- &#125;
+    for (size_t i = 0; i &lt; size; i++)
+    &#123;
+        auto beg = std::begin(*arr), end = std::end(*arr);
+        while (beg != end)
+        &#123;
+            cout &lt;&lt; *beg++ &lt;&lt; endl;
+        &#125;
+        arr += 1;
+    &#125;
 &#125;
 //We can also define our function using array syntax.
 void print(int arr[][2], size_t size) &#123; /* . . . */ &#125;
@@ -828,9 +828,9 @@ void print(int arr[][2], size_t size) &#123; /* . . . */ &#125;
 <p>Sometimes we do not know in advance <strong>how many arguments we need to pass</strong> to a function. For example, we might want to write a routine to print error messages generated from our program. We’d like to use a single function to print these error messages in order to handle them in a uniform way. However, different calls to our error-printing function might pass different arguments, corresponding to different kinds of error messages.</p>
 <p>The <strong>new standard</strong> provides two primary ways to write a function that takes a varying number of arguments: If all the arguments have the same type, we can pass a library type named initializer_list. An <strong>initializer_list</strong> is a library type that represents an array of values of the specified type. This type is defined in the <strong>initializer_list</strong> <strong>header</strong>. You can see all details in <a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/initializer_list/initializer_list/">here</a>.</p>
 <pre><code class="c++">void error_msg(std::initializer_list&lt;std::string&gt; il)&#123;
- for (auto beg = il.begin(); beg != il.end(); ++beg)
-  cout &lt;&lt; *beg &lt;&lt; &quot; &quot;;
- cout &lt;&lt; endl;
+    for (auto beg = il.begin(); beg != il.end(); ++beg)
+        cout &lt;&lt; *beg &lt;&lt; &quot; &quot;;
+    cout &lt;&lt; endl;
 &#125;
 </code></pre>
 <p>When we pass a sequence of values to an initializer_list parameter, we must enclose the sequence in curly braces:</p>
@@ -841,15 +841,15 @@ void print(int arr[][2], size_t size) &#123; /* . . . */ &#125;
 <p>Note never return a reference or pointer to a local object, When a function completes, its storage is freed. After a function terminates, references to local objects refer to memory that is no longer valid:</p>
 <pre><code class="c++">//don&#39;t do this
 std::string&amp; em() &#123;
- std::string str = &quot;iecbvasj&quot;;
- return str;
+    std::string str = &quot;iecbvasj&quot;;
+    return str;
 &#125;
 </code></pre>
 <p>A function that calls itself, either directly or indirectly, is a recursive function. As an example, we can rewrite our factorial function to use recursion:</p>
 <pre><code class="c++">int factorial(int val)&#123;
- if (val &gt; 1)
-  return factorial(val-1) * val;
- return 1;
+    if (val &gt; 1)
+        return factorial(val-1) * val;
+    return 1;
 &#125;
 </code></pre>
 <p>Because we cannot copy an array, a function cannot return an array. However, a function can return a pointer or a reference to an array. There are some ways to simplify such declarations, the most straightforward way is to use a type alias:</p>
@@ -859,26 +859,26 @@ using arrT = int[10]; // equivalent declaration of arrT;
 <p>arrT is a synonym for an array of ten ints. Because we cannot return an array, we define the return type as a pointer to this type.</p>
 <pre><code class="c++">// a function that initiated a array
 arrT *init_arr(arrT *t)&#123;
- for (auto i = std::begin(*t); i != std::end(*t); i++)&#123;
-  *i = 1;
- &#125;
- return t;
+    for (auto i = std::begin(*t); i != std::end(*t); i++)&#123;
+        *i = 1;
+    &#125;
+    return t;
 &#125;
 </code></pre>
 <p>To declare function without using a type alias, we must remember that the dimension of an array follows the name being defined:</p>
 <pre><code class="c++">int (*init_arr1(int (*t)[10]))[10] &#123;
- for (auto i = std::begin(*t); i != std::end(*t); i++) &#123;
-  *i = 1;
- &#125;
- return t;
+    for (auto i = std::begin(*t); i != std::end(*t); i++) &#123;
+        *i = 1;
+    &#125;
+    return t;
 &#125;
 </code></pre>
 <p>Under the new standard, another way to simplify the declaration of func is by using a trailing return type. Trailing returns can be defined for any function, but are most useful for functions with complicated return types, such as pointers (or references) to arrays.</p>
 <pre><code class="c++">auto init_arr(arrT* t) -&gt; int(*)[10]&#123;
- for (auto i = std::begin(*t); i != std::end(*t); i++) &#123;
-  *i = 1;
- &#125;
- return t;
+    for (auto i = std::begin(*t); i != std::end(*t); i++) &#123;
+        *i = 1;
+    &#125;
+    return t;
 &#125;
 </code></pre>
 <h3 id="Overloaded-Functions"><a href="#Overloaded-Functions" class="headerlink" title="Overloaded Functions"></a>Overloaded Functions</h3><p>Functions that have the same name but different parameter lists and that appear in the same scope are overloaded. For example, we want write a print function that print array with different parameter:</p>
@@ -898,29 +898,29 @@ int f1(int* a);     //same
 using std::cin; using std::cout; using std::endl;
 
 int f1(const int* a) &#123;
- return 1;
+    return 1;
 &#125;
 
 int f1(int* a) &#123;
- return 2;
+    return 2;
 &#125;
 
 int f1(const int&amp; a) &#123;
- return 3;
+    return 3;
 &#125;
 
 int f1(int&amp; a) &#123;
- return 4;
+    return 4;
 &#125;
 
 int main() &#123;
- const int a = 0;
- int b = 0;
- cout &lt;&lt; f1(&amp;a) &lt;&lt; endl;  //print 1
- cout &lt;&lt; f1(&amp;b) &lt;&lt; endl;  //print 2
- cout &lt;&lt; f1(a) &lt;&lt; endl;   //print 3
- cout &lt;&lt; f1(b) &lt;&lt; endl;   //print 4
- return 0;
+    const int a = 0;
+    int b = 0;
+    cout &lt;&lt; f1(&amp;a) &lt;&lt; endl;  //print 1
+    cout &lt;&lt; f1(&amp;b) &lt;&lt; endl;  //print 2
+    cout &lt;&lt; f1(a) &lt;&lt; endl;   //print 3
+    cout &lt;&lt; f1(b) &lt;&lt; endl;   //print 4
+    return 0;
 &#125;
 </code></pre>
 <p>Note overloading has no special properties with respect to scope: As usual, if we declare a name in an inner scope, that name hides uses of that name declared in an outer scope. Names do not overload across scopes:</p>
@@ -928,20 +928,20 @@ int main() &#123;
 using std::cin; using std::cout; using std::endl;
 
 int z() &#123;
- return 10;
+    return 10;
 &#125;
 
 int p() &#123;
- return 1;
+    return 1;
 &#125;
 
 int main() &#123;
- bool z;
- int r = z();    //error: z is a bool object
- double p(int a);
- p();            //error: previous function is hided
- p(1);           //ok
- return 0;
+    bool z;
+    int r = z();    //error: z is a bool object
+    double p(int a);
+    p();            //error: previous function is hided
+    p(1);           //ok
+    return 0;
 &#125;
 </code></pre>
 <h3 id="Features-for-Specialized-Uses"><a href="#Features-for-Specialized-Uses" class="headerlink" title="Features for Specialized Uses"></a>Features for Specialized Uses</h3><p>In this section we’ll cover <strong>three</strong> function-related features that are useful in many, but not all, programs: <strong>default arguments</strong>, <strong>inline</strong> and <strong>constexpr functions</strong>.</p>
@@ -952,18 +952,18 @@ int main() &#123;
 using std::cin; using std::cout; using std::endl;
 
 void hello(std::string s = &quot;C++&quot;, size_t n = 1) &#123;
- for (size_t i = 0; i &lt; n; i++)
- &#123;
-  cout &lt;&lt; &quot;Hello &quot; &lt;&lt; s &lt;&lt; endl;
- &#125;
+    for (size_t i = 0; i &lt; n; i++)
+    &#123;
+        cout &lt;&lt; &quot;Hello &quot; &lt;&lt; s &lt;&lt; endl;
+    &#125;
 &#125;
 
 int main() &#123;
- hello();       // say hello C++ once
- hello(&quot;Java&quot;); // say hello Java once
- hello(&quot;C#&quot;, 2);// say hello C# twice
- hello(3);      // error: can omit only trailing arguments
- return 0;
+    hello();       // say hello C++ once
+    hello(&quot;Java&quot;); // say hello Java once
+    hello(&quot;C#&quot;, 2);// say hello C# twice
+    hello(3);      // error: can omit only trailing arguments
+    return 0;
 &#125;
 </code></pre>
 <p>Sometimes we defining a function with such a small operation, the benefit of function are:</p>
@@ -976,7 +976,7 @@ int main() &#123;
 <p>However, Calling a function is apt to be slower than evaluating the equivalent expression. On most machines, a function call does a lot of work: Registers are saved before the call and restored after the return; arguments may be copied; and the program branches to a new location. Fortunately we have a good way to fix it disadvantage. <strong>The Inline Functions</strong></p>
 <p>A function specified as <strong>inline</strong> (usually) is expanded “in line” at each call. If function were defined as inline, then this call (probably) would be expanded during compilation into expression.</p>
 <pre><code class="c++">inline const string &amp;shorterString(const string &amp;s1, const string &amp;s2)&#123;
- return s1.size() &lt;= s2.size() ? s1 : s2;
+    return s1.size() &lt;= s2.size() ? s1 : s2;
 &#125;
 cout &lt;&lt; shorterString(s1, s2) &lt;&lt; endl;
 //may be compilation into expression. 
@@ -1001,7 +1001,7 @@ cout &lt;&lt; shorterString(s1, s2) &lt;&lt; endl;
 <h3 id="Pointers-to-Functions"><a href="#Pointers-to-Functions" class="headerlink" title="Pointers to Functions"></a>Pointers to Functions</h3><p>A function pointer is just that—a pointer that denotes a function rather than an object. Like any other pointer, a function pointer points to a particular type. A function’s type is determined by its return type and the types of its parameters. The function’s name is not part of its type. For example:</p>
 <pre><code class="c++">// compare two int
 bool cmp(int a, int b) &#123;
- return a &gt; b;
+    return a &gt; b;
 &#125;
 // pf points to a function returning bool that takes two int
 bool (*pf)(int a, int b);
@@ -1025,10 +1025,10 @@ double (*pf3)(int*) = ff;       // error: return type of ff and pf3 don&#39;t ma
 </code></pre>
 <p>Just as with arrays, we cannot define parameters of function type but can have a parameter that is a pointer to function. As with arrays, we can write a parameter that looks like a function type, but it will be treated as a pointer:</p>
 <pre><code class="c++">void useBigger(const string&amp; s1, const string&amp; s2,
- bool pf(const string&amp;, const string&amp;));
+               bool pf(const string&amp;, const string&amp;));
 // equivalent declaration: explicitly define the parameter as a pointer to function
 void useBigger(const string&amp; s1, const string&amp; s2,
- bool (*pf)(const string&amp;, const string&amp;));
+               bool (*pf)(const string&amp;, const string&amp;));
 </code></pre>
 <p>When we pass a function as an argument, we can do so directly. It will be automatically converted to a pointer.</p>
 <p>As with arrays, we can’t return a function type but can return a pointer to a function type. Similarly, we must write the return type as a pointer type; the compiler will not automatically treat a function return type as the corresponding pointer type. Also as with array returns, by far the easiest way to declare a function that returns a pointer to function is by using a type alias:</p>
@@ -1060,23 +1060,23 @@ F *f3(int); // ok: explicitly specify that the return type is a pointer to funct
 using std::cin; using std::cout; using std::endl;
 
 int main() &#123;
- Sales_data total; // variable to hold the running sum
- if (read(cin, total)) &#123; // read the first transaction
-  Sales_data trans; // variable to hold data for the next transaction
-  while (read(cin, trans)) &#123; // read the remaining transactions
-   if (total.isbn() == trans.isbn()) // check the isbns
-    total.combine(trans); // update the running total
-   else &#123;
-    print(cout, total) &lt;&lt; endl; // print the results
-    total = trans; // process the next book
-   &#125;
-  &#125;
-  print(cout, total) &lt;&lt; endl; // print the last transaction
- &#125;
- else &#123; // there was no input
-  std::cerr &lt;&lt; &quot;No data?!&quot; &lt;&lt; endl; // notify the user
- &#125;
- return 0;
+    Sales_data total; // variable to hold the running sum
+    if (read(cin, total)) &#123; // read the first transaction
+        Sales_data trans; // variable to hold data for the next transaction
+        while (read(cin, trans)) &#123; // read the remaining transactions
+            if (total.isbn() == trans.isbn()) // check the isbns
+                total.combine(trans); // update the running total
+            else &#123;
+                print(cout, total) &lt;&lt; endl; // print the results
+                total = trans; // process the next book
+            &#125;
+        &#125;
+        print(cout, total) &lt;&lt; endl; // print the last transaction
+    &#125;
+    else &#123; // there was no input
+        std::cerr &lt;&lt; &quot;No data?!&quot; &lt;&lt; endl; // notify the user
+    &#125;
+    return 0;
 &#125;
 </code></pre>
 <p>Our revised class will have the same data members as the version we defined in previous: bookNo, a string representing the ISBN; units_sold, an unsigned that says how many copies of the book were sold; and revenue, a double representing the total revenue for those sales.</p>
