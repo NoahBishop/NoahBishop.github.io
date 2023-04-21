@@ -726,7 +726,7 @@ a:active,a:hover {
     outline:0
 }
 a:active {
-    cursor:url(https://morning.eu.org/img/cursor/textto.cur),alias
+    cursor:url(https://morning.eu.org/images/cursor/textto.cur),alias
 }
 abbr[title] {
     border-bottom:1px dotted
@@ -853,7 +853,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 p {
     margin-bottom:1.5em;
-    cursor:url(https://morning.eu.org/images/cursor/textto.cur),auto
+    cursor:url(https://morning.eu.org/images/cursor/normal.cur),auto
 }
 dfn,cite,em,i {
     font-style:italic
