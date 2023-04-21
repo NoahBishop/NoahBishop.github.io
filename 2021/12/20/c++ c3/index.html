@@ -518,7 +518,7 @@
 </tbody>
 </table>
 <p>Note same operator has different meaning with different type of operand, when division a integer, like <code>5 / 2</code>, the result is 2 rather than 2.5.</p>
-<h3 id="Logical-and-Relational-Operators"><a href="#Logical-and-Relational-Operators" class="headerlink" title="Logical and Relational Operators"></a>Logical and Relational Operators</h3><p>The relational operators take operands of arithmetic or pointer type; the logical operators take operands of any type that can be converted to bool. These operators all return values of type bool. Arithmetic and pointer operand(s) with a value of zero are false; all other values are true. The operands to these operators are rvalues and the result is an rvalue.</p>
+<h3 id="Logical-and-Relational-Operators"><a href="#Logical-and-Relational-Operators" class="headerlink" title="Logical and Relational Operators"></a>Logical and Relational Operators</h3><p>The relational operators take operands of arithmetic or pointer type; the logical operators take operands of any type that can be converted to bool. These operators all return values of type bool. Arithmetic and pointer operand(s) with a value of zero are false; all other values are true. The operands to these operators are rvalues and the result is an rvalue. (notice: because my blog convert sheet have error, I replace  | symbol with ⏐)</p>
 <table>
 <thead>
 <tr>
@@ -569,19 +569,15 @@
 <td>operand1 &amp;&amp; operand2</td>
 </tr>
 <tr>
-<td style="text-align:center">\</td>
-<td>\</td>
-<td></td>
+<td style="text-align:center">⏐⏐</td>
 <td>logical or</td>
-<td>operand1 \</td>
-<td>\</td>
-<td>operand2</td>
+<td>operand1 ⏐⏐ operand2</td>
 </tr>
 </tbody>
 </table>
 <h3 id="The-Member-Access-Operators"><a href="#The-Member-Access-Operators" class="headerlink" title="The Member Access Operators"></a>The Member Access Operators</h3><p>The dot <code>.</code> and arrow <code>-&gt;</code> operators provide for member access. The dot operator fetches a member from an object of class type; arrow is defined so that ptr-&gt;mem is a synonym for (*ptr).mem:</p>
 <h3 id="The-Conditional-Operator"><a href="#The-Conditional-Operator" class="headerlink" title="The Conditional Operator"></a>The Conditional Operator</h3><p>The conditional operator (the <code>?:</code> operator) lets us embed simple if-else logic inside an expression. The conditional operator has the following form: <code>cond ? expr1 : expr2;</code>. where cond is an expression that is used as a condition and expr1 and expr2 are expressions of the same type (or types that can be converted to a common type). This operator executes by evaluating cond. If the condition is true, then expr1 is evaluated; otherwise, expr2 is evaluated. As one example, we can use a conditional operator to determine whether a grade is pass or fail:</p>
-<h3 id="The-Bitwise-Operators"><a href="#The-Bitwise-Operators" class="headerlink" title="The Bitwise Operators"></a>The Bitwise Operators</h3><p>The bitwise operators take operands of integral type that they use as a collection of bits. These operators let us test and set individual bits. We can also use these operators on a library type named bitset that represents a flexibly sized collection of bits</p>
+<h3 id="The-Bitwise-Operators"><a href="#The-Bitwise-Operators" class="headerlink" title="The Bitwise Operators"></a>The Bitwise Operators</h3><p>The bitwise operators take operands of integral type that they use as a collection of bits. These operators let us test and set individual bits. We can also use these operators on a library type named bitset that represents a flexibly sized collection of bits (notice: because my blog convert sheet have error, I replace  | symbol with ⏐)</p>
 <table>
 <thead>
 <tr>
@@ -617,11 +613,9 @@
 <td>operand1 ^ operand2</td>
 </tr>
 <tr>
-<td style="text-align:center">\</td>
-<td></td>
+<td style="text-align:center">⏐</td>
 <td>bitwise or</td>
-<td>operand1 \</td>
-<td>operand2</td>
+<td>operand1 ⏐ operand2</td>
 </tr>
 </tbody>
 </table>
