@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	
+		<title itemprop="name">
+			
+				(ch10) Overloaded Operations and Conversions | 
+						うさぎの手帳
+		</title>
+		
+			<link rel="shortcut icon" href="/images/favicon.ico">
+			
+				<meta http-equiv="x-dns-prefetch-control" content="on">
+				<link rel="stylesheet"
+					href="https://fonts.googleapis.com/css?family=Noto+SerifMerriweather|Merriweather+Sans|Source+Code+Pro|Ubuntu:400,700|Noto+Serif+SC"
+					media="all">
+				<link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+				<link rel="stylesheet" id="saukra_css-css" href="/css/style.css" type="text/css" media="all">
+				<link rel="stylesheet" href="/css/lib.min.css" media="all">
+				<link rel="stylesheet" href="/css/font.css" media="all">
+				<link rel="stylesheet" href="/css/insight.css" media="all">
+				<link rel="stylesheet" href="/css/jquery.fancybox.min.css" media="all">
+				<link rel="stylesheet" href="/css/zoom.css" media="all">
+				<link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+				<!--   <link rel="stylesheet" id="saukra_css-css" href="https://2heng.xin/wp-content/cache/autoptimize/css/autoptimize_ad42a61f4c7d4bdd9f91afcff6b5dda5.css
+" type="text/css" media="all"> -->
+				<script>
+					/*Initial Variables*/
+					var mashiro_option = new Object();
+					var mashiro_global = new Object();
+					mashiro_option.NProgressON = true;
+					/* 
+					* 邮箱信息之类的东西可以填在这里，这些js变量基本都作用于sakura-app.js
+					* 这样的设置仅是为了方便在基于PHP开发的主题中设置js变量，既然移植到了Node上，我想或许可以精简这一逻辑吧
+					*/
+					mashiro_option.email_domain = "";
+					mashiro_option.email_name = "";
+					mashiro_option.cookie_version_control = "";
+					mashiro_option.qzone_autocomplete = false;
+					mashiro_option.site_name = "桜荘そのうさぎ";
+					mashiro_option.author_name = "うさぎ";
+					mashiro_option.site_url = "https://morning.eu.org";
+					mashiro_option.v_appId = "EAyicHJhXmxJNEeuhACVujd4-gzGzoHsz";
+					mashiro_option.v_appKey = "09Tjj4It5DOhgboduuM40u7y";
+					mashiro_option.mathjax = "0";
+	//mashiro_option.qq_api_url = "https://api.mashiro.top/qqinfo/";
+	//mashiro_option.qq_avatar_api_url = "https://api.mashiro.top/qqinfo/";
+
+	// mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/moezx/cdn@3.4.5/css/lib.min.css";
+	// mashiro_option.float_player_on = true;
+
+					/*End of Initial Variables*/
+				</script>
+				<script type="text/javascript">
+					var bg = "https://morning.eu.org/images/cover/(1).jpg.webp,https://morning.eu.org/images/cover/(2).jpg.webp,https://morning.eu.org/images/cover/(3).jpg.webp,https://morning.eu.org/images/cover/(4).jpg.webp,https://morning.eu.org/images/cover/(5).jpg.webp,https://morning.eu.org/images/cover/(6).jpg.webp,https://morning.eu.org/images/cover/(7).jpg.webp,https://morning.eu.org/images/cover/(8).jpg.webp".split(",");
+					var bgindex = Math.floor(Math.random() * bg.length);
+					if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
+						alert('朋友，IE浏览器未适配哦~');
+					}
+				</script>
+				<script src="//code.bdstatic.com/npm/leancloud-storage@4.12.0/dist/av-min.js"></script>
+				<script src='//unpkg.com/valine@1.3.9/dist/Valine.min.js'></script>
+				<style type="text/css">
+					.hljs-ln {
+						border-collapse: collapse
+					}
+
+					.hljs-ln td {
+						padding: 0
+					}
+
+					.hljs-ln-n:before {
+						content: attr(data-line-number)
+					}
+				</style>
+				<style type="text/css">
+					.site-top .lower nav {
+						display: block !important;
+					}
+
+					.author-profile i,
+					.post-like a,
+					.post-share .show-share,
+					.sub-text,
+					.we-info a,
+					span.sitename,
+					.post-more i:hover,
+					#pagination a:hover,
+					.post-content a:hover,
+					.float-content i:hover {
+						color: #FE9600
+					}
+
+					.feature i,
+					.download,
+					.navigator i:hover,
+					.links ul li:before,
+					.ar-time i,
+					span.ar-circle,
+					.object,
+					.comment .comment-reply-link,
+					.siren-checkbox-radio:checked+.siren-checkbox-radioInput:after {
+						background: #FE9600
+					}
+
+					::-webkit-scrollbar-thumb {
+						background: #FE9600
+					}
+
+					.download,
+					.navigator i:hover,
+					.link-title,
+					.links ul li:hover,
+					#pagination a:hover,
+					.comment-respond input[type='submit']:hover {
+						border-color: #FE9600
+					}
+
+					.entry-content a:hover,
+					.site-info a:hover,
+					.comment h4 a,
+					#comments-navi a.prev,
+					#comments-navi a.next,
+					.comment h4 a:hover,
+					.site-top ul li a:hover,
+					.entry-title a:hover,
+					#archives-temp h3,
+					span.page-numbers.current,
+					.sorry li a:hover,
+					.site-title a:hover,
+					i.iconfont.js-toggle-search.iconsearch:hover,
+					.comment-respond input[type='submit']:hover {
+						color: #FE9600
+					}
+
+					.comments .comments-main {
+						display: block !important;
+					}
+
+					.comments .comments-hidden {
+						display: none !important;
+					}
+
+					background-position:center center;
+					background-attachment:inherit;
+					}
+				</style>
+<meta name="generator" content="Hexo 5.4.2"></head>
+<body class="page-template page-template-user page-template-page-analytics page-template-userpage-analytics-php page page-id-1297 chinese-font serif isWebKit">
+  <div class="scrollbar" id="bar">
+  </div>
+  <a href="#" class="cd-top faa-float animated"></a>
+  <section id="main-container">
+    <div class="headertop filter-dot">
+  <div id="banner_wave_1"></div>
+  <div id="banner_wave_2"></div>
+  <figure id="centerbg" class="centerbg">
+    <div class="focusinfo no-select">
+      <div class="header-tou">
+        <a target="_blank" rel="noopener" href="https://morning.eu.org">
+          <img src="https://morning.eu.org/images/custom/avatar.jpg">
+        </a>
+      </div>
+      <div class="header-info">
+        <p>
+          Live your life with passion! With some drive!
+        </p>
+        <div class="top-social_v2">
+          <li id="bg-pre">
+            <img class="flipx" src="/images/other/next-b.svg">
+          </li>
+          
+            
+              
+                  <li>
+                    <a href="https://github.com/NoahBishop" target="_blank" class="social-github" title="github">
+                      <img src="https://morning.eu.org/images/social/github.png">
+                    </a>
+                  </li>
+                  
+                    
+              
+                  <li>
+                    <a href="https://t.me/mega1037" target="_blank" class="social-github" title="telegram">
+                      <img src="https://morning.eu.org/images/social/telegram.png">
+                    </a>
+                  </li>
+                  
+                    
+              
+                  <li>
+                    <a href="https://music.163.com/#/user/home?id=305378376" target="_blank" class="social-github" title="netease">
+                      <img src="https://morning.eu.org/images/social/wangyiyun.png">
+                    </a>
+                  </li>
+                  
+                    
+              
+                  <li>
+                    <a href="https://www.twitter.com/noah_bishop_z" target="_blank" class="social-github" title="twitter">
+                      <img src="https://morning.eu.org/images/social/twitter.png">
+                    </a>
+                  </li>
+                  
+                    
+              
+                  <li>
+                    <a href="mailto:beiloquuw@gamil.com" target="_blank" class="social-github" title="email">
+                      <img src="https://morning.eu.org/images/social/email.svg">
+                    </a>
+                  </li>
+                  
+                    
+                      
+                        <li id="bg-next">
+                          <img src="/images/other/next-b.svg">
+                        </li>
+        </div>
+      </div>
+    </div>
+  </figure>
+  <div id="video-container" style="">
+    <video style="object-fit: fill" id="bgvideo" class="video" video-name="" src="" width="auto" preload="auto">
+    </video>
+    <div id="video-btn" class="loadvideo videolive">
+    </div>
+    <div id="video-add">
+    </div>
+    <div class="video-stu">
+    </div>
+  </div>
+  <div class="headertop-down faa-float animated" onclick="headertop_down()">
+    <span>
+      <i class="fa fa-chevron-down" aria-hidden="true">
+      </i>
+    </span>
+  </div>
+</div>
+    <div id="page" class="site wrapper">
+      <header class="site-header no-select gizle sabit" role="banner">
+  <div class="site-top">
+    <div class="site-branding">
+      <span class="site-title">
+        <span class="logolink moe-mashiro">
+          <a href="/">
+            <span class="sakurasono">桜荘その</span>
+            <span class="shironeko">うさぎ</span>
+          </a>
+        </span>
+      </span>
+    </div>
+    <div class="searchbox search-form-submit">
+      <i class="iconfont js-toggle-search iconsearch icon-search">
+      </i>
+    </div>
+    <div id="show-nav" class="showNav mobile-fit">
+      <div class="line line1">
+      </div>
+      <div class="line line2">
+      </div>
+      <div class="line line3">
+      </div>
+    </div>
+    <div class="lower-cantiner">
+      <div class="lower">
+        <nav class="mobile-fit-control hide">
+          <ul id="menu-new" class="menu">
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+                    首页
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+                    归档
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/categories/%E6%8A%80%E6%9C%AF/">
+                          <i class="fa fa-code" aria-hidden="true"></i>
+                          技术
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/%E7%94%9F%E6%B4%BB/">
+                          <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                          生活
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/%E8%B5%84%E6%BA%90/">
+                          <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                          资源
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/%E9%9A%8F%E6%83%B3/">
+                          <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                          随想
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/%E8%BD%AC%E8%BD%BD/">
+                          <i class="fa fa-book" aria-hidden="true"></i>
+                          转载
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/tags/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-tag" aria-hidden="true"></i>
+                    标签
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="javascript:;">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+                    清单
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/music/">
+                          <i class="fa fa-headphones" aria-hidden="true"></i>
+                          歌单
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/comment/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+                    留言板
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/links/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+                    友人帐
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-leaf faa-wrench" aria-hidden="true"></i>
+                    关于
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/about/">
+                          <i class="fa fa-meetup" aria-hidden="true"></i>
+                          我？
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/theme-sakura/">
+                          <i class="fa iconfont icon-sakura" aria-hidden="true"></i>
+                          主题
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/atom.xml">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-rss faa-pulse" aria-hidden="true"></i>
+                    RSS
+                  </span>
+                </a>
+                
+              </li>
+            
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/(2).jpg.webp');" src="" data-src="/images/cover/(2).jpg.webp">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      (ch10) Overloaded Operations and Conversions</h1>
+      <p class="entry-census">
+        <span>
+          <a href="morning.eu.org">
+            <img src="/images/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="morning.eu.org">Noah</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2021-12-10<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h1 id="Overloaded-Operations-and-Conversions"><a href="#Overloaded-Operations-and-Conversions" class="headerlink" title="Overloaded Operations and Conversions"></a>Overloaded Operations and Conversions</h1><p><em>In Chapter 2, we saw that C++ defines a large number of operators and automatic conversions among the built-in types. These facilities allow programmers to write a rich set of mixed-type expressions.</em></p>
+<p><em>C++ lets us define what the operators mean when applied to objects of class type. It also lets us define conversions for class types. Class-type conversions are used like the built-in conversions to implicitly convert an object of one type to another type when needed.</em></p>
+<h2 id="Basic-Concepts"><a href="#Basic-Concepts" class="headerlink" title="Basic Concepts"></a>Basic Concepts</h2><p>Overloaded operators are functions with special names: the <code>keyword</code> operator followed by the symbol for the operator being defined. Like any other function, an overloaded operator has a return type, a parameter list, and a body.</p>
+<p>An overloaded operator function has the same number of parameters as the operator has operands. A unary operator has one parameter; a binary operator has two. In a binary operator, the left-hand operand is passed to the first parameter and the right-hand operand to the second. Except for the overloaded function-call operator, operator(), an overloaded operator may not have default arguments.</p>
+<p>If an operator function is a member function, the first (left-hand) operand is bound to the implicit this pointer. Because the first operand is implicitly bound to this, a member operator function has one less (explicit) parameter than the operator has operands.</p>
+<p><strong>We can overload only existing operators</strong> and cannot invent new operator symbols. For example, we cannot define operator<code>**</code> to provide exponentiation.</p>
+<h3 id="Calling-an-Overloaded-Operator-Function-Directly"><a href="#Calling-an-Overloaded-Operator-Function-Directly" class="headerlink" title="Calling an Overloaded Operator Function Directly"></a>Calling an Overloaded Operator Function Directly</h3><p>Ordinarily, we “call” an overloaded operator function <strong>indirectly by using the operator</strong> on arguments of the appropriate type. However, we can also <strong>call an overloaded operator function directly</strong> in the same way that we call an ordinary function. We name the function and pass an appropriate number of arguments of the appropriate type, We call a member operator function explicitly in the same way that we call any other member function.</p>
+<pre><code class="c++">// equivalent calls to a nonmember operator function
+data1 + data2; // normal expression
+operator+(data1, data2); // equivalent function call
+data1 += data2; // expression-based &#39;&#39;call&#39;&#39;
+data1.operator+=(data2); // equivalent call to a member operator function
+</code></pre>
+<h3 id="Some-Operators-Shouldn’t-Be-Overloaded"><a href="#Some-Operators-Shouldn’t-Be-Overloaded" class="headerlink" title="Some Operators Shouldn’t Be Overloaded"></a>Some Operators Shouldn’t Be Overloaded</h3><p>Recall that a few operators guarantee the order in which operands are evaluated. Because using an overloaded operator is really a function call, these guarantees do not apply to overloaded operators. In particular, the operand-evaluation guarantees of the logical AND, logical OR, and comma operators are<br>not preserved.</p>
+<h3 id="Use-Definitions-That-Are-Consistent-with-the-Built-in-Meaning"><a href="#Use-Definitions-That-Are-Consistent-with-the-Built-in-Meaning" class="headerlink" title="Use Definitions That Are Consistent with the Built-in Meaning"></a>Use Definitions That Are Consistent with the Built-in Meaning</h3><p>When you design a class, you should always think first about what operations the class will provide. Only after you know what operations are needed should you think about whether to define each operation as an ordinary function or as an overloaded operator. Those operations with a logical mapping to an operator are good candidates for defining as overloaded operators:</p>
+<ol>
+<li>If the class does IO, define the shift operators to be consistent with how IO is done for the built-in types.</li>
+<li>If the class has an operation to test for equality, define operator==. If the class has operator==, it should usually have operator!= as well.</li>
+<li>If the class has a single, natural ordering operation, define operator&lt;. If the class has operator&lt;, it should probably have all of the relational operators.</li>
+<li>The return type of an overloaded operator usually should be compatible with the return from the built-in version of the operator: The logical and relational operators should return bool, the arithmetic operators should return a value of the class type, and assignment and compound assignment should return a reference to the left-hand operand.</li>
+</ol>
+<h3 id="Choosing-Member-or-Nonmember-Implementation"><a href="#Choosing-Member-or-Nonmember-Implementation" class="headerlink" title="Choosing Member or Nonmember Implementation"></a>Choosing Member or Nonmember Implementation</h3><p>When we define an overloaded operator, we must decide whether to make the operator a class member or an ordinary nonmember function. In some cases, there is no choice—some operators are required to be members; in other cases, we may not be able to define the operator appropriately if it is a member.</p>
+<p>The following guidelines can be of help in deciding whether to make an operator a member or an ordinary nonmember function:</p>
+<ol>
+<li>The assignment (=), subscript ([]), call (()), and member access arrow (-&gt;) operators must be defined as members.</li>
+<li>The compound-assignment operators ordinarily ought to be members. However, unlike assignment, they are not required to be members.</li>
+<li>Operators that change the state of their object or that are closely tied to theirgiven type—such as increment, decrement, and dereference—usually should bemembers.</li>
+<li>Symmetric operators—those that might convert either operand, such as the arithmetic, equality, relational, and bitwise operators—usually should be defined as ordinary nonmember functions.</li>
+</ol>
+<h2 id="Input-and-Output-Operators"><a href="#Input-and-Output-Operators" class="headerlink" title="Input and Output Operators"></a>Input and Output Operators</h2><p>As we’ve seen, the IO library uses &gt;&gt; and &lt;&lt; for input and output, respectively. The IO library itself defines versions of these operators to read and write the built-in types. Classes that support IO ordinarily define versions of these operators for objects of the class type.</p>
+<h3 id="Overloading-the-Output-Operator-lt-lt"><a href="#Overloading-the-Output-Operator-lt-lt" class="headerlink" title="Overloading the Output Operator &lt;&lt;"></a>Overloading the Output Operator &lt;&lt;</h3><p>Ordinarily, the first parameter of an output operator is a reference to a nonconst <code>ostream</code> object. The second parameter ordinarily should be a reference to const of the class type we want to print. To be consistent with other output operators, operator&lt;&lt; normally returns its ostream parameter.</p>
+<p>As an example, we’ll write the <code>Sales_data</code> output operator:(Sales_data in <a target="_blank" rel="noopener" href="https://www.morning.tk/2021/12/20/c++%20c3/#Classes">here</a>)</p>
+<pre><code class="c++">&#123;
+    // in class scope 
+    friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp;, const Sales_data&amp;);
+&#125;
+std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const Sales_data&amp; item) &#123;
+    os &lt;&lt; item.isbn() &lt;&lt; &quot; &quot; &lt;&lt; item.units_sold &lt;&lt; &quot; &quot;
+        &lt;&lt; item.revenue &lt;&lt; &quot; &quot; &lt;&lt; item.avg_price();
+    return os;
+&#125;
+</code></pre>
+<p>Input and output operators that conform to the conventions of the iostream library must be ordinary nonmember functions. These operators cannot be members of our own class. IO Operators Must Be Nonmember Functions.</p>
+<h3 id="Overloading-the-Input-Operator-gt-gt"><a href="#Overloading-the-Input-Operator-gt-gt" class="headerlink" title="Overloading the Input Operator &gt;&gt;"></a>Overloading the Input Operator &gt;&gt;</h3><p>Ordinarily the first parameter of an input operator is a reference to the stream from which it is to read, and the second parameter is a reference to the (nonconst) object into which to read. The operator usually returns a reference to its given stream. The second parameter must be <strong>nonconst</strong> because the purpose of an input operator is to read data into this object.</p>
+<p>As an example, we’ll write the <code>Sales_data</code> input operator:</p>
+<pre><code class="c++">&#123;
+    // in class scope 
+    friend std::istream&amp; operator&gt;&gt;(std::istream&amp;, const Sales_data&amp;);
+&#125;
+inline std::istream&amp; operator&gt;&gt;(std::istream&amp; is, Sales_data&amp; item) &#123;
+    double price = 0;
+    is &gt;&gt; item.bookNo &gt;&gt; item.units_sold &gt;&gt; price;
+    if (is) &#123;
+        item.revenue = item.units_sold * price;
+    &#125;
+    else &#123;
+        item = Sales_data();
+    &#125;
+    return is;
+&#125;
+</code></pre>
+<p>Except for the if statement, this definition is similar to our earlier read function. The if checks whether the reads were successful. If an IO error occurs, the operator resets its given object to the empty <code>Sales_data</code>. That way, the object is guaranteed to be in a consistent state.</p>
+<h2 id="Arithmetic-and-Relational-Operators"><a href="#Arithmetic-and-Relational-Operators" class="headerlink" title="Arithmetic and Relational Operators"></a>Arithmetic and Relational Operators</h2><p>Ordinarily, we define the arithmetic and relational operators as nonmember functions in order to allow conversions for either the left- or right-hand operand. These operators shouldn’t need to change the state of either operand, so the parameters are ordinarily references to const.</p>
+<p>An arithmetic operator usually generates a new value that is the result of a computation on its two operands. That value is distinct from either operand and is calculated in a local variable. The operation returns a copy of this local as its result. Classes that define an arithmetic operator generally define the corresponding compound assignment operator as well. When a class has both operators, it is usually more efficient to define the arithmetic operator to use compound assignment:</p>
+<pre><code class="c++">// assumes that both objects refer to the same book
+Sales_data operator+(const Sales_data &amp;lhs, const Sales_data &amp;rhs)
+&#123;
+    Sales_data sum = lhs; // copy data members from lhs into sum
+    sum += rhs; // add rhs into sum
+    return sum;
+&#125;
+</code></pre>
+<h3 id="Equality-Operators"><a href="#Equality-Operators" class="headerlink" title="Equality Operators"></a>Equality Operators</h3><p>Ordinarily, classes in C++ define the equality operator to test whether two objects are equivalent. That is, they usually compare every data member and treat two objects as equal if and only if all the corresponding members are equal. In line with this design philosophy, our Sales_data equality operator should compare the bookNo as well as the sales figures:</p>
+<pre><code class="C++">&#123;
+    // in class scope 
+    friend bool operator==(const Sales_data&amp;, const Sales_data&amp;);
+    friend bool operator!=(const Sales_data&amp;, const Sales_data&amp;);
+&#125;
+
+inline bool operator==(const Sales_data&amp; lhs, const Sales_data&amp; rhs) &#123;
+    return lhs.isbn() == rhs.isbn() &amp;&amp;
+        lhs.units_sold == rhs.units_sold &amp;&amp;
+        lhs.revenue == rhs.revenue;
+&#125;
+
+inline bool operator!=(const Sales_data&amp; lhs, const Sales_data&amp; rhs) &#123;
+    return !(lhs == rhs);
+&#125;
+</code></pre>
+<h3 id="Relational-Operators"><a href="#Relational-Operators" class="headerlink" title="Relational Operators"></a>Relational Operators</h3><p>Classes for which the equality operator is defined also often (but not always) have relational operators. like <code>&lt; &gt; &lt;= &gt;=</code>. We might think that we’d define <code>&lt;</code> similarly to <code>compareIsbn</code> . That function compared Sales_data objects by comparing their ISBNs. But results that are inconsistent with our definition of ==.</p>
+<h2 id="Assignment-Operators"><a href="#Assignment-Operators" class="headerlink" title="Assignment Operators"></a>Assignment Operators</h2><p>In addition to the copy- and move-assignment operators that assign one object of the class type to another object of the same type, a class can define additional assignment operators that allow other types as the right-hand operand.</p>
+<p>As one example, in addition to the copy- and move-assignment operators, the library vector class defines a third assignment operator that takes a braced list of elements. We can use this operator as follows:</p>
+<pre><code class="c++">vector&lt;string&gt; v;
+v = &#123;&quot;a&quot;, &quot;an&quot;, &quot;the&quot;&#125;;
+</code></pre>
+<p>We can add this operator to our <code>StrVec</code> class:</p>
+<pre><code class="c++">&#123;
+    //class scope
+    StrVec&amp; operator=(std::initializer_list&lt;std::string&gt;);
+&#125;
+StrVec&amp; StrVec::operator=(std::initializer_list&lt;std::string&gt; il) &#123;
+    // alloc_n_copy allocates space and copies elements from the given range
+    auto data = alloc_n_copy(il.begin(), il.end());
+    free(); // destroy the elements in this object and free the space
+    elements = data.first; // update data members to point to the new space
+    first_free = cap = data.second;
+    return *this;
+&#125;
+</code></pre>
+<p>Notice: In pervious version, the <code>alloc_n_copy</code> parameters are <code>string*</code>, but <code>il.begin()</code> return a <code>const string*</code>, we need change to:</p>
+<pre><code class="c++">std::pair&lt;std::string*, std::string*&gt; StrVec::alloc_n_copy(const std::string* b, const  std::string* e) 
+</code></pre>
+<p>This is a simple case to test our <code>StrVec</code> class:</p>
+<pre><code class="c++">#include&quot;StrVec.h&quot;
+#include&lt;iostream&gt;
+
+int main() &#123;
+    StrVec p;
+    p = &#123; &quot;a&quot;, &quot;an&quot;, &quot;the&quot; &#125;;
+    for (size_t i = 0; i &lt; p.size(); i++) &#123;
+        std::cout &lt;&lt; *(p.begin() + i) &lt;&lt; std::endl;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+<p>Compound assignment operators are not required to be members. However, we prefer to define all assignments, including compound assignments, in the class. For consistency with the built-in compound assignment, these operators should return a reference to their left-hand operand. For example, here is the definition of the <code>Sales_data</code> compound-assignment operator:</p>
+<pre><code class="c++">&#123;
+    // in class scope
+    Sales_data&amp; operator+=(Sales_data&amp;);
+&#125;
+inline Sales_data&amp; Sales_data::operator+=(Sales_data&amp; rhs) &#123;
+    this-&gt;units_sold += rhs.units_sold;
+    this-&gt;revenue += rhs.revenue;
+    return *this;
+&#125;
+</code></pre>
+<p>This is a simple case to test our <code>Sales_data</code> class:</p>
+<pre><code class="c++">#include&quot;Sales_data.h&quot;
+#include&lt;iostream&gt;
+#include&lt;iostream&gt;
+
+int main() &#123;
+    std::string isbn = &quot;1-4y35&quot;;
+    Sales_data b1(isbn, 80, 18.9);
+    Sales_data b2(isbn, 20, 18.9);
+    b1 += b2;
+    std::cout &lt;&lt; b1 &lt;&lt; std::endl;
+    return 0;
+&#125;
+</code></pre>
+<h2 id="Subscript-Operator"><a href="#Subscript-Operator" class="headerlink" title="Subscript Operator"></a>Subscript Operator</h2><p>Classes that represent containers from which elements can be retrieved by position often define the subscript operator, operator<code>[]</code>. As an example, we’ll define subscript for <code>StrVec</code>. Consequently, it is also usually a good idea to define both <strong>const</strong> and <strong>nonconst</strong> versions of this operator. When applied to a const object, subscript should return a reference to const so that it is not possible to assign to the returned object.</p>
+<pre><code class="c++">&#123;
+    // in class scope
+    std::string operator[](std::size_t idx) &#123;
+        return elements[idx];
+    &#125;
+    const std::string operator[](std::size_t idx) const &#123;
+        return elements[idx];
+    &#125;
+&#125;
+</code></pre>
+<p>We can use these operators similarly to how we subscript a vector or array. Because subscript returns a reference to an element, if the <code>StrVec</code> is <strong>nonconst</strong>, we can assign to that element; if we subscript a <strong>const</strong> object, we can’t.</p>
+<h2 id="Increment-and-Decrement-Operators"><a href="#Increment-and-Decrement-Operators" class="headerlink" title="Increment and Decrement Operators"></a>Increment and Decrement Operators</h2><p>The increment (++) and decrement (–) operators are most often implemented for iterator classes. These operators let the class move between the elements of a sequence. There is no language requirement that these operators be members of the class. However, because these operators change the state of the object on which they operate, our preference is to make them members.</p>
+<p>For the built-in types, there are both prefix and postfix versions of the increment and decrement operators. Not surprisingly, we can define both the prefix and postfix instances of these operators for our own classes as well. We’ll look at the prefix versions first and then implement the postfix ones.</p>
+<h3 id="Defining-Prefix-Increment-Decrement-Operators"><a href="#Defining-Prefix-Increment-Decrement-Operators" class="headerlink" title="Defining Prefix Increment/Decrement Operators"></a>Defining Prefix Increment/Decrement Operators</h3><pre><code class="c++">&#123;
+    // in class scope
+    class_name&amp; operator++();
+    class_name&amp; operator--();
+&#125;
+</code></pre>
+<h3 id="Differentiating-Prefix-and-Postfix-Operators"><a href="#Differentiating-Prefix-and-Postfix-Operators" class="headerlink" title="Differentiating Prefix and Postfix Operators"></a>Differentiating Prefix and Postfix Operators</h3><p>There is one problem with defining both the prefix and postfix operators: Normal overloading cannot distinguish between these operators. The prefix and postfix versions use the same symbol, meaning that the overloaded versions of these operators have the same name. They also have the same number and type of operands.</p>
+<p>To solve this problem, the postfix versions take an extra (unused) parameter of type int.</p>
+<pre><code class="c++">&#123;
+    // in class scope
+    class_name&amp; operator++(int);
+    class_name&amp; operator--(int);
+&#125;
+</code></pre>
+<h2 id="Function-Call-Operator"><a href="#Function-Call-Operator" class="headerlink" title="Function-Call Operator"></a>Function-Call Operator</h2><p>Classes that overload the call operator allow objects of its type to be used as if they were a function. Because such classes can also store state, they can be more flexible than ordinary functions.<br>As a simple example, the following struct, named <code>absInt</code>, has a call operator that returns the absolute value of its argument:</p>
+<pre><code class="c++">struct absInt &#123;
+     int operator()(int val) const &#123;
+    return val &lt; 0 ? -val : val;
+    &#125;
+&#125;;
+</code></pre>
+<p>This class defines a single operation: the function-call operator. That operator takes an argument of type int and returns the argument’s absolute value.</p>
+<pre><code class="c++">int i = -42;
+absInt absObj; // object that has a function-call operator
+int ui = absObj(i); // passes i to absObj.operator()
+</code></pre>
+<p>Objects of classes that define the call operator are referred to as <strong>function objects</strong>. Such objects “act like functions” because we can call them.</p>
+<p>Like any other class, a function-object class can have additional members aside from operator(). Function-object classes often contain data members that are used to customize the operations in the call operator.</p>
+<p>As an example, we’ll define a class that prints a string argument. By default, our class will write to cout and will print a space following each string. We’ll also let users of our class provide a different stream on which to write and provide a different separator. We can define this class as follows:</p>
+<pre><code class="c++">class PrintString &#123;
+public:
+    PrintString(ostream &amp;o = cout, char c = &#39; &#39;): os(o), sep(c) &#123; &#125;
+    void operator()(const string &amp;s) const &#123; 
+        os &lt;&lt; s &lt;&lt; sep;
+    &#125;
+private:
+    ostream &amp;os; // stream on which to write
+    char sep; // character to print after each output
+&#125;;
+</code></pre>
+<h3 id="Lambdas-Are-Function-Objects"><a href="#Lambdas-Are-Function-Objects" class="headerlink" title="Lambdas Are Function Objects"></a>Lambdas Are Function Objects</h3><p>When we write a lambda, the compiler translates that expression into an unnamed object of an unnamed class. The classes generated from a lambda contain an overloaded function-call operator. For example, the lambda that we passed as the last argument to <code>stable_sort</code>:</p>
+<pre><code class="c++">// sort words by size, but maintain alphabetical order for words of the same size
+std::stable_sort(words.begin(), words.end(),
+    [](const std::string&amp; a, const std::string&amp; b) &#123; return a.size() &lt; b.size(); &#125;);
+</code></pre>
+<p>acts like an unnamed object of a class that would look something like</p>
+<pre><code class="c++">class ShorterString &#123;
+public:
+    bool operator()(const string &amp;s1, const string &amp;s2) const&#123; 
+        return s1.size() &lt; s2.size(); 
+    &#125;
+&#125;;
+</code></pre>
+<p>If the lambda is declared as mutable, then the call operator is not const.</p>
+<p>As we’ve seen, when a lambda captures a variable by reference, it is up to the program to ensure that the variable to which the reference refers exists when the lambda is executed. Therefore, the compiler is permitted to use the reference directly without storing that reference as a data member in the generated<br>class.</p>
+<p>In contrast, variables that are captured by value are copied into the lambda. As a result, classes generated from lambdas that capture variables by value have data members corresponding to each such variable. These classes also have a constructor to initialize these data members from the value of the captured variables. As an example,the lambda that we used to find the first string whose length was greater than or equal to a given bound:</p>
+<pre><code class="c++">// get an iterator to the first element whose size() is &gt;= sz
+auto wc = find_if(words.begin(), words.end(),[sz](const string &amp;a));
+</code></pre>
+<p>would generate a class that looks something like</p>
+<pre><code class="c++">class SizeComp &#123;
+    SizeComp(size_t n) : sz(n) &#123;&#125; // parameter for each captured
+    variable
+        // call operator with the same return type, parameters, and body as the lambda
+        bool operator()(const string&amp; s) const &#123;
+        return s.size() &gt;= sz;
+    &#125;
+private:
+    size_t sz; // a data member for each variable captured by value
+&#125;;
+</code></pre>
+<h3 id="Library-Defined-Function-Objects"><a href="#Library-Defined-Function-Objects" class="headerlink" title="Library-Defined Function Objects"></a>Library-Defined Function Objects</h3><p>The standard library defines a set of classes that represent the arithmetic, relational, and logical operators. Each class defines a call operator that applies the named operation. For example, the plus class has a function-call operator that applies + to a pair of operands; the modulus class defines a call operator that applies the binary % operator; the equal_to class applies ==; and so on.</p>
+<pre><code class="c++">plus&lt;int&gt; intAdd; // function object that can add two int values
+negate&lt;int&gt; intNegate; // function object that can negate an int value
+// uses intAdd::operator(int, int) to add 10 and 20
+int sum = intAdd(10, 20); // equivalent to sum = 30
+sum = intNegate(intAdd(10, 20)); // equivalent to sum = 30
+// uses intNegate::operator(int) to generate -10 as the second parameter
+// to intAdd::operator(int, int)
+sum = intAdd(10, intNegate(10)); // sum = 0
+</code></pre>
+<h2 id="Overloading-Conversions-and-Operators"><a href="#Overloading-Conversions-and-Operators" class="headerlink" title="Overloading, Conversions, and Operators"></a>Overloading, Conversions, and Operators</h2><h3 id="Conversion-Operators"><a href="#Conversion-Operators" class="headerlink" title="Conversion Operators"></a>Conversion Operators</h3><p>A conversion operator is a special kind of member function that converts a value of a class type to a value of some other type. A conversion function typically has the general form:</p>
+<pre><code class="c++">operator type() const;
+</code></pre>
+<p>where type represents a type. Conversion operators can be defined for any type(other than void) that can be a function return type. Conversions to an array or a function type are not permitted. Conversions to pointer types—both data and function pointers—and to reference types are allowed.</p>
+<p>Conversion operators have no explicitly stated return type and no parameters, and they must be defined as member functions. Conversion operations ordinarily should not change the object they are converting. As a result, conversion operators usually should be defined as const members.</p>
+<p>As an example, we’ll define a small class that represents an integer in the range of 0 to 255:</p>
+<pre><code class="c++">#pragma once
+#include &lt;stdexcept&gt;
+class SmallInt &#123;
+public:
+    SmallInt(int i = 0) :data(i) &#123;
+        if (data &gt; 255 || data &lt; 0) &#123;
+            throw std::out_of_range(&quot;out of range!&quot;);
+        &#125;
+    &#125;
+
+    operator int() const &#123; return data; &#125;
+
+private:
+    int data;
+&#125;;
+</code></pre>
+<p>Our <code>SmallInt</code> class defines conversions to and from its type. The constructor converts values of arithmetic type to a <code>SmallInt</code>. The conversion operator converts<code>SmallInt</code> objects to int.</p>
+<pre><code class="c++">SmallInt si;
+si = 4; // implicitly converts 4 to SmallInt then calls SmallInt::operator=
+si + 3; // implicitly converts si to int followed by integer addition
+</code></pre>
+<p>To prevent such problems, the new standard introduced <code>explicit conversion</code></p>
+<pre><code class="c++">explicit operator int() const &#123; return data; &#125;
+</code></pre>
+<pre><code class="c++">SmallInt si = 3; // ok: the SmallInt constructor is not explicit
+si + 3; // error: implicit is conversion required, but operator int is explicit
+static_cast&lt;int&gt;(si) + 3; // ok: explicitly request the conversion
+</code></pre>
+<p>As with an explicit constructor, the compiler won’t (generally) use an explicit conversion operator for implicit conversions:</p>
+<h3 id="Avoiding-Ambiguous-Conversions"><a href="#Avoiding-Ambiguous-Conversions" class="headerlink" title="Avoiding Ambiguous Conversions"></a>Avoiding Ambiguous Conversions</h3><p>If a class has one or more conversions, it is important to ensure that there is only one way to convert from the class type to the target type. If there is more than one way to perform a conversion, it will be hard to write unambiguous code.</p>
+<pre><code class="c++">// usually a bad idea to have mutual conversions between two class types
+struct B;
+struct A &#123;
+    A() = default;
+    A(const B&amp;); // converts a B to an A
+    // other members
+&#125;;
+struct B &#123;
+    operator A() const; // also converts a B to an A
+    // other members
+&#125;;
+A f(const A&amp;);
+B b;
+A a = f(b); // error ambiguous: f(B::operator A())
+// or f(A::A(const B&amp;))
+</code></pre>
+<p>Because there are two ways to obtain an A from a B, the compiler doesn’t know which conversion to run; the call to f is ambiguous. This call can use the A constructor that takes a B, or it can use the B conversion operator that converts a B to an A. Because these two functions are equally good, the call is in error.</p>
+<h3 id="Function-Matching-and-Overloaded-Operators"><a href="#Function-Matching-and-Overloaded-Operators" class="headerlink" title="Function Matching and Overloaded Operators"></a>Function Matching and Overloaded Operators</h3><p>Overloaded operators are overloaded functions. Normal function matching is used to determine which operator—built-in or overloaded—to apply to a given expression. However, when an operator function is used in an expression, the set of candidate functions is broader than when we call a function using the call operator. If a has a class type, the expression a <code>sym</code> b might be:</p>
+<pre><code class="c++">a.operatorsym (b); // a has operatorsym as a member function
+operatorsym(a, b); // operatorsym is an ordinary function
+</code></pre>
+<p>When we use an overloaded operator with an operand of class type, the candidate functions include ordinary nonmember versions of that operator, as well as the built-in versions of the operator. Moreover, if the left-hand operand has class type, the overloaded versions of the operator, if any, defined by that class are also included.</p>
+<p>When we call a named function, member and nonmember functions with the same name do not overload one another. There is no overloading because the syntax we use to call a named function distinguishes between member and nonmember functions. When a call is through an object of a class type (or through a reference or pointer to such an object), then only the member functions of that class are considered. When we use an overloaded operator in an expression, there is nothing to indicate whether we’re using a member or nonmember function. Therefore, both member and nonmember versions must be considered.</p>
+<p>As an example, we’ll define an addition operator for our <code>SmallInt</code> class:</p>
+<pre><code class="c++">friend SmallInt operator+(const SmallInt&amp;, const SmallInt&amp;);
+</code></pre>
+<p>We can use this class to add two <code>SmallInts</code>, but we will run into ambiguity problems if we attempt to perform mixed-mode arithmetic:</p>
+<pre><code class="c++">SmallInt s1, s2;
+SmallInt s3 = s1 + s2; // uses overloaded operator+
+int i = s3 + 0; // error: ambiguous
+</code></pre>
+<p>The first addition uses the overloaded version of + that takes two <code>SmallInt</code> values. The second addition is ambiguous, because we can convert 0 to a <code>SmallInt</code> and use the <code>SmallInt</code> version of +, or convert s3 to int and use the built-in addition operator on ints.</p>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://morning.eu.org/images/custom/donate/404.jpg"></li>
+                <li class="wechat-code"><img src="https://morning.eu.org/images/custom/donate/404.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2021/12/11/c++%20c11/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="" data-src="/images/cover/(3).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/(3).jpg.webp">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                (ch11) Object-Oriented Programming</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2021/12/09/c++%20c9/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="" data-src="/images/cover/(1).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/(1).jpg.webp">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                (ch9) Copy Control</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+	window.onload = function(){
+		var valine = new Valine();
+		valine.init({
+			el: '#vcomments',
+			appId: "EAyicHJhXmxJNEeuhACVujd4-gzGzoHsz",
+			appKey: "09Tjj4It5DOhgboduuM40u7y",
+			avatar: 'wavatar',
+			path: window.location.pathname,
+			placeholder: "有什么想说的吗.."
+		})
+	}
+</script>
+
+
+
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="morning.eu.org" class="profile gravatar"><img src="/images/custom/avatar.jpg" itemprop="image" alt="Noah" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="morning.eu.org" itemprop="url" rel="author">Noah</a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i>life is perfact</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
+</div>
+
+
+
+    </div>    
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            // PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+    <!-- <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Noah Bishop<br>
+      powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer> -->
+<footer id="colophon" class="site-footer" role="contentinfo">
+  <div class="site-info">
+    <div class="footertext">
+      <div class="img-preload">
+        <img src="https://morning.eu.org/images/other/wordpress-rotating-ball-o.svg">
+        <img src="https://morning.eu.org/images/other/disqus-preloader.svg">
+      </div>
+      <p style="color: #666666;">&copy 2019-2023</p>
+    </div>
+    <div class="footer-device">
+      <p style="font-family: 'Ubuntu', sans-serif;">
+        <span style="color: #b9b9b9;">Theme <a href="https://github.com/honjun/hexo-theme-sakura" target="_blank"
+            style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Sakura</a> <i
+            class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i> by <a
+            href="https://2heng.xin/" target="_blank"
+            style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Mashiro</a>&<a
+            href="https://www.hojun.cn/" target="_blank"
+            style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Hojun</a>, Powered by Hexo,
+          Hosted by Coding Pages</a>
+        </span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+
+<!-- <script src="/js/tocbot.js"></script> -->
+<script type="text/javascript" src="/js/lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/InsightSearch.js"></script>
+<script type="text/javascript" src="/js/jquery.fancybox.min.js"></script>
+<script type="text/javascript" src="/js/zoom.min.js"></script>
+<script type="text/javascript" src="/js/sakura-app.js"></script>
+<script src="/js/botui.js"></script>
+<!-- 不蒜子 网页计数器 -->
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script> -->
+<script type="text/javascript">
+  /* <![CDATA[ */
+  if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+    var Poi = { "pjax": "1", "movies": { "url": "", "name": "", "live": "close" }, "windowheight": "fixed", "codelamp": "close", "ajaxurl": "", "order": "asc", "formpostion": "bottom" };
+  } else {
+    var Poi = { "pjax": "1", "movies": { "url": "", "name": "", "live": "open" }, "windowheight": "auto", "codelamp": "close", "ajaxurl": "", "order": "asc", "formpostion": "bottom" };
+  }
+/* ]]> */
+
+</script>
+<script>
+  $(document).ready(function () {
+    if ($(".toc").length > 0 && document.body.clientWidth > 1200) {
+      if ($(".pattern-center").length > 0) { //有图的情况
+        tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -400,
+          scrollSmoothOffset: -85
+        });
+      } else {
+        tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -85,
+          scrollSmoothOffset: -85
+        });
+      }
+      var offsetTop = $('.toc').offset().top - 95;
+      window.onscroll = function () {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+        if (scrollTop >= offsetTop) {
+          $('.toc').addClass('toc-fixed');
+        } else {
+          $('.toc').removeClass('toc-fixed');
+        }
+      }
+    }
+  });
+</script>
+    <div class="openNav no-select" style="height: 50px;">
+      <div class="iconflat no-select" style="width: 50px; height: 50px;">
+        <div class="icon"></div>
+      </div>
+      <div class="site-branding search-form-submit">
+        <i class="iconfont js-toggle-search iconsearch icon-search"></i>
+      </div>
+    </div>
+  </section>
+  <div id="mo-nav" class="">
+  <div class="m-avatar">
+    <img src="https://morning.eu.org/images/custom/avatar.jpg">
+  </div>
+  <p style="text-align: center; color: #333; font-weight: 900; font-family: 'Ubuntu', sans-serif; letter-spacing: 1.5px">桜荘そのうさぎ</p>
+  <p style="text-align: center; word-spacing: 20px;">
+    
+      
+        <a href="https://github.com/NoahBishop" class="fa fa-github" target="_blank" style="color: #333; margin-left:20px"></a>
+      
+        <a href="https://t.me/mega1037" class="fa fa-telegram" target="_blank" style="color: #25c6fe; margin-left:20px"></a>
+      
+        <a href="https://mailto:beiloquuw@gamil.com" class="fa fa-google" target="_blank" style="color: #dd4b39; margin-left:20px"></a>
+      
+    
+  </p>
+  <ul id="menu-new-1" class="menu">
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+            首页
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/archives">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+            归档
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/categories/%E6%8A%80%E6%9C%AF/">
+                  <i class="fa fa-code" aria-hidden="true"></i>
+                  技术
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/%E7%94%9F%E6%B4%BB/">
+                  <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                  生活
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/%E8%B5%84%E6%BA%90/">
+                  <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                  资源
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/%E9%9A%8F%E6%83%B3/">
+                  <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                  随想
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/%E8%BD%AC%E8%BD%BD/">
+                  <i class="fa fa-book" aria-hidden="true"></i>
+                  转载
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/tags/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-tag" aria-hidden="true"></i>
+            标签
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="javascript:;">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+            清单
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/music/">
+                  <i class="fa fa-headphones" aria-hidden="true"></i>
+                  歌单
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/comment/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+            留言板
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/links/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+            友人帐
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-leaf faa-wrench" aria-hidden="true"></i>
+            关于
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/about/">
+                  <i class="fa fa-meetup" aria-hidden="true"></i>
+                  我？
+                </a>
+              </li>
+            
+              <li>
+                <a href="/theme-sakura/">
+                  <i class="fa iconfont icon-sakura" aria-hidden="true"></i>
+                  主题
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/atom.xml">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-rss faa-pulse" aria-hidden="true"></i>
+            RSS
+          </span>
+        </a>
+        
+      </li>
+    
+  </ul>
+  <p style="text-align: center; font-size: 13px; color: #b9b9b9;">&copy 2019 hexo-sakura</p>
+</div>
+<button onclick="topFunction()" class="mobile-cd-top" id="moblieGoTop" title="Go to top" style="display: none;"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<style>
+  .aplayer .aplayer-lrc {
+    height: 35px;
+  }
+  .aplayer .aplayer-lrc p{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18px !important;
+  }
+  .aplayer .aplayer-lrc p.aplayer-lrc-current{
+    color: #FF1493;
+  }
+  .aplayer.aplayer-narrow .aplayer-body{
+    left: -66px !important;
+  }
+  .aplayer.aplayer-fixed .aplayer-lrc {
+    display: none;
+  }
+  .aplayer .aplayer-lrc.aplayer-lrc-hide {
+      display:none !important;
+  }
+  .aplayer.aplayer-fixed .lrc-show {
+    display: block;
+    background: rgba(255, 255, 255, 0.8);
+  }
+</style>
+<meting-js
+
+    id="7225712775"
+
+    server="netease"
+
+    type="playlist"
+
+    fixed="true"
+
+    autoplay="true"
+
+    loop="all"
+
+    order="random"
+
+    preload="auto"
+
+    volume="0.5"
+
+    mutex="true"
+
+</meting-js>
+<script>
+  $(function(){
+    $('body').on('click', '.aplayer', function(){
+      if($('.aplayer-button').hasClass('aplayer-play')) {
+        $('.aplayer-lrc').removeClass('lrc-show');
+      } else {
+        $('.aplayer-lrc').addClass('lrc-show');
+      }
+    })
+  });
+</script>
+</body>
+</html>

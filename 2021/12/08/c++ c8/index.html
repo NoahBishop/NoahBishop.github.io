@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	
+		<title itemprop="name">
+			
+				(ch8) Dynamic Memory | 
+						うさぎの手帳
+		</title>
+		
+			<link rel="shortcut icon" href="/images/favicon.ico">
+			
+				<meta http-equiv="x-dns-prefetch-control" content="on">
+				<link rel="stylesheet"
+					href="https://fonts.googleapis.com/css?family=Noto+SerifMerriweather|Merriweather+Sans|Source+Code+Pro|Ubuntu:400,700|Noto+Serif+SC"
+					media="all">
+				<link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+				<link rel="stylesheet" id="saukra_css-css" href="/css/style.css" type="text/css" media="all">
+				<link rel="stylesheet" href="/css/lib.min.css" media="all">
+				<link rel="stylesheet" href="/css/font.css" media="all">
+				<link rel="stylesheet" href="/css/insight.css" media="all">
+				<link rel="stylesheet" href="/css/jquery.fancybox.min.css" media="all">
+				<link rel="stylesheet" href="/css/zoom.css" media="all">
+				<link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+				<!--   <link rel="stylesheet" id="saukra_css-css" href="https://2heng.xin/wp-content/cache/autoptimize/css/autoptimize_ad42a61f4c7d4bdd9f91afcff6b5dda5.css
+" type="text/css" media="all"> -->
+				<script>
+					/*Initial Variables*/
+					var mashiro_option = new Object();
+					var mashiro_global = new Object();
+					mashiro_option.NProgressON = true;
+					/* 
+					* 邮箱信息之类的东西可以填在这里，这些js变量基本都作用于sakura-app.js
+					* 这样的设置仅是为了方便在基于PHP开发的主题中设置js变量，既然移植到了Node上，我想或许可以精简这一逻辑吧
+					*/
+					mashiro_option.email_domain = "";
+					mashiro_option.email_name = "";
+					mashiro_option.cookie_version_control = "";
+					mashiro_option.qzone_autocomplete = false;
+					mashiro_option.site_name = "桜荘そのうさぎ";
+					mashiro_option.author_name = "うさぎ";
+					mashiro_option.site_url = "https://morning.eu.org";
+					mashiro_option.v_appId = "EAyicHJhXmxJNEeuhACVujd4-gzGzoHsz";
+					mashiro_option.v_appKey = "09Tjj4It5DOhgboduuM40u7y";
+					mashiro_option.mathjax = "0";
+	//mashiro_option.qq_api_url = "https://api.mashiro.top/qqinfo/";
+	//mashiro_option.qq_avatar_api_url = "https://api.mashiro.top/qqinfo/";
+
+	// mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/moezx/cdn@3.4.5/css/lib.min.css";
+	// mashiro_option.float_player_on = true;
+
+					/*End of Initial Variables*/
+				</script>
+				<script type="text/javascript">
+					var bg = "https://morning.eu.org/images/cover/(1).jpg.webp,https://morning.eu.org/images/cover/(2).jpg.webp,https://morning.eu.org/images/cover/(3).jpg.webp,https://morning.eu.org/images/cover/(4).jpg.webp,https://morning.eu.org/images/cover/(5).jpg.webp,https://morning.eu.org/images/cover/(6).jpg.webp,https://morning.eu.org/images/cover/(7).jpg.webp,https://morning.eu.org/images/cover/(8).jpg.webp".split(",");
+					var bgindex = Math.floor(Math.random() * bg.length);
+					if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
+						alert('朋友，IE浏览器未适配哦~');
+					}
+				</script>
+				<script src="//code.bdstatic.com/npm/leancloud-storage@4.12.0/dist/av-min.js"></script>
+				<script src='//unpkg.com/valine@1.3.9/dist/Valine.min.js'></script>
+				<style type="text/css">
+					.hljs-ln {
+						border-collapse: collapse
+					}
+
+					.hljs-ln td {
+						padding: 0
+					}
+
+					.hljs-ln-n:before {
+						content: attr(data-line-number)
+					}
+				</style>
+				<style type="text/css">
+					.site-top .lower nav {
+						display: block !important;
+					}
+
+					.author-profile i,
+					.post-like a,
+					.post-share .show-share,
+					.sub-text,
+					.we-info a,
+					span.sitename,
+					.post-more i:hover,
+					#pagination a:hover,
+					.post-content a:hover,
+					.float-content i:hover {
+						color: #FE9600
+					}
+
+					.feature i,
+					.download,
+					.navigator i:hover,
+					.links ul li:before,
+					.ar-time i,
+					span.ar-circle,
+					.object,
+					.comment .comment-reply-link,
+					.siren-checkbox-radio:checked+.siren-checkbox-radioInput:after {
+						background: #FE9600
+					}
+
+					::-webkit-scrollbar-thumb {
+						background: #FE9600
+					}
+
+					.download,
+					.navigator i:hover,
+					.link-title,
+					.links ul li:hover,
+					#pagination a:hover,
+					.comment-respond input[type='submit']:hover {
+						border-color: #FE9600
+					}
+
+					.entry-content a:hover,
+					.site-info a:hover,
+					.comment h4 a,
+					#comments-navi a.prev,
+					#comments-navi a.next,
+					.comment h4 a:hover,
+					.site-top ul li a:hover,
+					.entry-title a:hover,
+					#archives-temp h3,
+					span.page-numbers.current,
+					.sorry li a:hover,
+					.site-title a:hover,
+					i.iconfont.js-toggle-search.iconsearch:hover,
+					.comment-respond input[type='submit']:hover {
+						color: #FE9600
+					}
+
+					.comments .comments-main {
+						display: block !important;
+					}
+
+					.comments .comments-hidden {
+						display: none !important;
+					}
+
+					background-position:center center;
+					background-attachment:inherit;
+					}
+				</style>
+<meta name="generator" content="Hexo 5.4.2"></head>
+<body class="page-template page-template-user page-template-page-analytics page-template-userpage-analytics-php page page-id-1297 chinese-font serif isWebKit">
+  <div class="scrollbar" id="bar">
+  </div>
+  <a href="#" class="cd-top faa-float animated"></a>
+  <section id="main-container">
+    <div class="headertop filter-dot">
+  <div id="banner_wave_1"></div>
+  <div id="banner_wave_2"></div>
+  <figure id="centerbg" class="centerbg">
+    <div class="focusinfo no-select">
+      <div class="header-tou">
+        <a target="_blank" rel="noopener" href="https://morning.eu.org">
+          <img src="https://morning.eu.org/images/custom/avatar.jpg">
+        </a>
+      </div>
+      <div class="header-info">
+        <p>
+          Live your life with passion! With some drive!
+        </p>
+        <div class="top-social_v2">
+          <li id="bg-pre">
+            <img class="flipx" src="/images/other/next-b.svg">
+          </li>
+          
+            
+              
+                  <li>
+                    <a href="https://github.com/NoahBishop" target="_blank" class="social-github" title="github">
+                      <img src="https://morning.eu.org/images/social/github.png">
+                    </a>
+                  </li>
+                  
+                    
+              
+                  <li>
+                    <a href="https://t.me/mega1037" target="_blank" class="social-github" title="telegram">
+                      <img src="https://morning.eu.org/images/social/telegram.png">
+                    </a>
+                  </li>
+                  
+                    
+              
+                  <li>
+                    <a href="https://music.163.com/#/user/home?id=305378376" target="_blank" class="social-github" title="netease">
+                      <img src="https://morning.eu.org/images/social/wangyiyun.png">
+                    </a>
+                  </li>
+                  
+                    
+              
+                  <li>
+                    <a href="https://www.twitter.com/noah_bishop_z" target="_blank" class="social-github" title="twitter">
+                      <img src="https://morning.eu.org/images/social/twitter.png">
+                    </a>
+                  </li>
+                  
+                    
+              
+                  <li>
+                    <a href="mailto:beiloquuw@gamil.com" target="_blank" class="social-github" title="email">
+                      <img src="https://morning.eu.org/images/social/email.svg">
+                    </a>
+                  </li>
+                  
+                    
+                      
+                        <li id="bg-next">
+                          <img src="/images/other/next-b.svg">
+                        </li>
+        </div>
+      </div>
+    </div>
+  </figure>
+  <div id="video-container" style="">
+    <video style="object-fit: fill" id="bgvideo" class="video" video-name="" src="" width="auto" preload="auto">
+    </video>
+    <div id="video-btn" class="loadvideo videolive">
+    </div>
+    <div id="video-add">
+    </div>
+    <div class="video-stu">
+    </div>
+  </div>
+  <div class="headertop-down faa-float animated" onclick="headertop_down()">
+    <span>
+      <i class="fa fa-chevron-down" aria-hidden="true">
+      </i>
+    </span>
+  </div>
+</div>
+    <div id="page" class="site wrapper">
+      <header class="site-header no-select gizle sabit" role="banner">
+  <div class="site-top">
+    <div class="site-branding">
+      <span class="site-title">
+        <span class="logolink moe-mashiro">
+          <a href="/">
+            <span class="sakurasono">桜荘その</span>
+            <span class="shironeko">うさぎ</span>
+          </a>
+        </span>
+      </span>
+    </div>
+    <div class="searchbox search-form-submit">
+      <i class="iconfont js-toggle-search iconsearch icon-search">
+      </i>
+    </div>
+    <div id="show-nav" class="showNav mobile-fit">
+      <div class="line line1">
+      </div>
+      <div class="line line2">
+      </div>
+      <div class="line line3">
+      </div>
+    </div>
+    <div class="lower-cantiner">
+      <div class="lower">
+        <nav class="mobile-fit-control hide">
+          <ul id="menu-new" class="menu">
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+                    首页
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+                    归档
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/categories/%E6%8A%80%E6%9C%AF/">
+                          <i class="fa fa-code" aria-hidden="true"></i>
+                          技术
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/%E7%94%9F%E6%B4%BB/">
+                          <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                          生活
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/%E8%B5%84%E6%BA%90/">
+                          <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                          资源
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/%E9%9A%8F%E6%83%B3/">
+                          <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                          随想
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/%E8%BD%AC%E8%BD%BD/">
+                          <i class="fa fa-book" aria-hidden="true"></i>
+                          转载
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/tags/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-tag" aria-hidden="true"></i>
+                    标签
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="javascript:;">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+                    清单
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/music/">
+                          <i class="fa fa-headphones" aria-hidden="true"></i>
+                          歌单
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/comment/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+                    留言板
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/links/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+                    友人帐
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-leaf faa-wrench" aria-hidden="true"></i>
+                    关于
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/about/">
+                          <i class="fa fa-meetup" aria-hidden="true"></i>
+                          我？
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/theme-sakura/">
+                          <i class="fa iconfont icon-sakura" aria-hidden="true"></i>
+                          主题
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/atom.xml">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-rss faa-pulse" aria-hidden="true"></i>
+                    RSS
+                  </span>
+                </a>
+                
+              </li>
+            
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/(8).jpg.webp');" src="" data-src="/images/cover/(8).jpg.webp">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      (ch8) Dynamic Memory</h1>
+      <p class="entry-census">
+        <span>
+          <a href="morning.eu.org">
+            <img src="/images/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="morning.eu.org">Noah</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2021-12-8<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h1 id="Dynamic-Memory"><a href="#Dynamic-Memory" class="headerlink" title="Dynamic Memory"></a>Dynamic Memory</h1><p>The programs we’ve written so far have used objects that have well-defined lifetimes. Global objects are allocated at program start-up and destroyed when the program ends. Local, automatic objects are created and destroyed when the block in which they are defined is entered and exited. Local static objects are allocated before their first use and are destroyed when the program ends.</p>
+<p>In addition to supporting automatic and static objects, C++ lets us allocate objects dynamically. Dynamically allocated objects have a lifetime that is independent of where they are created; they exist until they are <strong>explicitly</strong> freed.</p>
+<p>Our programs have used only <strong>static</strong> or <strong>stack memory</strong>. Static memory is used for local static objects, for class static data members, and for variables defined outside any function. Stack memory is used for no-static objects defined inside functions. Objects allocated in static or stack memory are automatically created and destroyed by the compiler. Stack objects exist only while the block in which they are defined is executing; static objects are allocated before they are used, and they are destroyed when the program ends.</p>
+<p>In addition to <strong>static or stack memory</strong>, every program also has a pool of memory that it can use. This memory is referred to as the <strong>free store or heap</strong>. Programs use the heap for objects that they dynamically allocate—that is, for objects that the program allocates at run time. The program controls the lifetime of dynamic objects; our code must <strong>explicitly</strong> destroy such objects when they are no longer needed.</p>
+<h2 id="Dynamic-Memory-and-Smart-Pointers"><a href="#Dynamic-Memory-and-Smart-Pointers" class="headerlink" title="Dynamic Memory and Smart Pointers"></a>Dynamic Memory and Smart Pointers</h2><p>In C++, <strong>dynamic memory</strong> is managed through a pair of operators: <code>new</code>, which allocates, and optionally initializes, an object in dynamic memory and returns a pointer to that object; and <code>delete</code>, which takes a pointer to a dynamic object, destroys that object, and frees the associated memory.</p>
+<p>Dynamic memory is problematic because it is surprisingly hard to ensure that we free memory at the right time. Either we <strong>forget to free</strong> the memory—in which case we have a memory leak—or we free the memory when there are <strong>still pointers referring</strong> to that memory—in which case we have a pointer that refers to memory that is no longer valid.</p>
+<p>To make using dynamic memory easier (and safer), the new library provides two smart pointer types that manage dynamic objects. A <strong>smart pointer</strong> acts like a regular pointer with the important exception that it automatically deletes the object to which it points. The new library defines two kinds of smart pointers that <strong>differ in how they manage their underlying pointers</strong>: <code>shared_ptr</code>, which allows multiple pointers to refer to the same object, and <code>unique_ptr</code>, which “owns” the object to which it points. The library also defines a companion class named <code>weak_ptr</code> that is a weak reference to an object managed by a <code>shared_ptr</code>. All three are defined in the memory header.</p>
+<h3 id="The-shared-ptr-Class"><a href="#The-shared-ptr-Class" class="headerlink" title="The shared_ptr Class"></a>The shared_ptr Class</h3><p>Like <code>vectors</code>, smart pointers are <strong>templates</strong>. Therefore, when we create a smart pointer, we must supply additional information—in this case, the type to which the pointer can point. As with vector, we supply that type inside angle brackets that follow the name of the kind of smart pointer we are defining:</p>
+<pre><code class="c++">// shared_ptr that can point at a string
+shared_ptr&lt;string&gt; s_ptr1;
+// shared_ptr that can point at a vector of int
+shared_ptr&lt;vector&lt;int&gt;&gt; s_ptr2;
+</code></pre>
+<p>A default initialized smart pointer holds a null pointer.</p>
+<p>We use a smart pointer in ways that are similar to using a pointer. Dereferencing a smart pointer returns the object to which the pointer points. When we use a smart pointer in a condition, the effect is to test whether the pointer is null:</p>
+<pre><code class="c++">// if p1 is not null, check whether it&#39;s the empty string
+if (s_ptr1 &amp;&amp; s_ptr1-&gt;empty()) &#123;
+    // if so, dereference p1 to assign a new value to that string
+    *s_ptr1 = &quot;hello&quot;;
+&#125;
+</code></pre>
+<p>Next table lists operations common to <code>shared_ptr</code> and <code>unique_ptr</code>.</p>
+<table>
+<thead>
+<tr>
+<th>member</th>
+<th>definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>shared_ptr<T> ptr</td>
+<td>Null smart pointer</td>
+</tr>
+<tr>
+<td>unique_ptr<T> ptr</td>
+<td>Null smart pointer</td>
+</tr>
+<tr>
+<td>ptr</td>
+<td>as a condition check if ptr point to an object</td>
+</tr>
+<tr>
+<td>*ptr</td>
+<td>dereference ptr get object</td>
+</tr>
+<tr>
+<td>ptr-&gt;member</td>
+<td>equal to (*ptr).member</td>
+</tr>
+<tr>
+<td>ptr.get()</td>
+<td>Returns the <em>stored pointer</em>.</td>
+</tr>
+<tr>
+<td>swap(ptr1,ptr2)</td>
+<td>swap pointer ptr1 and ptr2</td>
+</tr>
+<tr>
+<td>ptr1.swap(ptr2)</td>
+<td>swap pointer ptr1 and ptr2</td>
+</tr>
+</tbody>
+</table>
+<p>This table show the particular operation for <code>shared_ptr</code>:</p>
+<table>
+<thead>
+<tr>
+<th>member</th>
+<th>definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>make_shared<T>(args)</td>
+<td>Allocates and constructs an object of type <code>T</code> passing <em>args</em> to its constructor.</td>
+</tr>
+<tr>
+<td>shared_ptr<T> ptr(q)</td>
+<td>p is a copy of shared_ptr q</td>
+</tr>
+<tr>
+<td>p=q</td>
+<td>assign to p</td>
+</tr>
+<tr>
+<td>p.unique()</td>
+<td>Check if unique</td>
+</tr>
+<tr>
+<td>p.use_count()</td>
+<td>Returns the number of <a target="_blank" rel="noopener" href="https://www.cplusplus.com/shared_ptr">shared_ptr</a> objects that share</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The safest way to allocate and use dynamic memory</strong> is to call a library function named <code>make_shared</code>. This function allocates and initializes an object in dynamic memory and returns a <code>shared_ptr</code> that points to that object. Like the smart pointers, <code>make_shared</code> is defined in the <code>memory</code> header. When we call <code>make_shared</code>, we must specify the <strong>type</strong> of object we want to create. We do so in the same way as we use a template class, by following the function name with a type enclosed in angle brackets:</p>
+<pre><code class="c++">// shared_ptr that points to an int with value 42
+auto ptr1 = make_shared&lt;int&gt;(10);
+// shared_ptr that points to a string with value HHHHH
+auto ptr2 = make_shared&lt;string&gt;(5, &#39;H&#39;);
+// shared_ptr that points to a string with value HELLO
+shared_ptr&lt;string&gt; ptr3 = make_shared&lt;string&gt;(&quot;HELLO&quot;);
+// output: 10 HHHHH HELLO
+cout &lt;&lt; *ptr1 &lt;&lt; &quot; &quot; &lt;&lt; *ptr2 &lt;&lt; &quot; &quot; &lt;&lt; *ptr3 &lt;&lt; endl;
+</code></pre>
+<p>Like the sequential-container emplace members, <code>make_shared</code> uses its arguments to construct an object of the given type. Of course, ordinarily we use auto to make it easier to define an object to hold the result of <code>make_shared</code>:</p>
+<p>When we copy or assign a <code>shared_ptr</code>, each <code>shared_ptr</code> keeps track of how many other <code>shared_ptrs</code> point to the same object:</p>
+<pre><code class="c++">// copy shared_ptr
+// ptr3 and ptr4 point to the same object
+// object to which ptr3 and ptr4 point has two users
+auto ptr4 = ptr3;
+</code></pre>
+<p>We can think of a <code>shared_ptr</code> as if it has an associated <strong>counter</strong>, usually referred to as a reference count. Whenever we copy a <code>shared_ptr</code>, the count is <strong>incremented</strong>. The counter is <strong>decremented</strong> when we assign a new value to the <code>shared_ptr</code> and when the <code>shared_ptr</code> itself is destroyed, such as when a local <code>shared_ptr</code> goes out of scope. Once a <code>shared_ptr’s</code> counter goes to zero, the shared_ptr automatically <strong>frees</strong> the object that it manages:</p>
+<pre><code class="c++">auto r = make_shared&lt;int&gt;(42); // int to which r points has one user
+r = q; 
+// assign to r, making it point to a different address
+// increase the use count for the object to which q points
+// reduce the use count of the object to which r had pointed
+// the object r had pointed to has no users; that object is automatically freed
+</code></pre>
+<p>When the last <code>shared_ptr</code> pointing to an object is <strong>destroyed</strong>, the <code>shared_ptr</code> class automatically <strong>destroys</strong> the object to which that <code>shared_ptr</code> points. It does so through another special member function known as a <strong>destructor</strong>. Analogous to its constructors, each class has a destructor. Just as a constructor controls initialization, the destructor controls what happens when objects of that class type are destroyed.</p>
+<p>The <strong>destructor</strong> for <code>shared_ptr</code> decrements the reference count of the object to which that shared_ptr points. If the count goes to zero, the shared_ptr destructor destroys the object to which the shared_ptr points and frees the memory used by that object.</p>
+<p>The fact that the <code>shared_ptr</code> class automatically frees dynamic objects when they are no longer needed makes it fairly easy to use dynamic memory. For example, we might have a function that returns a shared_ptr to a dynamically allocated object of a type named Foo that can be initialized by an argument of type T:(note this is just a abstract example, this code can not run in computer now)</p>
+<pre><code class="c++">// factory returns a shared_ptr pointing to a dynamically allocated object
+shared_ptr&lt;Foo&gt; factory(T arg)&#123;
+    // process arg as appropriate
+    // shared_ptr will take care of deleting this memory
+    return make_shared&lt;Foo&gt;(arg);
+&#125;
+</code></pre>
+<p>Because <code>factory</code> returns a <code>shared_ptr</code>, we can be sure that the object allocated by factory will be freed when appropriate. For example, the following function stores the <code>shared_ptr</code> returned by factory in a local variable:</p>
+<pre><code class="c++">void use_factory(T arg)&#123;
+    shared_ptr&lt;Foo&gt; p = factory(arg);
+    // use p
+&#125; // p goes out of scope; the memory to which p points is automatically freed
+</code></pre>
+<p>This is simple case that show the shared_ptr and a refeence:</p>
+<pre><code class="c++">shared_ptr&lt;string&gt; getS() &#123;
+    auto s = make_shared&lt;string&gt;(&quot;hello&quot;);
+    return s;
+&#125;
+
+string&amp; getS(char a) &#123;
+    string s(10, a);
+    return s;
+&#125;
+
+int main()&#123;
+    // ok output hello
+    auto s1 = getS();
+    cout &lt;&lt; *s1 &lt;&lt; endl;
+    // Segmentation fault
+    auto s2 = getS(&#39;A&#39;);
+    return 0;
+&#125;
+</code></pre>
+<p>Programs tend to use dynamic memory for one of three purposes:</p>
+<ol>
+<li>They don’t know how many objects they’ll need</li>
+<li>They don’t know the precise type of the objects they need</li>
+<li>They want to share data between several objects</li>
+</ol>
+<p>The container classes are an example of classes that use dynamic memory for the first purpose. In this section, we’ll define a class that uses dynamic memory in order to let several objects share the same underlying data.</p>
+<p>So far, the classes we’ve used allocate resources that exist only as long as the corresponding objects. For example, each vector “<strong>owns</strong>” its own elements. When we copy a vector, the elements in the original vector and in the copy are <strong>separate</strong> from one another:</p>
+<pre><code class="c++">vector&lt;string&gt; v1; // empty vector
+&#123;     // new scope
+     vector&lt;string&gt; v2 = &#123;&quot;a&quot;, &quot;an&quot;, &quot;the&quot;&#125;;
+    v1 = v2; // copies the elements from v2 into v1
+&#125;     // v2 is destroyed, which destroys the elements in v2
+    // v1 has three elements, which are copies of the ones originally in v2
+</code></pre>
+<p>Some classes allocate resources with a lifetime that is <strong>independent</strong> of the original object. As an example, assume we want to define a class named <code>Blob</code> that will hold a collection of elements. Unlike the containers, we want Blob objects that are copies of one another to share the same elements. That is, when we copy a Blob, the original and the copy should refer to the same underlying elements. like this:</p>
+<pre><code class="C++">Blob&lt;string&gt; b1; // empty Blob
+&#123;     // new scope
+    Blob&lt;string&gt; b2 = &#123;&quot;a&quot;, &quot;an&quot;, &quot;the&quot;&#125;;
+    b1 = b2; // b1 and b2 share the same elements
+&#125;     // b2 is destroyed, but the elements in b2 must not be destroyed
+    // b1 points to the elements originally created in b2
+</code></pre>
+<p>Ultimately, we’ll implement our Blob class as a template, but we won’t learn how to do. For now, we’ll define a version of our class that can manage strings. As a result, we’ll name this version of our class <code>StrBlob</code>.</p>
+<p>The easiest way to implement a new collection type is to use one of the library containers to manage the elements. That way, we can let the library type manage the storage for the elements themselves. In this case, we’ll use a vector to hold our elements.</p>
+<p>To implement the sharing we want, we’ll give each <code>StrBlob</code> a <code>shared_ptr</code> to a dynamically allocated <code>vector</code>. That shared_ptr member will keep track of how many <code>StrBlobs</code> share the same vector and will delete the vector when the last <code>StrBlob</code> using that vector is destroyed.</p>
+<p>We still need to decide what operations our class will provide. For now, we’ll implement a small subset of the vector operations. We’ll also change the operations that access elements (e.g., front and back): In our class, these operations will throw an exception if a user attempts to access an element that doesn’t exist.</p>
+<p>Our class will have a default constructor and a constructor that has a parameter of type <code>initializer_list&lt;string&gt;</code>. This constructor will take a braced list of initializers. This is <code>StrBlob</code> class:</p>
+<pre><code class="c++">#ifndef StrBlob1
+#define StrBlob1
+#include&lt;memory&gt;
+#include&lt;vector&gt;
+#include&lt;string&gt;
+#include&lt;initializer_list&gt;
+#include&lt;stdexcept&gt;
+
+class StrBlob &#123;
+public:
+    typedef std::vector&lt;std::string&gt;::size_type size_type;
+
+    StrBlob() : data(std::make_shared&lt;std::vector&lt;std::string&gt;&gt;()) &#123;
+    &#125;;
+    StrBlob(std::initializer_list&lt;std::string&gt; il)
+        : data(std::make_shared&lt;std::vector&lt;std::string&gt;&gt;(il)) &#123;
+    &#125;;
+
+    size_type size() const &#123; return data-&gt;size(); &#125;
+    bool empty() const &#123; return data-&gt;empty(); &#125;
+    // add and remove elements
+    void push_back(const std::string&amp; t) &#123;
+        data-&gt;push_back(t);
+    &#125;
+    void pop_back();
+    // element access
+    std::string&amp; front();
+    std::string&amp; back();
+
+private:
+    // a shared_ptr ponint to string of vector 
+    std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt; data;
+    void check(size_type i, const std::string&amp; msg) const;
+&#125;;
+
+void StrBlob::pop_back() &#123;
+    data-&gt;pop_back();
+&#125;
+
+std::string&amp; StrBlob::front() &#123;
+    // TODO: insert return statement here
+    return data-&gt;front();
+&#125;
+
+std::string&amp; StrBlob::back() &#123;
+    // TODO: insert return statement here
+    return data-&gt;back();
+&#125;
+
+void StrBlob::check(size_type i, const std::string&amp; msg) const &#123;
+    if (i &gt; data-&gt;size()) &#123;
+        throw std::out_of_range(msg);
+    &#125;
+&#125;
+
+#endif // !StrBlob
+</code></pre>
+<p>This is test code:</p>
+<pre><code class="c++">StrBlob b1;
+&#123;
+    StrBlob b2 = &#123; &quot;a&quot;, &quot;an&quot;, &quot;the&quot; &#125;;
+    b1 = b2;
+    b2.push_back(&quot;about&quot;);
+&#125;
+cout &lt;&lt; b1.back() &lt;&lt; endl; // output about
+</code></pre>
+<h3 id="Managing-Memory-Directly"><a href="#Managing-Memory-Directly" class="headerlink" title="Managing Memory Directly"></a>Managing Memory Directly</h3><p>The language itself defines two operators that allocate and free dynamic memory. The <code>new</code> operator allocates memory, and <code>delete</code> frees memory allocated by <code>new</code>.</p>
+<p>Objects allocated on the free store are unnamed, so <code>new</code> offers no way to name the objects that it allocates. Instead, <code>new</code> returns a <strong>pointer</strong> to the object it allocates:</p>
+<pre><code class="c++">int *pi = new int; 
+// pi points to a dynamically allocated,
+// unnamed, uninitialized int
+</code></pre>
+<p>This new expression constructs an object of type int on the free store and returns a pointer to that object. By default, dynamically allocated objects are default initialized, which means that objects of built-in or compound type have <strong>undefined value</strong>; objects of class type are initialized by their <strong>default constructor</strong>:</p>
+<pre><code class="c++">string *ps = new string; // initialized to empty string
+int *pi = new int; // pi points to an uninitialized int
+</code></pre>
+<p>We can initialize a dynamically allocated object using direct initialization. We can use traditional construction (using parentheses), and under the new standard, we can also use list initialization (with curly braces):</p>
+<pre><code class="c++">int *pi = new int(1024); // object to which pi points has value 1024
+string *ps = new string(10, &#39;9&#39;); // *ps is &quot;9999999999&quot;
+// vector with ten elements with values from 0 to 9
+vector&lt;int&gt; *pv = new vector&lt;int&gt;&#123;0,1,2,3,4,5,6,7,8,9&#125;;
+</code></pre>
+<p>When we provide an initializer inside parentheses, we can use <code>auto</code> to deduce the type of the object we want to allocate from that initializer. However, because the compiler uses the initializer’s type to deduce the type to allocate, we can use auto only with a single initializer inside parentheses:</p>
+<pre><code class="c++">auto p1 = new auto(obj); // p points to an object of the type of obj
+// that object is initialized from obj
+auto p2 = new auto&#123;a,b,c&#125;; // error: must use parentheses for the initializer
+</code></pre>
+<p>The type of p1 is a pointer to the auto-deduced type of <code>obj</code>. If <code>obj</code> is an int, then p1 is <code>int*</code>; if <code>obj</code> is a string, then p1 is a <code>string*</code>; and so on. The newly allocated object is initialized from the value of <code>obj</code>.</p>
+<p>Although modern machines tend to have huge memory capacity, it is always possible that the free store will be <strong>exhausted</strong>. Once a program has used all of its available memory, new expressions will fail. By default, if new is unable to allocate the requested storage, it throws an exception of type <code>bad_alloc</code>. We can prevent new from throwing an exception by using a different form of new:</p>
+<pre><code class="c++">// if allocation fails, new returns a null pointer
+int *p1 = new int; // if allocation fails, new throws std::bad_alloc
+int *p2 = new (nothrow) int; // if allocation fails, new returns a null pointer
+</code></pre>
+<p>In order to prevent memory exhaustion, we must return dynamically allocated memory to the system once we are finished using it. We return memory through a delete expression. A delete expression takes a pointer to the object we want to free:</p>
+<pre><code class="c++">delete p1;
+</code></pre>
+<p>We need notice the pointer we pass to delete must either point to <strong>dynamically allocated</strong> memory or be a null pointer. Deleting a pointer to memory that was not allocated by new, or deleting the same pointer value more than once, is undefined:</p>
+<pre><code class="c++">auto* p1 = new int(1);
+int num = 10;
+int* p2 = &amp;num;
+delete p1; //ok
+delete p2; //error
+</code></pre>
+<p>When we delete a pointer, that pointer becomes invalid. Although the pointer is invalid, on many machines the pointer continues to hold the address of the (freed) dynamic memory. After the delete, the pointer becomes what is referred to as a dangling pointer. A <strong>dangling pointer</strong> is one that refers to memory that once held an object but no longer does so. Dangling pointers have all the problems of uninitialized pointers. We can avoid the problems with dangling pointers by deleting the memory associated with a pointer just before the pointer itself goes out of scope. That way there is no chance to use the pointer after the memory associated with the pointer is freed. If we need to keep the pointer around, we can assign <code>nullptr</code> to the pointer after we use delete. Doing so makes it clear that the pointer points to no object.</p>
+<h3 id="Using-shared-ptrs-with-new"><a href="#Using-shared-ptrs-with-new" class="headerlink" title="Using shared_ptrs with new"></a>Using shared_ptrs with new</h3><p>As we’ve seen, if we do not initialize a smart pointer, it is initialized as a null pointer. As described in next table, we can also initialize a smart pointer from a pointer returned by new:</p>
+<table>
+<thead>
+<tr>
+<th>member</th>
+<th>means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>shared_ptr<T> p(q)</td>
+<td>p manages the object to which the built-in pointer q points; q must point to memory allocated by new and must be convertible to T*.</td>
+</tr>
+<tr>
+<td>shared_ptr<T> p(u)</td>
+<td>p assumes ownership from the unique_ptr u; makes u null.</td>
+</tr>
+<tr>
+<td>shared_ptr<T> p(q, d)</td>
+<td>p assumes ownership for the object to which the built-in pointer q points. q must be convertible to T*. p will use the callable object d in place of delete to free q.</td>
+</tr>
+<tr>
+<td>shared_ptr<T> p(p2, d)</td>
+<td>p is a copy of the shared_ptr p2 as described in previous Table , except that p uses the callable object d in place of delete.</td>
+</tr>
+<tr>
+<td>p.reset()</td>
+<td>If p is the only shared_ptr pointing at its object, reset frees p’s existing object.</td>
+</tr>
+<tr>
+<td>p.reset(q)</td>
+<td>If the optional built-in pointer q is passed makes p point to q, otherwise makes p null.</td>
+</tr>
+<tr>
+<td>p.reset(q, d)</td>
+<td>If d is supplied, will call d to free q otherwise uses delete to free q.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="c++">shared_ptr&lt;double&gt; p1; // shared_ptr that can point at a double
+shared_ptr&lt;int&gt; p2(new int(42)); // p2 points to an int with value 42
+</code></pre>
+<p>The smart pointer constructors that take pointers are <strong>explicit</strong>. Hence, we cannot <strong>implicitly</strong> convert a built-in pointer to a smart pointer; we must use the direct form of initialization to initialize a smart pointer:</p>
+<pre><code class="c++">shared_ptr&lt;int&gt; p1 = new int(1024); // error: must use direct initialization
+shared_ptr&lt;int&gt; p2(new int(1024)); // ok: uses direct initialization
+</code></pre>
+<p>By default, a pointer used to initialize a smart pointer must point to dynamic memory because, by default, smart pointers use delete to free the associated object. We can bind smart pointers to pointers to other kinds of resources. However, to do so, we must supply our own operation to use in place of <code>delete</code>. </p>
+<p>A <code>shared_ptr</code> can coordinate destruction only with other <code>shared_ptrs</code> that are copies of itself. Indeed, this fact is one of the reasons we recommend using <code>make_shared</code> rather than <code>new</code>. That way, we bind a <code>shared_ptr</code> to the object at the same time that we allocate it. There is no way to inadvertently bind the same memory to more than one independently created <code>shared_ptr</code>.</p>
+<p>Consider the following function that operates on a <code>shared_ptr</code>:</p>
+<pre><code class="c++">// ptr is created and initialized when process is called
+void process(shared_ptr&lt;int&gt; ptr)
+&#123;
+    // use ptr
+&#125;    // ptr goes out of scope and is destroyed
+</code></pre>
+<p>The parameter to process is passed by value, so the argument to process is copied into ptr. Copying a shared_ptr increments its reference count. Thus, inside process the count is at least 2. When process completes, the reference count of ptr is decremented but cannot go to zero. Therefore, when the local variable ptr is destroyed, the memory to which ptr points will not be deleted.</p>
+<p>The smart pointer types define a function named <code>get</code> that returns a built-in pointer to the object that the smart pointer is managing. This function is intended for cases when we need to pass a built-in pointer to code that can’t use a smart pointer. The code that uses the return from get must not delete that pointer.</p>
+<pre><code class="c++">shared_ptr&lt;int&gt; p2(new int(10));
+auto* p3 = p2.get();
+&#123;
+    // undefined: two independent shared_ptrs point to the same memory
+    shared_ptr&lt;int&gt; p4(p3);
+&#125;    // block ends, p4 is destroyed, and the memory to which q points is freed
+cout &lt;&lt; *p2 &lt;&lt; endl;    // undefined; the memory to which p2 points was freed
+</code></pre>
+<p>In this case, both <code>p2</code> and <code>p4</code> point to the same memory. Because they were created independently from each other, each has a reference count of 1. When the block in which q was defined ends, q is destroyed. Destroying q frees the memory to which q points. That makes p into a dangling pointer, meaning that what happens when we attempt to use p is undefined. Moreover, when p is destroyed, the pointer to that memory will be deleted a second time.</p>
+<p>The <code>shared_ptr</code> class gives us a few other operations, which are listed in previous table. We can use reset to assign a new pointer to a <code>shared_ptr</code>:</p>
+<pre><code class="c++">p = new int(1024); // error: cannot assign a pointer to a shared_ptr
+p.reset(new int(1024)); // ok: p points to a new object
+</code></pre>
+<p>Like assignment, reset updates the reference counts and, if appropriate, deletes the object to which p points. The reset member is often used together with unique to control changes to the object shared among several <code>shared_ptrs</code>. Before changing the underlying object, we check whether we’re the only user. If not, we make a new copy before making the change:</p>
+<pre><code class="c++">if (!p.unique())
+    p.reset(new string(*p)); // we aren&#39;t alone; allocate a new copy
+*p += newVal; // now that we know we&#39;re the only pointer, okay to change this object
+</code></pre>
+<h3 id="Smart-Pointers-and-Exceptions"><a href="#Smart-Pointers-and-Exceptions" class="headerlink" title="Smart Pointers and Exceptions"></a>Smart Pointers and Exceptions</h3><p>In previous chapter we noted that programs that use exception handling to continue processing after an exception occurs need to ensure that resources are properly freed if an exception occurs. One easy way to make sure resources are freed is to use smart pointers. When we use a smart pointer, the smart pointer class ensures that memory is freed when it is no longer needed even if the block is exited prematurely:</p>
+<pre><code class="c++">void f()&#123;
+    shared_ptr&lt;int&gt; sp(new int(42)); // allocate a new object
+    // code that throws an exception that is not caught inside f
+&#125;    // shared_ptr freed automatically when the function ends
+</code></pre>
+<p>When a function is exited, whether through normal processing or due to an exception, all the local objects are destroyed. In this case, <code>sp</code> is a <code>shared_ptr</code>, so destroying <code>sp</code> checks its reference count. Here, <code>sp</code> is the only pointer to the memory it manages; that memory will be freed as part of destroying <code>sp</code>.</p>
+<p>In contrast, memory that we manage directly is not automatically freed when an exception occurs. If we use built-in pointers to manage memory and an exception occurs after a new but before the corresponding delete, then that memory won’t be freed:</p>
+<p>Many C++ classes, including all the library classes, define destructors that take care of cleaning up the resources used by that object. However, not all classes are so well behaved. In particular, classes that are designed to be used by both C and C++ generally require the user to specifically free any resources that are used.</p>
+<h3 id="unique-ptr"><a href="#unique-ptr" class="headerlink" title="unique_ptr"></a>unique_ptr</h3><p>A <code>unique_ptr</code> “owns” the object to which it points. Unlike <code>shared_ptr</code>, only one <code>unique_ptr</code> at a time can point to a given object. The object to which a <code>unique_ptr</code> points is destroyed when the <code>unique_ptr</code> is destroyed. Next table lists the operations specific to <code>unique_ptrs</code>.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unique_ptr<T> u1</td>
+<td>Null unique_ptrs that can point to objects of type T.</td>
+</tr>
+<tr>
+<td>unique_ptr&lt;T, D&gt; u2</td>
+<td>u1 will use delete to free its pointer; u2 will use a callable object of type D to free its pointer.</td>
+</tr>
+<tr>
+<td>unique_ptr&lt;T, D&gt; u(d)</td>
+<td>Null unique_ptr that point to objects of type T that uses d, which must be an object of type D in place of delete.</td>
+</tr>
+<tr>
+<td>u=nullptr</td>
+<td>Deletes the object to which u points; makes u null.</td>
+</tr>
+<tr>
+<td>u.release()</td>
+<td>Relinquishes control of the pointer u had held, returns the pointer u had held and makes u null.</td>
+</tr>
+<tr>
+<td>u.reset()</td>
+<td>Deletes the object to which u points</td>
+</tr>
+<tr>
+<td>u.reset(p)</td>
+<td>If the built-in pointer q is supplied,makes u point to that object.</td>
+</tr>
+<tr>
+<td>u.reset(nullptr)</td>
+<td>Otherwise makes u null.</td>
+</tr>
+</tbody>
+</table>
+<p>Unlike <code>shared_ptr</code>, there is <strong>no</strong> library function comparable to <code>make_shared</code> that returns a <code>unique_ptr</code>. Instead, when we define a <code>unique_ptr</code>, we bind it to a pointer returned by new. As with <code>shared_ptrs</code>, we must use the direct form of initialization:</p>
+<pre><code class="c++">unique_ptr&lt;double&gt; p1; // unique_ptr that can point at a double
+unique_ptr&lt;int&gt; p2(new int(42)); // p2 points to int with value 42
+</code></pre>
+<p>Because a <code>unique_ptr</code> owns the object to which it points, unique_ptr <strong>does</strong> <strong>not</strong> support ordinary <strong>copy</strong> or <strong>assignment</strong>. Although we can’t copy or assign a unique_ptr, we can transfer ownership from one (nonconst) unique_ptr to another by calling <code>release</code> or <code>reset</code>:</p>
+<pre><code class="c++">// transfers ownership from p1 (which points to the string Stegosaurus) to p2
+unique_ptr&lt;string&gt; p2(p1.release()); // release makes p1 null
+unique_ptr&lt;string&gt; p3(new string(&quot;Trex&quot;));
+// transfers ownership from p3 to p2
+p2.reset(p3.release()); // reset deletes the memory to which p2 had pointed
+</code></pre>
+<p>There is one <strong>exception</strong> to the rule that we cannot copy a <code>unique_ptr</code>: We can copy or assign a <code>unique_ptr</code> that is about to be destroyed. The most common example is when we <strong>return</strong> a <code>unique_ptr</code> from a function:</p>
+<pre><code class="c++">unique_ptr&lt;int&gt; clone(int p) &#123;
+    // ok: explicitly create a unique_ptr&lt;int&gt; from int*
+    return unique_ptr&lt;int&gt;(new int(p));
+&#125;
+</code></pre>
+<h3 id="weak-ptr"><a href="#weak-ptr" class="headerlink" title="weak_ptr"></a>weak_ptr</h3><p>A <code>weak_ptr</code> is a smart pointer that does not control the lifetime of the object to which it points. Instead, a <code>weak_ptr</code> points to an object that is managed by a <code>shared_ptr</code>. Binding a <code>weak_ptr</code> to a <code>shared_ptr</code> does <strong>not</strong> change the reference <strong>count</strong> of that shared_ptr. Once the last <code>shared_ptr</code> pointing to the object goes away, the object itself will be deleted. That object will be deleted even if there are <code>weak_ptrs</code> pointing to it—hence the name <code>weak_ptr</code>, which captures the idea that a weak_ptr shares its object “weakly.”</p>
+<h2 id="Dynamic-Arrays"><a href="#Dynamic-Arrays" class="headerlink" title="Dynamic Arrays"></a>Dynamic Arrays</h2><p>The <code>new</code> and <code>delete</code> operators allocate objects one at a time. Some applications, need the ability to allocate storage for many objects at once. For example, <code>vectors</code> and <code>strings</code> store their elements in contiguous memory and must allocate several elements at once whenever the container has to be reallocated.</p>
+<p>To support such usage, the language and library provide two ways to allocate an array of objects at once. The language defines a second kind of new expression that allocates and initializes an array of objects. The library includes a template class named <code>allocator</code> that lets us separate allocation from initialization. Using an allocator generally provides better performance and more flexible memory management.</p>
+<h3 id="new-and-Arrays"><a href="#new-and-Arrays" class="headerlink" title="new and Arrays"></a>new and Arrays</h3><p>We ask <code>new</code> to allocate an array of objects by specifying the number of objects to allocate in a pair of square brackets after a type name. In this case, new allocates the requested number of objects and (assuming the allocation succeeds) returns a pointer to the first one:</p>
+<pre><code class="c++">// call get_size to determine how many ints to allocate
+int *pia = new int[get_size()]; // pia points to the first of these ints
+</code></pre>
+<p>The size inside the brackets must have integral type but need not be a constant. We can also allocate an array by using a type alias to represent an array type. In this case, we omit the brackets:</p>
+<pre><code class="c++">using ten_arr = int[10];
+int* p2 = new ten_arr;
+</code></pre>
+<p>Although it is common to refer to memory allocated by <code>new ten_arr[]</code> as a “dynamic array,” this usage is somewhat misleading. When we use new to allocate an array, we do <strong>not</strong> get an object with an <strong>array</strong> type. Instead, we get a pointer to the element type of the array. Even if we use a type alias to define an array type, new does not allocate an object of array type. Because the allocated memory does not have an array type, we cannot call <code>begin</code> or <code>end</code> on a dynamic array.</p>
+<p>By default, objects allocated by new—whether allocated as a single object or in an array—are default initialized. We can value initialize the elements in an array by following the size with an empty pair of parentheses.</p>
+<pre><code class="c++">int* pia = new int[10]; // block of ten uninitialized ints
+int* pia2 = new int[10](); // block of ten ints value initialized to 0
+string* psa = new string[10]; // block of ten empty strings
+string* psa2 = new string[10](); // block of ten empty strings
+</code></pre>
+<p>Under the new standard, we can also provide a braced list of element initializers:</p>
+<pre><code class="c++">int* pia = new int[10]&#123; 1,2,3,4,5,6,7,8,9,0 &#125;;
+string* psa = new string[10]&#123; &quot;nvifd&quot;,string(10,&#39;A&#39;) &#125;;
+</code></pre>
+<p>To <strong>free</strong> a dynamic array, we use a special form of delete that includes an empty pair of square brackets:</p>
+<pre><code class="c++">delete p; // p must point to a dynamically allocated object or be null
+delete [] pa; // pa must point to a dynamically allocated array or be null
+</code></pre>
+<p>The second statement destroys the elements in the array to which pa points and frees the corresponding memory. Elements in an array are destroyed in reverse order. That is, the last element is destroyed first, then the second to last, and so on.</p>
+<p>The library provides a version of <code>unique_ptr</code> that can manage arrays allocated by new. To use a <code>unique_ptr</code> to manage a dynamic array, we must include a pair of empty brackets after the object type:</p>
+<pre><code class="c++">// up points to an array of ten uninitialized ints
+unique_ptr&lt;int[]&gt; up(new int[10]);
+up.release(); // automatically uses delete[] to destroy its pointer
+</code></pre>
+<p><code>unqiue_ptrs</code> that point to arrays provide slightly different operations than those we used in previous, we can use the subscript operator to access the elements in the array:</p>
+<pre><code class="c++">for (size_t i = 0; i &lt; 10; i++) &#123;
+    up[i] = i;
+&#125;
+</code></pre>
+<p>Unlike <code>unique_ptr</code>, <code>shared_ptrs</code> provide no direct support for managing a dynamic array. If we want to use a shared_ptr to manage a dynamic array, we must provide our own deleter:</p>
+<pre><code class="c++">// to use a shared_ptr we must supply a deleter
+shared_ptr&lt;int&gt; sp(new int[10], [](int *p) &#123; delete[] p; &#125;);
+sp.reset(); // uses the lambda we supplied that uses delete[] to free the array
+</code></pre>
+<p>The fact that <code>shared_ptr</code> does not directly support managing arrays affects how we access the elements in the array:</p>
+<pre><code class="c++">for (size_t i = 0; i &lt; 10; i++) &#123;
+    *(sp.get() + i) = i;
+&#125;
+</code></pre>
+<h3 id="The-allocator-Class"><a href="#The-allocator-Class" class="headerlink" title="The allocator Class"></a>The allocator Class</h3><p>An aspect of <code>new</code> that limits its flexibility is that new combines allocating memory with constructing object(s) in that memory. Similarly, <code>delete</code> combines destruction with deallocation. Combining initialization with allocation is usually what we want when we allocate a single object. In that case, we almost certainly know the value the object should have.</p>
+<p>When we allocate a block of memory, we often plan to construct objects in that memory as needed. In this case, we’d like to <strong>decouple</strong> memory allocation from object construction. <strong>Decoupling</strong> construction from allocation means that we can allocate memory in large chunks and pay the overhead of constructing the objects only when we actually need to create them.</p>
+<p>The library <code>allocator</code> class, which is defined in the memory header, lets us <strong>separate</strong> allocation from construction. It provides type-aware allocation of raw, unconstructed, memory. Next table outlines the operations that allocator supports. In this section, we’ll describe the allocator operations.</p>
+<table>
+<thead>
+<tr>
+<th>methods</th>
+<th>means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>allocator<T> a</td>
+<td>Defines an allocator object named a that can allocate memory for objects of type T.</td>
+</tr>
+<tr>
+<td>a.allocate(n)</td>
+<td>Allocates raw, unconstructed memory to hold n objects of type T.</td>
+</tr>
+<tr>
+<td>a.deallocate(p, n)</td>
+<td>Deallocates memory that held n objects of type T starting at the address in the T* pointer p.</td>
+</tr>
+<tr>
+<td>a.construct(p, args)</td>
+<td>which is used to construct an object in the memory pointed to by p</td>
+</tr>
+<tr>
+<td>a.destory(p)</td>
+<td>Runs the destructor on the object pointed to by the T*pointer p.</td>
+</tr>
+</tbody>
+</table>
+<p>Like <code>vector</code>, <code>allocator</code> is a <strong>template</strong>. To define an allocator we must specify the type of objects that a particular allocator can allocate. When an allocator object allocates memory, it allocates memory that is appropriately sized and aligned to hold objects of the given type:</p>
+<pre><code class="c++">allocator&lt;string&gt; alloc; // object that can allocate strings
+auto const p = alloc.allocate(n); // allocate n unconstructed strings
+</code></pre>
+<p>The memory an allocator allocates is <strong>unconstructed</strong>. We use this memory by constructing objects in that memory. In the new library the <code>construct</code> member takes a pointer and zero or more additional arguments:</p>
+<pre><code class="c++">auto q = p; // q will point to one past the last constructed element
+alloc.construct(q++); // *q is the empty string
+alloc.construct(q++, 10, &#39;c&#39;); // *q is cccccccccc
+alloc.construct(q++, &quot;hi&quot;); // *q is hi!
+</code></pre>
+<p>It is an error to use raw memory in which an object has not been constructed:</p>
+<pre><code class="c++">cout &lt;&lt; *q &lt;&lt; endl; // disaster: q points to unconstructed memory!
+</code></pre>
+<p>When we’re finished using the objects, we must <strong>destroy</strong> the elements we constructed, which we do by calling destroy on each constructed element. The destroy function takes a pointer and runs the destructor on the pointed-to object:</p>
+<pre><code class="c++">while (q != p)
+    alloc.destroy(--q); // free the strings we actually allocated
+</code></pre>
+<p>Once the elements have been destroyed, we can either reuse the memory to hold other strings or <strong>return</strong> the memory to the system. We free the memory by calling deallocate:</p>
+<pre><code class="c++">alloc.deallocate(p, n);
+</code></pre>
+<p>The pointer we pass to deallocate cannot be null; it must point to memory allocated by allocate. Moreover, the size argument passed to deallocate must be the <strong>same size as</strong> used in the call to allocate that obtained the memory to which the pointer points.</p>
+<p>As a companion to the allocator class, the library also defines two algorithms that can construct objects in uninitialized memory.</p>
+<table>
+<thead>
+<tr>
+<th>methods</th>
+<th>means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/memory/uninitialized_copy/"><strong>uninitialized_copy</strong></a></td>
+<td>Copy block of memory</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/memory/uninitialized_copy_n/"><strong>uninitialized_copy_n</strong> </a></td>
+<td>Copy block of memory</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/memory/uninitialized_fill/"><strong>uninitialized_fill</strong></a></td>
+<td>Fill block of memory</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/memory/uninitialized_fill_n/"><strong>uninitialized_fill_n</strong></a></td>
+<td>Fill block of memory</td>
+</tr>
+</tbody>
+</table>
+<p>As an example, assume we have a <code>vector</code> of <code>ints</code> that we want to copy into dynamic memory. We’ll allocate memory for twice as many <code>ints</code> as are in the vector. We’ll construct the first half of the newly allocated memory by copying elements from the original vector. We’ll construct elements in the second half by filling them with a given value:</p>
+<pre><code class="c++">int main() &#123;
+    vector&lt;int&gt; v(2, 2);
+    allocator&lt;int&gt; alloc;
+    auto p = alloc.allocate(v.size() * 2);
+    auto q = uninitialized_copy(v.begin(), v.end(), p);
+    uninitialized_fill_n(q, v.size(), 20);
+    for (size_t i = 0; i &lt; v.size() * 2; i++) &#123;
+        cout &lt;&lt; p[i] &lt;&lt; endl;
+    &#125;
+    return 0;
+&#125;
+//output
+//2
+//2
+//20
+//20
+</code></pre>
+<h2 id="Using-the-Library-A-Text-Query-Program"><a href="#Using-the-Library-A-Text-Query-Program" class="headerlink" title="Using the Library: A Text-Query Program"></a>Using the Library: A Text-Query Program</h2><p>To conclude our discussion of the library, we’ll implement a simple text-query program. Our program will let a user search a given file for words that might occur in it. The result of a query will be the number of times the word occurs and a list of lines on which that word appears.</p>
+<h3 id="Design-of-the-Query-Program"><a href="#Design-of-the-Query-Program" class="headerlink" title="Design of the Query Program"></a>Design of the Query Program</h3><pre><code class="c++">#pragma once
+#include&lt;fstream&gt;
+#include&lt;vector&gt;
+#include&lt;string&gt;
+#include&lt;set&gt;
+#include&lt;memory&gt;
+#include&lt;map&gt;
+#include&lt;sstream&gt;
+#include&lt;iostream&gt;
+
+// when we write more than one class in a FILE:
+// we need protected that first declaration class
+// then implement method by declaration sequential
+
+class QueryResult;
+
+class TextQuery &#123;
+public:
+    using line_no = std::vector&lt;std::string&gt;::size_type;
+
+    TextQuery() = default;
+    TextQuery(std::ifstream&amp; input);
+    QueryResult query(const std::string&amp; s);
+private:
+    // input file
+    std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt; file;
+    // map of each word to the set of the lines in which that word appears
+    std::map &lt;std::string, std::shared_ptr&lt;std::set&lt;line_no&gt;&gt;&gt; wm;
+&#125;;
+
+class QueryResult &#123;
+    friend std::ostream&amp; print(std::ostream&amp;, const QueryResult&amp;);
+public:
+    QueryResult() = default;
+    QueryResult(std::string s,
+        std::shared_ptr&lt;std::set&lt;TextQuery::line_no&gt;&gt; p,
+        std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt; f) :
+        s_word(s), lines(p), file(f) &#123;
+    &#125;
+
+private:
+    std::string s_word;
+    std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt; file;
+    std::shared_ptr&lt;std::set&lt;TextQuery::line_no&gt;&gt; lines;
+&#125;;
+
+// TextQuery member
+TextQuery::TextQuery(std::ifstream&amp; input)
+    :file(new std::vector&lt;std::string&gt;) &#123;
+    std::string line, text;
+    while (getline(input, line)) &#123;
+        //read a line and save to vector string
+        file-&gt;push_back(line);
+
+        //get current line_no
+        size_t n = file-&gt;size() - 1;
+
+        //save one word where appeared
+        std::istringstream ss(line);
+        while (ss &gt;&gt; text) &#123;
+            // if word isn&#39;t already in wm, subscripting adds a new entry
+            auto&amp; lines = wm[text];
+            if (!lines) &#123;
+                lines.reset(new std::set&lt;line_no&gt;);
+            &#125;
+            // insert this line number
+            lines-&gt;insert(n);
+        &#125;
+    &#125;
+&#125;
+
+QueryResult TextQuery::query(const std::string&amp; s) &#123;
+    // we&#39;ll return a pointer to this set if we don&#39;t find s
+    static std::shared_ptr&lt;std::set&lt;line_no&gt;&gt; nodata(new std::set&lt;line_no&gt;);
+
+    auto location = wm.find(s);
+    if (location != wm.end()) &#123;
+        return QueryResult(s, location-&gt;second, file);
+    &#125;
+    else &#123;
+        return QueryResult(s, nodata, file);
+    &#125;
+&#125;
+
+// QueryResult member
+std::ostream&amp; print(std::ostream&amp; out, const QueryResult&amp; qr) &#123;
+    // TODO: insert return statement here
+    out &lt;&lt; qr.s_word &lt;&lt; &quot; appear &quot; &lt;&lt; (qr.lines)-&gt;size() &lt;&lt; &quot; times:&quot; &lt;&lt; std::endl;
+    for (auto&amp; line : *(qr.lines)) &#123;
+        out &lt;&lt; line + 1 &lt;&lt; &quot;: &quot; &lt;&lt; (qr.file)-&gt;at(line) &lt;&lt; std::endl;
+    &#125;
+    return out;
+&#125;
+</code></pre>
+<h3 id="Main-program"><a href="#Main-program" class="headerlink" title="Main program"></a>Main program</h3><pre><code class="c++">#include&lt;fstream&gt;
+#include&lt;iostream&gt;
+#include &quot;ch12_3.h&quot;
+using namespace std;
+
+int main() &#123;
+    ifstream input(&quot;text.txt&quot;);
+    TextQuery tq(input);
+
+    string s;
+    while (true) &#123;
+        cout &lt;&lt; &quot;input a word you want query:&quot; &lt;&lt; endl;
+        if (!(cin &gt;&gt; s) || s == &quot;q&quot;) &#123;
+            break;
+        &#125;
+        auto qr = tq.query(s);
+        print(std::cout, qr);
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://morning.eu.org/images/custom/donate/404.jpg"></li>
+                <li class="wechat-code"><img src="https://morning.eu.org/images/custom/donate/404.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2021/12/09/c++%20c9/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="" data-src="/images/cover/(1).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/(1).jpg.webp">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                (ch9) Copy Control</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2021/12/07/c++%20c7/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="" data-src="/images/cover/(7).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/(7).jpg.webp">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                (ch7) Associative Containers</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+	window.onload = function(){
+		var valine = new Valine();
+		valine.init({
+			el: '#vcomments',
+			appId: "EAyicHJhXmxJNEeuhACVujd4-gzGzoHsz",
+			appKey: "09Tjj4It5DOhgboduuM40u7y",
+			avatar: 'wavatar',
+			path: window.location.pathname,
+			placeholder: "有什么想说的吗.."
+		})
+	}
+</script>
+
+
+
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="morning.eu.org" class="profile gravatar"><img src="/images/custom/avatar.jpg" itemprop="image" alt="Noah" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="morning.eu.org" itemprop="url" rel="author">Noah</a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i>life is perfact</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
+</div>
+
+
+
+    </div>    
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            // PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+    <!-- <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Noah Bishop<br>
+      powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer> -->
+<footer id="colophon" class="site-footer" role="contentinfo">
+  <div class="site-info">
+    <div class="footertext">
+      <div class="img-preload">
+        <img src="https://morning.eu.org/images/other/wordpress-rotating-ball-o.svg">
+        <img src="https://morning.eu.org/images/other/disqus-preloader.svg">
+      </div>
+      <p style="color: #666666;">&copy 2019-2023</p>
+    </div>
+    <div class="footer-device">
+      <p style="font-family: 'Ubuntu', sans-serif;">
+        <span style="color: #b9b9b9;">Theme <a href="https://github.com/honjun/hexo-theme-sakura" target="_blank"
+            style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Sakura</a> <i
+            class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i> by <a
+            href="https://2heng.xin/" target="_blank"
+            style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Mashiro</a>&<a
+            href="https://www.hojun.cn/" target="_blank"
+            style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Hojun</a>, Powered by Hexo,
+          Hosted by Coding Pages</a>
+        </span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+
+<!-- <script src="/js/tocbot.js"></script> -->
+<script type="text/javascript" src="/js/lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/InsightSearch.js"></script>
+<script type="text/javascript" src="/js/jquery.fancybox.min.js"></script>
+<script type="text/javascript" src="/js/zoom.min.js"></script>
+<script type="text/javascript" src="/js/sakura-app.js"></script>
+<script src="/js/botui.js"></script>
+<!-- 不蒜子 网页计数器 -->
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script> -->
+<script type="text/javascript">
+  /* <![CDATA[ */
+  if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+    var Poi = { "pjax": "1", "movies": { "url": "", "name": "", "live": "close" }, "windowheight": "fixed", "codelamp": "close", "ajaxurl": "", "order": "asc", "formpostion": "bottom" };
+  } else {
+    var Poi = { "pjax": "1", "movies": { "url": "", "name": "", "live": "open" }, "windowheight": "auto", "codelamp": "close", "ajaxurl": "", "order": "asc", "formpostion": "bottom" };
+  }
+/* ]]> */
+
+</script>
+<script>
+  $(document).ready(function () {
+    if ($(".toc").length > 0 && document.body.clientWidth > 1200) {
+      if ($(".pattern-center").length > 0) { //有图的情况
+        tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -400,
+          scrollSmoothOffset: -85
+        });
+      } else {
+        tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -85,
+          scrollSmoothOffset: -85
+        });
+      }
+      var offsetTop = $('.toc').offset().top - 95;
+      window.onscroll = function () {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+        if (scrollTop >= offsetTop) {
+          $('.toc').addClass('toc-fixed');
+        } else {
+          $('.toc').removeClass('toc-fixed');
+        }
+      }
+    }
+  });
+</script>
+    <div class="openNav no-select" style="height: 50px;">
+      <div class="iconflat no-select" style="width: 50px; height: 50px;">
+        <div class="icon"></div>
+      </div>
+      <div class="site-branding search-form-submit">
+        <i class="iconfont js-toggle-search iconsearch icon-search"></i>
+      </div>
+    </div>
+  </section>
+  <div id="mo-nav" class="">
+  <div class="m-avatar">
+    <img src="https://morning.eu.org/images/custom/avatar.jpg">
+  </div>
+  <p style="text-align: center; color: #333; font-weight: 900; font-family: 'Ubuntu', sans-serif; letter-spacing: 1.5px">桜荘そのうさぎ</p>
+  <p style="text-align: center; word-spacing: 20px;">
+    
+      
+        <a href="https://github.com/NoahBishop" class="fa fa-github" target="_blank" style="color: #333; margin-left:20px"></a>
+      
+        <a href="https://t.me/mega1037" class="fa fa-telegram" target="_blank" style="color: #25c6fe; margin-left:20px"></a>
+      
+        <a href="https://mailto:beiloquuw@gamil.com" class="fa fa-google" target="_blank" style="color: #dd4b39; margin-left:20px"></a>
+      
+    
+  </p>
+  <ul id="menu-new-1" class="menu">
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+            首页
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/archives">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+            归档
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/categories/%E6%8A%80%E6%9C%AF/">
+                  <i class="fa fa-code" aria-hidden="true"></i>
+                  技术
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/%E7%94%9F%E6%B4%BB/">
+                  <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                  生活
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/%E8%B5%84%E6%BA%90/">
+                  <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                  资源
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/%E9%9A%8F%E6%83%B3/">
+                  <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                  随想
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/%E8%BD%AC%E8%BD%BD/">
+                  <i class="fa fa-book" aria-hidden="true"></i>
+                  转载
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/tags/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-tag" aria-hidden="true"></i>
+            标签
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="javascript:;">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+            清单
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/music/">
+                  <i class="fa fa-headphones" aria-hidden="true"></i>
+                  歌单
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/comment/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+            留言板
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/links/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+            友人帐
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-leaf faa-wrench" aria-hidden="true"></i>
+            关于
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/about/">
+                  <i class="fa fa-meetup" aria-hidden="true"></i>
+                  我？
+                </a>
+              </li>
+            
+              <li>
+                <a href="/theme-sakura/">
+                  <i class="fa iconfont icon-sakura" aria-hidden="true"></i>
+                  主题
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/atom.xml">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-rss faa-pulse" aria-hidden="true"></i>
+            RSS
+          </span>
+        </a>
+        
+      </li>
+    
+  </ul>
+  <p style="text-align: center; font-size: 13px; color: #b9b9b9;">&copy 2019 hexo-sakura</p>
+</div>
+<button onclick="topFunction()" class="mobile-cd-top" id="moblieGoTop" title="Go to top" style="display: none;"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<style>
+  .aplayer .aplayer-lrc {
+    height: 35px;
+  }
+  .aplayer .aplayer-lrc p{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18px !important;
+  }
+  .aplayer .aplayer-lrc p.aplayer-lrc-current{
+    color: #FF1493;
+  }
+  .aplayer.aplayer-narrow .aplayer-body{
+    left: -66px !important;
+  }
+  .aplayer.aplayer-fixed .aplayer-lrc {
+    display: none;
+  }
+  .aplayer .aplayer-lrc.aplayer-lrc-hide {
+      display:none !important;
+  }
+  .aplayer.aplayer-fixed .lrc-show {
+    display: block;
+    background: rgba(255, 255, 255, 0.8);
+  }
+</style>
+<meting-js
+
+    id="7225712775"
+
+    server="netease"
+
+    type="playlist"
+
+    fixed="true"
+
+    autoplay="true"
+
+    loop="all"
+
+    order="random"
+
+    preload="auto"
+
+    volume="0.5"
+
+    mutex="true"
+
+</meting-js>
+<script>
+  $(function(){
+    $('body').on('click', '.aplayer', function(){
+      if($('.aplayer-button').hasClass('aplayer-play')) {
+        $('.aplayer-lrc').removeClass('lrc-show');
+      } else {
+        $('.aplayer-lrc').addClass('lrc-show');
+      }
+    })
+  });
+</script>
+</body>
+</html>

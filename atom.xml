@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://NoahBishop.github.io/"/>
-  <updated>2023-04-21T08:45:06.232Z</updated>
+  <updated>2023-04-21T15:59:18.010Z</updated>
   <id>https://NoahBishop.github.io/</id>
   
   <author>
@@ -17,11 +17,115 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>(ch12) Templates and Generic Programming (Not completed yet)</title>
+    <link href="https://NoahBishop.github.io/2021/12/12/c++%20c12/"/>
+    <id>https://NoahBishop.github.io/2021/12/12/c++ c12/</id>
+    <published>2021-12-12T13:52:45.000Z</published>
+    <updated>2023-04-21T15:59:18.010Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Templates-and-Generic-Programming&quot;&gt;&lt;a href=&quot;#Templates-and-Generic-Programming&quot; class=&quot;headerlink&quot; title=&quot;Templates and Generic
+        
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="C/C++ basic" scheme="https://NoahBishop.github.io/tags/C-C-basic/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>(ch11) Object-Oriented Programming</title>
+    <link href="https://NoahBishop.github.io/2021/12/11/c++%20c11/"/>
+    <id>https://NoahBishop.github.io/2021/12/11/c++ c11/</id>
+    <published>2021-12-11T13:52:45.000Z</published>
+    <updated>2023-04-21T15:57:13.015Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Object-Oriented-Programming&quot;&gt;&lt;a href=&quot;#Object-Oriented-Programming&quot; class=&quot;headerlink&quot; title=&quot;Object-Oriented
+        
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="C/C++ basic" scheme="https://NoahBishop.github.io/tags/C-C-basic/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>(ch10) Overloaded Operations and Conversions</title>
+    <link href="https://NoahBishop.github.io/2021/12/10/c++%20c10/"/>
+    <id>https://NoahBishop.github.io/2021/12/10/c++ c10/</id>
+    <published>2021-12-10T13:52:45.000Z</published>
+    <updated>2023-04-21T15:56:24.348Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Overloaded-Operations-and-Conversions&quot;&gt;&lt;a href=&quot;#Overloaded-Operations-and-Conversions&quot; class=&quot;headerlink&quot; title=&quot;Overloaded
+        
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="C/C++ basic" scheme="https://NoahBishop.github.io/tags/C-C-basic/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>(ch9) Copy Control</title>
+    <link href="https://NoahBishop.github.io/2021/12/09/c++%20c9/"/>
+    <id>https://NoahBishop.github.io/2021/12/09/c++ c9/</id>
+    <published>2021-12-09T13:52:45.000Z</published>
+    <updated>2023-04-21T15:56:18.077Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Copy-Control&quot;&gt;&lt;a href=&quot;#Copy-Control&quot; class=&quot;headerlink&quot; title=&quot;Copy Control&quot;&gt;&lt;/a&gt;Copy Control&lt;/h1&gt;&lt;p&gt;As we see in chapter 3, each
+        
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="C/C++ basic" scheme="https://NoahBishop.github.io/tags/C-C-basic/"/>
+    
+  </entry>
+  
+  <entry>
     <title>(ch8) Dynamic Memory</title>
-    <link href="https://NoahBishop.github.io/2021/12/25/c++%20c8/"/>
-    <id>https://NoahBishop.github.io/2021/12/25/c++ c8/</id>
-    <published>2021-12-25T13:52:45.000Z</published>
-    <updated>2023-04-21T08:45:06.232Z</updated>
+    <link href="https://NoahBishop.github.io/2021/12/08/c++%20c8/"/>
+    <id>https://NoahBishop.github.io/2021/12/08/c++ c8/</id>
+    <published>2021-12-08T13:52:45.000Z</published>
+    <updated>2023-04-21T15:52:42.787Z</updated>
     
     <summary type="html">
     
@@ -44,10 +148,10 @@
   
   <entry>
     <title>(ch7) Associative Containers</title>
-    <link href="https://NoahBishop.github.io/2021/12/24/c++%20c7/"/>
-    <id>https://NoahBishop.github.io/2021/12/24/c++ c7/</id>
-    <published>2021-12-24T13:52:45.000Z</published>
-    <updated>2023-04-21T08:45:04.021Z</updated>
+    <link href="https://NoahBishop.github.io/2021/12/07/c++%20c7/"/>
+    <id>https://NoahBishop.github.io/2021/12/07/c++ c7/</id>
+    <published>2021-12-07T13:52:45.000Z</published>
+    <updated>2023-04-21T15:52:38.835Z</updated>
     
     <summary type="html">
     
@@ -70,10 +174,10 @@
   
   <entry>
     <title>(ch6) Generic Algorithms</title>
-    <link href="https://NoahBishop.github.io/2021/12/23/c++%20c6/"/>
-    <id>https://NoahBishop.github.io/2021/12/23/c++ c6/</id>
-    <published>2021-12-23T13:52:45.000Z</published>
-    <updated>2023-04-21T08:45:02.190Z</updated>
+    <link href="https://NoahBishop.github.io/2021/12/06/c++%20c6/"/>
+    <id>https://NoahBishop.github.io/2021/12/06/c++ c6/</id>
+    <published>2021-12-06T13:52:45.000Z</published>
+    <updated>2023-04-21T15:52:35.498Z</updated>
     
     <summary type="html">
     
@@ -96,10 +200,10 @@
   
   <entry>
     <title>(ch5) Sequential Containers</title>
-    <link href="https://NoahBishop.github.io/2021/12/22/c++%20c5/"/>
-    <id>https://NoahBishop.github.io/2021/12/22/c++ c5/</id>
-    <published>2021-12-22T13:52:45.000Z</published>
-    <updated>2023-04-21T08:45:00.503Z</updated>
+    <link href="https://NoahBishop.github.io/2021/12/05/c++%20c5/"/>
+    <id>https://NoahBishop.github.io/2021/12/05/c++ c5/</id>
+    <published>2021-12-05T13:52:45.000Z</published>
+    <updated>2023-04-21T15:52:32.560Z</updated>
     
     <summary type="html">
     
@@ -122,10 +226,10 @@
   
   <entry>
     <title>(ch4) The C++ IO Library</title>
-    <link href="https://NoahBishop.github.io/2021/12/21/c++%20c4/"/>
-    <id>https://NoahBishop.github.io/2021/12/21/c++ c4/</id>
-    <published>2021-12-21T13:52:45.000Z</published>
-    <updated>2023-04-21T08:44:58.887Z</updated>
+    <link href="https://NoahBishop.github.io/2021/12/04/c++%20c4/"/>
+    <id>https://NoahBishop.github.io/2021/12/04/c++ c4/</id>
+    <published>2021-12-04T13:52:45.000Z</published>
+    <updated>2023-04-21T15:52:28.265Z</updated>
     
     <summary type="html">
     
@@ -148,10 +252,10 @@
   
   <entry>
     <title>(ch3) C++ Basic Features - Operators And Statements</title>
-    <link href="https://NoahBishop.github.io/2021/12/20/c++%20c3/"/>
-    <id>https://NoahBishop.github.io/2021/12/20/c++ c3/</id>
-    <published>2021-12-20T13:52:45.000Z</published>
-    <updated>2023-04-21T09:46:54.638Z</updated>
+    <link href="https://NoahBishop.github.io/2021/12/03/c++%20c3/"/>
+    <id>https://NoahBishop.github.io/2021/12/03/c++ c3/</id>
+    <published>2021-12-03T13:52:45.000Z</published>
+    <updated>2023-04-21T15:52:24.855Z</updated>
     
     <summary type="html">
     
@@ -174,10 +278,10 @@
   
   <entry>
     <title>(ch2) C++ Basic Features - Type</title>
-    <link href="https://NoahBishop.github.io/2021/12/19/c++%20c2/"/>
-    <id>https://NoahBishop.github.io/2021/12/19/c++ c2/</id>
-    <published>2021-12-19T13:52:45.000Z</published>
-    <updated>2023-04-21T08:44:55.709Z</updated>
+    <link href="https://NoahBishop.github.io/2021/12/02/c++%20c2/"/>
+    <id>https://NoahBishop.github.io/2021/12/02/c++ c2/</id>
+    <published>2021-12-02T13:52:45.000Z</published>
+    <updated>2023-04-21T15:52:21.357Z</updated>
     
     <summary type="html">
     
@@ -200,10 +304,10 @@
   
   <entry>
     <title>(ch1) Getting Started C++</title>
-    <link href="https://NoahBishop.github.io/2021/12/18/c++%20c1/"/>
-    <id>https://NoahBishop.github.io/2021/12/18/c++ c1/</id>
-    <published>2021-12-18T13:52:45.000Z</published>
-    <updated>2023-04-21T08:44:49.694Z</updated>
+    <link href="https://NoahBishop.github.io/2021/12/01/c++%20c1/"/>
+    <id>https://NoahBishop.github.io/2021/12/01/c++ c1/</id>
+    <published>2021-12-01T13:52:45.000Z</published>
+    <updated>2023-04-21T16:00:56.416Z</updated>
     
     <summary type="html">
     

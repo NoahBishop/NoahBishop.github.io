@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	
+		<title itemprop="name">
+			
+				(ch9) Copy Control | 
+						うさぎの手帳
+		</title>
+		
+			<link rel="shortcut icon" href="/images/favicon.ico">
+			
+				<meta http-equiv="x-dns-prefetch-control" content="on">
+				<link rel="stylesheet"
+					href="https://fonts.googleapis.com/css?family=Noto+SerifMerriweather|Merriweather+Sans|Source+Code+Pro|Ubuntu:400,700|Noto+Serif+SC"
+					media="all">
+				<link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+				<link rel="stylesheet" id="saukra_css-css" href="/css/style.css" type="text/css" media="all">
+				<link rel="stylesheet" href="/css/lib.min.css" media="all">
+				<link rel="stylesheet" href="/css/font.css" media="all">
+				<link rel="stylesheet" href="/css/insight.css" media="all">
+				<link rel="stylesheet" href="/css/jquery.fancybox.min.css" media="all">
+				<link rel="stylesheet" href="/css/zoom.css" media="all">
+				<link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+				<!--   <link rel="stylesheet" id="saukra_css-css" href="https://2heng.xin/wp-content/cache/autoptimize/css/autoptimize_ad42a61f4c7d4bdd9f91afcff6b5dda5.css
+" type="text/css" media="all"> -->
+				<script>
+					/*Initial Variables*/
+					var mashiro_option = new Object();
+					var mashiro_global = new Object();
+					mashiro_option.NProgressON = true;
+					/* 
+					* 邮箱信息之类的东西可以填在这里，这些js变量基本都作用于sakura-app.js
+					* 这样的设置仅是为了方便在基于PHP开发的主题中设置js变量，既然移植到了Node上，我想或许可以精简这一逻辑吧
+					*/
+					mashiro_option.email_domain = "";
+					mashiro_option.email_name = "";
+					mashiro_option.cookie_version_control = "";
+					mashiro_option.qzone_autocomplete = false;
+					mashiro_option.site_name = "桜荘そのうさぎ";
+					mashiro_option.author_name = "うさぎ";
+					mashiro_option.site_url = "https://morning.eu.org";
+					mashiro_option.v_appId = "EAyicHJhXmxJNEeuhACVujd4-gzGzoHsz";
+					mashiro_option.v_appKey = "09Tjj4It5DOhgboduuM40u7y";
+					mashiro_option.mathjax = "0";
+	//mashiro_option.qq_api_url = "https://api.mashiro.top/qqinfo/";
+	//mashiro_option.qq_avatar_api_url = "https://api.mashiro.top/qqinfo/";
+
+	// mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/moezx/cdn@3.4.5/css/lib.min.css";
+	// mashiro_option.float_player_on = true;
+
+					/*End of Initial Variables*/
+				</script>
+				<script type="text/javascript">
+					var bg = "https://morning.eu.org/images/cover/(1).jpg.webp,https://morning.eu.org/images/cover/(2).jpg.webp,https://morning.eu.org/images/cover/(3).jpg.webp,https://morning.eu.org/images/cover/(4).jpg.webp,https://morning.eu.org/images/cover/(5).jpg.webp,https://morning.eu.org/images/cover/(6).jpg.webp,https://morning.eu.org/images/cover/(7).jpg.webp,https://morning.eu.org/images/cover/(8).jpg.webp".split(",");
+					var bgindex = Math.floor(Math.random() * bg.length);
+					if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
+						alert('朋友，IE浏览器未适配哦~');
+					}
+				</script>
+				<script src="//code.bdstatic.com/npm/leancloud-storage@4.12.0/dist/av-min.js"></script>
+				<script src='//unpkg.com/valine@1.3.9/dist/Valine.min.js'></script>
+				<style type="text/css">
+					.hljs-ln {
+						border-collapse: collapse
+					}
+
+					.hljs-ln td {
+						padding: 0
+					}
+
+					.hljs-ln-n:before {
+						content: attr(data-line-number)
+					}
+				</style>
+				<style type="text/css">
+					.site-top .lower nav {
+						display: block !important;
+					}
+
+					.author-profile i,
+					.post-like a,
+					.post-share .show-share,
+					.sub-text,
+					.we-info a,
+					span.sitename,
+					.post-more i:hover,
+					#pagination a:hover,
+					.post-content a:hover,
+					.float-content i:hover {
+						color: #FE9600
+					}
+
+					.feature i,
+					.download,
+					.navigator i:hover,
+					.links ul li:before,
+					.ar-time i,
+					span.ar-circle,
+					.object,
+					.comment .comment-reply-link,
+					.siren-checkbox-radio:checked+.siren-checkbox-radioInput:after {
+						background: #FE9600
+					}
+
+					::-webkit-scrollbar-thumb {
+						background: #FE9600
+					}
+
+					.download,
+					.navigator i:hover,
+					.link-title,
+					.links ul li:hover,
+					#pagination a:hover,
+					.comment-respond input[type='submit']:hover {
+						border-color: #FE9600
+					}
+
+					.entry-content a:hover,
+					.site-info a:hover,
+					.comment h4 a,
+					#comments-navi a.prev,
+					#comments-navi a.next,
+					.comment h4 a:hover,
+					.site-top ul li a:hover,
+					.entry-title a:hover,
+					#archives-temp h3,
+					span.page-numbers.current,
+					.sorry li a:hover,
+					.site-title a:hover,
+					i.iconfont.js-toggle-search.iconsearch:hover,
+					.comment-respond input[type='submit']:hover {
+						color: #FE9600
+					}
+
+					.comments .comments-main {
+						display: block !important;
+					}
+
+					.comments .comments-hidden {
+						display: none !important;
+					}
+
+					background-position:center center;
+					background-attachment:inherit;
+					}
+				</style>
+<meta name="generator" content="Hexo 5.4.2"></head>
+<body class="page-template page-template-user page-template-page-analytics page-template-userpage-analytics-php page page-id-1297 chinese-font serif isWebKit">
+  <div class="scrollbar" id="bar">
+  </div>
+  <a href="#" class="cd-top faa-float animated"></a>
+  <section id="main-container">
+    <div class="headertop filter-dot">
+  <div id="banner_wave_1"></div>
+  <div id="banner_wave_2"></div>
+  <figure id="centerbg" class="centerbg">
+    <div class="focusinfo no-select">
+      <div class="header-tou">
+        <a target="_blank" rel="noopener" href="https://morning.eu.org">
+          <img src="https://morning.eu.org/images/custom/avatar.jpg">
+        </a>
+      </div>
+      <div class="header-info">
+        <p>
+          Live your life with passion! With some drive!
+        </p>
+        <div class="top-social_v2">
+          <li id="bg-pre">
+            <img class="flipx" src="/images/other/next-b.svg">
+          </li>
+          
+            
+              
+                  <li>
+                    <a href="https://github.com/NoahBishop" target="_blank" class="social-github" title="github">
+                      <img src="https://morning.eu.org/images/social/github.png">
+                    </a>
+                  </li>
+                  
+                    
+              
+                  <li>
+                    <a href="https://t.me/mega1037" target="_blank" class="social-github" title="telegram">
+                      <img src="https://morning.eu.org/images/social/telegram.png">
+                    </a>
+                  </li>
+                  
+                    
+              
+                  <li>
+                    <a href="https://music.163.com/#/user/home?id=305378376" target="_blank" class="social-github" title="netease">
+                      <img src="https://morning.eu.org/images/social/wangyiyun.png">
+                    </a>
+                  </li>
+                  
+                    
+              
+                  <li>
+                    <a href="https://www.twitter.com/noah_bishop_z" target="_blank" class="social-github" title="twitter">
+                      <img src="https://morning.eu.org/images/social/twitter.png">
+                    </a>
+                  </li>
+                  
+                    
+              
+                  <li>
+                    <a href="mailto:beiloquuw@gamil.com" target="_blank" class="social-github" title="email">
+                      <img src="https://morning.eu.org/images/social/email.svg">
+                    </a>
+                  </li>
+                  
+                    
+                      
+                        <li id="bg-next">
+                          <img src="/images/other/next-b.svg">
+                        </li>
+        </div>
+      </div>
+    </div>
+  </figure>
+  <div id="video-container" style="">
+    <video style="object-fit: fill" id="bgvideo" class="video" video-name="" src="" width="auto" preload="auto">
+    </video>
+    <div id="video-btn" class="loadvideo videolive">
+    </div>
+    <div id="video-add">
+    </div>
+    <div class="video-stu">
+    </div>
+  </div>
+  <div class="headertop-down faa-float animated" onclick="headertop_down()">
+    <span>
+      <i class="fa fa-chevron-down" aria-hidden="true">
+      </i>
+    </span>
+  </div>
+</div>
+    <div id="page" class="site wrapper">
+      <header class="site-header no-select gizle sabit" role="banner">
+  <div class="site-top">
+    <div class="site-branding">
+      <span class="site-title">
+        <span class="logolink moe-mashiro">
+          <a href="/">
+            <span class="sakurasono">桜荘その</span>
+            <span class="shironeko">うさぎ</span>
+          </a>
+        </span>
+      </span>
+    </div>
+    <div class="searchbox search-form-submit">
+      <i class="iconfont js-toggle-search iconsearch icon-search">
+      </i>
+    </div>
+    <div id="show-nav" class="showNav mobile-fit">
+      <div class="line line1">
+      </div>
+      <div class="line line2">
+      </div>
+      <div class="line line3">
+      </div>
+    </div>
+    <div class="lower-cantiner">
+      <div class="lower">
+        <nav class="mobile-fit-control hide">
+          <ul id="menu-new" class="menu">
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+                    首页
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+                    归档
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/categories/%E6%8A%80%E6%9C%AF/">
+                          <i class="fa fa-code" aria-hidden="true"></i>
+                          技术
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/%E7%94%9F%E6%B4%BB/">
+                          <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                          生活
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/%E8%B5%84%E6%BA%90/">
+                          <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                          资源
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/%E9%9A%8F%E6%83%B3/">
+                          <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                          随想
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/%E8%BD%AC%E8%BD%BD/">
+                          <i class="fa fa-book" aria-hidden="true"></i>
+                          转载
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/tags/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-tag" aria-hidden="true"></i>
+                    标签
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="javascript:;">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+                    清单
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/music/">
+                          <i class="fa fa-headphones" aria-hidden="true"></i>
+                          歌单
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/comment/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+                    留言板
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/links/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+                    友人帐
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-leaf faa-wrench" aria-hidden="true"></i>
+                    关于
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/about/">
+                          <i class="fa fa-meetup" aria-hidden="true"></i>
+                          我？
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/theme-sakura/">
+                          <i class="fa iconfont icon-sakura" aria-hidden="true"></i>
+                          主题
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/atom.xml">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-rss faa-pulse" aria-hidden="true"></i>
+                    RSS
+                  </span>
+                </a>
+                
+              </li>
+            
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/(1).jpg.webp');" src="" data-src="/images/cover/(1).jpg.webp">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      (ch9) Copy Control</h1>
+      <p class="entry-census">
+        <span>
+          <a href="morning.eu.org">
+            <img src="/images/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="morning.eu.org">Noah</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2021-12-9<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h1 id="Copy-Control"><a href="#Copy-Control" class="headerlink" title="Copy Control"></a>Copy Control</h1><p>As we see in chapter 3, each class defines a new type and defines the operations that objects of that type can perform. In that chapter, we also learned that classes can define constructors, which control what happens when objects of the class type are created.<br>In this chapter we’ll learn how classes can control what happens when objects of the class type are <strong>copied</strong>, <strong>assigned</strong>, <strong>moved</strong>, or <strong>destroyed</strong>. Classes control these actions through special member functions: the copy constructor, move constructor, copy-assignment operator, move-assignment operator, and destructor.</p>
+<h2 id="Copy-Assign-and-Destroy"><a href="#Copy-Assign-and-Destroy" class="headerlink" title="Copy, Assign, and Destroy"></a>Copy, Assign, and Destroy</h2><h3 id="The-Copy-Constructor"><a href="#The-Copy-Constructor" class="headerlink" title="The Copy Constructor"></a>The Copy Constructor</h3><p>A constructor is the copy constructor if its first parameter is a reference to the class type and any additional parameters have default values:</p>
+<pre><code class="c++">class Temp &#123;
+public:
+    Temp() = default; // default constructor
+    Temp(const Temp&amp;);// copy constructor
+&#125;;
+</code></pre>
+<p>For reasons we’ll explain shortly, the first parameter must be a reference type. That parameter is almost always a reference to const, although we can define the copy constructor to take a reference to nonconst. The copy constructor is used implicitly in several circumstances. Hence, the copy constructor usually should not be explicit.</p>
+<p>When we do not define a copy constructor for a class, the compiler synthesizes one for us. Unlike the synthesized default constructor, a copy constructor is synthesized even if we define other constructors. The type of each member determines how that member is copied: Members of class type are copied by the copy constructor for that class; members of built-in type are copied directly. Although we cannot directly copy an array, the synthesized copy constructor copies members of array type by copying each element. Elements of class type are copied by using the elements’ copy constructor. </p>
+<p>As an example, the synthesized copy constructor for our Sales_data class is equivalent to:</p>
+<pre><code class="c++">class Sales_data &#123;
+public:
+    // other members and constructors as before
+    // declaration equivalent to the synthesized copy constructor
+    //copy constructors
+    Sales_data(const Sales_data&amp; org) :
+        bookNo(org.bookNo), units_sold(org.units_sold), revenue(org.revenue) &#123;
+        //empty
+    &#125;
+&#125;
+</code></pre>
+<p>We are now in a position to fully understand the differences between <strong>direct</strong> initialization and <strong>copy</strong> initialization:</p>
+<ol>
+<li>When we use direct initialization, we are asking the compiler to use ordinary function matching to select the constructor that best matches the arguments we provide.</li>
+<li>When we use copy initialization, we are asking the compiler to copy the right-hand operand into the object being created, converting that operand if necessary.</li>
+</ol>
+<p>Copy initialization happens not only when we define variables using an <code>=</code>, but also when we:</p>
+<ol>
+<li>Pass an object as an argument to a parameter of nonreference type</li>
+<li>Return an object from a function that has a nonreference return type</li>
+<li>Brace initialize the elements in an array or the members of an aggregate class</li>
+</ol>
+<p>Some class types also use copy initialization for the objects they allocate. For example, the library <strong>containers</strong> copy initialize their elements when we initialize the container, or when we call an insert or push member. By contrast, elements created by an emplace member are direct initialized.</p>
+<h3 id="The-Copy-Assignment-Operator"><a href="#The-Copy-Assignment-Operator" class="headerlink" title="The Copy-Assignment Operator"></a>The Copy-Assignment Operator</h3><p>As with the copy constructor, the compiler synthesizes a copy-assignment operator if the class does not define its own. Before we look at the synthesized assignment operator, we need to know a bit about overloaded operators, which we cover in detail in next chapter.</p>
+<p>Overloaded operators are functions that have the name operator followed by the symbol for the operator being defined. Hence, the assignment operator is a function named <code>operator=</code>. Like any other function, an operator function has a return type and a parameter list.</p>
+<p>The parameters in an overloaded operator represent the operands of the operator. Some operators, assignment among them, must be defined as member functions. When an operator is a member function, the left-hand operand is bound to the implicit this parameter. The right-hand operand in a binary operator, such as assignment, is passed as an explicit parameter.</p>
+<p>The copy-assignment operator takes an argument of the same type as the class:</p>
+<pre><code class="c++">Temp&amp; operator=(const Temp&amp; org);
+</code></pre>
+<p>To be consistent with assignment for the built-in types, assignment operators usually return a reference to their left-hand operand. It is also worth noting that the library generally requires that types stored in a container have assignment operators that return a reference to the left-hand operand.</p>
+<p>Just as it does for the copy constructor, the compiler generates a synthesized copy-assignment operator for a class if the class does not define its own. Otherwise, it assigns each nonstatic member of the right-hand object to the corresponding member of the left-hand object using the copy-assignment operator for the type of that member. Array members are assigned by assigning each element of the array. The synthesized copy-assignment operator returns a reference to its left-hand object.</p>
+<pre><code class="c++">Temp&amp; Temp::operator=(const Temp&amp; org) &#123;
+    data = org.data + 2;
+    return *this;
+&#125;
+</code></pre>
+<pre><code class="c++">#include&quot;Temp.h&quot;
+
+int main() &#123;
+    Temp p(10); //p.data = 10
+    Temp q = p; //q.data = 11
+    Temp r;
+    r = p;      //r.data = 12
+    return 0;
+&#125;
+</code></pre>
+<h3 id="The-Destructor"><a href="#The-Destructor" class="headerlink" title="The Destructor"></a>The Destructor</h3><p>The destructor operates inversely to the constructors: Constructors initialize the nonstatic data members of an object and may do other work; destructors do whatever work is needed to free the resources used by an object and destroy the nonstatic data members of the object.</p>
+<p>The destructor is a member function with the name of the class prefixed by a tilde <code>~</code>. It has no return value and takes no parameters:</p>
+<pre><code class="c++">class Temp&#123;
+public:
+    ~Temp(); // destructor
+&#125;
+</code></pre>
+<p>Because it takes <strong>no</strong> parameters, it cannot be <strong>overloaded</strong>. There is always only one destructor for a given class.</p>
+<p>Just as a constructor has an initialization part and a function body, a destructor has a function body and a destruction part. In a constructor, members are initialized before the function body is executed, and members are initialized in the same order as they appear in the class. In a destructor, the function body is executed first and then the members are destroyed. Members are destroyed in <strong>reverse order</strong> from the order in which they were initialized.</p>
+<p>The function body of a destructor does whatever operations the class designer wishes to have executed subsequent to the last use of an object. Typically, the destructor frees resources an object allocated during its lifetime.</p>
+<p>In a destructor, there is nothing akin to the constructor initializer list to control how members are destroyed; the destruction part is implicit. What happens when a member is destroyed depends on the type of the member. Members of class type are destroyed by running the member’s own destructor. The built-in types do not have destructors, so nothing is done to destroy members of built-in type.</p>
+<p>The destructor is used automatically whenever an object of its type is destroyed:</p>
+<ol>
+<li>Variables are destroyed when they go out of scope.</li>
+<li>Members of an object are destroyed when the object of which they are a part is destroyed.</li>
+<li>Elements in a container—whether a library container or an array—are destroyed when the container is destroyed.</li>
+<li>Dynamically allocated objects are destroyed when the delete operator is applied to a pointer to the object.</li>
+<li>Temporary objects are destroyed at the end of the full expression in which the temporary was created.</li>
+</ol>
+<h3 id="The-Rule-of-Three-Five"><a href="#The-Rule-of-Three-Five" class="headerlink" title="The Rule of Three/Five"></a>The Rule of Three/Five</h3><p>As we’ve seen, there are three basic operations to control copies of class objects: the copy constructor, copy-assignment operator, and destructor. Moreover, in section 6, under the new standard, a class can also define a move constructor and move-assignment operator.</p>
+<p>There is no requirement that we define all of these operations: We can define one or two of them without having to define all of them. However, ordinarily these operations should be thought of as a unit. In general, it is unusual to need one without needing to define them all.</p>
+<p>One rule of thumb to use when you decide whether a class needs to define its own versions of the copy-control members is to decide first whether the class needs a destructor. Often, the need for a destructor is more obvious than the need for the copy constructor or assignment operator. If the class needs a destructor, it almost surely needs a copy constructor and copy-assignment operator as well.</p>
+<p>As a example, we need allocate allocates dynamic memory to save a string in the class, when we call constructor. We also need free the memory when call destructor.</p>
+<pre><code class="c++">Temp::~Temp() &#123;
+    delete s;
+&#125;
+</code></pre>
+<p>In this version of the class, the memory allocated in the constructor will be freed when a object is destroyed. Unfortunately, we have introduced a serious bug! This version of the class uses the synthesized versions of copy and assignment. Those functions copy the pointer member, meaning that multiple objects may be pointing to the same memory:</p>
+<pre><code class="c++">#pragma once
+#include &lt;string&gt;
+class Temp &#123;
+public:
+    Temp() = default; // default constructor
+    Temp(int num) :data(num), s(new std::string(10, &#39;A&#39;)) &#123;
+
+    &#125;
+
+    ~Temp(); // destructor
+    const int a = 10;
+
+private:
+    int data;
+    std::string* s;
+&#125;;
+Temp::~Temp() &#123;
+    delete s;
+&#125;
+</code></pre>
+<pre><code class="c++">#include&quot;Temp.h&quot;
+
+int main() &#123;
+    Temp p(10); //p-&gt;s = AAAAAAAAAA
+    Temp q = p; //q-&gt;s = AAAAAAAAAA
+    // p.s and q.s point to same address
+    return 0;
+&#125;
+</code></pre>
+<p>This code will delete that pointer twice.</p>
+<p>The second rule of thumb: If a class needs a copy constructor, it almost surely needs a copy-assignment operator. And vice versa—if the class needs an assignment operator, it almost surely needs a copy constructor as well.</p>
+<h3 id="Preventing-Copies"><a href="#Preventing-Copies" class="headerlink" title="Preventing Copies"></a>Preventing Copies</h3><p>Although most classes should (and generally do) define a copy constructor and a copy-assignment operator, for some classes, there really is no sensible meaning for these operations. In such cases, the class must be defined so as to prevent copies or assignments from being made. For example, the iostream classes prevent copying to avoid letting multiple objects write to or read from the same IO buffer. It might seem that we could prevent copies by not defining the copy-control members. However, this strategy doesn’t work: If our class doesn’t define these operations, the compiler will synthesize them.</p>
+<p>Under the new standard, we can prevent copies by defining the copy constructor and copy-assignment operator as deleted functions. A deleted function is one that is declared but may not be used in any other way. We indicate that we want to define a function as deleted by following its parameter list with = delete:</p>
+<pre><code class="c++">#pragma once
+class NoCopy &#123;
+public:
+    NoCopy() = default;
+    ~NoCopy() = default;
+
+    NoCopy(const NoCopy&amp;) = delete; // no copy
+private:
+    int a = 10;
+&#125;;
+</code></pre>
+<p>It is worth noting that we did not delete the destructor. If the destructor is deleted, then there is no way to destroy objects of that type.</p>
+<h2 id="Copy-Control-and-Resource-Management"><a href="#Copy-Control-and-Resource-Management" class="headerlink" title="Copy Control and Resource Management"></a>Copy Control and Resource Management</h2><p>Ordinarily, classes that manage resources that do not reside in the class must define the copy-control members. As we saw in previous, such classes will need destructors to free the resources allocated by the object. Once a class needs a destructor, it almost surely needs a copy constructor and copy-assignment operator as well.</p>
+<p>In order to define these members, we first have to decide what copying an object of our type will mean. In general, we have two choices: We can define the copy operations to make the class behave like a value or like a pointer.</p>
+<p>Classes that behave like values have their own state. When we copy a value like object, the copy and the original are independent of each other. Changes made to the copy have no effect on the original, and vice versa.</p>
+<p>Classes that act like pointers share state. When we copy objects of such classes, the copy and the original use the same underlying data. Changes made to the copy also change the original, and vice versa.</p>
+<p>To illustrate these two approaches, we’ll define the copy-control members for the <code>TestStr</code> class. First, we’ll make the class act like a value; then we’ll reimplement the class making it behave like a pointer.</p>
+<h3 id="Classes-That-Act-Like-Values"><a href="#Classes-That-Act-Like-Values" class="headerlink" title="Classes That Act Like Values"></a>Classes That Act Like Values</h3><p>To provide value like behavior, each object has to have its own copy of the resource that the class manages. That means each <code>TestStr</code> object must have its own copy of the string to which <code>s</code> points. To implement value like behavior <code>TestStr</code> needs:</p>
+<ol>
+<li>A copy constructor that copies the string, not just the pointer</li>
+<li>A destructor to free the string</li>
+<li>A copy-assignment operator to free the object’s existing string and copy the string from its right-hand operand</li>
+</ol>
+<pre><code class="c++">#pragma once
+#include&lt;string&gt;
+class TestStr &#123;
+public:
+    // constructor
+    TestStr(const std::string&amp; os = &quot;&quot;) : s(new std::string(os)) &#123;&#125;
+
+    // copy constructor
+    TestStr(const TestStr&amp; org) :
+        s(new std::string(*(org.s))) &#123;
+        // empty
+    &#125;
+
+    // copy-assignment operator
+    TestStr&amp; operator=(const TestStr&amp; org);
+
+    // destructor
+    ~TestStr() &#123;
+        delete s;
+    &#125;
+
+private:
+    std::string* s;
+&#125;;
+
+TestStr&amp; TestStr::operator=(const TestStr&amp; org) &#123;
+    auto newp = new std::string(*org.s);
+    delete s;
+    s = newp;
+    return *this;
+&#125;
+</code></pre>
+<p>In <code>operator=</code> we write <code>auto newp = new std::string(*org.s);</code> and the <code>s = newp</code>, could we straightforward use <code>s = new std::string(*org.s);</code>, the answer is certainly not. To illustrate the importance of guarding against self-assignment, consider what would happen if run this code:</p>
+<pre><code class="c++">TestStr s;
+s = s;
+</code></pre>
+<p>If there are same object, first free string, and then create a string by a string that has been free.</p>
+<h3 id="Defining-Classes-That-Act-Like-Pointers"><a href="#Defining-Classes-That-Act-Like-Pointers" class="headerlink" title="Defining Classes That Act Like Pointers"></a>Defining Classes That Act Like Pointers</h3><p>For our <code>TestStr</code> class to act like a pointer, we need the copy constructor and copy assignment operator to copy the pointer member, not the string to which that pointer points. Our class will still need its own destructor to free the memory allocated by the constructor that takes a string. In this case, though, the destructor cannot unilaterally free its associated string. It can do so only when the last <code>TestStr</code> pointing to that string goes away.</p>
+<p>The easiest way to make a class act like a pointer is to use <code>shared_ptrs</code> to manage the resources in the class. However, sometimes we want to manage a resource directly. In such cases, it can be useful to use a <strong>reference count</strong>.</p>
+<p>Reference counting works as follows:</p>
+<ol>
+<li>In addition to initializing the object, each constructor (other than the copy constructor) creates a counter. This counter will keep track of how many objects share state with the object we are creating. When we create an object, there is only one such object, so we initialize the counter to 1.</li>
+<li>The copy constructor does not allocate a new counter; instead, it copies the data members of its given object, including the counter. The copy constructor increments this shared counter, indicating that there is another user of that object’s state.</li>
+<li>The destructor decrements the counter, indicating that there is one less user of the shared state. If the count goes to zero, the destructor deletes that state.</li>
+<li>The copy-assignment operator increments the right-hand operand’s counter and decrements the counter of the left-hand operand.</li>
+</ol>
+<p>The only wrinkle is deciding where to put the reference count. The counter cannot be a direct member of a <code>TestStr</code> object. To see why, consider what happens in the following example:</p>
+<pre><code class="c++">TestStr p;
+TestStr q(p);
+TestStr r(p);
+</code></pre>
+<p>If the reference count is stored in each object, how can we update it correctly when <code>r</code> is created? We could increment the count in <code>p</code> and copy that count into <code>r</code>, but how would we update the counter in <code>q</code>?</p>
+<p>One way to solve this problem is to store the counter in dynamic memory. When we create an object, we’ll also allocate a new counter. When we copy or assign an object, we’ll copy the pointer to the counter. That way the copy and the original will point to the same counter.</p>
+<pre><code class="c++">#pragma once
+#include&lt;string&gt;
+
+class TestStr &#123;
+public:
+    // constructor
+    TestStr(const std::string&amp; os = &quot;&quot;)
+        : s(new std::string(os)), counter(new std::size_t(1)) &#123;
+        //empty
+    &#125;
+
+    // copy constructor
+    TestStr(const TestStr&amp; org) :
+        s(org.s), counter(org.counter) &#123;
+        // counter++
+        (*counter)++;
+    &#125;
+
+    // copy-assignment operator
+    TestStr&amp; operator=(const TestStr&amp; org);
+
+    // destructor
+    ~TestStr() &#123;
+        if (--(*counter) == 0) &#123;
+            delete s;
+        &#125;
+    &#125;
+
+private:
+    std::string* s;
+    std::size_t* counter;
+&#125;;
+
+TestStr&amp; TestStr::operator=(const TestStr&amp; org) &#123;
+    // increment the use count of the right-hand operand
+    (*org.counter)++;
+    // if no other users
+    if (--(*counter) == 0) &#123;
+        delete s;
+        delete counter;
+    &#125;
+    // copy data from org into this object
+    s = org.s;
+    counter = org.counter;
+    return *this;
+&#125;
+</code></pre>
+<h2 id="Swap"><a href="#Swap" class="headerlink" title="Swap"></a>Swap</h2><p>In addition to defining the copy-control members, classes that manage resources often also define a function named <code>swap</code>. Defining <code>swap</code> is particularly important for classes that we plan to use with algorithms that <strong>reorder</strong> elements. Such algorithms call swap whenever they need to exchange two elements.</p>
+<pre><code class="c++">#include&lt;iostream&gt;
+
+int main() &#123;
+    int a = 1, b = 2;
+    std::swap(a, b);
+    std::cout &lt;&lt; a &lt;&lt; &quot; &quot; &lt;&lt; b &lt;&lt; std::endl; // 2 1
+    return 0;
+&#125;
+</code></pre>
+<p>If a class defines its own <code>swap</code>, then the algorithm uses that class-specific version. Otherwise, it uses the swap function defined by the library. Although, as usual, we don’t know how swap is implemented, conceptually it’s easy to see that swapping two objects involves a copy and two assignments. For example, code to swap two objects of our value-like TestStr class might look something like:</p>
+<pre><code class="c++">TestStr temp = v1; // make a temporary copy of the value of v1
+v1 = v2;           // assign the value of v2 to v1
+v2 = temp;         // assign the saved value of v1 to v2
+</code></pre>
+<p>In this <code>swap</code> function, we create a temporary copy of the value of v1. Copying a value-like TestStr allocates a new string and copies the string to which the TestStr points. In principle, none of this memory allocation is necessary, we can just do this:</p>
+<pre><code class="c++">string *temp = v1.ps; // make a temporary copy of the pointer in v1.ps
+v1.ps = v2.ps; // assign the pointer in v2.ps to v1.ps
+v2.ps = temp; // assign the saved pointer in v1.ps to v2.ps
+</code></pre>
+<h3 id="Writing-Our-Own-swap-Function"><a href="#Writing-Our-Own-swap-Function" class="headerlink" title="Writing Our Own swap Function"></a>Writing Our Own swap Function</h3><p>We can override the default behavior of swap by defining a version of swap that operates on our class. The typical implementation of swap is:</p>
+<pre><code class="c++">// write in TestStr.h file
+// note in the case wo rename TestStr to TestStr_swap
+class TestStr &#123;
+public:
+    friend void swap(TestStr_swap&amp;, TestStr_swap&amp;);
+    // same as before
+&#125;;
+
+// write in TestStr.cpp file
+void swap(TestStr_swap&amp; p1, TestStr_swap&amp; p2) &#123;
+    std::swap(p1.s, p2.s);
+&#125;
+</code></pre>
+<p>NOTICE: If you use vs2019 create a class, don’t write methods in <code>*.h</code> file, plz write in the corresponding <code>*.cpp</code> file.</p>
+<p>We start by declaring swap as a friend to give it access to TestStr (private) data members. Then the body of swap calls swap on each of the data members of the given object.</p>
+<h3 id="Using-swap-in-Assignment-Operators"><a href="#Using-swap-in-Assignment-Operators" class="headerlink" title="Using swap in Assignment Operators"></a>Using swap in Assignment Operators</h3><p>Classes that define swap often use swap to define their assignment operator. These operators use a technique known as <strong>copy and swap</strong>. This technique swaps the left-hand operand with a copy of the right-hand operand:</p>
+<pre><code class="c++">// note this version pass value rather than reference
+TestStr_swap&amp; TestStr_swap::operator=(TestStr_swap org) &#123;
+    swap(*this, org);
+    return *this;
+&#125;
+</code></pre>
+<p>In the body of the assignment operator, we call <code>swap</code>, which swaps the data members of <code>org</code> with those in <code>*this</code>. Because we pass org by value the org will automatically call its destroy function when this function end.</p>
+<h2 id="A-Copy-Control-Example"><a href="#A-Copy-Control-Example" class="headerlink" title="A Copy-Control Example"></a>A Copy-Control Example</h2><p>Although copy control is most often needed for classes that allocate resources, resource management is not the only reason why a class might need to define these members. Some classes have bookkeeping or other actions that the copy-control members must perform.</p>
+<p>As an example of a class that needs copy control in order to do some bookkeeping, we’ll sketch out two classes that might be used in a mail-handling application. These classes, Message and Folder, represent, respectively, email (or other kinds of) messages, and directories in which a message might appear. Each Message can appear in multiple Folders. However, there will be only one copy of the contents of any given Message. That way, if the contents of a Message are changed, those changes will appear when we view that Message from any of its Folders.</p>
+<p>To keep track of which Messages are in which Folders, each Message will store a set of pointers to the Folders in which it appears, and each Folder will contain a set of pointers to its Messages.</p>
+<p>Our Message class will provide <code>save</code> and <code>remove</code> operations to add or remove a Message from a specified Folder. To create a new Message, we will specify the contents of the message but no Folder. To put a Message in a particular Folder, we must call <code>save</code>.</p>
+<p>When we destroy a Message, that Message no longer exists. Therefore, destroying a Message must remove pointers to that Message from the Folders that had contained that Message.</p>
+<h3 id="The-Message-Class"><a href="#The-Message-Class" class="headerlink" title="The Message Class"></a>The Message Class</h3><pre><code class="c++">// in Message.h
+#pragma once
+#include&lt;string&gt;
+#include&lt;set&gt;
+#include&quot;Folder.h&quot;
+class Folder;
+class Message &#123;
+    friend class Folder;
+public:
+    friend void swap(Message&amp;, Message&amp;);
+    // constructor
+    explicit Message(std::string s = &quot;&quot;) :contents(s) &#123;
+        //empty
+    &#125;
+
+    // copy constructor
+    Message(Message&amp; org);
+
+    // copy assignment
+    Message&amp; operator=(const Message&amp; org);
+
+    // destructor
+    ~Message();
+
+    // add/remove this Message from the specified Folder&#39;s set of messages
+    void save(Folder&amp;);
+    void remove(Folder&amp;);
+
+    // get message
+    std::string&amp; getMsg();
+
+private:
+    std::string contents;
+    std::set&lt;Folder*&gt; folders;
+    // add this Message to the Folders that point to the parameter
+    void add_to_Folders(const Message&amp;);
+    // remove this Message from every Folder in folders
+    void remove_from_Folders();
+&#125;;
+
+
+// in Message.cpp
+#include &quot;Message.h&quot;
+
+Message::Message(Message&amp; org)
+    :contents(org.contents), folders(org.folders) &#123;
+    // add this Message to the Folders that point to org
+    add_to_Folders(org);
+&#125;
+
+Message&amp; Message::operator=(const Message&amp; org) &#123;
+    remove_from_Folders();
+    contents = org.contents;
+    folders = org.folders;
+    add_to_Folders(*this);
+    return *this;
+&#125;
+
+Message::~Message() &#123;
+    // remove message pointer in folder
+    remove_from_Folders();
+&#125;
+
+void Message::save(Folder&amp; f) &#123;
+    // add the given Folder to our list of Folders
+    folders.insert(&amp;f);
+    // add this Message to f&#39;s set of Messages
+    f.addMsg(this);
+&#125;
+
+void Message::remove(Folder&amp; f) &#123;
+    // remove the given Folder from our list of Folders
+    folders.erase(&amp;f);
+    // remove this Message from f&#39;s set of Messages
+    f.remMsg(this);
+&#125;
+
+std::string&amp; Message::getMsg() &#123;
+    return this-&gt;contents;
+&#125;
+
+void Message::add_to_Folders(const Message&amp; org) &#123;
+    for (auto&amp; f : org.folders) &#123;
+        f-&gt;addMsg(this);
+    &#125;
+&#125;
+
+void Message::remove_from_Folders() &#123;
+    for (auto&amp; f : folders) &#123;
+        f-&gt;remMsg(this);
+    &#125;
+&#125;
+
+void swap(Message&amp; m1, Message&amp; m2) &#123;
+    m1.remove_from_Folders();
+    m2.remove_from_Folders();
+
+    std::swap(m1.contents, m2.contents);
+    std::swap(m1.folders, m2.folders);
+
+    m1.add_to_Folders(m1);
+    m2.add_to_Folders(m2);
+&#125;
+</code></pre>
+<h3 id="The-Folder-class"><a href="#The-Folder-class" class="headerlink" title="The Folder class"></a>The Folder class</h3><pre><code class="c++">// in  Folder.h
+#pragma once
+#include&lt;set&gt;
+#include&quot;Message.h&quot;
+#include&lt;iostream&gt;
+class Message;
+class Folder &#123;
+    friend class Message;
+    friend void listall(Folder&amp; f);
+public:
+    Folder() = default;
+    ~Folder();
+
+private:
+    std::set&lt;Message*&gt; messages;
+
+    // add and remove message to folder
+    void addMsg(Message*);
+    void remMsg(Message*);
+&#125;;
+
+
+// in Folder.cpp
+#include &quot;Folder.h&quot;
+
+Folder::~Folder() &#123;
+
+&#125;
+
+void Folder::addMsg(Message* m) &#123;
+    messages.insert(m);
+&#125;
+
+void Folder::remMsg(Message* m) &#123;
+    messages.erase(m);
+&#125;
+
+void listall(Folder&amp; f) &#123;
+    for (auto&amp; m : f.messages) &#123;
+        std::cout &lt;&lt; m-&gt;getMsg() &lt;&lt; &quot; &quot;;
+    &#125;
+    std::cout &lt;&lt; std::endl;
+&#125;
+</code></pre>
+<h2 id="Classes-That-Manage-Dynamic-Memory"><a href="#Classes-That-Manage-Dynamic-Memory" class="headerlink" title="Classes That Manage Dynamic Memory"></a>Classes That Manage Dynamic Memory</h2><p>Some classes need to allocate a varying amount of storage at run time. Such classes often can (and if they can, generally should) use a library container to hold their data. For example, our <code>StrBlob</code> class uses a <code>vector</code> to manage the underlying storage for its elements. </p>
+<p>However, this strategy does not work for every class; some classes need to do their own allocation. Such classes generally must define their own copy-control members to manage the memory they allocate.</p>
+<p>As an example, we’ll implement a simplification of the library vector class. Among the simplifications we’ll make is that our class will not be a template. Instead, our class will hold <code>strings</code>. Thus, we’ll call our class <code>StrVec</code>.</p>
+<h3 id="Class-StrVec-design"><a href="#Class-StrVec-design" class="headerlink" title="Class StrVec design"></a>Class StrVec design</h3><p>Recall that the vector class stores its elements in contiguous storage. To obtain acceptable performance, vector pre-allocates enough storage to hold more elements than are needed. Each vector member that adds elements checks whether there is space available for another element. If so, the member constructs an object in the next available spot. If there isn’t space left, then the vector is reallocated: The vector obtains new space, moves the existing elements into that space, frees the old space, and adds the new element.</p>
+<p>Each <code>StrVec</code> will have <strong>three</strong> pointers into the space it uses for its elements:</p>
+<ol>
+<li>elements, which points to the first element in the allocated memory</li>
+<li>first_free, which points just after the last actual element</li>
+<li>cap, which points just past the end of the allocated memory</li>
+</ol>
+<p>In addition to these pointers, <code>StrVec</code> will have a member named <code>alloc</code> that is an <code>allocator&lt;string&gt;</code>. The <code>alloc</code> member will allocate the memory used by a <code>StrVec</code>. Our class will also have four utility functions:</p>
+<ol>
+<li><code>alloc_n_copy</code> will allocate space and copy a given range of elements.</li>
+<li><code>free</code> will destroy the constructed elements and deallocate the space.</li>
+<li><code>chk_n_alloc</code> will ensure that there is room to add at least one more element to the <code>StrVec</code>.</li>
+<li><code>reallocate</code> will reallocate the <code>StrVec</code> when it runs out of space.</li>
+</ol>
+<h3 id="Key-the-reallocate-implement"><a href="#Key-the-reallocate-implement" class="headerlink" title="Key: the reallocate implement"></a>Key: the reallocate implement</h3><p>Before we write the reallocate member, we should think a bit about what it must do. This function will</p>
+<ol>
+<li>Allocate memory for a new, larger array of strings</li>
+<li>Construct the first part of that space to hold the existing elements</li>
+<li>Destroy the elements in the existing memory and deallocate that memory</li>
+</ol>
+<p>Copying the data in these strings is unnecessary. Our <code>StrVec</code> performance will be much better if we can avoid the overhead of allocating and deallocating the strings themselves each time we reallocate.</p>
+<p>We can avoid copying the strings by using two facilities introduced by the new library. First, several of the library classes, including string, define so-called “<code>move constructors</code>”. For string, we can imagine that<br>each string has a pointer to an array of char. Presumably the string move constructor copies the pointer rather than allocating space for and copying the characters themselves. The second facility we’ll use is a library function named <code>move</code>, which is defined in the utility <code>header</code>.</p>
+<h3 id="Class-definition-and-check"><a href="#Class-definition-and-check" class="headerlink" title="Class definition and check"></a>Class definition and check</h3><pre><code class="c++">// in StrVec.h file
+#pragma once
+#include&lt;memory&gt;
+#include&lt;string&gt;
+class StrVec &#123;
+public:
+    StrVec() :elements(nullptr), first_free(nullptr), cap(nullptr) &#123;
+        //empty
+    &#125;
+    StrVec(const StrVec&amp;);
+    StrVec&amp; operator=(const StrVec&amp;);
+    ~StrVec();
+
+    void push_back(std::string&amp;);
+    size_t size();
+    size_t capacity();
+    std::string* begin() const;
+    std::string* end() const;
+
+    std::string&amp; at(size_t idx);
+
+private:
+    // private methods
+    void free();
+    void chk_n_alloc();
+    void reallocate();
+    std::pair&lt; std::string*, std::string*&gt; alloc_n_copy(std::string*, std::string*);
+
+    // private attributes
+    std::allocator&lt;std::string&gt; alloc;
+    std::string* elements;
+    std::string* first_free;
+    std::string* cap;
+&#125;;
+</code></pre>
+<pre><code class="c++">// in StrVec.cpp file
+#include &quot;StrVec.h&quot;
+
+StrVec::StrVec(const StrVec&amp; v) &#123;
+    auto newdata = alloc_n_copy(v.begin(), v.end());
+    elements = newdata.first;
+    first_free = cap = newdata.second;
+&#125;
+
+StrVec&amp; StrVec::operator=(const StrVec&amp; v) &#123;
+    auto newdata = alloc_n_copy(v.begin(), v.end());
+    free();
+    elements = newdata.first;
+    first_free = cap = newdata.second;
+    return *this;
+&#125;
+
+StrVec::~StrVec() &#123;
+    free();
+&#125;
+
+void StrVec::push_back(std::string&amp; s) &#123;
+    chk_n_alloc();
+    alloc.construct(first_free++, s);
+&#125;
+
+size_t StrVec::size() &#123;
+    return first_free - elements;
+&#125;
+
+size_t StrVec::capacity() &#123;
+    return cap - elements;
+&#125;
+
+std::string* StrVec::begin() const &#123;
+    return elements;
+&#125;
+
+std::string* StrVec::end() const &#123;
+    return first_free;
+&#125;
+
+std::string&amp; StrVec::at(size_t idx) &#123;
+    return *(elements + idx);
+&#125;
+
+void StrVec::free() &#123;
+    if (elements) &#123;
+        alloc.deallocate(elements, cap - elements);
+    &#125;
+&#125;
+
+void StrVec::chk_n_alloc() &#123;
+    if (size() == capacity()) &#123;
+        reallocate();
+    &#125;
+&#125;
+
+void StrVec::reallocate() &#123;
+    auto newcap = size() ? 2 * size() : 1;
+    auto newdata = alloc.allocate(newcap);
+    auto dest = newdata, org = elements;
+    for (auto i = 0; i != size(); i++) &#123;
+        alloc.construct(dest++, std::move(*org++));
+    &#125;
+    free();
+    elements = newdata;
+    cap = elements + newcap;
+    first_free = dest;
+&#125;
+
+std::pair&lt;std::string*, std::string*&gt; StrVec::alloc_n_copy(std::string* b, std::string* e) &#123;
+    auto data = alloc.allocate(e - b);
+    return &#123; data, std::uninitialized_copy(b,e,data) &#125;;
+&#125;
+</code></pre>
+<pre><code class="c++">#include&lt;iostream&gt;
+#include&quot;StrVec.h&quot;
+#include&lt;string&gt;
+
+void check(StrVec&amp; m) &#123;
+    for (size_t i = 0; i &lt; m.size(); i++) &#123;
+        std::cout &lt;&lt; m.at(i) &lt;&lt; std::endl;
+    &#125;
+    std::cout &lt;&lt; &quot;size: &quot; &lt;&lt; m.size() &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;cap: &quot; &lt;&lt; m.capacity() &lt;&lt; std::endl;
+&#125;
+
+int main() &#123;
+    StrVec m1;
+    for (size_t i = 0; i &lt; 5; i++) &#123;
+        std::string s = std::to_string(i);
+        m1.push_back(s);
+    &#125;
+    StrVec m2;
+    m2 = m1;
+    StrVec m3(m1);
+
+    check(m1);
+    check(m2);
+    check(m3);
+    return 0;
+&#125;
+</code></pre>
+<h2 id="Moving-Objects"><a href="#Moving-Objects" class="headerlink" title="Moving Objects"></a>Moving Objects</h2><p>One of the major features in the new standard is the ability to move rather than copy an object. Copies are made in many circumstances. In some of these circumstances, an object is immediately destroyed after it is copied. In those cases, moving, rather than copying, the object can provide a significant performance boost.</p>
+<h3 id="Rvalue-References"><a href="#Rvalue-References" class="headerlink" title="Rvalue References"></a>Rvalue References</h3><p>To support move operations, the new standard introduced a new kind of reference, an <code>rvalue</code> reference. An <code>rvalue</code> reference is a reference that must be bound to an <code>rvalue</code>. An <code>rvalue</code> reference is obtained by using <code>&amp;&amp;</code> rather than <code>&amp;</code>. As we’ll see, <code>rvalue</code> references have the important property that they may be bound only to <strong>an object that is about to be destroyed</strong>. As a result, we are free to “<code>move</code>” resources from an <code>rvalue</code> reference to another object.</p>
+<p>Like any reference, an rvalue reference is just another name for an object. As we know, we cannot bind regular references—which we’ll refer to as lvalue references when we need to distinguish them from rvalue references—to expressions that require a conversion, to literals, or to expressions that return an rvalue.</p>
+<pre><code class="c++">int i = 42;
+int &amp;r = i; // ok: r refers to i
+int &amp;&amp;rr = i; // error: cannot bind an rvalue reference to an lvalue
+int &amp;r2 = i * 42; // error: i * 42 is an rvalue
+const int &amp;r3 = i * 42; // ok: we can bind a reference to const to an rvalue
+int &amp;&amp;rr2 = i * 42; // ok: bind rr2 to the result of the multiplication
+</code></pre>
+<p>Looking at the list of lvalue and rvalue expressions, it should be clear that lvalues and rvalues differ from each other in an important manner: Lvalues have persistent state, whereas rvalues are either literals or temporary objects created in the course of evaluating expressions.</p>
+<p>Because rvalue references can only be bound to temporaries, we know that:</p>
+<ol>
+<li>The referred-to object is about to be destoryed</li>
+<li>There can be no other users of that object</li>
+</ol>
+<p>Although we rarely think about it this way, a variable is <strong>an expression with one operand and no operator.</strong> Like any other expression, a variable expression has the lvalue/rvalue property. Variable expressions are lvalues. It may be surprising, but as a consequence, we cannot bind an rvalue reference to a variable defined as an rvalue reference type:</p>
+<pre><code class="c++">int &amp;&amp;rr1 = 42; // ok: literals are rvalues
+int &amp;&amp;rr2 = rr1; // error: the expression rr1 is an lvalue!
+</code></pre>
+<p>Given our previous observation that rvalues represent ephemeral objects, it should not be surprising that a variable is an lvalue. After all, a variable persists <strong>until it goes out of scope</strong>.</p>
+<p>Although we cannot directly bind an rvalue reference to an lvalue, we can explicitly cast an lvalue to its corresponding rvalue reference type. We can also obtain an rvalue reference bound to an lvalue by calling a new library function named move, which is defined in the <code>utility</code> header.</p>
+<p>Calling <code>move</code> tells the compiler that we have an lvalue that we want to treat as if it were an rvalue. It is essential to realize that the call to move promises that <strong>we do not intend to use rr1 again</strong> except to assign to it or to destroy it. After a call to move, we cannot make any assumptions about the value of the moved-from object.</p>
+<pre><code class="c++">int &amp;&amp;rr3 = std::move(rr1); // ok
+</code></pre>
+<h3 id="Move-Constructor-and-Move-Assignment"><a href="#Move-Constructor-and-Move-Assignment" class="headerlink" title="Move Constructor and Move Assignment"></a>Move Constructor and Move Assignment</h3><p>Like the string class (and other library classes), our own classes can benefit from being able to be moved as well as copied. To enable move operations for our own types, we define a move constructor and a move-assignment operator. These members are similar to the corresponding copy operations, but they “steal” resources from their given object rather than copy them.</p>
+<p>In addition to moving resources, the move constructor must ensure that the moved from object is left in a state such that destroying that object will be harmless. In particular, once its resources are moved, the original object must no longer point to those moved resources—responsibility for those resources has been assumed by the newly created object.</p>
+<p>As an example, we’ll define the <code>StrVec</code> move constructor to move rather than copy the elements from one <code>StrVec</code> to another:</p>
+<pre><code class="c++">StrVec::StrVec(StrVec&amp;&amp; v)
+    :elements(v.elements), first_free(v.first_free), cap(v.cap) &#123;
+    v.elements = v.first_free = v.cap = nullptr;
+&#125;
+</code></pre>
+<p>Unlike the copy constructor, the move constructor does not allocate any new memory; it takes over the memory in the given <code>StrVec</code>. Having taken over the memory from its argument, the constructor body sets the pointers in the given object to <code>nullptr</code>.</p>
+<p>Because a move operation executes by “stealing” resources, it ordinarily does not itself allocate any resources. As a result, move operations ordinarily will not throw any exceptions. When we write a move operation that cannot throw, we should inform the library of that fact. As we’ll see, unless the library knows that our move constructor won’t throw, it will do extra work to cater to the possibility that moving an object of our class type might throw. One way inform the library is to specify <code>noexcept</code> on our constructor.</p>
+<p>Understanding why <code>noexcept</code> is needed can help deepen our understanding of how the library <strong>interacts</strong> with objects of the types we write. We need to indicate that a move operation doesn’t throw because of two interrelated facts: </p>
+<ol>
+<li>First, although move operations usually don’t throw exceptions, they are permitted to do so.</li>
+<li>Second, the library containers provide guarantees as to what they do if an exception happens. As one example, vector guarantees that if an exception happens when we call push_back, the vector itself will be left unchanged.</li>
+</ol>
+<p>As we’ve just seen, moving an object generally changes the value of the moved from object. If reallocation uses a move constructor and that constructor throws an <code>exception</code> after moving some but not all of the elements, there would be a problem. The moved-from elements in the old space would have been changed, and the unconstructed elements in the new space would not yet exist. In this case, vector would be unable to meet its requirement that the vector is left unchanged.</p>
+<p>The <code>move-assignment operator</code> does the same work as the destructor and the move constructor. As with the move constructor, if our move-assignment operator won’t throw any exceptions, we should make it <code>noexcept</code>. Like a copy-assignment operator, a move-assignment operator must guard against self-assignment:</p>
+<pre><code class="c++">StrVec&amp; StrVec::operator=(StrVec&amp;&amp; org) noexcept &#123;
+    if (this != &amp;org) &#123;
+        free();
+        elements = org.elements;
+        first_free = org.first_free;
+        cap = org.cap;
+        org.elements = org.first_free = org.cap = nullptr;
+    &#125;
+    return *this;
+&#125;
+</code></pre>
+<p>As it does for the copy constructor and copy-assignment operator, the compiler will synthesize the move constructor and move-assignment operator. However, the conditions under which it <strong>synthesizes a move operation</strong> are quite different from those in which it synthesizes a copy operation.</p>
+<p>The <code>reallocate</code> member of <code>StrVec</code> used a for loop to call construct to copy the elements from the old memory to the new. As an alternative to writing that loop, it would be easier if we could call <code>uninitialized_copy</code> to construct the newly allocated space. However, <code>uninitialized_copy</code> does what it says: It <strong>copies</strong> the elements. There is no analogous library function to “<code>move</code>” objects into unconstructed memory.</p>
+<p>Instead, the new library defines a <code>move iterator adaptor</code>. A move iterator adapts its given iterator by changing the behavior of the iterator’s dereference operator. Ordinarily, an iterator dereference operator returns an <code>lvalue</code> reference to the element. Unlike other iterators, the dereference operator of a move iterator yields an <code>rvalue</code> reference.</p>
+<pre><code class="c++">void StrVec::reallocate() &#123;
+    auto newcap = size() ? 2 * size() : 1;
+    auto first = alloc.allocate(newcap);
+    auto last = uninitialized_copy(make_move_iterator(begin()), make_move_iterator(end()), first);
+    free();
+    elements = first;
+    cap = elements + newcap;
+    first_free = last;
+&#125;
+</code></pre>
+<h3 id="Rvalue-References-and-Member-Functions"><a href="#Rvalue-References-and-Member-Functions" class="headerlink" title="Rvalue References and Member Functions"></a>Rvalue References and Member Functions</h3><p>Member functions other than constructors and assignment can benefit from providing both copy and move versions. Such move-enabled members typically use the same parameter pattern as the copy/move constructor and the assignment operators—one version takes an lvalue reference to const, and the second takes an rvalue reference to nonconst.</p>
+<p>For example, the library containers that define push_back provide two versions: one that has an rvalue reference parameter and the other a const lvalue reference. Assuming X is the element type, these containers define:</p>
+<pre><code class="c++">void push_back(const X&amp;); // copy: binds to any kind of X
+void push_back(X&amp;&amp;); // move: binds only to modifiable rvalues of type X
+</code></pre>
+<p>Note in our test program, first use <code>std::string s = std::to_string(i);</code> and then <code>m1.push_back(s);</code>. after we write this version of <code>push_back</code> that parameter is a <code>rvalue</code>. We can abbreviation previous two statements to <code>m1.push_back(std::to_string(i));</code>.</p>
+<pre><code class="c++">void StrVec::push_back(std::string&amp;&amp; s) &#123;
+    chk_n_alloc();
+    alloc.construct(first_free++, std::move(s));
+&#125;
+</code></pre>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://morning.eu.org/images/custom/donate/404.jpg"></li>
+                <li class="wechat-code"><img src="https://morning.eu.org/images/custom/donate/404.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2021/12/10/c++%20c10/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="" data-src="/images/cover/(2).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/(2).jpg.webp">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                (ch10) Overloaded Operations and Conversions</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2021/12/08/c++%20c8/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="" data-src="/images/cover/(8).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/(8).jpg.webp">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                (ch8) Dynamic Memory</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+	window.onload = function(){
+		var valine = new Valine();
+		valine.init({
+			el: '#vcomments',
+			appId: "EAyicHJhXmxJNEeuhACVujd4-gzGzoHsz",
+			appKey: "09Tjj4It5DOhgboduuM40u7y",
+			avatar: 'wavatar',
+			path: window.location.pathname,
+			placeholder: "有什么想说的吗.."
+		})
+	}
+</script>
+
+
+
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="morning.eu.org" class="profile gravatar"><img src="/images/custom/avatar.jpg" itemprop="image" alt="Noah" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="morning.eu.org" itemprop="url" rel="author">Noah</a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i>life is perfact</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
+</div>
+
+
+
+    </div>    
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            // PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+    <!-- <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Noah Bishop<br>
+      powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer> -->
+<footer id="colophon" class="site-footer" role="contentinfo">
+  <div class="site-info">
+    <div class="footertext">
+      <div class="img-preload">
+        <img src="https://morning.eu.org/images/other/wordpress-rotating-ball-o.svg">
+        <img src="https://morning.eu.org/images/other/disqus-preloader.svg">
+      </div>
+      <p style="color: #666666;">&copy 2019-2023</p>
+    </div>
+    <div class="footer-device">
+      <p style="font-family: 'Ubuntu', sans-serif;">
+        <span style="color: #b9b9b9;">Theme <a href="https://github.com/honjun/hexo-theme-sakura" target="_blank"
+            style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Sakura</a> <i
+            class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i> by <a
+            href="https://2heng.xin/" target="_blank"
+            style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Mashiro</a>&<a
+            href="https://www.hojun.cn/" target="_blank"
+            style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Hojun</a>, Powered by Hexo,
+          Hosted by Coding Pages</a>
+        </span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+
+<!-- <script src="/js/tocbot.js"></script> -->
+<script type="text/javascript" src="/js/lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/InsightSearch.js"></script>
+<script type="text/javascript" src="/js/jquery.fancybox.min.js"></script>
+<script type="text/javascript" src="/js/zoom.min.js"></script>
+<script type="text/javascript" src="/js/sakura-app.js"></script>
+<script src="/js/botui.js"></script>
+<!-- 不蒜子 网页计数器 -->
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script> -->
+<script type="text/javascript">
+  /* <![CDATA[ */
+  if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+    var Poi = { "pjax": "1", "movies": { "url": "", "name": "", "live": "close" }, "windowheight": "fixed", "codelamp": "close", "ajaxurl": "", "order": "asc", "formpostion": "bottom" };
+  } else {
+    var Poi = { "pjax": "1", "movies": { "url": "", "name": "", "live": "open" }, "windowheight": "auto", "codelamp": "close", "ajaxurl": "", "order": "asc", "formpostion": "bottom" };
+  }
+/* ]]> */
+
+</script>
+<script>
+  $(document).ready(function () {
+    if ($(".toc").length > 0 && document.body.clientWidth > 1200) {
+      if ($(".pattern-center").length > 0) { //有图的情况
+        tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -400,
+          scrollSmoothOffset: -85
+        });
+      } else {
+        tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -85,
+          scrollSmoothOffset: -85
+        });
+      }
+      var offsetTop = $('.toc').offset().top - 95;
+      window.onscroll = function () {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+        if (scrollTop >= offsetTop) {
+          $('.toc').addClass('toc-fixed');
+        } else {
+          $('.toc').removeClass('toc-fixed');
+        }
+      }
+    }
+  });
+</script>
+    <div class="openNav no-select" style="height: 50px;">
+      <div class="iconflat no-select" style="width: 50px; height: 50px;">
+        <div class="icon"></div>
+      </div>
+      <div class="site-branding search-form-submit">
+        <i class="iconfont js-toggle-search iconsearch icon-search"></i>
+      </div>
+    </div>
+  </section>
+  <div id="mo-nav" class="">
+  <div class="m-avatar">
+    <img src="https://morning.eu.org/images/custom/avatar.jpg">
+  </div>
+  <p style="text-align: center; color: #333; font-weight: 900; font-family: 'Ubuntu', sans-serif; letter-spacing: 1.5px">桜荘そのうさぎ</p>
+  <p style="text-align: center; word-spacing: 20px;">
+    
+      
+        <a href="https://github.com/NoahBishop" class="fa fa-github" target="_blank" style="color: #333; margin-left:20px"></a>
+      
+        <a href="https://t.me/mega1037" class="fa fa-telegram" target="_blank" style="color: #25c6fe; margin-left:20px"></a>
+      
+        <a href="https://mailto:beiloquuw@gamil.com" class="fa fa-google" target="_blank" style="color: #dd4b39; margin-left:20px"></a>
+      
+    
+  </p>
+  <ul id="menu-new-1" class="menu">
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+            首页
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/archives">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+            归档
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/categories/%E6%8A%80%E6%9C%AF/">
+                  <i class="fa fa-code" aria-hidden="true"></i>
+                  技术
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/%E7%94%9F%E6%B4%BB/">
+                  <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                  生活
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/%E8%B5%84%E6%BA%90/">
+                  <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                  资源
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/%E9%9A%8F%E6%83%B3/">
+                  <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                  随想
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/%E8%BD%AC%E8%BD%BD/">
+                  <i class="fa fa-book" aria-hidden="true"></i>
+                  转载
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/tags/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-tag" aria-hidden="true"></i>
+            标签
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="javascript:;">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+            清单
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/music/">
+                  <i class="fa fa-headphones" aria-hidden="true"></i>
+                  歌单
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/comment/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+            留言板
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/links/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+            友人帐
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-leaf faa-wrench" aria-hidden="true"></i>
+            关于
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/about/">
+                  <i class="fa fa-meetup" aria-hidden="true"></i>
+                  我？
+                </a>
+              </li>
+            
+              <li>
+                <a href="/theme-sakura/">
+                  <i class="fa iconfont icon-sakura" aria-hidden="true"></i>
+                  主题
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/atom.xml">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-rss faa-pulse" aria-hidden="true"></i>
+            RSS
+          </span>
+        </a>
+        
+      </li>
+    
+  </ul>
+  <p style="text-align: center; font-size: 13px; color: #b9b9b9;">&copy 2019 hexo-sakura</p>
+</div>
+<button onclick="topFunction()" class="mobile-cd-top" id="moblieGoTop" title="Go to top" style="display: none;"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<style>
+  .aplayer .aplayer-lrc {
+    height: 35px;
+  }
+  .aplayer .aplayer-lrc p{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18px !important;
+  }
+  .aplayer .aplayer-lrc p.aplayer-lrc-current{
+    color: #FF1493;
+  }
+  .aplayer.aplayer-narrow .aplayer-body{
+    left: -66px !important;
+  }
+  .aplayer.aplayer-fixed .aplayer-lrc {
+    display: none;
+  }
+  .aplayer .aplayer-lrc.aplayer-lrc-hide {
+      display:none !important;
+  }
+  .aplayer.aplayer-fixed .lrc-show {
+    display: block;
+    background: rgba(255, 255, 255, 0.8);
+  }
+</style>
+<meting-js
+
+    id="7225712775"
+
+    server="netease"
+
+    type="playlist"
+
+    fixed="true"
+
+    autoplay="true"
+
+    loop="all"
+
+    order="random"
+
+    preload="auto"
+
+    volume="0.5"
+
+    mutex="true"
+
+</meting-js>
+<script>
+  $(function(){
+    $('body').on('click', '.aplayer', function(){
+      if($('.aplayer-button').hasClass('aplayer-play')) {
+        $('.aplayer-lrc').removeClass('lrc-show');
+      } else {
+        $('.aplayer-lrc').addClass('lrc-show');
+      }
+    })
+  });
+</script>
+</body>
+</html>
