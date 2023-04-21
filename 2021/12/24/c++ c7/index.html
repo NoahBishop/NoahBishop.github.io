@@ -329,6 +329,16 @@
               </li>
             
               <li>
+                <a href="/tags/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-tag" aria-hidden="true"></i>
+                    标签
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
                 <a href="javascript:;">
                   <span class="faa-parent animated-hover">
                     <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
@@ -364,16 +374,6 @@
                   <span class="faa-parent animated-hover">
                     <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
                     友人帐
-                  </span>
-                </a>
-                
-              </li>
-            
-              <li>
-                <a href="/donate/">
-                  <span class="faa-parent animated-hover">
-                    <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
-                    赞赏
                   </span>
                 </a>
                 
@@ -507,27 +507,27 @@
 </table>
 <h2 id="Using-an-Associative-Container"><a href="#Using-an-Associative-Container" class="headerlink" title="Using an Associative Container"></a>Using an Associative Container</h2><h3 id="Using-a-map"><a href="#Using-a-map" class="headerlink" title="Using a map"></a>Using a map</h3><p>A classic example that relies on associative arrays is a word-counting program, this program reads its input and reports how often each word appears.</p>
 <pre><code class="c++">//read word from istream, when word is EOF end read
-int read_word(istream&amp; in, string&amp; word) {
+int read_word(istream&amp; in, string&amp; word) &#123;
  in &gt;&gt; word;
- if (word == (&quot;EOF&quot;)) {
+ if (word == (&quot;EOF&quot;)) &#123;
   return 0;
- }
+ &#125;
  return 1;
-}
+&#125;
 
-int main() {
+int main() &#123;
  // count the number of times each word occurs in the input
  map&lt;string, size_t&gt; count_words;
  string word;
- while (read_word(cin, word)) {
+ while (read_word(cin, word)) &#123;
   ++count_words[word];
- }
+ &#125;
  //in vs2019 type rfor can autofill for range
- for (const auto&amp; w : count_words) {
+ for (const auto&amp; w : count_words) &#123;
   cout &lt;&lt; w.first &lt;&lt; &quot; appear &quot; &lt;&lt; w.second &lt;&lt; &quot; times.&quot; &lt;&lt; endl;
- }
+ &#125;
  return 0;
-}
+&#125;
 //C++
 //java
 //C++
@@ -541,29 +541,29 @@ int main() {
 <h3 id="Using-a-set"><a href="#Using-a-set" class="headerlink" title="Using a set"></a>Using a set</h3><p>As a example, suppose some words we want exclude when count word, we can use a set to save the words need to exclude.</p>
 <pre><code class="C++">//SAME------
 //save exclude word
-while (read_word(cin, word)) {
+while (read_word(cin, word)) &#123;
  exclude.insert(word);
-}
+&#125;
 //count word
-while (read_word(cin, word)) {
+while (read_word(cin, word)) &#123;
  if (exclude.find(word) == exclude.end())
   ++count_words[word];
-}
+&#125;
 //SAME------
 </code></pre>
 <p>Like the other containers, set is a <code>template</code>. To define a set, we specify the type of its elements, which in this case are <code>string</code>.</p>
 <h2 id="Overview-of-the-Associative-Containers"><a href="#Overview-of-the-Associative-Containers" class="headerlink" title="Overview of the Associative Containers"></a>Overview of the Associative Containers</h2><p>Associative containers (both ordered and unordered) support the general container operations covered in previous chapter table. However, the associative containers do not support the sequential-container position-specific operations, such as <code>push_front</code> or <code>back</code>.</p>
 <h3 id="Defining-an-Associative-Container"><a href="#Defining-an-Associative-Container" class="headerlink" title="Defining an Associative Container"></a>Defining an Associative Container</h3><p>As we’ve just seen, when we define a map, we must indicate both the key and value type; when we define a set, we specify only a key type, because there is no value type. Each of the associative containers defines a default constructor, which creates an empty container of the specified type. We can also initialize an associative container as a copy of another container of the same type or from a range of values, so long as those values can be converted to the type of the container. Under the new standard, we can also list initialize the elements:</p>
-<pre><code class="c++">map&lt;string, size_t&gt; count_words = { {&quot;hello&quot;,3} };
-set&lt;string&gt; exclude = { &quot;c++&quot;,&quot;Java&quot; };
+<pre><code class="c++">map&lt;string, size_t&gt; count_words = &#123; &#123;&quot;hello&quot;,3&#125; &#125;;
+set&lt;string&gt; exclude = &#123; &quot;c++&quot;,&quot;Java&quot; &#125;;
 </code></pre>
 <p>The keys in a <code>map</code> or a <code>set</code> must be <strong>unique</strong>; there can be only one element with a given key. The <code>multimap</code> and <code>multiset</code> containers have no such restriction; there can be several elements with the same key. For example, the map we used to count words must have only one element per given word. On the other hand, a dictionary could have several definitions associated with a particular word.</p>
 <pre><code class="c++">// define a vector with 20 elements, holding two copies of each number from 0 to 9
 vector&lt;int&gt; ivec;
-for (vector&lt;int&gt;::size_type i = 0; i != 10; ++i) {
+for (vector&lt;int&gt;::size_type i = 0; i != 10; ++i) &#123;
  ivec.push_back(i);
  ivec.push_back(i); // duplicate copies of each number
-}
+&#125;
 // iset holds unique elements from ivec; miset holds all 20 elements
 set&lt;int&gt; iset(ivec.cbegin(), ivec.cend());
 multiset&lt;int&gt; miset(ivec.cbegin(), ivec.cend());
@@ -578,19 +578,19 @@ pair&lt;string, size_t&gt; word_count; // holds a string and an size_t
 pair&lt;string, vector&lt;int&gt;&gt; line; // holds string and vector&lt;int&gt;
 </code></pre>
 <p>We can also provide initializers for each member:</p>
-<pre><code class="c++">pair&lt;string, string&gt; author{&quot;James&quot;, &quot;Joyce&quot;};
+<pre><code class="c++">pair&lt;string, string&gt; author&#123;&quot;James&quot;, &quot;Joyce&quot;&#125;;
 </code></pre>
 <p>Unlike other library types, the data members of pair are public. These members are named first and second, respectively.</p>
 <pre><code class="c++">cout &lt;&lt;author.first&lt;&lt;author.second &lt;&lt; endl;
 </code></pre>
 <p>Imagine we have a function that needs to return a <code>pair</code>. Under the new standard we can list initialize the return value:</p>
-<pre><code class="c++">pair&lt;string, int&gt; process(vector&lt;string&gt;&amp; v) {
+<pre><code class="c++">pair&lt;string, int&gt; process(vector&lt;string&gt;&amp; v) &#123;
  // process v
  if (!v.empty())
-  return { v.back(), v.back().size() }; // list initialize
+  return &#123; v.back(), v.back().size() &#125;; // list initialize
  else
   return pair&lt;string, int&gt;(); // explicitly constructed return value
-}
+&#125;
 </code></pre>
 <p>Alternatively, we could have used <code>make_pair</code> to generate a new pair of the appropriate type from its two arguments:</p>
 <pre><code class="c++">return make_pair(v.back(), v.back().size());
@@ -609,7 +609,7 @@ map&lt;string, int&gt;::mapped_type v5; // v5 is an int
 </code></pre>
 <h3 id="Associative-Container-Iterators"><a href="#Associative-Container-Iterators" class="headerlink" title="Associative Container Iterators"></a>Associative Container Iterators</h3><p>When we dereference an iterator, we get a reference to a value of the container’s value_type. In the case of <code>map</code>, the <code>value_type</code> is a pair in which <code>first</code> holds the const key and <code>second</code> holds the value:</p>
 <pre><code class="c++">// get an iterator to an element in word_count
-map&lt;string, size_t&gt; count_words = { {&quot;hello&quot;,3} };
+map&lt;string, size_t&gt; count_words = &#123; &#123;&quot;hello&quot;,3&#125; &#125;;
 auto map_it = count_words.begin();
 // *map_it is a reference to a pair&lt;const string, size_t&gt; object
 cout &lt;&lt; map_it-&gt;first; // prints the key for this element
@@ -618,43 +618,43 @@ map_it-&gt;first = &quot;new key&quot;; // error: key is const
 ++map_it-&gt;second; // ok: we can change the value through an iterator
 </code></pre>
 <p>Although the set types define both the <code>iterator</code> and <code>const_iterator</code> types, both types of iterators give us <strong>read-only access</strong> to the elements in the <code>set</code>. Just as we cannot change the key part of a map element, the keys in a set are also const. We can use a set iterator to read, but not write, an element’s value:</p>
-<pre><code class="c++">set&lt;int&gt; iset = {0,1,2,3,4,5,6,7,8,9};
+<pre><code class="c++">set&lt;int&gt; iset = &#123;0,1,2,3,4,5,6,7,8,9&#125;;
 set&lt;int&gt;::iterator set_it = iset.begin();
-if (set_it != iset.end()) {
+if (set_it != iset.end()) &#123;
  *set_it = 42; // error: keys in a set are read-only
  cout &lt;&lt; *set_it &lt;&lt; endl; // ok: can read the key
-}
+&#125;
 </code></pre>
 <p>In general, we do <strong>not</strong> use the <strong>generic algorithms</strong> with the associative containers. The fact that the keys are const means that we cannot pass associative container iterators to algorithms that write to or reorder container elements. Such algorithms need to write to the elements. The elements in the set types are const, and those in maps are pairs whose first element is const.</p>
 <p>Associative containers can be used with the algorithms that read elements. However, many of these algorithms search the sequence. Because elements in an associative container can be found (<strong>quickly</strong>) by their <strong>key</strong>, it is almost always a bad idea to use a generic search algorithm.</p>
 <h3 id="Adding-Elements"><a href="#Adding-Elements" class="headerlink" title="Adding Elements"></a>Adding Elements</h3><p>The <code>insert</code> members add one element or a range of elements. Because map and set (and the corresponding unordered types) contain unique keys, inserting an element that is already present has no effect:</p>
-<pre><code class="c++">vector&lt;string&gt; k = { &quot;ourb&quot;,&quot;uvrgsu&quot;,&quot;ourb&quot; };
+<pre><code class="c++">vector&lt;string&gt; k = &#123; &quot;ourb&quot;,&quot;uvrgsu&quot;,&quot;ourb&quot; &#125;;
 auto m = process(k);
 set&lt;string&gt; s;
 s.insert(k.begin(), k.end());
-s.insert({ &quot;ourb&quot;,&quot;ivgr&quot; });
+s.insert(&#123; &quot;ourb&quot;,&quot;ivgr&quot; &#125;);
 </code></pre>
 <p>The versions of insert that take a pair of iterators or an initializer list work similarly to the corresponding constructors—only the first element with a given key is inserted.</p>
 <p>When we <code>insert</code> into a <code>map</code>, we must remember that the element type is a <code>pair</code>. Often, we don’t have a pair object that we want to insert. Instead, we create a pair in the argument list to insert:</p>
 <pre><code class="c++">// four ways to add word to word_count
-word_count.insert({word, 1});
+word_count.insert(&#123;word, 1&#125;);
 word_count.insert(make_pair(word, 1));
 word_count.insert(pair&lt;string, size_t&gt;(word, 1));
 word_count.insert(map&lt;string, size_t&gt;::value_type(word, 1));
 </code></pre>
 <p>The value <strong>returned by insert</strong> (or emplace) depends on the container type and the parameters. For the containers that have unique keys, the versions of insert and emplace that add a single element return a pair that lets us know whether the insertion happened. The <strong>first</strong> member of the pair is an iterator to the element with the <strong>given key</strong>; the <strong>second</strong> is a <strong>bool</strong> indicating whether that element was inserted, or was already there. If the key is already in the container, then insert does nothing, and the bool portion of the return value is false. If the key isn’t present, then the element is inserted and the bool is true.</p>
-<pre><code class="c++">while (read(cin,word)) {
- auto isSuccess = count_words.insert({ word,1 });
- if (!isSuccess.second) {
+<pre><code class="c++">while (read(cin,word)) &#123;
+ auto isSuccess = count_words.insert(&#123; word,1 &#125;);
+ if (!isSuccess.second) &#123;
   ++isSuccess.first-&gt;second;
- }
-}
+ &#125;
+&#125;
 </code></pre>
 <p>For each <code>word</code>, we attempt to insert it with a value 1. If word is already in the <code>map</code>, then nothing happens. In particular, the counter associated with word is unchanged. If <code>word</code> is <strong>not</strong> already in the map, then that string is added to the map and its counter value is set to 1.</p>
 <p>Our word-counting program depends on the fact that a given key can <strong>occur only once</strong>. That way, there is only one counter associated with any given word. Sometimes, we want to be able to add additional elements with the same key.</p>
 <pre><code class="c++">multimap&lt;string, int&gt; au;
-au.insert({ &quot;A&quot;,10 });
-au.insert({ &quot;A&quot;,20 });
+au.insert(&#123; &quot;A&quot;,10 &#125;);
+au.insert(&#123; &quot;A&quot;,20 &#125;);
 cout &lt;&lt; au.size() &lt;&lt; endl; // 2
 </code></pre>
 <h3 id="Erasing-Elements"><a href="#Erasing-Elements" class="headerlink" title="Erasing Elements"></a>Erasing Elements</h3><p>The associative containers define three versions of erase, which are described in next table. As with the sequential containers, we can erase one element or a range of elements by passing erase an iterator or an iterator pair. These versions of erase are similar to the corresponding operations on sequential containers: The indicated element(s) are removed and the function returns void.</p>
@@ -710,28 +710,28 @@ cout &lt;&lt; au[&quot;b&quot;] &lt;&lt; endl;
 </thead>
 <tbody>
 <tr>
-<td><a href="https://www.cplusplus.com/reference/map/map/find/" target="_blank" rel="noopener"><strong>find</strong></a></td>
+<td><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/map/map/find/"><strong>find</strong></a></td>
 <td>Get iterator to element</td>
 </tr>
 <tr>
-<td><a href="https://www.cplusplus.com/reference/map/map/count/" target="_blank" rel="noopener"><strong>count</strong></a></td>
+<td><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/map/map/count/"><strong>count</strong></a></td>
 <td>Count elements with a specific key</td>
 </tr>
 <tr>
-<td><a href="https://www.cplusplus.com/reference/map/map/lower_bound/" target="_blank" rel="noopener"><strong>lower_bound</strong></a></td>
+<td><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/map/map/lower_bound/"><strong>lower_bound</strong></a></td>
 <td>Return iterator to lower bound</td>
 </tr>
 <tr>
-<td><a href="https://www.cplusplus.com/reference/map/map/upper_bound/" target="_blank" rel="noopener"><strong>upper_bound</strong></a></td>
+<td><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/map/map/upper_bound/"><strong>upper_bound</strong></a></td>
 <td>Return iterator to upper bound</td>
 </tr>
 <tr>
-<td><a href="https://www.cplusplus.com/reference/map/map/equal_range/" target="_blank" rel="noopener"><strong>equal_range</strong></a></td>
+<td><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/map/map/equal_range/"><strong>equal_range</strong></a></td>
 <td>Get range of equal elements</td>
 </tr>
 </tbody>
 </table>
-<pre><code class="c++">multiset&lt;int&gt; iset = { 0,1,2,3,4,5,6,7,8,9,1 };
+<pre><code class="c++">multiset&lt;int&gt; iset = &#123; 0,1,2,3,4,5,6,7,8,9,1 &#125;;
 auto fa1 = iset.find(1); //returns an iterator that refers to the element with key = 1
 auto fa2 = iset.find(11); // returns the iterator == iset.end()
 auto fa3 = iset.count(1); // returns 2
@@ -739,66 +739,66 @@ auto fa4 = iset.count(11); // returns 0
 </code></pre>
 <p>Finding an element in an associative container that requires <strong>unique</strong> keys is a simple matter—the element is or is not in the container. For the containers that allow <strong>multiple</strong> keys, the process is more complicated: There may be many elements with the given key. When a <code>multimap</code> or <code>multiset</code> has multiple elements of a given key, those elements will be adjacent within the container.</p>
 <pre><code class="c++">multimap&lt;int, int&gt; ikdn;
-ikdn.insert({ 1,2 });
-ikdn.insert({ 2,5 });
-ikdn.insert({ 1,7 });
+ikdn.insert(&#123; 1,2 &#125;);
+ikdn.insert(&#123; 2,5 &#125;);
+ikdn.insert(&#123; 1,7 &#125;);
 auto num = ikdn.count(1);
 auto iter = ikdn.find(1); // a iterator point to a pair
-while (num) {
+while (num) &#123;
  cout &lt;&lt; iter-&gt;second &lt;&lt; endl;
  ++iter;
  --num;
-}
+&#125;
 </code></pre>
 <p>We are guaranteed that iterating across a multimap or multiset returns all the elements with a given key in sequence.</p>
 <p>Alternatively, we can solve our problem using <code>lower_bound</code> and <code>upper_bound</code>. Each of these operations take a key and returns an iterator. If the key is in the container, the iterator returned from <code>lower_bound</code> will refer to the <strong>first</strong> instance of that key and the iterator returned by <code>upper_bound</code> will refer just after the last instance of the key. If the element is not in the <code>multimap</code>, then <code>lower_bound</code> and <code>upper_bound</code> will return <strong>equal</strong> iterators; both will refer to the point at which the key can be inserted without disrupting the order. Thus, calling <code>lower_bound</code> and <code>upper_bound</code> on the same key yields an iterator range that denotes all the elements with that key.</p>
 <pre><code class="c++">multimap&lt;int, int&gt; ikdn;
-ikdn.insert({ 1,2 });
-ikdn.insert({ 2,5 });
-ikdn.insert({ 1,7 });
-for (auto i = ikdn.lower_bound(1); i != ikdn.upper_bound(1); i++) {
+ikdn.insert(&#123; 1,2 &#125;);
+ikdn.insert(&#123; 2,5 &#125;);
+ikdn.insert(&#123; 1,7 &#125;);
+for (auto i = ikdn.lower_bound(1); i != ikdn.upper_bound(1); i++) &#123;
  cout &lt;&lt; i-&gt;second &lt;&lt; endl;
-}
+&#125;
 </code></pre>
 <p>The remaining way to solve this problem is the most direct of the three approaches: Instead of calling <code>upper_bound</code> and <code>lower_bound</code>, we can call <code>equal_range</code>. This function takes a key and returns a pair of iterators. If the key is present, then the first iterator refers to the first instance of the key and the second iterator refers one past the last instance of the key.</p>
-<pre><code class="c++">for (auto pos = ikdn.equal_range(1); pos.first != pos.second; ++pos.first) {
+<pre><code class="c++">for (auto pos = ikdn.equal_range(1); pos.first != pos.second; ++pos.first) &#123;
  cout &lt;&lt; pos.first-&gt;second &lt;&lt; endl;
-}
+&#125;
 </code></pre>
 <h3 id="A-Word-Transformation-Map"><a href="#A-Word-Transformation-Map" class="headerlink" title="A Word Transformation Map"></a>A Word Transformation Map</h3><pre><code class="c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
 
-void transform(ifstream&amp; in_que, ifstream&amp; in_tran) {
+void transform(ifstream&amp; in_que, ifstream&amp; in_tran) &#123;
  map&lt;string, string&gt; dir;
 
  //read transform rules
  string sou, con, text, word;
- while (in_tran &gt;&gt; sou &gt;&gt; con) {
+ while (in_tran &gt;&gt; sou &gt;&gt; con) &#123;
   dir[sou] = con;
- }
+ &#125;
  in_tran.close();
 
  //read question
- while (getline(in_que, text)) {
+ while (getline(in_que, text)) &#123;
   istringstream ss(text);
-  while (ss &gt;&gt; word) {
-   if (dir.find(word) != dir.end()) {
+  while (ss &gt;&gt; word) &#123;
+   if (dir.find(word) != dir.end()) &#123;
     cout &lt;&lt; dir[word] &lt;&lt; &quot; &quot;;
-   }
-   else {
+   &#125;
+   else &#123;
     cout &lt;&lt; word &lt;&lt; &quot; &quot;;
-   }
-  }
+   &#125;
+  &#125;
   cout &lt;&lt; endl;
- }
-}
+ &#125;
+&#125;
 
-int main() {
+int main() &#123;
  ifstream in_que(&quot;ques.txt&quot;);
  ifstream in_tran(&quot;trans.txt&quot;);
  transform(in_que, in_tran);
  return 0;
-}
+&#125;
 </code></pre>
 <h2 id="The-Unordered-Containers"><a href="#The-Unordered-Containers" class="headerlink" title="The Unordered Containers"></a>The Unordered Containers</h2><p>The new standard defines four <strong>unordered</strong> associative containers. Rather than using a comparison operation to organize their elements, these containers use a <strong>hash function</strong> and the key type’s == operator. An unordered container is most useful when we have a key type for which there is no obvious ordering relationship among the elements. These containers are also useful for applications in which the cost of maintaining the elements in order is prohibitive.</p>
 <h3 id="Using-an-Unordered-Container"><a href="#Using-an-Unordered-Container" class="headerlink" title="Using an Unordered Container"></a>Using an Unordered Container</h3><p>Aside from operations that manage the hashing, the <strong>unordered</strong> containers provide the same operations (<code>find</code>, <code>insert</code>, and so on) as the <strong>ordered</strong> containers. That means that the operations we’ve used on map and set apply to <code>unordered_map</code> and <code>unordered_set</code> as well. Similarly for the unordered versions of the containers that allow multiple keys.</p>
@@ -808,52 +808,52 @@ int main() {
 using namespace std;
 
 //uppercase string
-void upperCase(string&amp; str) {
- for (auto&amp; i : str) {
+void upperCase(string&amp; str) &#123;
+ for (auto&amp; i : str) &#123;
   i = toupper(i);
- }
-}
+ &#125;
+&#125;
 
 //read word from istream, when word is EOF end read
-int read_word(istream&amp; in, string&amp; word) {
+int read_word(istream&amp; in, string&amp; word) &#123;
  in &gt;&gt; word;
  upperCase(word);
- if (word == (&quot;EOF&quot;)) {
+ if (word == (&quot;EOF&quot;)) &#123;
   return 0;
- }
+ &#125;
  return 1;
-}
+&#125;
 
-int main() {
+int main() &#123;
  // count the number of times each word occurs in the input
  map&lt;string, size_t&gt; count_words;
  unordered_map&lt;string, size_t&gt; unorder_count_words;
 
- set&lt;string&gt; exclude = { &quot;c++&quot;,&quot;Java&quot; };
+ set&lt;string&gt; exclude = &#123; &quot;c++&quot;,&quot;Java&quot; &#125;;
  string word;
- while (read_word(cin, word)) {
+ while (read_word(cin, word)) &#123;
   // add to order map
-  auto isSuccess1 = count_words.insert({ word,1 });
-  if (!isSuccess1.second) {
+  auto isSuccess1 = count_words.insert(&#123; word,1 &#125;);
+  if (!isSuccess1.second) &#123;
    ++isSuccess1.first-&gt;second;
-  }
+  &#125;
   // add to unorder map
-  auto isSuccess2 = unorder_count_words.insert({ word,1 });
-  if (!isSuccess2.second) {
+  auto isSuccess2 = unorder_count_words.insert(&#123; word,1 &#125;);
+  if (!isSuccess2.second) &#123;
    ++isSuccess2.first-&gt;second;
-  }
- }
+  &#125;
+ &#125;
  //order map
- for (const auto&amp; w : count_words) {
+ for (const auto&amp; w : count_words) &#123;
   cout &lt;&lt; w.first &lt;&lt; &quot; appear &quot; &lt;&lt; w.second &lt;&lt; &quot; times.&quot; &lt;&lt; endl;
- }
+ &#125;
  cout &lt;&lt; &quot;__________&quot; &lt;&lt; endl;
  //unorder map
- for (const auto&amp; w : unorder_count_words) {
+ for (const auto&amp; w : unorder_count_words) &#123;
   cout &lt;&lt; w.first &lt;&lt; &quot; appear &quot; &lt;&lt; w.second &lt;&lt; &quot; times.&quot; &lt;&lt; endl;
- }
+ &#125;
  return 0;
-}
+&#125;
 //c
 //a
 //b
@@ -867,7 +867,7 @@ int main() {
 //A appear 1 times.
 </code></pre>
 <p>The <strong>unordered</strong> containers are organized as a collection of <strong>buckets</strong>, each of which holds zero or more elements. These containers use a hash function to map elements to buckets. To access an element, the container first <strong>computes</strong> the element’s <strong>hash code</strong>, which tells which bucket to search. The container puts all of its elements with a given hash value into the same bucket. If the container allows multiple elements with a given key, all the elements with the same key will be in the same bucket. As a result, the <strong>performance</strong> of an unordered container <strong>depends on the quality of its hash function and on the number and size of its buckets.</strong></p>
-<p>The unordered containers provide a set of functions, in <a href="https://www.cplusplus.com/reference/unordered_map/unordered_map/" target="_blank" rel="noopener">here</a>, that let us manage the buckets. These members let us inquire about the state of the container and force the container to reorganize itself as needed.</p>
+<p>The unordered containers provide a set of functions, in <a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/unordered_map/unordered_map/">here</a>, that let us manage the buckets. These members let us inquire about the state of the container and force the container to reorganize itself as needed.</p>
 <h3 id="Requirements-on-Key-Type-for-Unordered-Containers"><a href="#Requirements-on-Key-Type-for-Unordered-Containers" class="headerlink" title="Requirements on Key Type for Unordered Containers"></a>Requirements on Key Type for Unordered Containers</h3><p>By default, the unordered containers use the <code>==</code> operator on the key type to compare elements. They also use an object of type <code>hash&lt;key_type&gt;</code> to generate the hash code for each element. The library supplies versions of the hash template for the built in types, including pointers. It also defines hash for some of the library types, including strings and the smart pointer types that we will describe in next chapter. Thus, we can directly define unordered containers whose key is one of the built-in types (including pointer types), or a string, or a smart pointer.</p>
 <p>However, we <strong>cannot</strong> directly define an unordered container that uses a our own class types for its key type. Unlike the containers, we cannot use the hash template directly. Instead, we must supply our own version of the hash template.</p>
 
@@ -1184,6 +1184,16 @@ int main() {
       </li>
     
       <li>
+        <a href="/tags/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-tag" aria-hidden="true"></i>
+            标签
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
         <a href="javascript:;">
           <span class="faa-parent animated-hover">
             <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
@@ -1219,16 +1229,6 @@ int main() {
           <span class="faa-parent animated-hover">
             <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
             友人帐
-          </span>
-        </a>
-        
-      </li>
-    
-      <li>
-        <a href="/donate/">
-          <span class="faa-parent animated-hover">
-            <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
-            赞赏
           </span>
         </a>
         

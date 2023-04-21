@@ -329,6 +329,16 @@
               </li>
             
               <li>
+                <a href="/tags/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-tag" aria-hidden="true"></i>
+                    标签
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
                 <a href="javascript:;">
                   <span class="faa-parent animated-hover">
                     <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
@@ -364,16 +374,6 @@
                   <span class="faa-parent animated-hover">
                     <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
                     友人帐
-                  </span>
-                </a>
-                
-              </li>
-            
-              <li>
-                <a href="/donate/">
-                  <span class="faa-parent animated-hover">
-                    <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
-                    赞赏
                   </span>
                 </a>
                 
@@ -464,14 +464,14 @@
 <h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>Most of the algorithms are defined in the <code>algorithm</code> header. The library also defines a set of generic numeric algorithms that are defined in the <code>numeric</code> header.</p>
 <p>In general, the algorithms <strong>do not work directly</strong> on a container. Instead, they operate by traversing a range of elements bounded by two <strong>iterators</strong>. If we want find a substring in string container, we can use the <code>s.find</code> function, however the vector does not provide method find, how could we do?</p>
 <p>The generic algorithm provides a function called find can do this:</p>
-<pre><code class="c++">int main() {
- vector&lt;int&gt; k = { 5,4,3,2,1 };
+<pre><code class="c++">int main() &#123;
+ vector&lt;int&gt; k = &#123; 5,4,3,2,1 &#125;;
  // result will denote the element we want if it&#39;s in vec, or vec.cend() if not
  auto pos1 = find(k.cbegin(), k.cend(), 6);
  auto pos2 = find(k.cbegin(), k.cend(), 2);
  cout &lt;&lt; (pos1 == k.cend()) &lt;&lt; &quot; &quot; &lt;&lt; *pos2 &lt;&lt; endl;
  return 0;
-}
+&#125;
 //out put
 //1 2
 </code></pre>
@@ -491,128 +491,128 @@
 <h2 id="A-First-Look-at-the-Algorithms"><a href="#A-First-Look-at-the-Algorithms" class="headerlink" title="A First Look at the Algorithms"></a>A First Look at the Algorithms</h2><p>The library provides more than 100 algorithms. Fortunately, like the containers, the algorithms have a consistent architecture. Understanding this architecture makes learning and using the algorithms easier than memorizing all 100+ of them.</p>
 <p>With only a few exceptions, the algorithms operate over a range of elements. We’ll refer to this range as the <code>“input range”</code>. The algorithms that take an input range always use their <strong>first two parameters</strong> to denote that range. These parameters are iterators denoting the <code>first</code> and <code>one past the last elements</code> to process.</p>
 <h3 id="Read-Only-Algorithms"><a href="#Read-Only-Algorithms" class="headerlink" title="Read-Only Algorithms"></a>Read-Only Algorithms</h3><p>A number of the algorithms <strong>read, but never write to</strong>, the elements in their input range. The <code>find</code> function is one such algorithm, as is the <code>count</code> function which count a value how often. Another read-only algorithm is <code>accumulate</code>, which is defined in the <code>numeric</code> header. The first two parameters specify a range of elements to sum. The third is an initial value for the sum.</p>
-<pre><code class="c++">int main() {
- vector&lt;int&gt; k = { 5,4,5,2,1 };
+<pre><code class="c++">int main() &#123;
+ vector&lt;int&gt; k = &#123; 5,4,5,2,1 &#125;;
  // output is 2
  cout &lt;&lt; count(k.cbegin(), k.cend(), 5) &lt;&lt; endl;
  // output is initvalue 2 add all vector equal to 2+17=19
  cout &lt;&lt; accumulate(k.cbegin(), k.cend(), 2) &lt;&lt; endl;
  return 0;
-}
+&#125;
 </code></pre>
 <p>The type of the third argument to accumulate determines which addition operator is used and is the type that accumulate returns.</p>
 <p>The fact that accumulate uses its third argument as the starting point for the summation has an important implication: It must be possible to <code>add</code> the element type to the type of the sum. That is, the elements in the sequence must match or be convertible to the type of the third argument.</p>
 <p>Another read-only algorithm is <code>equal</code>, which lets us determine whether two sequences hold the same values. It compares each element from the first sequence to the corresponding element in the second. It returns true if the corresponding elements are equal, false otherwise. The algorithm takes three iterators: The first two (as usual) denote the range of elements in the first sequence; the third denotes the first element in the second sequence:</p>
-<pre><code class="c++">int main() {
- vector&lt;int&gt; v1 = { 1,2,3,4,5 };
- vector&lt;int&gt; v2 = { 1,2,3,4,5 };
+<pre><code class="c++">int main() &#123;
+ vector&lt;int&gt; v1 = &#123; 1,2,3,4,5 &#125;;
+ vector&lt;int&gt; v2 = &#123; 1,2,3,4,5 &#125;;
     // ouput is 1
  cout &lt;&lt; equal(v1.cbegin() - 1, v1.cend(), v2.cbegin() - 1) &lt;&lt; endl;
  return 0;
-}
+&#125;
 </code></pre>
 <p>Because <code>equal</code> operates in terms of iterators, we can call equal to compare elements in containers of different types. Moreover, the element types also need not be the same so long as we can use == to compare the element types.</p>
-<pre><code class="c++">int main() {
- vector&lt;string&gt; vs = { &quot;123&quot;,&quot;234&quot; };
- list&lt;char*&gt; lc = { &quot;123&quot;,&quot;234&quot; };
+<pre><code class="c++">int main() &#123;
+ vector&lt;string&gt; vs = &#123; &quot;123&quot;,&quot;234&quot; &#125;;
+ list&lt;char*&gt; lc = &#123; &quot;123&quot;,&quot;234&quot; &#125;;
  // out put is 1
  cout &lt;&lt; equal(vs.cbegin(), vs.cend(), lc.cbegin()) &lt;&lt; endl;
  return 0;
-}
+&#125;
 </code></pre>
 <p>NOTICE: Algorithms that take a single iterator denoting a second sequence assume that the second sequence is at least as <strong>large</strong> at the first.</p>
 <h3 id="Algorithms-That-Write-Container-Elements"><a href="#Algorithms-That-Write-Container-Elements" class="headerlink" title="Algorithms That Write Container Elements"></a>Algorithms That Write Container Elements</h3><p>Some algorithms assign new values to the elements in a sequence. When we use an algorithm that assigns to elements, we must take care to ensure that the sequence into which the algorithm writes is at least as large as the number of elements we ask the algorithm to write. Remember, <strong>algorithms do not perform container operations</strong>, so they have <strong>no way</strong> themselves to <strong>change</strong> the size of a container.</p>
 <p>the <code>fill</code> algorithm takes a pair of iterators that denote a range and a third argument that is a value. fill assigns the given value to each element in the input sequence:</p>
-<pre><code class="c++">int main() {
+<pre><code class="c++">int main() &#123;
  vector&lt;string&gt; vs(10);
  fill(vs.begin(), vs.end(), &quot;A&quot;);
  return 0;
-}
+&#125;
 </code></pre>
 <p>Some algorithms take an iterator that denotes a separate destination. These algorithms assign new values to the elements of a sequence starting at the element denoted by the destination iterator. For example, the <code>fill_n</code> function takes <strong>a single iterator</strong>, <strong>a count</strong>, and <strong>a value</strong>. It assigns the given value to the specified number of elements starting at the element denoted to by the <code>iterator</code>.</p>
-<pre><code class="c++">int main() {
+<pre><code class="c++">int main() &#123;
  vector&lt;string&gt; vs(10);
  fill_n(vs.begin(), vs.size(), &quot;A&quot;);
  return 0;
-}
+&#125;
 </code></pre>
 <p>One way to ensure that an algorithm has enough elements to hold the output is to use an <code>insert iterator</code>. An insert iterator is an iterator that adds elements to a container. <code>back_inserter</code>, which is a function defined in the <code>iterator</code> header.</p>
 <p><code>back_inserter</code> takes a reference to a container and returns an insert iterator bound to that container. When we assign through that iterator, the assignment calls <code>push_back</code> to add an element with the given value to the container:</p>
-<pre><code class="c++">int main() {
+<pre><code class="c++">int main() &#123;
  vector&lt;string&gt; k;
  auto it = back_inserter(k);
  *it = &quot;hello&quot;;
  cout &lt;&lt; *k.cbegin() &lt;&lt; endl;
  return 0;
-}
+&#125;
 // output
 // hello
 </code></pre>
 <p>We frequently use back_inserter to create an iterator to use as the destination of an algorithm. For example:</p>
-<pre><code class="c++">int main() {
+<pre><code class="c++">int main() &#123;
  vector&lt;string&gt; k;
  fill_n(back_inserter(k), 5, &quot;A&quot;);
- for (auto m : k) {
+ for (auto m : k) &#123;
   cout &lt;&lt; m;
- }
+ &#125;
  cout &lt;&lt; endl;
  return 0;
-}
+&#125;
 // output
 // AAAAA
 </code></pre>
 <p>The <code>copy</code> algorithm is another example of an algorithm that writes to the elements of an output sequence denoted by a destination iterator. This algorithm takes three iterators. The first two denote an input range; the third denotes the beginning of the destination sequence. The value returned by copy is the (incremented) value of its destination iterator. That is, ret will point just <strong>past the last</strong> element copied into a2.</p>
-<pre><code class="c++">int main() {
- int a1[] = { 0,1,2,3,4,5,6,7,8,9 };
+<pre><code class="c++">int main() &#123;
+ int a1[] = &#123; 0,1,2,3,4,5,6,7,8,9 &#125;;
  int a2[sizeof(a1) / sizeof(*a1)]; // a2 has the same size as a1
  // ret points just past the last element copied into a2
  auto ret = copy(begin(a1), end(a1), a2); // copy a1 into a2
  cout &lt;&lt; *(ret - 1) &lt;&lt; endl; // output is 9
  return 0;
-}
+&#125;
 </code></pre>
 <p>the <code>replace</code> algorithm reads a sequence and replaces every instance of a given value with another value. This algorithm takes four parameters: two iterators denoting the input range, and two values. It replaces each element that is equal to the first value with the second:</p>
-<pre><code class="c++">int main() {
+<pre><code class="c++">int main() &#123;
  vector&lt;string&gt; k;
  fill_n(back_inserter(k), 5, &quot;A&quot;);
  replace(k.begin(), k.end(), &quot;A&quot;, &quot;B&quot;);
  //output BBBBB
- for (auto m : k) {
+ for (auto m : k) &#123;
   cout &lt;&lt; m;
- }
+ &#125;
  cout &lt;&lt; endl;
  return 0;
-}
+&#125;
 </code></pre>
 <p>If we want to leave the original sequence unchanged, we can call <code>replace_copy</code>. That algorithm takes a third iterator argument denoting a destination in which to write the adjusted sequence:</p>
 <pre><code class="c++">replace_copy(k.begin(), k.end(), back_inserter(m), &quot;A&quot;, &quot;B&quot;);
 </code></pre>
 <h3 id="Algorithms-That-Reorder-Container-Elements"><a href="#Algorithms-That-Reorder-Container-Elements" class="headerlink" title="Algorithms That Reorder Container Elements"></a>Algorithms That Reorder Container Elements</h3><p>Some algorithms rearrange the order of elements within a container. An obvious example of such an algorithm is <code>sort</code>. A call to sort arranges the elements in the input range into sorted order using the element type’s <code>&lt;</code> operator.</p>
-<pre><code class="c++">int main() {
- vector&lt;int&gt; vec = { 5,4,3,4,1,2 };
+<pre><code class="c++">int main() &#123;
+ vector&lt;int&gt; vec = &#123; 5,4,3,4,1,2 &#125;;
  sort(vec.begin(), vec.end());
  return 0;
-}
+&#125;
 </code></pre>
 <p>To eliminate the duplicated words, we will first sort the vector so that duplicated words appear adjacent to each other. Once the vector is sorted, we can use another library algorithm, named <code>unique</code>, to reorder the vector so that the unique elements appear <strong>in the first part of the vector</strong>. Because algorithms cannot do container operations, we’ll use the erase member of vector to actually remove the elements:</p>
-<pre><code class="c++">void elimDups(vector&lt;int&gt;&amp; vec) {
+<pre><code class="c++">void elimDups(vector&lt;int&gt;&amp; vec) &#123;
  sort(vec.begin(), vec.end());
  auto end_unique = unique(vec.begin(), vec.end());
  vec.erase(end_unique, vec.end());
-}
+&#125;
 </code></pre>
-<p>You can see more details about <code>unique</code> in <a href="https://www.cplusplus.com/reference/algorithm/unique/" target="_blank" rel="noopener">here</a>. Shortly, the removal is done by replacing the duplicate elements by the next element that is not a duplicate, and signaling the new size of the shortened range by returning an iterator to the element that should be considered its new <em>past-the-end</em> element.</p>
+<p>You can see more details about <code>unique</code> in <a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/algorithm/unique/">here</a>. Shortly, the removal is done by replacing the duplicate elements by the next element that is not a duplicate, and signaling the new size of the shortened range by returning an iterator to the element that should be considered its new <em>past-the-end</em> element.</p>
 <pre><code class="c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
 
-void printVec(vector&lt;int&gt;&amp; vec) {
- for (auto veci : vec) {
+void printVec(vector&lt;int&gt;&amp; vec) &#123;
+ for (auto veci : vec) &#123;
   cout &lt;&lt; veci &lt;&lt; &quot; &quot;;
- }
+ &#125;
  cout &lt;&lt; endl;
-}
+&#125;
 
-void elimDups(vector&lt;int&gt;&amp; vec) {
+void elimDups(vector&lt;int&gt;&amp; vec) &#123;
  // sorted
  sort(vec.begin(), vec.end());
  printVec(vec);
@@ -624,13 +624,13 @@ void elimDups(vector&lt;int&gt;&amp; vec) {
  // remove duplicates
  vec.erase(end_unique, vec.end());
  printVec(vec);
-}
+&#125;
 
-int main() {
- vector&lt;int&gt; vec = { 5,4,3,4,1,2,1 };
+int main() &#123;
+ vector&lt;int&gt; vec = &#123; 5,4,3,4,1,2,1 &#125;;
  elimDups(vec);
  return 0;
-}
+&#125;
 </code></pre>
 <p>the <code>end_unique</code> denotes one past the last unique element.</p>
 <h2 id="Customizing-Operations"><a href="#Customizing-Operations" class="headerlink" title="Customizing Operations"></a>Customizing Operations</h2><p>Many of the algorithms compare elements in the input sequence. By default, such algorithms use either the element type’s <code>&lt;</code> or <code>==</code> operator. The library also defines versions of these algorithms that let us supply our own operation to use in place of the default operator.</p>
@@ -640,88 +640,88 @@ int main() {
 <pre><code class="c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
 
-bool isShort(const string&amp; str1, const string&amp; str2) {
- if (str1.size() != str2.size()) {
+bool isShort(const string&amp; str1, const string&amp; str2) &#123;
+ if (str1.size() != str2.size()) &#123;
   return str1.size() &lt; str2.size();
- }
- else {
+ &#125;
+ else &#123;
   return str1 &lt; str2;
- }
-}
+ &#125;
+&#125;
 
-int main() {
- vector&lt;string&gt; vec = { &quot;bbcd&quot;,&quot;abcd&quot;,&quot;c&quot; };
+int main() &#123;
+ vector&lt;string&gt; vec = &#123; &quot;bbcd&quot;,&quot;abcd&quot;,&quot;c&quot; &#125;;
  sort(vec.begin(), vec.end(), isShort);
- for (auto i = vec.begin(); i != vec.end(); i++) {
+ for (auto i = vec.begin(); i != vec.end(); i++) &#123;
   cout &lt;&lt; *i &lt;&lt; &quot; &quot;;
- }
+ &#125;
  cout &lt;&lt; endl;
  return 0;
-}
+&#125;
 </code></pre>
 <h3 id="Lambda-Expressions"><a href="#Lambda-Expressions" class="headerlink" title="Lambda Expressions"></a>Lambda Expressions</h3><p>The predicates we pass to an algorithm must have exactly one or two parameters, depending on whether the algorithm takes a unary or binary predicate, respectively. However, sometimes we want to do processing that requires more arguments than the algorithm’s predicate allows.</p>
 <p>As a example, if we want find the first element in the  string vector that has the given size, we can use the library <code>find_if</code> algorithm to find an element that has a particular size. Like <code>find</code>, the <code>find_if</code> algorithm takes a pair of iterators denoting a range. Unlike <code>find</code>, the third argument to <code>find_if</code> is a <code>predicate</code>. The <code>find_if</code> algorithm calls the given predicate on each element in the input range. It returns the first element for which the predicate returns a nonzero value, or its end iterator if no such element is found. However, <code>find_if</code> takes a <strong>unary predicate</strong>—any function we pass to find_if must have exactly <strong>one</strong> parameter that can be called with an element from the input sequence. <strong>There is no way to pass a second argument representing the size.</strong></p>
 <p>We can pass any kind of callable object to an algorithm. The only callables we’ve used so far are functions and function pointers. There are two other kinds of callables: classes that overload the function-call<br>operator, and <strong>lambda expressions</strong>.</p>
-<p>The format of lambda expressions is <code>[capture list] (parameter list) -&gt; return type { function body }</code>.</p>
+<p>The format of lambda expressions is <code>[capture list] (parameter list) -&gt; return type &#123; function body &#125;</code>.</p>
 <ol>
 <li><strong>capture</strong> list is an (often empty) list of local variables defined in the enclosing function</li>
 <li><strong>return type</strong>, <strong>parameter list</strong>, and <strong>function body</strong> are the same as in any ordinary function.</li>
 </ol>
 <p>We’re now ready to solve our original problem, which is to write a callable expression that we can pass to <code>find_if</code>. We want an expression that will compare the length of each string in the input sequence with the value of the <code>sz</code> parameter in the biggies function.</p>
-<pre><code class="c++">int main() {
- vector&lt;string&gt; vec = { &quot;bbcd&quot;,&quot;abcd&quot;,&quot;sd&quot;,&quot;c&quot; };
+<pre><code class="c++">int main() &#123;
+ vector&lt;string&gt; vec = &#123; &quot;bbcd&quot;,&quot;abcd&quot;,&quot;sd&quot;,&quot;c&quot; &#125;;
  size_t sz = 2;
- auto wc = find_if(vec.begin(), vec.end(), [sz](const string&amp; str) {
+ auto wc = find_if(vec.begin(), vec.end(), [sz](const string&amp; str) &#123;
   return str.size() &lt;= sz;
-  });
+  &#125;);
  cout &lt;&lt; *wc &lt;&lt; endl; // output is sd
  return 0;
-}
+&#125;
 </code></pre>
 <h3 id="Lambda-Captures-and-Returns"><a href="#Lambda-Captures-and-Returns" class="headerlink" title="Lambda Captures and Returns"></a>Lambda Captures and Returns</h3><p>When we define a lambda, the compiler generates a new (unnamed) class type that corresponds to that lambda. For now, what’s useful to understand is that when we pass a lambda to a function, we are defining both a new type and an object of that type: The argument is an unnamed object of this compiler-generated class type. Similarly, when we use auto to define a variable initialized by a lambda, we are defining an object of the type generated from that lambda.</p>
 <p>Similar to parameter passing, we can <code>capture</code> variables by value or by reference. As with a parameter passed by <strong>value</strong>, it must be possible to copy such variables. Unlike parameters, the value of a captured variable is copied when the lambda is created, not when it is called:</p>
 <pre><code class="c++">int v = 10;
-auto k = [v]() {return v; };
+auto k = [v]() &#123;return v; &#125;;
 v = 100;
 cout &lt;&lt; k() &lt;&lt; endl; // output is 10
 </code></pre>
 <p>We can also define lambdas that capture variables by <strong>reference</strong>. For example:</p>
 <pre><code class="c++">int v = 10;
-auto k = [v]() {return v; };
+auto k = [v]() &#123;return v; &#125;;
 v = 100;
 cout &lt;&lt; k() &lt;&lt; endl; // output is 10
 </code></pre>
 <p>Rather than <strong>explicitly</strong> listing the variables we want to use from the enclosing function, we can let the compiler infer which variables we use from the code in the lambda’s body. To direct the compiler to infer the capture list, we use an <code>&amp;</code> or <code>=</code> in the capture list. The <code>&amp;</code> tells the compiler to capture by <strong>reference</strong>, and the <code>=</code> says the values are captured by <strong>value</strong>.</p>
 <pre><code class="c++">int v = 10;
-auto k = [=]() {return v; };
+auto k = [=]() &#123;return v; &#125;;
 v = 100;
 cout &lt;&lt; k() &lt;&lt; endl; // output is 10
 </code></pre>
 <pre><code class="c++">int v = 10;
-auto k = [&amp;]() {return v; };
+auto k = [&amp;]() &#123;return v; &#125;;
 v = 100;
 cout &lt;&lt; k() &lt;&lt; endl; // output is 100
 </code></pre>
 <p>If we want to capture some variables <strong>by value and others by reference</strong>, we can mix implicit and explicit captures:</p>
 <pre><code class="c++">int v = 10, d = 20;
-auto k = [=, &amp;d]() {return v + d; };
+auto k = [=, &amp;d]() &#123;return v + d; &#125;;
 v = 100;
 d = 50;
 cout &lt;&lt; k() &lt;&lt; endl; // output is 60
 </code></pre>
 <p>By default, a lambda may <strong>not change</strong> the value of a variable that it copies by value. If we want to be able to change the value of a captured variable, we must follow the parameter list with the keyword <code>mutable</code>. Lambdas that are mutable may not omit the parameter list:</p>
 <pre><code class="c++">int v = 10;
-auto k = [v]()mutable {v = 100; return v; };
+auto k = [v]()mutable &#123;v = 100; return v; &#125;;
 cout &lt;&lt; k() &lt;&lt; endl; // output is 100
 cout &lt;&lt; v &lt;&lt; endl;   // output is 10
 </code></pre>
 <p>The lambdas we’ve written so far contain only a single return statement. We can use <code>-&gt; type</code> specify return type.</p>
-<pre><code class="c++">auto k = [=, &amp;d]()-&gt;int {return v + d; };
+<pre><code class="c++">auto k = [=, &amp;d]()-&gt;int &#123;return v + d; &#125;;
 </code></pre>
 <h3 id="Binding-Arguments"><a href="#Binding-Arguments" class="headerlink" title="Binding Arguments"></a>Binding Arguments</h3><p>It is usually straightforward to use a function in place of a lambda that has an <strong>empty capture list</strong>. As we’ve seen, we can use either a lambda or our <code>isShort</code> function to order the vector on word length. However, it is not so easy to write a function to replace a lambda that <strong>captures local variables</strong>. For example, the lambda that we used in the call to find_if compared a string with a given size. We can easily write a function to do the same work:</p>
-<pre><code class="c++">bool check_size(const string &amp;s, string::size_type sz){
+<pre><code class="c++">bool check_size(const string &amp;s, string::size_type sz)&#123;
  return s.size() &gt;= sz;
-}
+&#125;
 </code></pre>
 <p>However, we can’t use this function as an argument to find_if. Because <code>find_if</code> takes a unary predicate. The lambda that biggies passed to find_if used its capture list to store <code>sz</code>. In order to use <code>check_size</code> in place of that lambda, we have to figure out how to pass an argument to the <code>sz</code> parameter.</p>
 <p>We can solve the problem of passing a size argument to check_size by using a new library function named <code>bind</code>, which is defined in the functional header. The <code>bind</code> function can be thought of as a general-purpose function adaptor. It takes a callable object and generates a new callable that “adapts” the parameter list of the original object. The form is <code>auto newCallable = bind(callable, arg_list);</code>.</p>
@@ -797,7 +797,7 @@ cout &lt;&lt; v &lt;&lt; endl;   // output is 10
 <li>Bidirectional iterators: can read and write a sequence forward or backward. In addition to supporting all the operations of a forward iterator, a bidirectional iterator also supports the prefix and postfix decrement (<code>--</code>) operators.</li>
 <li>Random-access iterators: provide constant-time access to any position in the sequence. These iterators support all the functionality of bidirectional iterators.</li>
 </ol>
-<h2 id="Container-Specific-Algorithms"><a href="#Container-Specific-Algorithms" class="headerlink" title="Container-Specific Algorithms"></a>Container-Specific Algorithms</h2><p>Unlike the other containers, <code>list</code> and <code>forward_list</code> define several algorithms as members. In particular, the list types define their own versions of <code>sort</code>, <code>merge</code>, <code>remove</code>, <code>reverse</code>, and <code>unique</code>. you can see details in <a href="https://www.cplusplus.com/reference/list/list/" target="_blank" rel="noopener">here</a>.</p>
+<h2 id="Container-Specific-Algorithms"><a href="#Container-Specific-Algorithms" class="headerlink" title="Container-Specific Algorithms"></a>Container-Specific Algorithms</h2><p>Unlike the other containers, <code>list</code> and <code>forward_list</code> define several algorithms as members. In particular, the list types define their own versions of <code>sort</code>, <code>merge</code>, <code>remove</code>, <code>reverse</code>, and <code>unique</code>. you can see details in <a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/list/list/">here</a>.</p>
 
         </div>
         <!-- .entry-content -->
@@ -1112,6 +1112,16 @@ cout &lt;&lt; v &lt;&lt; endl;   // output is 10
       </li>
     
       <li>
+        <a href="/tags/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-tag" aria-hidden="true"></i>
+            标签
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
         <a href="javascript:;">
           <span class="faa-parent animated-hover">
             <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
@@ -1147,16 +1157,6 @@ cout &lt;&lt; v &lt;&lt; endl;   // output is 10
           <span class="faa-parent animated-hover">
             <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
             友人帐
-          </span>
-        </a>
-        
-      </li>
-    
-      <li>
-        <a href="/donate/">
-          <span class="faa-parent animated-hover">
-            <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
-            赞赏
           </span>
         </a>
         

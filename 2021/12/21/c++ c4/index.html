@@ -329,6 +329,16 @@
               </li>
             
               <li>
+                <a href="/tags/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-tag" aria-hidden="true"></i>
+                    标签
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
                 <a href="javascript:;">
                   <span class="faa-parent animated-hover">
                     <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
@@ -364,16 +374,6 @@
                   <span class="faa-parent animated-hover">
                     <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
                     友人帐
-                  </span>
-                </a>
-                
-              </li>
-            
-              <li>
-                <a href="/donate/">
-                  <span class="faa-parent animated-hover">
-                    <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
-                    赞赏
                   </span>
                 </a>
                 
@@ -516,7 +516,7 @@
 </tr>
 </tbody>
 </table>
-<p>The more details you can read in <a href="http://www.cplusplus.com/reference/istream/iostream/" target="_blank" rel="noopener">here</a>.</p>
+<p>The more details you can read in <a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/istream/iostream/">here</a>.</p>
 <p>As an example of an IO error, consider the following code:<code>int ival;</code> <code>cin &gt;&gt; ival;</code>, If we enter Boo on the standard input, the read will fail. The input operator expected to read an int but got the character B instead. As a result, cin will be put in an error state. Similarly, cin will be in an error state if we enter an end-of-file. Once an error has occurred, subsequent IO operations on that stream will <strong>fail</strong>. We can read from or write to a stream only when it is in a non-error state.</p>
 <h2 id="File-Input-and-Output"><a href="#File-Input-and-Output" class="headerlink" title="File Input and Output"></a>File Input and Output</h2><p>The <strong>fstream</strong> header defines three types to support file IO: <strong>ifstream</strong> to read from a given file, <strong>ofstream</strong> to write to a given file, and <strong>fstream</strong>, which reads and writes a given file. These types provide the same operations as those we have previously used on the objects cin and cout. In particular, we can use the IO operators (&lt;&lt; and &gt;&gt;) to read and write files, we can use getline to read an ifstream.</p>
 <p>In addition to the behavior that they inherit from the iostream types, the types defined in fstream add members to manage the file associated with the stream. These operations, listed in next table, can be called on objects of fstream, ifstream, or ofstream but not on the other IO types.</p>
@@ -564,7 +564,7 @@
 #include &lt;fstream&gt;
 #include &lt;string&gt;
 
-int main() {
+int main() &#123;
  //file path
  std::string ans_file = &quot;Answer.txt&quot;;
  std::string que_file = &quot;Question.txt&quot;;
@@ -590,12 +590,12 @@ int main() {
  in &gt;&gt; sum;
  std::cout &lt;&lt; sum &lt;&lt; std::endl;
  return 0;
-}
+&#125;
 </code></pre>
 <p>When we define an empty file stream object, we can subsequently associate that object with a file by calling open, If a call to open fails, failbit is set. Because a call to open might fail, it is usually a good idea to verify that the open succeeded:</p>
-<pre><code class="c++">if(out){
+<pre><code class="c++">if(out)&#123;
  /**/
-}
+&#125;
 </code></pre>
 <p>Once a file stream has been opened, it remains associated with the specified file. Indeed, calling open on a file stream that is already open will fail and set failbit. Subsequent attempts to use that file stream will fail. To associate a file stream with a different file, we must first close the existing file. Once the file is closed, we can open a new one.</p>
 <p>Each stream has an associated file mode that represents how the file may be used. Next table lists the file modes and their meanings.</p>
@@ -611,12 +611,12 @@ int main() {
 <tr>
 <td style="text-align:center">in</td>
 <td><strong>input</strong></td>
-<td>File open for reading: the <em><a href="http://www.cplusplus.com/fstream::rdbuf" target="_blank" rel="noopener">internal stream buffer</a></em> supports input operations.</td>
+<td>File open for reading: the <em><a target="_blank" rel="noopener" href="http://www.cplusplus.com/fstream::rdbuf">internal stream buffer</a></em> supports input operations.</td>
 </tr>
 <tr>
 <td style="text-align:center">out</td>
 <td><strong>output</strong></td>
-<td>File open for writing: the <em><a href="http://www.cplusplus.com/fstream::rdbuf" target="_blank" rel="noopener">internal stream buffer</a></em> supports output operations.</td>
+<td>File open for writing: the <em><a target="_blank" rel="noopener" href="http://www.cplusplus.com/fstream::rdbuf">internal stream buffer</a></em> supports output operations.</td>
 </tr>
 <tr>
 <td style="text-align:center">binary</td>
@@ -684,35 +684,35 @@ int main() {
 #include &lt;sstream&gt;
 #include &lt;string&gt;
 #include &lt;vector&gt;
-class Info {
+class Info &#123;
 public:
  //constructor
- Info(std::string n) : name(n) {}
+ Info(std::string n) : name(n) &#123;&#125;
 
  //add more phone number
- void add_phone(std::string ph) {
+ void add_phone(std::string ph) &#123;
   phone.push_back(ph);
- }
+ &#125;
 
  //print information
- void print(std::ostream&amp; os) {
+ void print(std::ostream&amp; os) &#123;
   os &lt;&lt; &quot;Name: &quot; &lt;&lt; &quot;\n&quot;;
   int count = 1;
-  for (auto i = phone.begin(); i &lt; phone.end(); i++) {
+  for (auto i = phone.begin(); i &lt; phone.end(); i++) &#123;
    os &lt;&lt; &quot;phone&quot; &lt;&lt; count &lt;&lt; &quot;: &quot; &lt;&lt; *i &lt;&lt; &quot;\n&quot;;
-  }
+  &#125;
   os &lt;&lt; &quot;\n&quot;;
- }
+ &#125;
 private:
  std::string name;
  std::vector&lt;std::string&gt; phone;
-};
+&#125;;
 
-int main() {
+int main() &#123;
  std::istringstream in;
  std::string info;
  std::vector&lt;Info&gt; contacts;
- while (getline(std::cin,info)) {
+ while (getline(std::cin,info)) &#123;
   in.str(info);
   std::string name;
   std::string phone_number;
@@ -720,16 +720,16 @@ int main() {
   in &gt;&gt; name;
   Info peo(name);
   //read phone number
-  while (in &gt;&gt; phone_number) {
+  while (in &gt;&gt; phone_number) &#123;
    peo.add_phone(phone_number);
-  }
+  &#125;
   contacts.push_back(peo);
-  for (auto i = contacts.begin(); i &lt; contacts.end(); i++) {
+  for (auto i = contacts.begin(); i &lt; contacts.end(); i++) &#123;
    i-&gt;print(std::cout);
-  }
- }
+  &#125;
+ &#125;
  return 0;
-}
+&#125;
 </code></pre>
 
         </div>
@@ -1045,6 +1045,16 @@ int main() {
       </li>
     
       <li>
+        <a href="/tags/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-tag" aria-hidden="true"></i>
+            标签
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
         <a href="javascript:;">
           <span class="faa-parent animated-hover">
             <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
@@ -1080,16 +1090,6 @@ int main() {
           <span class="faa-parent animated-hover">
             <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
             友人帐
-          </span>
-        </a>
-        
-      </li>
-    
-      <li>
-        <a href="/donate/">
-          <span class="faa-parent animated-hover">
-            <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
-            赞赏
           </span>
         </a>
         

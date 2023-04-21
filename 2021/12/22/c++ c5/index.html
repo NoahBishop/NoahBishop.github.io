@@ -329,6 +329,16 @@
               </li>
             
               <li>
+                <a href="/tags/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-tag" aria-hidden="true"></i>
+                    标签
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
                 <a href="javascript:;">
                   <span class="faa-parent animated-hover">
                     <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
@@ -364,16 +374,6 @@
                   <span class="faa-parent animated-hover">
                     <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
                     友人帐
-                  </span>
-                </a>
-                
-              </li>
-            
-              <li>
-                <a href="/donate/">
-                  <span class="faa-parent animated-hover">
-                    <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
-                    赞赏
                   </span>
                 </a>
                 
@@ -580,35 +580,35 @@ vector&lt;vector&lt;string&gt; &gt;;
 <h3 id="Iterators"><a href="#Iterators" class="headerlink" title="Iterators"></a>Iterators</h3><p>An <strong>iterator</strong> <strong>range</strong> is denoted by a pair of iterators each of which refers to an element, or to one past the last element, in the same container. These two iterators, often referred to as <strong>begin</strong> and <strong>end</strong>—or (somewhat misleadingly) as <strong>first</strong> and <strong>last</strong>—mark a range of elements from the container. The name last, although commonly used, is a bit misleading, because the second iterator never refers to the last element of the range. Instead, it refers to a point one <strong>past the last element</strong>.</p>
 <p>This element range is called a <strong>left-inclusive interval</strong>. The standard mathematical notation for such a range is <code>[begin, end)</code>.</p>
 <h3 id="begin-and-end-Members"><a href="#begin-and-end-Members" class="headerlink" title="begin and end Members"></a>begin and end Members</h3><p>The <strong>begin</strong> and <strong>end</strong> operations yield iterators that refer to the first and one past the last element in the container. These iterators are most often used to form an iterator range that encompasses all the elements in the container. The versions with an <code>r</code> return reverse iterators. Those that start with a <code>c</code> return the const version of the related iterator:</p>
-<pre><code class="c++">list&lt;string&gt; a = {&quot;Milton&quot;, &quot;Shakespeare&quot;, &quot;Austen&quot;};
+<pre><code class="c++">list&lt;string&gt; a = &#123;&quot;Milton&quot;, &quot;Shakespeare&quot;, &quot;Austen&quot;&#125;;
 auto it1 = a.begin(); // list&lt;string&gt;::iterator
 auto it2 = a.rbegin(); // list&lt;string&gt;::reverse_iterator
 auto it3 = a.cbegin(); // list&lt;string&gt;::const_iterator
 auto it4 = a.crbegin();// list&lt;string&gt;::const_reverse_iterator
 </code></pre>
 <h3 id="Assignment-and-swap"><a href="#Assignment-and-swap" class="headerlink" title="Assignment and swap"></a>Assignment and swap</h3><p>The assignment-related operators <strong>act on the entire container</strong>. The assignment operator replaces the entire range of elements in the left hand container with copies of the elements from the right-hand operand:</p>
-<pre><code class="c++">int main() {
+<pre><code class="c++">int main() &#123;
  vector&lt;int&gt; k(10, 20);
  vector&lt;int&gt; m(5, 40);
  k = m;
- for (auto i = k.begin(); i != k.cend(); i++) {
+ for (auto i = k.begin(); i != k.cend(); i++) &#123;
   cout &lt;&lt; *i &lt;&lt; &quot; &quot;;
- }
+ &#125;
  return 0;
-}
+&#125;
 //output
 40 40 40 40 40 
 </code></pre>
 <p>The assignment operator requires that the left-hand and right-hand operands have the <strong>same type</strong>. It copies all the elements from the right-hand operand into the left-hand operand. The sequential containers (except array) also define a member named assign that lets us assign from a <strong>different but compatible type</strong>, or assign from a subsequence of a container.</p>
-<pre><code class="c++">int main() {
+<pre><code class="c++">int main() &#123;
  vector&lt;char&gt; k(10, &#39;A&#39;);
  vector&lt;int&gt; m(5, 40);
  k.assign(m.begin(), m.end());
- for (auto i = k.begin(); i != k.cend(); i++) {
+ for (auto i = k.begin(); i != k.cend(); i++) &#123;
   cout &lt;&lt; *i &lt;&lt; &quot;&quot;;
- }
+ &#125;
  return 0;
-}
+&#125;
 //output
 ( ( ( ( ( 
 </code></pre>
@@ -617,72 +617,72 @@ auto it4 = a.crbegin();// list&lt;string&gt;::const_reverse_iterator
 slist1.assign(10, &quot;Hiya!&quot;); // ten elements; each one is Hiya !
 </code></pre>
 <p>The <code>swap</code> operation exchanges the contents of two containers of the same type. After the call to swap, the elements in the two containers are interchanged:</p>
-<pre><code class="c++">int main() {
+<pre><code class="c++">int main() &#123;
  vector&lt;int&gt; k(5, 20);
  vector&lt;int&gt; m(5, 40);
  k.swap(m);
- for (auto i = k.begin(); i != k.cend(); i++) {
+ for (auto i = k.begin(); i != k.cend(); i++) &#123;
   cout &lt;&lt; *i &lt;&lt; &quot; &quot;;
- }
- for (auto i = m.begin(); i != m.cend(); i++) {
+ &#125;
+ for (auto i = m.begin(); i != m.cend(); i++) &#123;
   cout &lt;&lt; *i &lt;&lt; &quot; &quot;;
- }
+ &#125;
  return 0;
-}
+&#125;
 //output
 40 40 40 40 40 
 20 20 20 20 20 
 </code></pre>
 <h2 id="Sequential-Container-Operations"><a href="#Sequential-Container-Operations" class="headerlink" title="Sequential Container Operations"></a>Sequential Container Operations</h2><h3 id="Add-elements"><a href="#Add-elements" class="headerlink" title="Add elements"></a>Add elements</h3><p>Excepting array, all of the library containers provide flexible memory management. We can add or remove elements dynamically changing the size of the container at run time.</p>
 <p><code>push_back</code> appends an element to the back of a vector. Aside from array and forward_list, every sequential container (including the string type) supports push_back. The call to push_back creates a new element at the end of container, increasing the size of container by 1. The value of that element is a <strong>copy</strong> of word. The type of container can be any of list, vector, or deque. Because string is just a container of characters, we can use push_back to <strong>add characters</strong> to the end of the string:</p>
-<pre><code class="c++">int main() {
+<pre><code class="c++">int main() &#123;
  string s1 = &quot;hell&quot;;
  s1.push_back(&#39;o&#39;); // s1 is hello
  return 0;
-}
+&#125;
 </code></pre>
 <p>In addition to <code>push_back</code>, the <strong>list</strong>, <strong>forward_list</strong>, and <strong>deque</strong> containers support an analogous operation named <code>push_front</code>. This operation inserts a new element at the front of the container:</p>
-<pre><code class="c++">int main() {
+<pre><code class="c++">int main() &#123;
  deque&lt;int&gt; k(1, 5);
  k.push_back(6);
  k.push_front(4);
  return 0;
-}
+&#125;
 // k is a deque with elemrnts 4,5,6
 </code></pre>
 <p>More generally, the <code>insert</code> members let us insert zero or more elements at any point in the container. The insert members are supported for <strong>vector</strong>, <strong>deque</strong>, <strong>list</strong>, and <strong>string</strong>. Each of the insert functions takes <strong>an iterator as its first argument</strong>. The iterator indicates where in the container to put the element(s).</p>
-<pre><code class="c++">int main() {
- vector&lt;int&gt; k = { 1,2,4,5 };
+<pre><code class="c++">int main() &#123;
+ vector&lt;int&gt; k = &#123; 1,2,4,5 &#125;;
  auto it = k.begin();
  it += 2;
  k.insert(it, 3);
  return 0;
-}
+&#125;
 //k is a vector with elements 1,2,3,4,5
 </code></pre>
 <p>The arguments to insert that appear after the initial iterator argument are analogous to the container constructors that take the same parameters. The version that takes an element count and a value adds the <strong>specified number of identical</strong>.</p>
-<pre><code class="c++">int main() {
+<pre><code class="c++">int main() &#123;
  vector&lt;int&gt; k;
- // k = {1}
+ // k = &#123;1&#125;
  k.insert(k.end(), 1, 1);
- // k = {1,2,3}
- k.insert(k.end(), { 2,3 });
- // k = {1,2,3,4,5}
- vector&lt;int&gt; t = { 4,5 };
+ // k = &#123;1,2,3&#125;
+ k.insert(k.end(), &#123; 2,3 &#125;);
+ // k = &#123;1,2,3,4,5&#125;
+ vector&lt;int&gt; t = &#123; 4,5 &#125;;
  k.insert(k.end(), t.begin(), t.end());
  return 0;
-}
+&#125;
 </code></pre>
 <p>Under the <strong>new standard</strong>, the versions of insert that take a count or a range return an iterator to the first element that was inserted. (In prior versions of the library, these operations returned void.) We can use the value returned by insert to repeatedly insert elements at a specified position in the container:</p>
-<pre><code class="c++">int main() {
+<pre><code class="c++">int main() &#123;
  vector&lt;int&gt; k;
  auto iter = k.begin();
- for (int i = 0; i &lt; 5; i++) {
+ for (int i = 0; i &lt; 5; i++) &#123;
   iter = k.insert(iter, i);
- }
+ &#125;
  return 0;
-}
-// k = {4,3,2,1,0}
+&#125;
+// k = &#123;4,3,2,1,0&#125;
 </code></pre>
 <p>The new standard introduced three new members—<strong>emplace_front</strong>, <strong>emplace</strong>, and <strong>emplace_back</strong>—that <code>construct</code> rather than <code>copy</code> elements. These operations correspond to the <strong>push_front</strong>, <strong>insert</strong>, and <strong>push_back</strong> operations in that they let us put an element at the front of the container, in front of a given position, or at the back of the container, respectively.</p>
 <pre><code class="c++">c.emplace_back(&quot;978-0590353403&quot;, 25, 15.99);
@@ -690,30 +690,30 @@ c.push_back(Sales_data(&quot;978-0590353403&quot;, 25, 15.99));
 </code></pre>
 <p>The call to <code>emplace_back</code> and the second call to <code>push_back</code> both create new Sales_data objects. In the call to emplace_back, that object is created directly in space managed by the container. The call to push_back creates a local temporary object that is pushed onto the container.</p>
 <h3 id="Accessing-Elements"><a href="#Accessing-Elements" class="headerlink" title="Accessing Elements"></a>Accessing Elements</h3><p>Each sequential container, including <code>array</code>, has a front member, and all except <code>forward_list</code> also have a <code>back</code> member. These operations return a <code>reference</code> to the first and last element, respectively:</p>
-<pre><code class="c++">if (!c.empty()) {
+<pre><code class="c++">if (!c.empty()) &#123;
  // val and val2 are copies of the value of the first element in c
  auto val = *c.begin(), val2 = c.front();
  // val3 and val4 are copies of the of the last element in c
  auto last = c.end();
  auto val3 = *(--last); // can&#39;t decrement forward_list iterators
  auto val4 = c.back(); // not supported by forward_list
-}
+&#125;
 </code></pre>
 <p>The containers that provide fast random access (string, vector, deque, and array) also provide the subscript operator <code>[]</code>. As we’ve seen, the subscript operator takes an index and returns a reference to the element at that position in the container. The index must be <strong>“in range”</strong> (i.e., greater than or equal to 0 and less than the size of the container). It is up to the program to ensure that the index is valid; the subscript operator does not check whether the index is in range. Using an out-of-range value for an index is a serious programming error, but one that the compiler will not detect.</p>
 <p>If we want to ensure that our index is valid, we can use the <code>at</code> member instead. The at member acts like the subscript operator, but if the index is invalid, at throws an out_of_range exception.</p>
 <h3 id="Erasing-Elements"><a href="#Erasing-Elements" class="headerlink" title="Erasing Elements"></a>Erasing Elements</h3><p>Just as there are several ways to add elements to a (no-array) container there are also several ways to remove elements.</p>
 <p>The <code>pop_front</code> and <code>pop_back</code> functions remove the first and last elements, respectively. Just as there is no <code>push_front</code> for vector and string, there is also no <code>pop_front</code> for those types. Similarly, <code>forward_list</code> does not have pop_back. Like the element access members, we may not use a pop operation on an empty container.</p>
-<pre><code class="c++">int main() {
- deque&lt;int&gt; k = { 1,1,2,3,3 };
+<pre><code class="c++">int main() &#123;
+ deque&lt;int&gt; k = &#123; 1,1,2,3,3 &#125;;
  k.pop_back();
  k.pop_front();
  return 0;
-}
-// k = {1,2,3}
+&#125;
+// k = &#123;1,2,3&#125;
 </code></pre>
 <p>The <code>erase</code> members remove element(s) at a specified point in the container. We can delete a single element denoted by an iterator or a range of elements marked by a pair of iterators. Both forms of erase return an iterator <strong>referring to the location</strong> after the (last) element that was removed.</p>
-<pre><code class="c++">int main() {
- list&lt;int&gt; lst = { 0,1,2,3,4,5,6,7,8,9 };
+<pre><code class="c++">int main() &#123;
+ list&lt;int&gt; lst = &#123; 0,1,2,3,4,5,6,7,8,9 &#125;;
  auto it = lst.begin();
  while (it != lst.end())
   if (*it % 2) // if the element is odd
@@ -721,17 +721,17 @@ c.push_back(Sales_data(&quot;978-0590353403&quot;, 25, 15.99));
   else
    ++it;
  return 0;
-}
+&#125;
 </code></pre>
 <p>delete a range of elements:</p>
-<pre><code class="c++">int main() {
- vector&lt;int&gt; lst = { 0,1,2,3,4,5,6,7,8,9 };
+<pre><code class="c++">int main() &#123;
+ vector&lt;int&gt; lst = &#123; 0,1,2,3,4,5,6,7,8,9 &#125;;
  auto it_beg = lst.begin();
  auto it_end = lst.begin() + 5;
  lst.erase(it_beg, it_end);
  return 0;
-}
-// lst = {5,6,7,8,9}
+&#125;
+// lst = &#123;5,6,7,8,9&#125;
 </code></pre>
 <h3 id="Resizing-a-Container"><a href="#Resizing-a-Container" class="headerlink" title="Resizing a Container"></a>Resizing a Container</h3><p>With the usual exception of arrays, we can use resize, to make a container larger or smaller. If the current size is greater than the requested size, elements are deleted from the back of the container; if the current size is less than the new size, elements are added to the back of the container:</p>
 <pre><code class="c++">list&lt;int&gt; ilist(10, 42); // ten ints: each has value 42
@@ -742,13 +742,13 @@ ilist.resize(5); // erases 20 elements from the back of ilist
 <h2 id="How-a-vector-Grows"><a href="#How-a-vector-Grows" class="headerlink" title="How a vector Grows"></a>How a vector Grows</h2><p>To support fast random access, vector elements are stored <strong>contiguously</strong>—each element is adjacent to the previous element. If there is no room for the new element, the container can’t just add an element<br>somewhere else in memory—the elements must be contiguous. Instead, the container must allocate new memory to hold the existing elements plus the new one, move the elements from the old location into the new space, add the new element, and deallocate the old memory. If vector did this memory allocation and deallocation each time we added an element, performance would be unacceptably slow.</p>
 <p>To avoid these costs, library implementors use allocation strategies that reduce the number of times the container is reallocated. It is important to understand the difference between <code>capacity</code> and <code>size</code>. The <code>size</code> of a container is the number of elements it already holds; its <code>capacity</code> is how many elements it can hold before more space must be allocated.</p>
 <p>A vector may be reallocated only when the user performs an insert operation when the size equals capacity or by a call to resize or reserve with a value that exceeds the current capacity. How much memory is allocated beyond the specified amount is up to the implementation.</p>
-<pre><code class="c++">int main() {
+<pre><code class="c++">int main() &#123;
  vector&lt;int&gt; ivec(50, 1);
  cout &lt;&lt; ivec.capacity() &lt;&lt; endl;
  ivec.push_back(1);
  cout &lt;&lt; ivec.capacity() &lt;&lt; endl;
  return 0;
-}
+&#125;
 // in my computer the output is
 // 50
 // 100
@@ -768,14 +768,14 @@ s.insert(s.size(), 5, &#39;!&#39;);
 s.erase(s.size() - 5, 5); // erase the last five characters from s
 </code></pre>
 <p>The string class defines two additional members, <code>append</code> and <code>replace</code>, that can change the contents of a string. The append operation is a shorthand way of inserting at the end:</p>
-<pre><code class="c++">int main() {
+<pre><code class="c++">int main() &#123;
  string s(&quot;C++ Primer&quot;); // initialize s and s2 to &quot;C++Primer
  s.append(&quot; 4th Ed.&quot;);
  cout &lt;&lt; s &lt;&lt; endl;
  s.replace(11, 3, &quot;5th&quot;);
  cout &lt;&lt; s &lt;&lt; endl;
  return 0;
-}
+&#125;
 // output
 // C++ Primer 4th Ed.
 // C++ Primer 5th Ed.
@@ -790,32 +790,32 @@ s.erase(s.size() - 5, 5); // erase the last five characters from s
 </thead>
 <tbody>
 <tr>
-<td><a href="https://www.cplusplus.com/reference/string/string/find/" target="_blank" rel="noopener"><strong>find</strong></a></td>
+<td><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/string/string/find/"><strong>find</strong></a></td>
 <td>Find first occurrence of content in string</td>
 </tr>
 <tr>
-<td><a href="https://www.cplusplus.com/reference/string/string/rfind/" target="_blank" rel="noopener"><strong>rfind</strong></a></td>
+<td><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/string/string/rfind/"><strong>rfind</strong></a></td>
 <td>Find last occurrence of content in string</td>
 </tr>
 <tr>
-<td><a href="https://www.cplusplus.com/reference/string/string/find_first_of/" target="_blank" rel="noopener"><strong>find_first_of</strong></a></td>
+<td><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/string/string/find_first_of/"><strong>find_first_of</strong></a></td>
 <td>Find any character match in string</td>
 </tr>
 <tr>
-<td><a href="https://www.cplusplus.com/reference/string/string/find_last_of/" target="_blank" rel="noopener"><strong>find_last_of</strong></a></td>
+<td><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/string/string/find_last_of/"><strong>find_last_of</strong></a></td>
 <td>Find character in string from the end</td>
 </tr>
 <tr>
-<td><a href="https://www.cplusplus.com/reference/string/string/find_first_not_of/" target="_blank" rel="noopener"><strong>find_first_not_of</strong></a></td>
+<td><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/string/string/find_first_not_of/"><strong>find_first_not_of</strong></a></td>
 <td>Find absence of character in string</td>
 </tr>
 <tr>
-<td><a href="https://www.cplusplus.com/reference/string/string/find_last_not_of/" target="_blank" rel="noopener"><strong>find_last_not_of</strong></a></td>
+<td><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/string/string/find_last_not_of/"><strong>find_last_not_of</strong></a></td>
 <td>Find non-matching character in string from the end</td>
 </tr>
 </tbody>
 </table>
-<pre><code class="c++">int main() {
+<pre><code class="c++">int main() &#123;
  string s(&quot;AA BB AA DD AA BB AA&quot;);
  // return the first match position
  auto pos = s.find(&quot;AA&quot;);
@@ -836,7 +836,7 @@ s.erase(s.size() - 5, 5); // erase the last five characters from s
  pos = s.find_last_not_of(&quot;AD &quot;);
  cout &lt;&lt; pos &lt;&lt; s.substr(pos) &lt;&lt; endl;
  return 0;
-}
+&#125;
 //output
 //0AA BB AA DD AA BB AA
 //18AA
@@ -848,13 +848,13 @@ s.erase(s.size() - 5, 5); // erase the last five characters from s
 <p>We can pass an optional starting position to the find operations. This optional argument indicates the <strong>position from which to start the search</strong>. By default, that position is set to zero. One common programming pattern uses this optional argument to loop through a string finding all occurrences:</p>
 <pre><code class="c++">string::size_type pos = 0;
 // each iteration finds the next number in name
-while ((pos = name.find_first_of(numbers, pos))!= string::npos) {
+while ((pos = name.find_first_of(numbers, pos))!= string::npos) &#123;
  cout &lt;&lt; &quot;found number at index: &quot; &lt;&lt; pos &lt;&lt; &quot; element is &quot; &lt;&lt; name[pos] &lt;&lt; endl;
  ++pos; // move to the next character
-}
+&#125;
 </code></pre>
 <h3 id="Compare"><a href="#Compare" class="headerlink" title="Compare"></a>Compare</h3><p>In addition to the relational operators, the string library provides a set of <code>compare</code> functions that are similar to the C library <code>strcmp</code> function. The function <code>compare</code> returns zero or a positive or negative value depending on whether s is equal to, greater than, or less than the string formed from the given arguments.</p>
-<pre><code class="c++">int main() {
+<pre><code class="c++">int main() &#123;
  std::string str1(&quot;green apple&quot;);
  std::string str2(&quot;red apple&quot;);
 
@@ -871,16 +871,16 @@ while ((pos = name.find_first_of(numbers, pos))!= string::npos) {
   std::cout &lt;&lt; &quot;therefore, both are apples&quot; &lt;&lt; endl;
 
  return 0;
-}
+&#125;
 //output
 //green apple is not red apple
 //still, green apple is an apple
 //and red apple is also an apple
 //therefore, both are apples
 </code></pre>
-<p>previous code show the most common usage, more details you can check this <a href="https://www.cplusplus.com/reference/string/string/compare/" target="_blank" rel="noopener">website</a>.</p>
+<p>previous code show the most common usage, more details you can check this <a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/string/string/compare/">website</a>.</p>
 <h3 id="Numeric-Conversions"><a href="#Numeric-Conversions" class="headerlink" title="Numeric Conversions"></a>Numeric Conversions</h3><p>Strings often contain characters that represent numbers. In c++ 11 the new standard introduced several functions that convert between numeric data and library strings:</p>
-<pre><code class="c++">int main() {
+<pre><code class="c++">int main() &#123;
  // converts the double i to its character representation
  // note output the i and s is different
  double i = 42.97538045793466769837795;
@@ -894,26 +894,26 @@ while ((pos = name.find_first_of(numbers, pos))!= string::npos) {
  string j = &quot;6745&quot;;
  int toi = stoi(k);
  return 0;
-}
+&#125;
 </code></pre>
 <p>the function that string to numeric type can be think prefix <code>sto</code> add a suffix represent the numeric type, <code>stoi</code> means string to int, <code>stof</code> means string to float. etc…</p>
 <h2 id="Container-Adaptors"><a href="#Container-Adaptors" class="headerlink" title="Container Adaptors"></a>Container Adaptors</h2><p>In addition to the sequential containers, the library defines three sequential container adaptors: <code>stack</code>, <code>queue</code>, and <code>priority_queue</code>. An adaptor is a general concept in the library. There are container, iterator, and function adaptors. Essentially, an adaptor is a mechanism for making one thing act like another. A container adaptor takes an existing container type and makes it act like a different type.</p>
 <h3 id="Defining-an-Adaptor"><a href="#Defining-an-Adaptor" class="headerlink" title="Defining an Adaptor"></a>Defining an Adaptor</h3><p>Each adaptor defines two constructors: the default constructor that creates an empty object, and a constructor that takes a container and initializes the adaptor by copying the given container.</p>
-<pre><code class="c++">deque&lt;int&gt; mydeque = { 1,2,3,4,5 };
+<pre><code class="c++">deque&lt;int&gt; mydeque = &#123; 1,2,3,4,5 &#125;;
 // empty stack
 stack&lt;int&gt; myst1;
 // copies elements from deq into stk
 stack&lt;int&gt; myst2(mydeque);
 </code></pre>
 <p>By default both <code>stack</code> and <code>queue</code> are implemented in terms of <code>deque</code>, and a <code>priority_queue</code> is implemented on a <code>vector</code>. We can override the default container type by naming a sequential container as a second type argument when we create the adaptor:</p>
-<pre><code class="c++">int main() {
- vector&lt;string&gt; svec = { &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot; };
+<pre><code class="c++">int main() &#123;
+ vector&lt;string&gt; svec = &#123; &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot; &#125;;
  // empty stack implemented on top of vector
  stack&lt;string, vector&lt;string&gt;&gt; str_stk;
  // str_stk2 is implemented on top of vector and initially holds a copy of svec
  stack&lt;string, vector&lt;string&gt;&gt; str_stk2(svec);
  return 0;
-}
+&#125;
 </code></pre>
 <ol>
 <li>A <code>stack</code> requires only <code>push_back</code>, <code>pop_back</code>, and <code>back</code> operations, so we can use any of the remaining container types for a stack.</li>
@@ -921,20 +921,20 @@ stack&lt;int&gt; myst2(mydeque);
 <li>A <code>priority_queue</code> requires <code>random access</code> in addition to the <code>front</code>, <code>push_back</code>, and <code>pop_back</code> operations; it can be built on a vector or a deque but not on a list.</li>
 </ol>
 <h3 id="Stack-Adaptor"><a href="#Stack-Adaptor" class="headerlink" title="Stack Adaptor"></a>Stack Adaptor</h3><p>The three most common methods in stack are <code>push</code>, <code>pop</code>, <code>top</code>, the <code>push</code> add a element to the top of stack, the <code>pop</code> remove a element to the top of stack, the <code>top</code> return the top of stack.</p>
-<pre><code class="c++">int main() {
+<pre><code class="c++">int main() &#123;
  stack&lt;int&gt; m;
  // add 1,2,3,4,5 by sequential
- for (int i = 0; i &lt; 5; i++) {
+ for (int i = 0; i &lt; 5; i++) &#123;
   m.push(i);
- }
+ &#125;
  // pop elemrnt
- for (int i = 0; i &lt; 5; i++) {
+ for (int i = 0; i &lt; 5; i++) &#123;
   cout &lt;&lt; m.top() &lt;&lt; &quot; &quot;;
   m.pop();
- }
+ &#125;
  cout &lt;&lt; endl;
  return 0;
-}
+&#125;
 //output
 //4 3 2 1 0 
 </code></pre>
@@ -948,20 +948,20 @@ stack&lt;int&gt; myst2(mydeque);
 <li><code>top</code>: return the most priority element in priority_queue (only valid in priority_queue)</li>
 </ol>
 <p>A priority_queue lets us establish a priority among the elements held in the queue. Newly added elements are placed ahead of all the elements with a lower priority. A restaurant that seats people according to their reservation time, regardless of when they arrive, is an example of a priority queue. By default, the library uses the <code>&lt;</code> operator on the element type to determine relative priorities. However we can override the default.</p>
-<pre><code class="c++">int main() {
+<pre><code class="c++">int main() &#123;
  queue&lt;int&gt; m;
  // add 1,2,3,4,5 by sequential
- for (int i = 0; i &lt; 5; i++) {
+ for (int i = 0; i &lt; 5; i++) &#123;
   m.push(i);
- }
+ &#125;
  // pop elemrnt
- for (int i = 0; i &lt; 5; i++) {
+ for (int i = 0; i &lt; 5; i++) &#123;
   cout &lt;&lt; m.front() &lt;&lt; &quot; &quot;;
   m.pop();
- }
+ &#125;
  cout &lt;&lt; endl;
  return 0;
-}
+&#125;
 //0 1 2 3 4 
 </code></pre>
 
@@ -1278,6 +1278,16 @@ stack&lt;int&gt; myst2(mydeque);
       </li>
     
       <li>
+        <a href="/tags/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-tag" aria-hidden="true"></i>
+            标签
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
         <a href="javascript:;">
           <span class="faa-parent animated-hover">
             <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
@@ -1313,16 +1323,6 @@ stack&lt;int&gt; myst2(mydeque);
           <span class="faa-parent animated-hover">
             <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
             友人帐
-          </span>
-        </a>
-        
-      </li>
-    
-      <li>
-        <a href="/donate/">
-          <span class="faa-parent animated-hover">
-            <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
-            赞赏
           </span>
         </a>
         

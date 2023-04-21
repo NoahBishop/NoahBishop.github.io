@@ -329,6 +329,16 @@
               </li>
             
               <li>
+                <a href="/tags/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-tag" aria-hidden="true"></i>
+                    标签
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
                 <a href="javascript:;">
                   <span class="faa-parent animated-hover">
                     <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
@@ -364,16 +374,6 @@
                   <span class="faa-parent animated-hover">
                     <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
                     友人帐
-                  </span>
-                </a>
-                
-              </li>
-            
-              <li>
-                <a href="/donate/">
-                  <span class="faa-parent animated-hover">
-                    <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
-                    赞赏
                   </span>
                 </a>
                 
@@ -466,10 +466,10 @@
 <h2 id="write-a-simple-c-program"><a href="#write-a-simple-c-program" class="headerlink" title="write a simple c++ program"></a>write a simple c++ program</h2><p>Every c++ program contains one or more <strong>functions</strong>, one of which must be named <strong>main</strong>. The operating system runs a C++ program by calling <strong>main</strong>, this is a simple c++ program.</p>
 <pre><code class="c++">#include&lt;cstdio&gt;
 int main()
-{
+&#123;
     printf(&quot;hello world!\n&quot;);
     return 0;
-}
+&#125;
 </code></pre>
 <p>A function definition has four elements: a <strong>return type</strong>, a <strong>function name</strong>, a (possibly empty) <strong>parameter list</strong> enclosed in parentheses, and a <strong>function body</strong>.</p>
 <p>In previous example, the <em>int</em> is return type, <em>main</em> is function name, and don’t have parameter. The function body is a block of statements starting with an open curly brace and ending with a close curly.</p>
@@ -511,13 +511,13 @@ int main()
 <pre><code class="c++">#include &lt;iostream&gt;
 
 int main()
-{
+&#123;
     int num1, num2;
     std::cout &lt;&lt; &quot;Enter two numbers:&quot; &lt;&lt; std::endl;
     std::cin &gt;&gt; num1 &gt;&gt; num2;
     std::cout &lt;&lt; &quot;the sum is:&quot; &lt;&lt; num1 + num2 &lt;&lt; std::endl;
     return 0;
-}
+&#125;
 //running
 //Enter two numbers:
 //10 20
@@ -537,7 +537,7 @@ compler think this line is a statement, because the comments is end*/
 <pre><code class="c++">#include &lt;iostream&gt;
 
 int main()
-{
+&#123;
  /*
  * this is a simple program that
  * add all even numbers between 0 to 20
@@ -545,27 +545,27 @@ int main()
  int n = 0, sum = 0;
  //while loop end when n greater than 20
  while (n &lt;= 20)
- {
+ &#123;
   //if n is a even number
-  if (n % 2 == 0) {
+  if (n % 2 == 0) &#123;
    sum += n;
-  }
+  &#125;
   n++;
- }
+ &#125;
  std::cout &lt;&lt; &quot;the sum of even numbers between 0 to 20 is &quot; &lt;&lt; sum &lt;&lt; std::endl;
 
  sum = 0;
  //for loop end when i greater than 20
  for (int i = 0; i &lt;= 20; i++)
- {
+ &#123;
   //if i is a even number
-  if (i % 2 == 0) {
+  if (i % 2 == 0) &#123;
    sum += i;
-  }
- }
+  &#125;
+ &#125;
  std::cout &lt;&lt; &quot;the sum of even numbers between 0 to 20 is &quot; &lt;&lt; sum &lt;&lt; std::endl;
     return 0;
-}
+&#125;
 </code></pre>
 <h2 id="Introducing-Classes"><a href="#Introducing-Classes" class="headerlink" title="Introducing Classes"></a>Introducing Classes</h2><p>one of the most difference between c language and c++ language is the c++ has classes. In c++, we define our data structure by define a classes, a class defines a type along with many operations that are related to this type. We will discuss more details in the next post.</p>
 
@@ -865,6 +865,16 @@ int main()
       </li>
     
       <li>
+        <a href="/tags/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-tag" aria-hidden="true"></i>
+            标签
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
         <a href="javascript:;">
           <span class="faa-parent animated-hover">
             <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
@@ -900,16 +910,6 @@ int main()
           <span class="faa-parent animated-hover">
             <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
             友人帐
-          </span>
-        </a>
-        
-      </li>
-    
-      <li>
-        <a href="/donate/">
-          <span class="faa-parent animated-hover">
-            <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
-            赞赏
           </span>
         </a>
         

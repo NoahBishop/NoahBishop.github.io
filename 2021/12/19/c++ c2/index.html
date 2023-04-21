@@ -329,6 +329,16 @@
               </li>
             
               <li>
+                <a href="/tags/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-tag" aria-hidden="true"></i>
+                    标签
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
                 <a href="javascript:;">
                   <span class="faa-parent animated-hover">
                     <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
@@ -364,16 +374,6 @@
                   <span class="faa-parent animated-hover">
                     <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
                     友人帐
-                  </span>
-                </a>
-                
-              </li>
-            
-              <li>
-                <a href="/donate/">
-                  <span class="faa-parent animated-hover">
-                    <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
-                    赞赏
                   </span>
                 </a>
                 
@@ -512,18 +512,18 @@
 <pre><code class="c++">#include &lt;iostream&gt;
 
 int main()
-{
+&#123;
  //you can use this statement check how many bytes for the type
     //change int to another type you want
     std::cout &lt;&lt; sizeof(int) &lt;&lt; std::endl;
     return 0;
-}
+&#125;
 </code></pre>
 <p>The type of an object defines the data that an object might contain and what operations that object can perform. Among the operations that many types support is the ability to convert objects of the given type to other, related types. Type conversions happen automatically when we use an object of one type where an object of another type is expected.</p>
 <pre><code class="c++">#include &lt;iostream&gt;
 
 int main()
-{
+&#123;
  //only b = 0 can&#39;t make b is false
     bool b = 10; // b is true
     //actually, true equal to 1 and false equal to 0
@@ -541,7 +541,7 @@ int main()
     //the int tpye has been convert to a unsigned before add operation
  std::cout &lt;&lt; u + i &lt;&lt; std::endl; // if 32-bit ints, prints 4294967264
     return 0;
-}
+&#125;
 </code></pre>
 <h3 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h3><p>A variable provides us with named storage that our programs can manipulate. Each variable in C++ has a type. The type determines the size and layout of the variable’s memory, the range of values that can be stored within that memory, and the set of operations that can be applied to the variable. C++ programmers tend to refer to variables as “variables” or “objects” interchangeably.</p>
 <p>The previous codes has explained how define a variable, but they are initialized, if you define a variable without an initializer, what that default value is depends on the type of the variable and may also depend on where the variable is defined. Some classes require that every object be explicitly initialized. The compiler will complain if we try to create an object of such a class with no initializer.</p>
@@ -565,14 +565,14 @@ extern double pi = 3.1416; // this is a error statement
 //names defined outside a function has global scope
 int a = 0;
 int main()
-{
+&#123;
  int sum = 0;
  // sum values from 1 through 10 inclusive
  for (int val = 1; val &lt;= 10; ++val)
   sum += val; // equivalent to sum = sum + val
  std::cout &lt;&lt; &quot;Sum of 1 to 10 inclusive is &quot; &lt;&lt; sum &lt;&lt; std::endl;
  return 0;
-}
+&#125;
 </code></pre>
 <p>Scopes can contain other scopes. The contained (or <strong>nested</strong>) scope is referred to as an inner scope, the containing scope is the outer scope. Once a name has been declared in a scope, that name can be used by scopes nested inside that scope. Names declared in the outer scope can also be redefined in an inner scope, this is a simple case.</p>
 <pre><code class="c++">#include &lt;iostream&gt;
@@ -580,7 +580,7 @@ int main()
 // to use a global variable and also define a local variable with the same name
 int reused = 42; // reused has global scope
 int main()
-{
+&#123;
  int unique = 0; // unique has block scope
  // output #1: uses global reused; prints 42 0
  std::cout &lt;&lt; reused &lt;&lt; &quot; &quot; &lt;&lt; unique &lt;&lt; std::endl;
@@ -590,14 +590,14 @@ int main()
  // output #3: explicitly requests the global reused; prints 42 0
  std::cout &lt;&lt; ::reused &lt;&lt; &quot; &quot; &lt;&lt; unique &lt;&lt; std::endl;
  return 0;
-}
+&#125;
 </code></pre>
 <h3 id="Compound-Types"><a href="#Compound-Types" class="headerlink" title="Compound Types"></a>Compound Types</h3><p>A compound type is a type that is defined in terms of another type. C++ has several compound types, two of which—<strong>references</strong> and <strong>pointers</strong>—we’ll cover in this chapter.</p>
 <p>A <strong>reference</strong> defines an alternative name for an object. A reference type “refers to” another type. We define a reference type by writing a declarator of the form &amp;d, where d is the name <strong>being declared</strong>: Once initialized, a reference remains bound to its <strong>initial object</strong>. There is no way to <strong>rebind</strong> a reference to refer to a different object. Because there is no way to rebind a reference, references must be <strong>initialized</strong>.</p>
 <pre><code class="c++">#include &lt;iostream&gt;
 
 int main()
-{
+&#123;
  int ival = 1024;
  int&amp; refVal = ival; // refVal refers to (is another name for) ival
  refVal = 100;
@@ -608,13 +608,13 @@ int main()
     double dval = 3.14;
  int &amp;refVal5 = dval; // error: initializer must be an int object
  return 0;
-}
+&#125;
 </code></pre>
 <p>A <strong>pointer</strong> is a compound type that “points to” another type. Like references, pointers are used for indirect access to other objects. Unlike a reference, <strong><em>a pointer is an object in its own right</em></strong>. Pointers can be <strong>assigned</strong> and <strong>copied</strong>; a single pointer can point to <strong>several different objects</strong> over its lifetime. Unlike a reference, a pointer need <strong>not</strong> be initialized at the time it is defined. Like other built-in types, pointers defined at block scope have undefined value if they are not initialized. the next case show how to use pointer:</p>
 <pre><code class="c++">#include &lt;iostream&gt;
 
 int main()
-{
+&#123;
  // create a empty pointer
  int* ptr = nullptr;
  // ptrToN holds the address of n; ptrToN is a pointer to n
@@ -634,7 +634,7 @@ int main()
  int *pi = &amp;ival; // pi points to an int
  int **ppi = &amp;pi; // ppi points to a pointer to an int
  return 0;
-}
+&#125;
 </code></pre>
 <p>(notice: Because references are not objects, they don’t have addresses. Hence, we may not define a pointer to a reference.)</p>
 <p>The type <strong>void*</strong> is a special pointer type that can hold the address of <strong>any object</strong>. Like any other pointer, a void<em> pointer holds an address, but the type of the object at that address is <strong>unknown</strong>, so we <strong>cannot</strong> use a void</em>to operate on the object it addresses—we don’t know that object’s type, and the type determines what operations we can perform on the object. Generally, we use a void* pointer to deal with memory as memory, rather than using the pointer to access the object stored in that memory.</p>
@@ -702,16 +702,16 @@ decltype((m)) d; // error: d is double&amp; and must be initialized
 decltype(m) e; // ok: e is an (uninitialized) double
 </code></pre>
 <h3 id="Defining-Our-Own-Data-Structures"><a href="#Defining-Our-Own-Data-Structures" class="headerlink" title="Defining Our Own Data Structures"></a>Defining Our Own Data Structures</h3><p>In C++ we define our own data types by defining a class. The library types string, istream, and ostream are all defined as classes, we will tell how to defined a full class in next several chapters, first we create a class that does not support any operations.</p>
-<pre><code class="c++">struct Sales_data {
+<pre><code class="c++">struct Sales_data &#123;
  std::string bookNo;
  unsigned units_sold = 0;
  double revenue = 0.0;
-};
+&#125;;
 </code></pre>
 <p>Our class begins with the keyword <strong>struct</strong>, followed by the name of the class and a (possibly empty) class body. The class body is surrounded by curly braces and forms a new scope. The names defined inside the class must be unique within the class but can reuse names defined outside the class. The close curly that ends the class body must be followed by a semicolon. The <strong>semicolon</strong> is needed because we can define variables after the class body:</p>
-<pre><code class="c++">struct Sales_data { /* ... */ } accum, trans, *salesptr;
+<pre><code class="c++">struct Sales_data &#123; /* ... */ &#125; accum, trans, *salesptr;
 // equivalent, but better way to define these objects
-struct Sales_data { /* ... */ };
+struct Sales_data &#123; /* ... */ &#125;;
 Sales_data accum, trans, *salesptr;
 </code></pre>
 <p>Generally, we define a class in a separate header file, typically, classes are stored in headers whose name derives from the name of the class. Headers often need to use facilities from other headers. For example,<br>because our Sales_data class has a string member, Sales_data.h must <strong>#include</strong> the string header. As we’ve seen, programs that use Sales_data also need to include the string header in order to use the <strong>bookNo</strong> member.</p>
@@ -722,11 +722,11 @@ Sales_data accum, trans, *salesptr;
 #ifndef SALES_DATA_H
 #define SALES_DATA_H
 #include &lt;string&gt;
-struct Sales_data {
+struct Sales_data &#123;
  std::string bookNo;
  unsigned units_sold = 0;
  double revenue = 0.0;
-};
+&#125;;
 #endif
 </code></pre>
 <p>The first time Sales_data.h is included, the <strong>#ifndef</strong> test will succeed. The preprocessor will process the lines following #ifndef up to the #endif. As a result, the preprocessor variable SALES_DATA_H will be defined and the contents of Sales_data.h will be copied into our program. If we include Sales_data.h later on in the same file, the #ifndef directive will be false. The lines between it and the #endif directive will be ignored. this is a simple case to statistics sales of book:</p>
@@ -735,7 +735,7 @@ struct Sales_data {
 #include &quot;Sales_data.h&quot;
 
 int main()
-{
+&#123;
  Sales_data book1, book2;
  double price = 0;
  // read the first transactions: ISBN, number of books sold, price per book
@@ -745,7 +745,7 @@ int main()
  std::cin &gt;&gt; book2.bookNo &gt;&gt; book2.units_sold &gt;&gt; price;
  book2.revenue = price * book2.units_sold;
  //add operation
- if (book1.bookNo == book2.bookNo) {
+ if (book1.bookNo == book2.bookNo) &#123;
   unsigned totalCnt = book1.units_sold + book2.units_sold;
   double totalRevenue = book1.revenue + book2.revenue;
   // print: ISBN, total sold, total revenue, average price per book
@@ -756,12 +756,12 @@ int main()
   else
    std::cout &lt;&lt; &quot;(no sales)&quot; &lt;&lt; std::endl;
   return 0;
- }
- else {
+ &#125;
+ else &#123;
   std::cout &lt;&lt; &quot;there are different books&quot; &lt;&lt; std::endl;
   return -1;
- }
-}
+ &#125;
+&#125;
 </code></pre>
 <h2 id="Strings-Vectors-and-Arrays"><a href="#Strings-Vectors-and-Arrays" class="headerlink" title="Strings, Vectors, and Arrays"></a>Strings, Vectors, and Arrays</h2><p>In addition to the built-in types covered in previous, C++ defines a rich library of abstract data types. Among the most important library types are <strong>string</strong>, which supports variable-length character strings, and <strong>vector</strong>, which defines variable-size collections. Associated with string and vector are companion types known as <strong>iterators</strong>, which are used to access the characters in a string or the elements in a vector.</p>
 <p>Before beginning our exploration of the library types, we’ll look at a mechanism for simplifying access to the names defined in the library.</p>
@@ -770,13 +770,13 @@ int main()
 // using declaration; when we use the name cin, we get the one from the namespacestd
 using std::cin;
 int main()
-{
+&#123;
  int i;
  cin &gt;&gt; i; // ok: cin is a synonym for std::cin
  cout &lt;&lt; i; // error: no using declaration; we must use the full name
  std::cout &lt;&lt; i; // ok: explicitly use cout from namepsace std
  return 0;
-}
+&#125;
 </code></pre>
 <p>Note “Headers Should <strong>Not</strong> Include using Declarations”, The reason is that the contents of a header are copied into the including program’s text. If a header has a using declaration, then every program that includes that header gets that same using declaration.</p>
 <h3 id="Library-string-Type"><a href="#Library-string-Type" class="headerlink" title="Library string Type"></a>Library string Type</h3><p>Each class defines how objects of its type can be initialized. A class may define many different ways to initialize objects of its type. examples:</p>
@@ -785,7 +785,7 @@ int main()
 using std::string;
 
 int main()
-{
+&#123;
  string s1;          // default initialization; s1 is the empty string
  string s2 = s1;     // s2 is a copy of s1
  string s3 = &quot;hello&quot;;// s3 is a copy of the string literal
@@ -793,7 +793,7 @@ int main()
  string s5(s1);      // s5 is a copy of s1
  string s6(&quot;hello&quot;); // s6 is a copy of the string literal
  return 0;
-}
+&#125;
 </code></pre>
 <p>When we initialize a variable using =, we are asking the compiler to <strong>copy initialize</strong> the object by copying the initializer on the right-hand side into the object being created. Otherwise, when we omit the =, we use <strong>direct initialization</strong>.</p>
 <pre><code class="c++">string s5 = &quot;hiya&quot;; // copy initialization
@@ -905,30 +905,30 @@ string s7 = &quot;hello&quot; + &quot;, &quot; + s2; // error: can&#39;t add str
 <p>Another of this kind of processing involves how we gain access to the characters themselves. Sometimes we need to process every character. Other times we need to process only a specific character, or we can stop processing once some condition is met.</p>
 <p>If we want to do something to every character in a string, by far the best approach is to use a statement introduced by the new standard: the <strong>range for</strong> statement.</p>
 <pre><code class="c++">string str = &quot;hello!!!&quot;;
-for (auto c : str) {   // for every char in str
+for (auto c : str) &#123;   // for every char in str
  cout &lt;&lt; c &lt;&lt; endl; // print the current character followed by a newline
-}
+&#125;
 //count the number of punctuation
 decltype(str.size()) punct = 0;
-for (auto c : str) {
- if (ispunct(c)){ // if the character is punctuation
+for (auto c : str) &#123;
+ if (ispunct(c))&#123; // if the character is punctuation
   ++punct;
- }
-}
+ &#125;
+&#125;
 cout &lt;&lt; punct &lt;&lt; endl;
 </code></pre>
 <p>If we want to change the value of the characters in a string, we must define the loop variable as a reference type, Remember that a reference is just another name for a given object.</p>
 <pre><code class="c++">string str = &quot;hello!!!&quot;;
-for (auto &amp;c : str) {
+for (auto &amp;c : str) &#123;
  c = toupper(c); // c is a reference, so the assignment changes the char in str
-}
+&#125;
 cout &lt;&lt; str &lt;&lt; endl;
 </code></pre>
 <p>A range for works well when we need to <strong>process every character</strong>. However, sometimes we need to access only a single character or to access characters until some condition is reached. There are two ways to access individual characters in a string: We can use a <strong>subscript</strong> or an <strong>iterator</strong>. The subscript operator (the [ ] operator) takes a <strong>string::size_type</strong> value that denotes the position of the character we want to access. Subscripts for strings start at zero, so str[0] is the first character, and the last character is in str[str.size() - 1]. we can rewrite previous as this:</p>
 <pre><code class="c++">for (decltype(str.size()) i = 0; i &lt; str.size(); i++)
-{
+&#123;
  str[i] = toupper(str[i]);
-}
+&#125;
 cout &lt;&lt; str &lt;&lt; endl;
 </code></pre>
 <p>When we use a subscript, we must ensure that the subscript is in range. That is, the subscript must be &gt;= 0 and &lt; the size() of the string. One way to simplify code that uses subscripts is always to use a variable of type string::size_type as the subscript. Because that type is unsigned, we ensure that the subscript cannot be less than zero.</p>
@@ -941,43 +941,43 @@ using std::string;
 using std::vector;
 
 int main()
-{
+&#123;
  vector&lt;int&gt; ivec;             //ivec holds objects of type int
  vector&lt;vector&lt;string&gt;&gt; strvec;//strvec holds objects of type vector&lt;string&gt;
  return 0;
-}
+&#125;
 </code></pre>
 <p>As with any class type, the vector template controls how we define and initialize vectors. Next code lists the most common ways to define vectors.</p>
 <pre><code class="c++">#include &lt;vector&gt;
 using std::vector;
 
 int main()
-{
+&#123;
  vector&lt;int&gt; ivec1; //default initlization, ivec1 is empty
  vector&lt;int&gt; ivec2 = ivec1; //ivec2 is copy of ivec1
  vector&lt;int&gt; ivec3(ivec1);  //ivec3 is copy of ivec1
  vector&lt;int&gt; ivec4(5, 1);   //ivec4 have 5 element with value 1
  vector&lt;int&gt; ivec5(5);      //ivec5 have 5 element with value initliazated
- vector&lt;int&gt; ivec6{ 1,2,3,4,5 };   //ivec6 have 1,2,3,4,5
- vector&lt;int&gt; ivec7 = { 1,2,3,4,5 };//ivec7 have 1,2,3,4,5
+ vector&lt;int&gt; ivec6&#123; 1,2,3,4,5 &#125;;   //ivec6 have 1,2,3,4,5
+ vector&lt;int&gt; ivec7 = &#123; 1,2,3,4,5 &#125;;//ivec7 have 1,2,3,4,5
  return 0;
-}
+&#125;
 </code></pre>
 <p>When we use parentheses, we are saying that the values we supply are to be used to construct the object. Thus, ivec4 and ivec5 use their initializers to determine the vector’s size, and its size and element values, respectively.</p>
 <p>When we use curly braces, {…}, we’re saying that, <strong>if possible</strong>, we want to <strong>list initialize</strong> the object. That is, if there is a way to use the values inside the curly braces as a list of element initializers, the class will do so. Only if it is not possible to list initialize the object will the <strong>other ways to initialize</strong> the object be considered.</p>
-<pre><code class="c++">vector&lt;string&gt; ivec8{10, &quot;hi&quot;}; // ivec8 has ten elements with value &quot;hi&quot;
-vector&lt;string&gt; ivec9{10};       // ivec9 has ten default-initialized elements
+<pre><code class="c++">vector&lt;string&gt; ivec8&#123;10, &quot;hi&quot;&#125;; // ivec8 has ten elements with value &quot;hi&quot;
+vector&lt;string&gt; ivec9&#123;10&#125;;       // ivec9 has ten default-initialized elements
 </code></pre>
 <hr>
 <p>Directly initializing the element of a vector just feasible only if we have a small number of known initial values or we want make a copy of a vector. More commonly, we use the <code>push_back</code> method <strong>add elements</strong> when running. The <code>push_back</code> operation takes a value and “pushes” that value as a new last<br>element onto the “back” of the vector. This code will add 0 to 99 to a vector in sequence:</p>
 <pre><code class="c++">vector&lt;int&gt; ivec1; //default initlization, ivec1 is empty
-for (int i = 0; i &lt; 100; i++){
+for (int i = 0; i &lt; 100; i++)&#123;
  ivec1.push_back(i); // add to ivec1
-}
+&#125;
 </code></pre>
 <p>The standard requires that vector implementations can efficiently add elements at run time. Because vectors grow efficiently, it is often unnecessary and can result in poorer performance to define a vector of a specific size. Note we cannot use a range for if the body of the loop adds elements to the vector. The body of a range for must not change the size of the sequence over which it is iterating.</p>
-<p>In addition to push_back, vector provides only a few other operations, most of which are similar to the corresponding operations on strings. we can get full operations in <a href="https://www.cplusplus.com/reference/vector/vector/" target="_blank" rel="noopener">here</a>. We access the elements of a vector the same way that we access the characters in a string:</p>
-<pre><code class="c++">vector&lt;int&gt; v{1,2,3,4,5,6,7,8,9};
+<p>In addition to push_back, vector provides only a few other operations, most of which are similar to the corresponding operations on strings. we can get full operations in <a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/vector/vector/">here</a>. We access the elements of a vector the same way that we access the characters in a string:</p>
+<pre><code class="c++">vector&lt;int&gt; v&#123;1,2,3,4,5,6,7,8,9&#125;;
 for (auto &amp;i : v) // for each element in v (note: i is a reference)
  i *= i; // square the element value
 for (auto i : v) // for each element in v
@@ -1013,23 +1013,23 @@ using std::string;
 using std::vector;
 
 int main()
-{
- vector&lt;int&gt; v{ 1,2,3,4,5,6,7,8,9 };
+&#123;
+ vector&lt;int&gt; v&#123; 1,2,3,4,5,6,7,8,9 &#125;;
  //b++: Increments b to refer next element
  //b--: Decrements b to refer previous element
  //b != v.end(): Compare two iterator for inequality
- for (auto b = v.begin(); b != v.end(); b++){
+ for (auto b = v.begin(); b != v.end(); b++)&#123;
   //*b get the reference to the element donated by b
   *b *= *b;
- }
+ &#125;
  Sales_data k;
  k.bookNo = &quot;0-321-71411-3&quot;;
- vector&lt;Sales_data&gt; sale = {k};
+ vector&lt;Sales_data&gt; sale = &#123;k&#125;;
  auto sb = sale.begin(), se = sale.end();
  //equal to (*sb).bookNo will print 0-321-71411-3
  cout &lt;&lt; sb-&gt;bookNo &lt;&lt; endl;
  return 0;
-}
+&#125;
 </code></pre>
 <p>Like pointer, there ere also has const iterator, when you define a const container(such  as vector) or string, the begin and end members are const iterator. You also can use cbigin or cend to get a const iterator when you don not want change element.</p>
 <p>Except previous operation, they are some operations for special container. Iterators for string and vector support additional operations that can move an iterator multiple elements at a time. They also support all the relational operators. These operations, which are often referred to as iterator arithmetic, are described in the next Table.</p>
@@ -1069,7 +1069,7 @@ int main()
 int a[10];   //array of ten ints
 int* b[10];  //array of ten points to int
 int d[p];    //error: p is not a constexpr
-int c[] = { 1,2,3 }; //array of three ints, 1 and 2 and 3
+int c[] = &#123; 1,2,3 &#125;; //array of three ints, 1 and 2 and 3
 </code></pre>
 <p>When we define an array, we must specify a <strong>type</strong> for the array. We cannot use <strong>auto</strong> to deduce the type from a list of initializers. As with vector, arrays hold objects. Thus, there are no arrays of references.</p>
 <p>Character arrays have an additional form of initialization. We can initialize such arrays from a string literal. When we use this form of initialization, it is important to remember that string literals end with a null character.</p>
@@ -1084,18 +1084,18 @@ int(&amp;r)[10] = a;  //a reference refer to a
 <pre><code class="c++">#include &lt;iostream&gt;
 
 int main()
-{
+&#123;
  int f = 10;
  int a[10];   //array of ten ints
- for (auto &amp;i : a) {
+ for (auto &amp;i : a) &#123;
   i = f--;
- }
+ &#125;
  //p is a pointer point to the first element of a
  auto p = a;
  //will print 10
  std::cout &lt;&lt; *p &lt;&lt; std::endl;
  return 0;
-}
+&#125;
 </code></pre>
 <p>Array is not a class, so it is not has member donated to begin and end, c++ provide a way to get pointer to fist element and last element. We will use this function in  next code.</p>
 <p>Many C++ programs predate the standard library and do not use the string and vector types. Moreover, many C++ programs interface to programs written in C or other languages that cannot use the C++ library. Hence, programs written in modern C++ may have to interface to code that uses arrays and/or C-style character strings. The C++ library offers facilities to make the interface easier to manage.</p>
@@ -1105,15 +1105,15 @@ int main()
 using std::string; using std::vector; using std::begin; using std::end;
 
 int main()
-{
+&#123;
  char str[] = &quot;Hello&quot;;
  string s(str);  //c string to std string
  const char* cs = s.c_str(); // std string to c string, must need const
- int int_arr[] = { 0, 1, 2, 3, 4, 5 };
+ int int_arr[] = &#123; 0, 1, 2, 3, 4, 5 &#125;;
  // ivec has six elements; each is a copy of the corresponding element in int_arr
  vector&lt;int&gt; ivec(begin(int_arr), end(int_arr));
  return 0;
-}
+&#125;
 </code></pre>
 
         </div>
@@ -1429,6 +1429,16 @@ int main()
       </li>
     
       <li>
+        <a href="/tags/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-tag" aria-hidden="true"></i>
+            标签
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
         <a href="javascript:;">
           <span class="faa-parent animated-hover">
             <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
@@ -1464,16 +1474,6 @@ int main()
           <span class="faa-parent animated-hover">
             <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
             友人帐
-          </span>
-        </a>
-        
-      </li>
-    
-      <li>
-        <a href="/donate/">
-          <span class="faa-parent animated-hover">
-            <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
-            赞赏
           </span>
         </a>
         

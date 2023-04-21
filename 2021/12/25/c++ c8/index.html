@@ -329,6 +329,16 @@
               </li>
             
               <li>
+                <a href="/tags/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-tag" aria-hidden="true"></i>
+                    标签
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
                 <a href="javascript:;">
                   <span class="faa-parent animated-hover">
                     <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
@@ -364,16 +374,6 @@
                   <span class="faa-parent animated-hover">
                     <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
                     友人帐
-                  </span>
-                </a>
-                
-              </li>
-            
-              <li>
-                <a href="/donate/">
-                  <span class="faa-parent animated-hover">
-                    <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
-                    赞赏
                   </span>
                 </a>
                 
@@ -476,10 +476,10 @@ shared_ptr&lt;vector&lt;int&gt;&gt; s_ptr2;
 <p>A default initialized smart pointer holds a null pointer.</p>
 <p>We use a smart pointer in ways that are similar to using a pointer. Dereferencing a smart pointer returns the object to which the pointer points. When we use a smart pointer in a condition, the effect is to test whether the pointer is null:</p>
 <pre><code class="c++">// if p1 is not null, check whether it&#39;s the empty string
-if (s_ptr1 &amp;&amp; s_ptr1-&gt;empty()) {
+if (s_ptr1 &amp;&amp; s_ptr1-&gt;empty()) &#123;
  // if so, dereference p1 to assign a new value to that string
  *s_ptr1 = &quot;hello&quot;;
-}
+&#125;
 </code></pre>
 <p>Next table lists operations common to <code>shared_ptr</code> and <code>unique_ptr</code>.</p>
 <table>
@@ -491,11 +491,11 @@ if (s_ptr1 &amp;&amp; s_ptr1-&gt;empty()) {
 </thead>
 <tbody>
 <tr>
-<td>shared_ptr<t> ptr</t></td>
+<td>shared_ptr<T> ptr</td>
 <td>Null smart pointer</td>
 </tr>
 <tr>
-<td>unique_ptr<t> ptr</t></td>
+<td>unique_ptr<T> ptr</td>
 <td>Null smart pointer</td>
 </tr>
 <tr>
@@ -534,11 +534,11 @@ if (s_ptr1 &amp;&amp; s_ptr1-&gt;empty()) {
 </thead>
 <tbody>
 <tr>
-<td>make_shared<t>(args)</t></td>
+<td>make_shared<T>(args)</td>
 <td>Allocates and constructs an object of type <code>T</code> passing <em>args</em> to its constructor.</td>
 </tr>
 <tr>
-<td>shared_ptr<t> ptr(q)</t></td>
+<td>shared_ptr<T> ptr(q)</td>
 <td>p is a copy of shared_ptr q</td>
 </tr>
 <tr>
@@ -551,7 +551,7 @@ if (s_ptr1 &amp;&amp; s_ptr1-&gt;empty()) {
 </tr>
 <tr>
 <td>p.use_count()</td>
-<td>Returns the number of <a href="https://www.cplusplus.com/shared_ptr" target="_blank" rel="noopener">shared_ptr</a> objects that share</td>
+<td>Returns the number of <a target="_blank" rel="noopener" href="https://www.cplusplus.com/shared_ptr">shared_ptr</a> objects that share</td>
 </tr>
 </tbody>
 </table>
@@ -584,37 +584,37 @@ r = q;
 <p>The <strong>destructor</strong> for <code>shared_ptr</code> decrements the reference count of the object to which that shared_ptr points. If the count goes to zero, the shared_ptr destructor destroys the object to which the shared_ptr points and frees the memory used by that object.</p>
 <p>The fact that the <code>shared_ptr</code> class automatically frees dynamic objects when they are no longer needed makes it fairly easy to use dynamic memory. For example, we might have a function that returns a shared_ptr to a dynamically allocated object of a type named Foo that can be initialized by an argument of type T:(note this is just a abstract example, this code can not run in computer now)</p>
 <pre><code class="c++">// factory returns a shared_ptr pointing to a dynamically allocated object
-shared_ptr&lt;Foo&gt; factory(T arg){
+shared_ptr&lt;Foo&gt; factory(T arg)&#123;
  // process arg as appropriate
  // shared_ptr will take care of deleting this memory
  return make_shared&lt;Foo&gt;(arg);
-}
+&#125;
 </code></pre>
 <p>Because <code>factory</code> returns a <code>shared_ptr</code>, we can be sure that the object allocated by factory will be freed when appropriate. For example, the following function stores the <code>shared_ptr</code> returned by factory in a local variable:</p>
-<pre><code class="c++">void use_factory(T arg){
+<pre><code class="c++">void use_factory(T arg)&#123;
  shared_ptr&lt;Foo&gt; p = factory(arg);
  // use p
-} // p goes out of scope; the memory to which p points is automatically freed
+&#125; // p goes out of scope; the memory to which p points is automatically freed
 </code></pre>
 <p>This is simple case that show the shared_ptr and a refeence:</p>
-<pre><code class="c++">shared_ptr&lt;string&gt; getS() {
+<pre><code class="c++">shared_ptr&lt;string&gt; getS() &#123;
  auto s = make_shared&lt;string&gt;(&quot;hello&quot;);
  return s;
-}
+&#125;
 
-string&amp; getS(char a) {
+string&amp; getS(char a) &#123;
  string s(10, a);
  return s;
-}
+&#125;
 
-int main(){
+int main()&#123;
     // ok output hello
  auto s1 = getS();
  cout &lt;&lt; *s1 &lt;&lt; endl;
     // Segmentation fault
  auto s2 = getS(&#39;A&#39;);
  return 0;
-}
+&#125;
 </code></pre>
 <p>Programs tend to use dynamic memory for one of three purposes:</p>
 <ol>
@@ -625,18 +625,18 @@ int main(){
 <p>The container classes are an example of classes that use dynamic memory for the first purpose. In this section, we’ll define a class that uses dynamic memory in order to let several objects share the same underlying data.</p>
 <p>So far, the classes we’ve used allocate resources that exist only as long as the corresponding objects. For example, each vector “<strong>owns</strong>” its own elements. When we copy a vector, the elements in the original vector and in the copy are <strong>separate</strong> from one another:</p>
 <pre><code class="c++">vector&lt;string&gt; v1; // empty vector
-{  // new scope
-  vector&lt;string&gt; v2 = {&quot;a&quot;, &quot;an&quot;, &quot;the&quot;};
+&#123;  // new scope
+  vector&lt;string&gt; v2 = &#123;&quot;a&quot;, &quot;an&quot;, &quot;the&quot;&#125;;
  v1 = v2; // copies the elements from v2 into v1
-}  // v2 is destroyed, which destroys the elements in v2
+&#125;  // v2 is destroyed, which destroys the elements in v2
  // v1 has three elements, which are copies of the ones originally in v2
 </code></pre>
 <p>Some classes allocate resources with a lifetime that is <strong>independent</strong> of the original object. As an example, assume we want to define a class named <code>Blob</code> that will hold a collection of elements. Unlike the containers, we want Blob objects that are copies of one another to share the same elements. That is, when we copy a Blob, the original and the copy should refer to the same underlying elements. like this:</p>
 <pre><code class="C++">Blob&lt;string&gt; b1; // empty Blob
-{  // new scope
- Blob&lt;string&gt; b2 = {&quot;a&quot;, &quot;an&quot;, &quot;the&quot;};
+&#123;  // new scope
+ Blob&lt;string&gt; b2 = &#123;&quot;a&quot;, &quot;an&quot;, &quot;the&quot;&#125;;
  b1 = b2; // b1 and b2 share the same elements
-}  // b2 is destroyed, but the elements in b2 must not be destroyed
+&#125;  // b2 is destroyed, but the elements in b2 must not be destroyed
  // b1 points to the elements originally created in b2
 </code></pre>
 <p>Ultimately, we’ll implement our Blob class as a template, but we won’t learn how to do. For now, we’ll define a version of our class that can manage strings. As a result, we’ll name this version of our class <code>StrBlob</code>.</p>
@@ -652,22 +652,22 @@ int main(){
 #include&lt;initializer_list&gt;
 #include&lt;stdexcept&gt;
 
-class StrBlob {
+class StrBlob &#123;
 public:
  typedef std::vector&lt;std::string&gt;::size_type size_type;
 
- StrBlob() : data(std::make_shared&lt;std::vector&lt;std::string&gt;&gt;()) {
- };
+ StrBlob() : data(std::make_shared&lt;std::vector&lt;std::string&gt;&gt;()) &#123;
+ &#125;;
  StrBlob(std::initializer_list&lt;std::string&gt; il)
-  : data(std::make_shared&lt;std::vector&lt;std::string&gt;&gt;(il)) {
- };
+  : data(std::make_shared&lt;std::vector&lt;std::string&gt;&gt;(il)) &#123;
+ &#125;;
 
- size_type size() const { return data-&gt;size(); }
- bool empty() const { return data-&gt;empty(); }
+ size_type size() const &#123; return data-&gt;size(); &#125;
+ bool empty() const &#123; return data-&gt;empty(); &#125;
  // add and remove elements
- void push_back(const std::string&amp; t) {
+ void push_back(const std::string&amp; t) &#123;
   data-&gt;push_back(t);
- }
+ &#125;
  void pop_back();
  // element access
  std::string&amp; front();
@@ -677,37 +677,37 @@ private:
  // a shared_ptr ponint to string of vector 
  std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt; data;
  void check(size_type i, const std::string&amp; msg) const;
-};
+&#125;;
 
-void StrBlob::pop_back() {
+void StrBlob::pop_back() &#123;
  data-&gt;pop_back();
-}
+&#125;
 
-std::string&amp; StrBlob::front() {
+std::string&amp; StrBlob::front() &#123;
  // TODO: insert return statement here
  return data-&gt;front();
-}
+&#125;
 
-std::string&amp; StrBlob::back() {
+std::string&amp; StrBlob::back() &#123;
  // TODO: insert return statement here
  return data-&gt;back();
-}
+&#125;
 
-void StrBlob::check(size_type i, const std::string&amp; msg) const {
- if (i &gt; data-&gt;size()) {
+void StrBlob::check(size_type i, const std::string&amp; msg) const &#123;
+ if (i &gt; data-&gt;size()) &#123;
   throw std::out_of_range(msg);
- }
-}
+ &#125;
+&#125;
 
 #endif // !StrBlob
 </code></pre>
 <p>This is test code:</p>
 <pre><code class="c++">StrBlob b1;
-{
- StrBlob b2 = { &quot;a&quot;, &quot;an&quot;, &quot;the&quot; };
+&#123;
+ StrBlob b2 = &#123; &quot;a&quot;, &quot;an&quot;, &quot;the&quot; &#125;;
  b1 = b2;
  b2.push_back(&quot;about&quot;);
-}
+&#125;
 cout &lt;&lt; b1.back() &lt;&lt; endl; // output about
 </code></pre>
 <h3 id="Managing-Memory-Directly"><a href="#Managing-Memory-Directly" class="headerlink" title="Managing Memory Directly"></a>Managing Memory Directly</h3><p>The language itself defines two operators that allocate and free dynamic memory. The <code>new</code> operator allocates memory, and <code>delete</code> frees memory allocated by <code>new</code>.</p>
@@ -724,12 +724,12 @@ int *pi = new int; // pi points to an uninitialized int
 <pre><code class="c++">int *pi = new int(1024); // object to which pi points has value 1024
 string *ps = new string(10, &#39;9&#39;); // *ps is &quot;9999999999&quot;
 // vector with ten elements with values from 0 to 9
-vector&lt;int&gt; *pv = new vector&lt;int&gt;{0,1,2,3,4,5,6,7,8,9};
+vector&lt;int&gt; *pv = new vector&lt;int&gt;&#123;0,1,2,3,4,5,6,7,8,9&#125;;
 </code></pre>
 <p>When we provide an initializer inside parentheses, we can use <code>auto</code> to deduce the type of the object we want to allocate from that initializer. However, because the compiler uses the initializer’s type to deduce the type to allocate, we can use auto only with a single initializer inside parentheses:</p>
 <pre><code class="c++">auto p1 = new auto(obj); // p points to an object of the type of obj
 // that object is initialized from obj
-auto p2 = new auto{a,b,c}; // error: must use parentheses for the initializer
+auto p2 = new auto&#123;a,b,c&#125;; // error: must use parentheses for the initializer
 </code></pre>
 <p>The type of p1 is a pointer to the auto-deduced type of <code>obj</code>. If <code>obj</code> is an int, then p1 is <code>int*</code>; if <code>obj</code> is a string, then p1 is a <code>string*</code>; and so on. The newly allocated object is initialized from the value of <code>obj</code>.</p>
 <p>Although modern machines tend to have huge memory capacity, it is always possible that the free store will be <strong>exhausted</strong>. Once a program has used all of its available memory, new expressions will fail. By default, if new is unable to allocate the requested storage, it throws an exception of type <code>bad_alloc</code>. We can prevent new from throwing an exception by using a different form of new:</p>
@@ -758,19 +758,19 @@ delete p2; //error
 </thead>
 <tbody>
 <tr>
-<td>shared_ptr<t> p(q)</t></td>
+<td>shared_ptr<T> p(q)</td>
 <td>p manages the object to which the built-in pointer q points; q must point to memory allocated by new and must be convertible to T*.</td>
 </tr>
 <tr>
-<td>shared_ptr<t> p(u)</t></td>
+<td>shared_ptr<T> p(u)</td>
 <td>p assumes ownership from the unique_ptr u; makes u null.</td>
 </tr>
 <tr>
-<td>shared_ptr<t> p(q, d)</t></td>
+<td>shared_ptr<T> p(q, d)</td>
 <td>p assumes ownership for the object to which the built-in pointer q points. q must be convertible to T*. p will use the callable object d in place of delete to free q.</td>
 </tr>
 <tr>
-<td>shared_ptr<t> p(p2, d)</t></td>
+<td>shared_ptr<T> p(p2, d)</td>
 <td>p is a copy of the shared_ptr p2 as described in previous Table , except that p uses the callable object d in place of delete.</td>
 </tr>
 <tr>
@@ -799,18 +799,18 @@ shared_ptr&lt;int&gt; p2(new int(1024)); // ok: uses direct initialization
 <p>Consider the following function that operates on a <code>shared_ptr</code>:</p>
 <pre><code class="c++">// ptr is created and initialized when process is called
 void process(shared_ptr&lt;int&gt; ptr)
-{
+&#123;
  // use ptr
-} // ptr goes out of scope and is destroyed
+&#125; // ptr goes out of scope and is destroyed
 </code></pre>
 <p>The parameter to process is passed by value, so the argument to process is copied into ptr. Copying a shared_ptr increments its reference count. Thus, inside process the count is at least 2. When process completes, the reference count of ptr is decremented but cannot go to zero. Therefore, when the local variable ptr is destroyed, the memory to which ptr points will not be deleted.</p>
 <p>The smart pointer types define a function named <code>get</code> that returns a built-in pointer to the object that the smart pointer is managing. This function is intended for cases when we need to pass a built-in pointer to code that can’t use a smart pointer. The code that uses the return from get must not delete that pointer.</p>
 <pre><code class="c++">shared_ptr&lt;int&gt; p2(new int(10));
 auto* p3 = p2.get();
-{
+&#123;
  // undefined: two independent shared_ptrs point to the same memory
     shared_ptr&lt;int&gt; p4(p3);
-} // block ends, p4 is destroyed, and the memory to which q points is freed
+&#125; // block ends, p4 is destroyed, and the memory to which q points is freed
 cout &lt;&lt; *p2 &lt;&lt; endl; // undefined; the memory to which p2 points was freed
 </code></pre>
 <p>In this case, both <code>p2</code> and <code>p4</code> point to the same memory. Because they were created independently from each other, each has a reference count of 1. When the block in which q was defined ends, q is destroyed. Destroying q frees the memory to which q points. That makes p into a dangling pointer, meaning that what happens when we attempt to use p is undefined. Moreover, when p is destroyed, the pointer to that memory will be deleted a second time.</p>
@@ -824,10 +824,10 @@ p.reset(new int(1024)); // ok: p points to a new object
 *p += newVal; // now that we know we&#39;re the only pointer, okay to change this object
 </code></pre>
 <h3 id="Smart-Pointers-and-Exceptions"><a href="#Smart-Pointers-and-Exceptions" class="headerlink" title="Smart Pointers and Exceptions"></a>Smart Pointers and Exceptions</h3><p>In previous chapter we noted that programs that use exception handling to continue processing after an exception occurs need to ensure that resources are properly freed if an exception occurs. One easy way to make sure resources are freed is to use smart pointers. When we use a smart pointer, the smart pointer class ensures that memory is freed when it is no longer needed even if the block is exited prematurely:</p>
-<pre><code class="c++">void f(){
+<pre><code class="c++">void f()&#123;
  shared_ptr&lt;int&gt; sp(new int(42)); // allocate a new object
  // code that throws an exception that is not caught inside f
-} // shared_ptr freed automatically when the function ends
+&#125; // shared_ptr freed automatically when the function ends
 </code></pre>
 <p>When a function is exited, whether through normal processing or due to an exception, all the local objects are destroyed. In this case, <code>sp</code> is a <code>shared_ptr</code>, so destroying <code>sp</code> checks its reference count. Here, <code>sp</code> is the only pointer to the memory it manages; that memory will be freed as part of destroying <code>sp</code>.</p>
 <p>In contrast, memory that we manage directly is not automatically freed when an exception occurs. If we use built-in pointers to manage memory and an exception occurs after a new but before the corresponding delete, then that memory won’t be freed:</p>
@@ -842,7 +842,7 @@ p.reset(new int(1024)); // ok: p points to a new object
 </thead>
 <tbody>
 <tr>
-<td>unique_ptr<t> u1</t></td>
+<td>unique_ptr<T> u1</td>
 <td>Null unique_ptrs that can point to objects of type T.</td>
 </tr>
 <tr>
@@ -887,10 +887,10 @@ unique_ptr&lt;string&gt; p3(new string(&quot;Trex&quot;));
 p2.reset(p3.release()); // reset deletes the memory to which p2 had pointed
 </code></pre>
 <p>There is one <strong>exception</strong> to the rule that we cannot copy a <code>unique_ptr</code>: We can copy or assign a <code>unique_ptr</code> that is about to be destroyed. The most common example is when we <strong>return</strong> a <code>unique_ptr</code> from a function:</p>
-<pre><code class="c++">unique_ptr&lt;int&gt; clone(int p) {
+<pre><code class="c++">unique_ptr&lt;int&gt; clone(int p) &#123;
  // ok: explicitly create a unique_ptr&lt;int&gt; from int*
  return unique_ptr&lt;int&gt;(new int(p));
-}
+&#125;
 </code></pre>
 <h3 id="weak-ptr"><a href="#weak-ptr" class="headerlink" title="weak_ptr"></a>weak_ptr</h3><p>A <code>weak_ptr</code> is a smart pointer that does not control the lifetime of the object to which it points. Instead, a <code>weak_ptr</code> points to an object that is managed by a <code>shared_ptr</code>. Binding a <code>weak_ptr</code> to a <code>shared_ptr</code> does <strong>not</strong> change the reference <strong>count</strong> of that shared_ptr. Once the last <code>shared_ptr</code> pointing to the object goes away, the object itself will be deleted. That object will be deleted even if there are <code>weak_ptrs</code> pointing to it—hence the name <code>weak_ptr</code>, which captures the idea that a weak_ptr shares its object “weakly.”</p>
 <h2 id="Dynamic-Arrays"><a href="#Dynamic-Arrays" class="headerlink" title="Dynamic Arrays"></a>Dynamic Arrays</h2><p>The <code>new</code> and <code>delete</code> operators allocate objects one at a time. Some applications, need the ability to allocate storage for many objects at once. For example, <code>vectors</code> and <code>strings</code> store their elements in contiguous memory and must allocate several elements at once whenever the container has to be reallocated.</p>
@@ -911,8 +911,8 @@ string* psa = new string[10]; // block of ten empty strings
 string* psa2 = new string[10](); // block of ten empty strings
 </code></pre>
 <p>Under the new standard, we can also provide a braced list of element initializers:</p>
-<pre><code class="c++">int* pia = new int[10]{ 1,2,3,4,5,6,7,8,9,0 };
-string* psa = new string[10]{ &quot;nvifd&quot;,string(10,&#39;A&#39;) };
+<pre><code class="c++">int* pia = new int[10]&#123; 1,2,3,4,5,6,7,8,9,0 &#125;;
+string* psa = new string[10]&#123; &quot;nvifd&quot;,string(10,&#39;A&#39;) &#125;;
 </code></pre>
 <p>To <strong>free</strong> a dynamic array, we use a special form of delete that includes an empty pair of square brackets:</p>
 <pre><code class="c++">delete p; // p must point to a dynamically allocated object or be null
@@ -925,19 +925,19 @@ unique_ptr&lt;int[]&gt; up(new int[10]);
 up.release(); // automatically uses delete[] to destroy its pointer
 </code></pre>
 <p><code>unqiue_ptrs</code> that point to arrays provide slightly different operations than those we used in previous, we can use the subscript operator to access the elements in the array:</p>
-<pre><code class="c++">for (size_t i = 0; i &lt; 10; i++) {
+<pre><code class="c++">for (size_t i = 0; i &lt; 10; i++) &#123;
  up[i] = i;
-}
+&#125;
 </code></pre>
 <p>Unlike <code>unique_ptr</code>, <code>shared_ptrs</code> provide no direct support for managing a dynamic array. If we want to use a shared_ptr to manage a dynamic array, we must provide our own deleter:</p>
 <pre><code class="c++">// to use a shared_ptr we must supply a deleter
-shared_ptr&lt;int&gt; sp(new int[10], [](int *p) { delete[] p; });
+shared_ptr&lt;int&gt; sp(new int[10], [](int *p) &#123; delete[] p; &#125;);
 sp.reset(); // uses the lambda we supplied that uses delete[] to free the array
 </code></pre>
 <p>The fact that <code>shared_ptr</code> does not directly support managing arrays affects how we access the elements in the array:</p>
-<pre><code class="c++">for (size_t i = 0; i &lt; 10; i++) {
+<pre><code class="c++">for (size_t i = 0; i &lt; 10; i++) &#123;
  *(sp.get() + i) = i;
-}
+&#125;
 </code></pre>
 <h3 id="The-allocator-Class"><a href="#The-allocator-Class" class="headerlink" title="The allocator Class"></a>The allocator Class</h3><p>An aspect of <code>new</code> that limits its flexibility is that new combines allocating memory with constructing object(s) in that memory. Similarly, <code>delete</code> combines destruction with deallocation. Combining initialization with allocation is usually what we want when we allocate a single object. In that case, we almost certainly know the value the object should have.</p>
 <p>When we allocate a block of memory, we often plan to construct objects in that memory as needed. In this case, we’d like to <strong>decouple</strong> memory allocation from object construction. <strong>Decoupling</strong> construction from allocation means that we can allocate memory in large chunks and pay the overhead of constructing the objects only when we actually need to create them.</p>
@@ -951,7 +951,7 @@ sp.reset(); // uses the lambda we supplied that uses delete[] to free the array
 </thead>
 <tbody>
 <tr>
-<td>allocator<t> a</t></td>
+<td>allocator<T> a</td>
 <td>Defines an allocator object named a that can allocate memory for objects of type T.</td>
 </tr>
 <tr>
@@ -1003,35 +1003,35 @@ alloc.construct(q++, &quot;hi&quot;); // *q is hi!
 </thead>
 <tbody>
 <tr>
-<td><a href="https://www.cplusplus.com/reference/memory/uninitialized_copy/" target="_blank" rel="noopener"><strong>uninitialized_copy</strong></a></td>
+<td><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/memory/uninitialized_copy/"><strong>uninitialized_copy</strong></a></td>
 <td>Copy block of memory</td>
 </tr>
 <tr>
-<td><a href="https://www.cplusplus.com/reference/memory/uninitialized_copy_n/" target="_blank" rel="noopener"><strong>uninitialized_copy_n</strong></a></td>
+<td><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/memory/uninitialized_copy_n/"><strong>uninitialized_copy_n</strong></a></td>
 <td>Copy block of memory</td>
 </tr>
 <tr>
-<td><a href="https://www.cplusplus.com/reference/memory/uninitialized_fill/" target="_blank" rel="noopener"><strong>uninitialized_fill</strong></a></td>
+<td><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/memory/uninitialized_fill/"><strong>uninitialized_fill</strong></a></td>
 <td>Fill block of memory</td>
 </tr>
 <tr>
-<td><a href="https://www.cplusplus.com/reference/memory/uninitialized_fill_n/" target="_blank" rel="noopener"><strong>uninitialized_fill_n</strong></a></td>
+<td><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/memory/uninitialized_fill_n/"><strong>uninitialized_fill_n</strong></a></td>
 <td>Fill block of memory</td>
 </tr>
 </tbody>
 </table>
 <p>As an example, assume we have a <code>vector</code> of <code>ints</code> that we want to copy into dynamic memory. We’ll allocate memory for twice as many <code>ints</code> as are in the vector. We’ll construct the first half of the newly allocated memory by copying elements from the original vector. We’ll construct elements in the second half by filling them with a given value:</p>
-<pre><code class="c++">int main() {
+<pre><code class="c++">int main() &#123;
  vector&lt;int&gt; v(2, 2);
  allocator&lt;int&gt; alloc;
  auto p = alloc.allocate(v.size() * 2);
  auto q = uninitialized_copy(v.begin(), v.end(), p);
  uninitialized_fill_n(q, v.size(), 20);
- for (size_t i = 0; i &lt; v.size() * 2; i++) {
+ for (size_t i = 0; i &lt; v.size() * 2; i++) &#123;
   cout &lt;&lt; p[i] &lt;&lt; endl;
- }
+ &#125;
  return 0;
-}
+&#125;
 //output
 //2
 //2
@@ -1055,7 +1055,7 @@ alloc.construct(q++, &quot;hi&quot;); // *q is hi!
 
 class QueryResult;
 
-class TextQuery {
+class TextQuery &#123;
 public:
  using line_no = std::vector&lt;std::string&gt;::size_type;
 
@@ -1067,29 +1067,29 @@ private:
  std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt; file;
  // map of each word to the set of the lines in which that word appears
  std::map &lt;std::string, std::shared_ptr&lt;std::set&lt;line_no&gt;&gt;&gt; wm;
-};
+&#125;;
 
-class QueryResult {
+class QueryResult &#123;
  friend std::ostream&amp; print(std::ostream&amp;, const QueryResult&amp;);
 public:
  QueryResult() = default;
  QueryResult(std::string s,
   std::shared_ptr&lt;std::set&lt;TextQuery::line_no&gt;&gt; p,
   std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt; f) :
-  s_word(s), lines(p), file(f) {
- }
+  s_word(s), lines(p), file(f) &#123;
+ &#125;
 
 private:
  std::string s_word;
  std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt; file;
  std::shared_ptr&lt;std::set&lt;TextQuery::line_no&gt;&gt; lines;
-};
+&#125;;
 
 // TextQuery member
 TextQuery::TextQuery(std::ifstream&amp; input)
- :file(new std::vector&lt;std::string&gt;) {
+ :file(new std::vector&lt;std::string&gt;) &#123;
  std::string line, text;
- while (getline(input, line)) {
+ while (getline(input, line)) &#123;
   //read a line and save to vector string
   file-&gt;push_back(line);
 
@@ -1098,61 +1098,61 @@ TextQuery::TextQuery(std::ifstream&amp; input)
 
   //save one word where appeared
   std::istringstream ss(line);
-  while (ss &gt;&gt; text) {
+  while (ss &gt;&gt; text) &#123;
    // if word isn&#39;t already in wm, subscripting adds a new entry
    auto&amp; lines = wm[text];
-   if (!lines) {
+   if (!lines) &#123;
     lines.reset(new std::set&lt;line_no&gt;);
-   }
+   &#125;
    // insert this line number
    lines-&gt;insert(n);
-  }
- }
-}
+  &#125;
+ &#125;
+&#125;
 
-QueryResult TextQuery::query(const std::string&amp; s) {
+QueryResult TextQuery::query(const std::string&amp; s) &#123;
  // we&#39;ll return a pointer to this set if we don&#39;t find s
  static std::shared_ptr&lt;std::set&lt;line_no&gt;&gt; nodata(new std::set&lt;line_no&gt;);
 
  auto location = wm.find(s);
- if (location != wm.end()) {
+ if (location != wm.end()) &#123;
   return QueryResult(s, location-&gt;second, file);
- }
- else {
+ &#125;
+ else &#123;
   return QueryResult(s, nodata, file);
- }
-}
+ &#125;
+&#125;
 
 // QueryResult member
-std::ostream&amp; print(std::ostream&amp; out, const QueryResult&amp; qr) {
+std::ostream&amp; print(std::ostream&amp; out, const QueryResult&amp; qr) &#123;
  // TODO: insert return statement here
  out &lt;&lt; qr.s_word &lt;&lt; &quot; appear &quot; &lt;&lt; (qr.lines)-&gt;size() &lt;&lt; &quot; times:&quot; &lt;&lt; std::endl;
- for (auto&amp; line : *(qr.lines)) {
+ for (auto&amp; line : *(qr.lines)) &#123;
   out &lt;&lt; line + 1 &lt;&lt; &quot;: &quot; &lt;&lt; (qr.file)-&gt;at(line) &lt;&lt; std::endl;
- }
+ &#125;
  return out;
-}
+&#125;
 </code></pre>
 <h3 id="Main-program"><a href="#Main-program" class="headerlink" title="Main program"></a>Main program</h3><pre><code class="c++">#include&lt;fstream&gt;
 #include&lt;iostream&gt;
 #include &quot;ch12_3.h&quot;
 using namespace std;
 
-int main() {
+int main() &#123;
  ifstream input(&quot;text.txt&quot;);
  TextQuery tq(input);
 
  string s;
- while (true) {
+ while (true) &#123;
   cout &lt;&lt; &quot;input a word you want query:&quot; &lt;&lt; endl;
-  if (!(cin &gt;&gt; s) || s == &quot;q&quot;) {
+  if (!(cin &gt;&gt; s) || s == &quot;q&quot;) &#123;
    break;
-  }
+  &#125;
   auto qr = tq.query(s);
   print(std::cout, qr);
- }
+ &#125;
  return 0;
-}
+&#125;
 </code></pre>
 
         </div>
@@ -1451,6 +1451,16 @@ int main() {
       </li>
     
       <li>
+        <a href="/tags/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-tag" aria-hidden="true"></i>
+            标签
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
         <a href="javascript:;">
           <span class="faa-parent animated-hover">
             <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
@@ -1486,16 +1496,6 @@ int main() {
           <span class="faa-parent animated-hover">
             <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
             友人帐
-          </span>
-        </a>
-        
-      </li>
-    
-      <li>
-        <a href="/donate/">
-          <span class="faa-parent animated-hover">
-            <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
-            赞赏
           </span>
         </a>
         
