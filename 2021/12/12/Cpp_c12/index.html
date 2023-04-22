@@ -7,7 +7,7 @@
 	
 		<title itemprop="name">
 			
-				(ch1) Getting Started C++ | 
+				(ch12) Templates and Generic Programming (Not completed yet) | 
 						うさぎの手帳
 		</title>
 		
@@ -430,11 +430,11 @@
 
   <div class="pattern-center single-center">
     <!-- 有配图默认渲染第一张 -->
-    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/(1).jpg.webp');" src="" data-src="/images/cover/(1).jpg.webp">
+    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/(4).jpg.webp');" src="" data-src="/images/cover/(4).jpg.webp">
     </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
-      (ch1) Getting Started C++</h1>
+      (ch12) Templates and Generic Programming (Not completed yet)</h1>
       <p class="entry-census">
         <span>
           <a href="morning.eu.org">
@@ -446,7 +446,7 @@
         </span>
         <span class="bull">
         ·</span>
-        2021-12-1<span class="bull">
+        2021-12-12<span class="bull">
         ·</span>
       <span id="busuanzi_value_page_pv"></span>次阅读</p>
     </header>
@@ -460,116 +460,204 @@
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          <h1 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h1><p><em>This chapter introduces most of the basic elements of C++: types, variables,expressions, statements, and functions.</em></p>
-<p><em>I write this post in 2021, today there are many powerful tools can help you write program more efficiently and quickly, I recommend you use vs2019 and create a “Linux project” and running in a virtual machine. you can simply create a virtual machine by VMware.</em></p>
-<p><em>this post is based on c plus plus primer.</em></p>
-<h2 id="write-a-simple-c-program"><a href="#write-a-simple-c-program" class="headerlink" title="write a simple c++ program"></a>write a simple c++ program</h2><p>Every c++ program contains one or more <strong>functions</strong>, one of which must be named <strong>main</strong>. The operating system runs a C++ program by calling <strong>main</strong>, this is a simple c++ program.</p>
-<pre><code class="c++">#include&lt;cstdio&gt;
-int main()
-&#123;
-    printf(&quot;hello world!\n&quot;);
-    return 0;
-&#125;
+          <h1 id="Templates-and-Generic-Programming"><a href="#Templates-and-Generic-Programming" class="headerlink" title="Templates and Generic Programming"></a>Templates and Generic Programming</h1><p>Both object-oriented programming (OOP) and generic programming deal with types that are not known at the time the program is written. The distinction between the two is that OOP deals with types that are not known until run time, whereas in generic programming the types become known during compilation.</p>
+<p>For example, the library provides a single, generic definition of each container, such as <code>vector</code>. We can use that generic definition to define many different types of <code>vectors</code>, each of which differs from the others as to the type of elements the <code>vector</code> contains.</p>
+<p>Templates are the foundation for generic programming in C++. A template is a blueprint or formula for creating classes or functions. When we use a generic type, such as vector, or a generic function, such as find, we supply the information needed to transform that blueprint into a specific class or function. <strong>That transformation happens during compilation.</strong></p>
+<h2 id="Defining-a-Template"><a href="#Defining-a-Template" class="headerlink" title="Defining a Template"></a>Defining a Template</h2><p>Imagine that we want to write a function to compare two values and indicate whether the first is less than, equal to, or greater than the second. In practice, we’d want to define several such functions, each of which will compare values of a given type.</p>
+<pre><code class="c++">// compare string
+int compare(const string &amp;v1, const string &amp;v2)
+// compare double
+int compare(const double &amp;v1, const double &amp;v2)
 </code></pre>
-<p>A function definition has four elements: a <strong>return type</strong>, a <strong>function name</strong>, a (possibly empty) <strong>parameter list</strong> enclosed in parentheses, and a <strong>function body</strong>.</p>
-<p>In previous example, the <em>int</em> is return type, <em>main</em> is function name, and don’t have parameter. The function body is a block of statements starting with an open curly brace and ending with a close curly.</p>
-<p>Note the semicolon at the end of statement, it can lead to compiler error messages when forgotten.</p>
-<h2 id="Input-and-output"><a href="#Input-and-output" class="headerlink" title="Input and output"></a>Input and output</h2><p>The c++ don’t define any statement to do input and output, but c++ include a extensive standard library that provide input and output. In previous case, we print the string “hello world” by use the “printf” function that define in <strong>cstdio</strong> standard library. Actually,  you are recommend use the <strong><em>iostream</em></strong> standard library, the cstdio is from the stdio.h in c language.</p>
-<p>Fundamental to iostream are istream and ostream, which represent input and output streams. The library defines four IO objects.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>in where</th>
-<th>referred</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>cin</td>
-<td>istream</td>
-<td>standard input</td>
-</tr>
-<tr>
-<td>cout</td>
-<td>ostream</td>
-<td>standard output</td>
-</tr>
-<tr>
-<td>cerr</td>
-<td>ostream</td>
-<td>standard error</td>
-</tr>
-<tr>
-<td>clog</td>
-<td>ostream</td>
-<td>general information about the execution of the program</td>
-</tr>
-</tbody>
-</table>
-<p><em>This is a sample case, read two numbers form standard input and print the sum by standard output.</em></p>
-<pre><code class="c++">#include &lt;iostream&gt;
-
-int main()
-&#123;
-    int num1, num2;
-    std::cout &lt;&lt; &quot;Enter two numbers:&quot; &lt;&lt; std::endl;
-    std::cin &gt;&gt; num1 &gt;&gt; num2;
-    std::cout &lt;&lt; &quot;the sum is:&quot; &lt;&lt; num1 + num2 &lt;&lt; std::endl;
-    return 0;
-&#125;
-//running
-//Enter two numbers:
-//10 20
-//the sum is:30
-</code></pre>
-<p>The first line in the previous case is <code>#include &lt;iostream&gt;</code> tell the compiler that wo want use the iostream library, we called it header in c++ program. And we notice that the program use the std::cin and std::cout rather than cin and cout, the profix <code>std::</code> mean the cin and cout are defined in the namespace called <code>std</code>. The namespace allow us to use  function that has same name in a program.</p>
-<h2 id="comments"><a href="#comments" class="headerlink" title="comments"></a>comments</h2><p>Comments help human reading program, the often to summarize a algorithm and explain what the variable’s mean,  the compiler ignore the comments, so they need be identified by special way.</p>
-<pre><code class="c++">//this is a comment
-/*
-  you can also write conmment is this way
-*/
-/*Comment Pairs Do Not Nest
-/*Comment Pairs Do Not Nest, the end of a comment is */
-compler think this line is a statement, because the comments is end*/
-</code></pre>
-<h2 id="Flow-of-Control"><a href="#Flow-of-Control" class="headerlink" title="Flow of Control"></a>Flow of Control</h2><p>Statement normally execute sequentially, the first statement at main block execute first, follow by second, the most important control ways in program are while loop, for loop and if branch. the following program add all even numbers between 0 to 20.</p>
-<pre><code class="c++">#include &lt;iostream&gt;
-
-int main()
-&#123;
-    /*
-     * this is a simple program that
-     * add all even numbers between 0 to 20
-     */
-    int n = 0, sum = 0;
-    // while loop end when n greater than 20
-    while (n &lt;= 20)
-    &#123;
-        // if n is a even number
-        if (n % 2 == 0)
-        &#123;
-            sum += n;
-        &#125;
-        n++;
+<p>These functions are nearly identical: The only <strong>difference</strong> between them is the <strong>type of their parameters</strong>. The function body is the same in each function.</p>
+<h3 id="Function-Templates"><a href="#Function-Templates" class="headerlink" title="Function Templates"></a>Function Templates</h3><p>Rather than defining a new function for each type, we can define a <strong>function template</strong>. A function template is a formula from which we can generate type-specific versions of that function. The template version of compare looks like:</p>
+<pre><code class="c++">template &lt;typename T&gt;
+int compare(const T&amp; l, const T&amp; r) &#123;
+    if (r &lt; l) &#123;
+        return 1;
     &#125;
-    std::cout &lt;&lt; &quot;the sum of even numbers between 0 to 20 is &quot; &lt;&lt; sum &lt;&lt; std::endl;
-
-    sum = 0;
-    // for loop end when i greater than 20
-    for (int i = 0; i &lt;= 20; i++)
-    &#123;
-        // if i is a even number
-        if (i % 2 == 0)
-        &#123;
-            sum += i;
-        &#125;
+    if (l &lt; r) &#123;
+        return -1;
     &#125;
-    std::cout &lt;&lt; &quot;the sum of even numbers between 0 to 20 is &quot; &lt;&lt; sum &lt;&lt; std::endl;
     return 0;
 &#125;
 </code></pre>
-<h2 id="Introducing-Classes"><a href="#Introducing-Classes" class="headerlink" title="Introducing Classes"></a>Introducing Classes</h2><p>one of the most difference between c language and c++ language is the c++ has classes. In c++, we define our data structure by define a classes, a class defines a type along with many operations that are related to this type. We will discuss more details in the next post.</p>
+<p>A template definition starts with the keyword template followed by a <strong>template parameter list</strong>, which is a comma-separated list of one or more template parameters bracketed by the <code>&lt;</code> and <code>&gt;</code> .</p>
+<p>The template parameter list acts much like a function parameter list. A function parameter list defines local variable(s) of a specified type but does not say how to initialize them. At run time, arguments are supplied that initialize the parameters.</p>
+<p>When we call a function template, the compiler (ordinarily) uses the arguments of the call to deduce the template argument(s) for us. That is, when we call compare, the compiler uses the type of the arguments to determine what type to bind to the template parameter T. For example, in this call</p>
+<pre><code class="c++">std::cout &lt;&lt; compare(4.5, 1.0) &lt;&lt; std::endl;
+</code></pre>
+<p>the arguments have type double. The compiler will deduce int as the template argument and will bind that argument to the template parameter T.</p>
+<p>Our compare function has one <strong>template type parameter</strong>. In general, we can use a type parameter as a type specifier in the same way that we use a built-in or class type specifier. In particular, a type parameter can be used to name the return type or a function parameter type, and for variable declarations or casts inside the function body:</p>
+<pre><code class="c++">template &lt;typename T&gt; T foo(T* p) &#123;
+    T tmp = *p; // tmp will have the type to which p points
+    // ...
+    return tmp;
+&#125;
+</code></pre>
+<p>Each type parameter must be preceded by the keyword class or typename:</p>
+<pre><code class="c++">// error: must precede U with either typename or class
+template &lt;typename T, U&gt; T calc(const T&amp;, const U&amp;);
+</code></pre>
+<p>These keywords have the <strong>same</strong> meaning and can be used interchangeably inside a template parameter list. A template parameter list can use both keywords:</p>
+<pre><code class="c++">// ok: no distinction between typename and class in a template parameter list
+template &lt;typename T, class U&gt; calc (const T&amp;, const U&amp;);
+</code></pre>
+<p><em>It may seem more intuitive to use the keyword <strong>typename</strong> rather than class to designate a template type parameter. After all, we can use built-in (nonclass) types as a template type argument. Moreover, typename more clearly indicates that the name that follows is a type name. However, typename was added to C++ after templates were already in widespread use; some programmers continue to use class exclusively.</em></p>
+<p>In addition to defining type parameters, we can define templates that take <strong>nontype parameters</strong>. A nontype parameter represents a value rather than a type. Nontype parameters are specified by using a specific type name instead of the class or typename keyword.</p>
+<p>As an example, we can write a version of compare that will handle string literals. Such literals are arrays of const char. Because we cannot copy an array, we’ll define our parameters as references to an array. Because we’d like to be able to compare literals of different lengths, we’ll give our template two nontype parameters. The first template parameter will represent the size of the first array, and the second parameter will represent the size of the second array:</p>
+<pre><code class="c++">template&lt;unsigned N, unsigned M&gt;
+int compare(const char(&amp;p1)[N], const char(&amp;p2)[M]) &#123;
+    // note need incloude string.h first
+    return strcmp(p1, p2);
+&#125;
+</code></pre>
+<p>A function template can be declared <strong>inline</strong> or <strong>constexpr</strong> in the same ways as nontemplate functions. The inline or constexpr specifier follows the template parameter list and precedes the return type:</p>
+<pre><code class="c++">// ok: inline specifier follows the template parameter list
+template &lt;typename T&gt; inline T min(const T&amp;, const T&amp;);
+// error: incorrect placement of the inline specifier
+inline template &lt;typename T&gt; T min(const T&amp;, const T&amp;);
+</code></pre>
+<p>Simple though it is, our initial compare function illustrates two important principles for writing generic code:</p>
+<ol>
+<li>The function parameters in the template are references to const.</li>
+<li>The tests in the body use only &lt; comparisons.</li>
+</ol>
+<p>However, by writing the code using only the &lt; operator, we reduce the requirements on types that can be used with our compare function. Those types must support <code>&lt;</code>, but they need not also support <code>&gt;</code>.</p>
+<p>In fact, if we were truly concerned about type independence and portability, we probably should have defined our function using the <code>less</code></p>
+<pre><code class="c++">template &lt;class T&gt;
+int compare(const T&amp; l, const T&amp; r) &#123;
+    if (std::less&lt;T&gt;()(l, r)) &#123;
+        return -1;
+    &#125;
+    if (std::less&lt;T&gt;()(r, l)) &#123;
+        return 1;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+<p>The problem with our original version is that if a user calls it with two pointers and those pointers do not point to the same array, then our code is undefined.</p>
+<h3 id="Class-Templates"><a href="#Class-Templates" class="headerlink" title="Class Templates"></a>Class Templates</h3><p>A class template is a blueprint for generating classes. Class templates differ from function templates in that the compiler cannot deduce the template parameter type(s) for a class template. Instead, as we’ve seen many times, to use a class template we must <strong>supply additional information inside angle brackets following the template’s name</strong>.</p>
+<p>Like function templates, class templates begin with the keyword template followed by a template parameter list. In the definition of the class template (and its members), we use the template parameters as stand-ins for types or values that will be supplied when the template is used</p>
+<pre><code class="c++">// in Blob.h
+#pragma once
+#include&lt;vector&gt;
+#include&lt;memory&gt;
+
+template &lt;typename T&gt; class Blob &#123;
+public:
+    typedef T value_type;
+    typedef typename std::vector&lt;T&gt;::size_type size_type;
+    // constructors
+    Blob();
+    Blob(std::initializer_list&lt;T&gt; il);
+    // number of elements in the Blob
+    size_type size() const &#123;
+        return data-&gt;size();
+    &#125;
+    bool empty() const &#123;
+        return data-&gt;empty();
+    &#125;
+    // add and remove elements
+    void push_back(const T&amp; t) &#123;
+        data-&gt;push_back(t);
+    &#125;
+    // move version;
+    void push_back(T&amp;&amp; t) &#123;
+        data-&gt;push_back(std::move(t));
+    &#125;
+    void pop_back() &#123;
+        data-&gt;pop_back();
+    &#125;
+    // element access
+    T&amp; back() &#123;
+        return data-&gt;back();
+    &#125;
+
+    T&amp; operator[](size_type i) &#123;
+        std::string msg = &quot;error&quot;;
+        check(i, msg);
+        return (*data)[i];
+    &#125;
+private:
+    std::shared_ptr&lt;std::vector&lt;T&gt;&gt; data;
+    void check(size_type i, const std::string&amp; msg) const;
+&#125;;
+
+
+template&lt;typename T&gt;
+Blob&lt;T&gt;::Blob()
+    :data(std::make_shared&lt;std::vector&lt;T&gt;&gt;()) &#123;
+&#125;
+
+template&lt;typename T&gt;
+Blob&lt;T&gt;::Blob(std::initializer_list&lt;T&gt; il)
+    : data(std::make_shared&lt;std::vector&lt;T&gt;&gt;(il)) &#123;
+&#125;
+
+template&lt;typename T&gt;
+void Blob&lt;T&gt;::check(size_type i, const std::string&amp; msg) const &#123;
+    if (i &gt; data-&gt;size()) &#123;
+        throw std::out_of_range(msg);
+    &#125;
+&#125;
+</code></pre>
+<p>it’s worth to note in this program, I define the function in <code>Blob.h</code> file instead of <code>bolb.cpp</code>, you can try write template functions in <code>bolb.cpp</code> file see what happened.</p>
+<p>As we’ve seen many times, when we use a class template, we must supply extra information. We can now see that that extra information is a list of explicit template arguments that are bound to the template’s parameters. The compiler uses these template arguments to instantiate a specific class from the template.</p>
+<p>When the compiler instantiates a class from our Blob template, it rewrites the Blob template, replacing each instance of the template parameter T by the given template argument, which in this case is int. The compiler generates a different class for each element type we specify:</p>
+<pre><code class="c++">// these definitions instantiate two distinct Blob types
+Blob&lt;string&gt; names; // Blob that holds strings
+Blob&lt;double&gt; prices;// different element type
+</code></pre>
+<p>There is one exception to the rule that we must supply template arguments when we use a class template type. Inside the scope of the class template itself, we may use the name of the template without arguments:</p>
+<pre><code class="c++">#pragma once
+#include&quot;Blob.h&quot;
+
+template &lt;typename T&gt; class BlobPtr &#123;
+public:
+    BlobPtr() : curr(0) &#123;&#125;
+    BlobPtr(Blob&lt;T&gt;&amp; a, size_t sz = 0) :
+        wptr(a.data), curr(sz) &#123;
+    &#125;
+    T&amp; operator*() const &#123;
+        auto p = check(curr, &quot;dereference past end&quot;);
+        return (*p)[curr]; // (*p) is the vector to which this object points
+    &#125;
+    // increment and decrement
+    BlobPtr&amp; operator++(); // prefix operators
+    BlobPtr&amp; operator--();
+private:
+    // check returns a shared_ptr to the vector if the check succeeds
+    std::shared_ptr&lt;std::vector&lt;T&gt;&gt;
+        check(std::size_t, const std::string&amp;) const;
+    // store a weak_ptr, which means the underlying vector might be destroyed
+    std::weak_ptr&lt;std::vector&lt;T&gt;&gt; wptr;
+    std::size_t curr; // current position within the array
+&#125;;
+</code></pre>
+<p>Notice: the prefix increment and decrement members of <code>BlobPtr</code> return <code>BlobPtr&amp;</code>, not <code>BlobPtr&lt;T&gt;&amp;</code>. When we are inside the scope of a class template, the compiler treats references to the template itself as if we had supplied template arguments matching the template’s own parameters. That is, it is as if we had written:</p>
+<pre><code class="c++">BlobPtr&lt;T&gt;&amp; operator++();
+BlobPtr&lt;T&gt;&amp; operator--();
+</code></pre>
+<p>When we define members outside the body of a class template, we must remember that we are not in the scope of the class until the class name is seen:</p>
+<pre><code class="c++">template&lt;typename T&gt;
+inline BlobPtr&lt;T&gt;&amp; BlobPtr&lt;T&gt;::operator++() &#123;
+    BlobPtr ret = *this; // save the current value
+    ++* this; // advance one element; prefix ++ checks the increment
+    return ret; // return the saved state
+&#125;
+
+template&lt;typename T&gt;
+inline BlobPtr&lt;T&gt;&amp; BlobPtr&lt;T&gt;::operator--() &#123;
+    BlobPtr ret = *this; // save the current value
+    --* this; // advance one element; prefix ++ checks the increment
+    return ret; // return the saved state
+&#125;
+</code></pre>
+<p>Because the return type appears outside the scope of the class, we must specify that the return type returns a <code>BlobPtr</code> instantiated with the same type as the class. Inside the function body, we are in the scope of the class so do not need to repeat the template argument when we define ret. When we do not supply template arguments, the compiler assumes that we are using the same type as the member’s instantiation. Hence, the definition of ret is as if we had written:</p>
+<pre><code class="c++">BlobPtr&lt;T&gt; ret = *this;
+</code></pre>
+<p>When a class contains a friend declaration, the class and the friend can independently be templates or not. A class template that has a nontemplate friend grants that friend access to all the instantiations of the template. When the friend is itself a template, the class granting friendship controls whether friendship includes all instantiations of the template or only specific instantiation(s).</p>
 
         </div>
         <!-- .entry-content -->
@@ -598,23 +686,23 @@ int main()
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
+        
           
-            <div class="post-nepre full previous">
+            <div class="post-nepre full next">
           
-            <a href="/2021/12/02/c++%20c2/" rel="prev">
+            <a href="/2021/12/11/Cpp_c11/" rel="next">
               <div class="background">
-                <img class="lazyload" src="" data-src="/images/cover/(2).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/(2).jpg.webp">
+                <img class="lazyload" src="" data-src="/images/cover/(3).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/(3).jpg.webp">
               </div>
               <span class="label">
-              Previous Post</span>
+              Next Post</span>
               <div class="info">
                 <h3>
-                (ch2) C++ Basic Features - Type</h3>
+                (ch11) Object-Oriented Programming</h3>
                 <hr>
               </div>
             </a>
           </div>
-        
         
       </section>
       

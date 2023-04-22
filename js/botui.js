@@ -26,11 +26,11 @@ function bot_ui_ini() {
     }).then(function () {
         botui.message.add({
             delay: 1100,
-            content: "这里是 Noah"
+            content: "私は真中友希です"
         }).then(function () {
             botui.message.add({
                 delay: 1100,
-                content: "一个废物~"
+                content: "はじめましで~"
             }).then(function () {
                 botui.action.button({
                     delay: 1600,
@@ -65,7 +65,7 @@ function bot_ui_ini() {
         secondpart = function () {
             botui.message.add({
                 delay: 1500,
-                content: "没了..."
+                content: "💨..."
             })
         }
 }
