@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://NoahBishop.github.io/"/>
-  <updated>2023-04-21T15:59:18.010Z</updated>
+  <updated>2023-04-23T15:46:26.331Z</updated>
   <id>https://NoahBishop.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Setting up Qt Projects with CMake and Linking External</title>
+    <link href="https://NoahBishop.github.io/2022/07/01/essay_01_use%20cmake%20settting%20up%20Qt%20project/"/>
+    <id>https://NoahBishop.github.io/2022/07/01/essay_01_use cmake settting up Qt project/</id>
+    <published>2022-07-01T13:52:45.000Z</published>
+    <updated>2023-04-23T15:46:26.331Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Setting-up-Qt-Projects-with-CMake-and-Linking-External-Libraries&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Qt" scheme="https://NoahBishop.github.io/tags/Qt/"/>
+    
+  </entry>
   
   <entry>
     <title>(ch12) Templates and Generic Programming (Not completed yet)</title>
@@ -39,32 +65,6 @@
     
     
       <category term="C/C++ basic" scheme="https://NoahBishop.github.io/tags/C-C-basic/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>(ch12) Templates and Generic Programming (Not completed yet)</title>
-    <link href="https://NoahBishop.github.io/2021/12/12/essay_01_use%20cmake%20settting%20up%20Qt%20project/"/>
-    <id>https://NoahBishop.github.io/2021/12/12/essay_01_use cmake settting up Qt project/</id>
-    <published>2021-12-12T13:52:45.000Z</published>
-    <updated>2023-04-23T15:42:59.311Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Setting-up-Qt-Projects-with-CMake-and-Linking-External-Libraries&quot;&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Qt" scheme="https://NoahBishop.github.io/tags/Qt/"/>
     
   </entry>
   
