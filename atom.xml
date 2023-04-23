@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://NoahBishop.github.io/"/>
-  <updated>2023-04-21T15:59:18.010Z</updated>
+  <updated>2023-04-23T15:40:10.737Z</updated>
   <id>https://NoahBishop.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="https://NoahBishop.github.io/2023/04/23/essay_01_use%20cmake%20settting%20up%20Qt%20project/"/>
+    <id>https://NoahBishop.github.io/2023/04/23/essay_01_use cmake settting up Qt project/</id>
+    <published>2023-04-23T15:40:25.656Z</published>
+    <updated>2023-04-23T15:40:10.737Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Setting-up-Qt-Projects-with-CMake-and-Linking-External-Libraries&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>(ch12) Templates and Generic Programming (Not completed yet)</title>
