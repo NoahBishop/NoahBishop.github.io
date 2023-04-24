@@ -553,7 +553,7 @@ int main()&#123;
 </code></pre>
 <p>In previous code has <strong>three</strong>3️⃣ points must notice:</p>
 <ol>
-<li><p>If you download the libtorch is <strong>release</strong> version, must build you project as release version, if you build your project as <strong>debug</strong> version the program will not work, the running error is this: </p>
+<li><p>If you download the libtorch <strong>release</strong> version, you must build your project as a release version. If you build your project as a <strong>debug</strong> version, the program will not work. The running error will be as follows:</p>
 <pre><code class="c++">error loading the model
 open file failed because of errno 42 on fopen: Illegal byte sequence, file path:
 Exception raised from RAIIFile at C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\caffe2\serialize\file_adapter.cc:27 (most recent call first):
@@ -566,9 +566,9 @@ Exception raised from RAIIFile at C:\actions-runner\_work\pytorch\pytorch\builde
 Press &lt;RETURN&gt; to close this window...
 </code></pre>
 </li>
-<li><p>In previous C++ code line <strong>29</strong>, I convert image format <strong>BGR</strong> to <strong>RGB</strong> format. In default, OpenCV load images as mode BGR(blue, green, red), but in python training code, Image.open function load image as RGB format.</p>
+<li><p>In the previous C++ code, on line 29, I converted the image format from BGR to RGB. By default, OpenCV loads images in BGR mode (blue, green, red), whereas the <code>Image.open</code> function in Python training code loads images in RGB format.</p>
 </li>
-<li><p>In previous C++ code line <strong>54</strong>, I just get the output for all probabilities, how to get one and convert it to C++ type(int, float..)? The output size is 1x[N]</p>
+<li><p>In the previous C++ code, on line 54, I got the output for all probabilities. How can I get one specific probability and convert it to a C++ type (e.g., <code>int</code>, <code>float</code>, etc.)? The output size is 1xN.</p>
 <pre><code class="C++">// get index 0 probability
 float pro = output[0][0].item&lt;float&gt;();
 
@@ -577,7 +577,7 @@ int max_pro_idx = torch::argmax(output).item&lt;int&gt;();
 </code></pre>
 </li>
 </ol>
-<h2 id="create-shared-library-in-windows"><a href="#create-shared-library-in-windows" class="headerlink" title="create shared library in windows"></a>create shared library in windows</h2><p>In my project, I utilized the Qt libraries for the GUI portion, as well as libtorch and OpenCV for the core calculations. Therefore, I want to create a shared library called <strong>model</strong> that links the PyTorch and OpenCV libraries together.</p>
+<h2 id="create-shared-library-in-windows"><a href="#create-shared-library-in-windows" class="headerlink" title="create shared library in windows"></a>create shared library in windows</h2><p>In my project, I used the Qt libraries for the GUI portion and the libtorch and OpenCV libraries for the core calculations. Therefore, I want to create a shared library called <code>model</code> that links the PyTorch and OpenCV libraries together.</p>
 <pre><code class="cmake"># import libtorch
 set(CMAKE_PREFIX_PATH &quot;replease to your libtorch installed folder📂&quot;)
 find_package(Torch REQUIRED)
@@ -640,15 +640,15 @@ install(DIRECTORY $&lt;TARGET_FILE_DIR:model&gt;/ DESTINATION bin
 <pre><code class="cmake"># use make cmake in windows can create shared libary with msvc
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS 1)
 </code></pre>
-<h2 id="Qt-portion-issues"><a href="#Qt-portion-issues" class="headerlink" title="Qt portion issues"></a>Qt portion issues</h2><p>After successful create shared library, I included header file, a new issue occurs, the compiler tell me many error in libtorch library header files . It so ridiculous! After searching many of similar issues, I get this issue was caused by QT_slots. To fix this issue need included header file like this:</p>
+<h2 id="Qt-portion-issues"><a href="#Qt-portion-issues" class="headerlink" title="Qt portion issues"></a>Qt portion issues</h2><p>After successfully creating the shared library and including the header file, I encountered a new issue where the compiler reported many errors in the libtorch library header files. It was quite frustrating! After searching for similar issues, I discovered that the issue was caused by QT slots. To fix this issue, I needed to include the header file as follows:</p>
 <pre><code class="c++">#undef slots
 
 #include &lt;model.h&gt;
 
 #define slots Q_SLOTS
 </code></pre>
-<h2 id="Package-your-application-and-make-installer"><a href="#Package-your-application-and-make-installer" class="headerlink" title="Package your application and make installer"></a>Package your application and make installer</h2><p>After we finished project that next need package it and needed environment. In my project used Qt and libtorch and OpenCV, There are many ways can do this. </p>
-<p>First. I copied need environment libraries to build folder 📂 </p>
+<h2 id="Package-your-application-and-make-installer"><a href="#Package-your-application-and-make-installer" class="headerlink" title="Package your application and make installer"></a>Package your application and make installer</h2><p>After finishing the project, the next step is to package it along with the necessary environment. My project uses Qt, libtorch, and OpenCV, and there are several ways to achieve this, my way is as follows:</p>
+<p>First, I copied the necessary environment libraries to the build folder📂 </p>
 <pre><code class="cmake"># cpoy linked dll lib to build folder
 if (MSVC)
     add_custom_command(TARGET model POST_BUILD
@@ -663,7 +663,7 @@ if (MSVC)
                        $&lt;TARGET_FILE_DIR:model&gt;)
 endif (MSVC)
 </code></pre>
-<p>Second. use cmake install script install them</p>
+<p>Second, I used a CMake install script to install them.</p>
 <pre><code class="cmake"># install scrpit, install all lib and model
 install(TARGETS model
     LIBRARY DESTINATION $&#123;CMAKE_INSTALL_LIBDIR&#125;
@@ -682,7 +682,7 @@ install(DIRECTORY &quot;$&#123;PROJECT_SOURCE_DIR&#125;/dataset/&quot;
     DESTINATION bin/dataset
 )
 </code></pre>
-<p>Qt portion may more difficult. Fortunately, Qt provide a cmake script that we can automatically call windeployqt.exe when run cmake install script.</p>
+<p>The Qt portion may be more difficult, but fortunately, Qt provides a CMake script that we can use to automatically call <code>windeployqt.exe</code> when running the CMake install script.</p>
 <pre><code class="cmake"># The command is defined in the Core component of the Qt6 package
 find_package(Qt6 REQUIRED COMPONENTS Core)
 qt_standard_project_setup()
@@ -695,8 +695,8 @@ qt_generate_deploy_app_script(
 
 install(SCRIPT $&#123;deploy_script&#125;)
 </code></pre>
-<p>After do this, run cmd as administrator and change dir to you project build folder 📂, run <code>cmake -- install ./</code>. By default, the program and need libraries will installed at <code>C:/program(X86)/you_project_name</code>.</p>
-<p>Next we need package a installer, inno setup may a good choice.</p>
+<p>After completing the above steps, I ran the command prompt as an administrator and changed the directory to the project build folder. Then, I ran <code>cmake --install ./</code> command. By default, the program and the necessary libraries will be installed in <code>C:/Program Files (x86)/your_project_name</code>.</p>
+<p>The next step is to package an installer, and Inno Setup could be a good choice. It provides a good GUI that makes it easy to create your application installer. If you want the user to not see the publisher as ‘Unknown’ when they install the application, you also need digital signing certificates and configure the signing tool. However, it is not free now.</p>
 <h2 id="My-project-structure"><a href="#My-project-structure" class="headerlink" title="My project structure"></a>My project structure</h2><pre><code class="apl">D:\QT_PROJECT\LCHIC
 |   CMakeLists.txt
 |   CMakeLists.txt.user
