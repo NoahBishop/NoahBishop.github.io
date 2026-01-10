@@ -7,6 +7,7 @@
 	
 		<title itemprop="name">
 			
+				(ch12) Templates and Generic Programming (Not completed yet) | 
 						うさぎの手帳
 		</title>
 		
@@ -423,492 +424,327 @@
   </div>
 </header>
 
-      <div class="blank" style="padding-top: 0px;"></div>
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/C_background.webp');" src="" data-src="/images/cover/C_background.webp">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      (ch12) Templates and Generic Programming (Not completed yet)</h1>
+      <p class="entry-census">
+        <span>
+          <a href="morning.eu.org">
+            <img src="/images/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="morning.eu.org">Noah</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2021-12-12<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
 <div id="content" class="site-content">
-  
-      <div class="top-feature-row">
-  <h1 class="fes-title" style="font-family: 'Ubuntu', sans-serif;">
-  <i class="fa fa-anchor" aria-hidden="true">
-  </i>
-  START:DASH!!</h1>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="https://morning.eu.org/theme-sakura/" target="_blank">
-        <div class="img">
-          <img src="https://morning.eu.org/images/startdash/sakura.jpg">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h1 id="Templates-and-Generic-Programming"><a href="#Templates-and-Generic-Programming" class="headerlink" title="Templates and Generic Programming"></a>Templates and Generic Programming</h1><p>Both object-oriented programming (OOP) and generic programming deal with types that are not known at the time the program is written. The distinction between the two is that OOP deals with types that are not known until run time, whereas in generic programming the types become known during compilation.</p>
+<p>For example, the library provides a single, generic definition of each container, such as <code>vector</code>. We can use that generic definition to define many different types of <code>vectors</code>, each of which differs from the others as to the type of elements the <code>vector</code> contains.</p>
+<p>Templates are the foundation for generic programming in C++. A template is a blueprint or formula for creating classes or functions. When we use a generic type, such as vector, or a generic function, such as find, we supply the information needed to transform that blueprint into a specific class or function. <strong>That transformation happens during compilation.</strong></p>
+<h2 id="Defining-a-Template"><a href="#Defining-a-Template" class="headerlink" title="Defining a Template"></a>Defining a Template</h2><p>Imagine that we want to write a function to compare two values and indicate whether the first is less than, equal to, or greater than the second. In practice, we’d want to define several such functions, each of which will compare values of a given type.</p>
+<pre><code class="c++">// compare string
+int compare(const string &amp;v1, const string &amp;v2)
+// compare double
+int compare(const double &amp;v1, const double &amp;v2)
+</code></pre>
+<p>These functions are nearly identical: The only <strong>difference</strong> between them is the <strong>type of their parameters</strong>. The function body is the same in each function.</p>
+<h3 id="Function-Templates"><a href="#Function-Templates" class="headerlink" title="Function Templates"></a>Function Templates</h3><p>Rather than defining a new function for each type, we can define a <strong>function template</strong>. A function template is a formula from which we can generate type-specific versions of that function. The template version of compare looks like:</p>
+<pre><code class="c++">template &lt;typename T&gt;
+int compare(const T&amp; l, const T&amp; r) &#123;
+ if (r &lt; l) &#123;
+  return 1;
+ &#125;
+ if (l &lt; r) &#123;
+  return -1;
+ &#125;
+ return 0;
+&#125;
+</code></pre>
+<p>A template definition starts with the keyword template followed by a <strong>template parameter list</strong>, which is a comma-separated list of one or more template parameters bracketed by the <code>&lt;</code> and <code>&gt;</code> .</p>
+<p>The template parameter list acts much like a function parameter list. A function parameter list defines local variable(s) of a specified type but does not say how to initialize them. At run time, arguments are supplied that initialize the parameters.</p>
+<p>When we call a function template, the compiler (ordinarily) uses the arguments of the call to deduce the template argument(s) for us. That is, when we call compare, the compiler uses the type of the arguments to determine what type to bind to the template parameter T. For example, in this call</p>
+<pre><code class="c++">std::cout &lt;&lt; compare(4.5, 1.0) &lt;&lt; std::endl;
+</code></pre>
+<p>the arguments have type double. The compiler will deduce int as the template argument and will bind that argument to the template parameter T.</p>
+<p>Our compare function has one <strong>template type parameter</strong>. In general, we can use a type parameter as a type specifier in the same way that we use a built-in or class type specifier. In particular, a type parameter can be used to name the return type or a function parameter type, and for variable declarations or casts inside the function body:</p>
+<pre><code class="c++">template &lt;typename T&gt; T foo(T* p) &#123;
+ T tmp = *p; // tmp will have the type to which p points
+ // ...
+ return tmp;
+&#125;
+</code></pre>
+<p>Each type parameter must be preceded by the keyword class or typename:</p>
+<pre><code class="c++">// error: must precede U with either typename or class
+template &lt;typename T, U&gt; T calc(const T&amp;, const U&amp;);
+</code></pre>
+<p>These keywords have the <strong>same</strong> meaning and can be used interchangeably inside a template parameter list. A template parameter list can use both keywords:</p>
+<pre><code class="c++">// ok: no distinction between typename and class in a template parameter list
+template &lt;typename T, class U&gt; calc (const T&amp;, const U&amp;);
+</code></pre>
+<p><em>It may seem more intuitive to use the keyword <strong>typename</strong> rather than class to designate a template type parameter. After all, we can use built-in (nonclass) types as a template type argument. Moreover, typename more clearly indicates that the name that follows is a type name. However, typename was added to C++ after templates were already in widespread use; some programmers continue to use class exclusively.</em></p>
+<p>In addition to defining type parameters, we can define templates that take <strong>nontype parameters</strong>. A nontype parameter represents a value rather than a type. Nontype parameters are specified by using a specific type name instead of the class or typename keyword.</p>
+<p>As an example, we can write a version of compare that will handle string literals. Such literals are arrays of const char. Because we cannot copy an array, we’ll define our parameters as references to an array. Because we’d like to be able to compare literals of different lengths, we’ll give our template two nontype parameters. The first template parameter will represent the size of the first array, and the second parameter will represent the size of the second array:</p>
+<pre><code class="c++">template&lt;unsigned N, unsigned M&gt;
+int compare(const char(&amp;p1)[N], const char(&amp;p2)[M]) &#123;
+ // note need incloude string.h first
+ return strcmp(p1, p2);
+&#125;
+</code></pre>
+<p>A function template can be declared <strong>inline</strong> or <strong>constexpr</strong> in the same ways as nontemplate functions. The inline or constexpr specifier follows the template parameter list and precedes the return type:</p>
+<pre><code class="c++">// ok: inline specifier follows the template parameter list
+template &lt;typename T&gt; inline T min(const T&amp;, const T&amp;);
+// error: incorrect placement of the inline specifier
+inline template &lt;typename T&gt; T min(const T&amp;, const T&amp;);
+</code></pre>
+<p>Simple though it is, our initial compare function illustrates two important principles for writing generic code:</p>
+<ol>
+<li>The function parameters in the template are references to const.</li>
+<li>The tests in the body use only &lt; comparisons.</li>
+</ol>
+<p>However, by writing the code using only the &lt; operator, we reduce the requirements on types that can be used with our compare function. Those types must support <code>&lt;</code>, but they need not also support <code>&gt;</code>.</p>
+<p>In fact, if we were truly concerned about type independence and portability, we probably should have defined our function using the <code>less</code></p>
+<pre><code class="c++">template &lt;class T&gt;
+int compare(const T&amp; l, const T&amp; r) &#123;
+ if (std::less&lt;T&gt;()(l, r)) &#123;
+  return -1;
+ &#125;
+ if (std::less&lt;T&gt;()(r, l)) &#123;
+  return 1;
+ &#125;
+ return 0;
+&#125;
+</code></pre>
+<p>The problem with our original version is that if a user calls it with two pointers and those pointers do not point to the same array, then our code is undefined.</p>
+<h3 id="Class-Templates"><a href="#Class-Templates" class="headerlink" title="Class Templates"></a>Class Templates</h3><p>A class template is a blueprint for generating classes. Class templates differ from function templates in that the compiler cannot deduce the template parameter type(s) for a class template. Instead, as we’ve seen many times, to use a class template we must <strong>supply additional information inside angle brackets following the template’s name</strong>.</p>
+<p>Like function templates, class templates begin with the keyword template followed by a template parameter list. In the definition of the class template (and its members), we use the template parameters as stand-ins for types or values that will be supplied when the template is used</p>
+<pre><code class="c++">// in Blob.h
+#pragma once
+#include&lt;vector&gt;
+#include&lt;memory&gt;
+
+template &lt;typename T&gt; class Blob &#123;
+public:
+ typedef T value_type;
+ typedef typename std::vector&lt;T&gt;::size_type size_type;
+ // constructors
+ Blob();
+ Blob(std::initializer_list&lt;T&gt; il);
+ // number of elements in the Blob
+ size_type size() const &#123;
+  return data-&gt;size();
+ &#125;
+ bool empty() const &#123;
+  return data-&gt;empty();
+ &#125;
+ // add and remove elements
+ void push_back(const T&amp; t) &#123;
+  data-&gt;push_back(t);
+ &#125;
+ // move version;
+ void push_back(T&amp;&amp; t) &#123;
+  data-&gt;push_back(std::move(t));
+ &#125;
+ void pop_back() &#123;
+  data-&gt;pop_back();
+ &#125;
+ // element access
+ T&amp; back() &#123;
+  return data-&gt;back();
+ &#125;
+
+ T&amp; operator[](size_type i) &#123;
+  std::string msg = &quot;error&quot;;
+  check(i, msg);
+  return (*data)[i];
+ &#125;
+private:
+ std::shared_ptr&lt;std::vector&lt;T&gt;&gt; data;
+ void check(size_type i, const std::string&amp; msg) const;
+&#125;;
+
+
+template&lt;typename T&gt;
+Blob&lt;T&gt;::Blob()
+ :data(std::make_shared&lt;std::vector&lt;T&gt;&gt;()) &#123;
+&#125;
+
+template&lt;typename T&gt;
+Blob&lt;T&gt;::Blob(std::initializer_list&lt;T&gt; il)
+ : data(std::make_shared&lt;std::vector&lt;T&gt;&gt;(il)) &#123;
+&#125;
+
+template&lt;typename T&gt;
+void Blob&lt;T&gt;::check(size_type i, const std::string&amp; msg) const &#123;
+ if (i &gt; data-&gt;size()) &#123;
+  throw std::out_of_range(msg);
+ &#125;
+&#125;
+</code></pre>
+<p>it’s worth to note in this program, I define the function in <code>Blob.h</code> file instead of <code>bolb.cpp</code>, you can try write template functions in <code>bolb.cpp</code> file see what happened.</p>
+<p>As we’ve seen many times, when we use a class template, we must supply extra information. We can now see that that extra information is a list of explicit template arguments that are bound to the template’s parameters. The compiler uses these template arguments to instantiate a specific class from the template.</p>
+<p>When the compiler instantiates a class from our Blob template, it rewrites the Blob template, replacing each instance of the template parameter T by the given template argument, which in this case is int. The compiler generates a different class for each element type we specify:</p>
+<pre><code class="c++">// these definitions instantiate two distinct Blob types
+Blob&lt;string&gt; names; // Blob that holds strings
+Blob&lt;double&gt; prices;// different element type
+</code></pre>
+<p>There is one exception to the rule that we must supply template arguments when we use a class template type. Inside the scope of the class template itself, we may use the name of the template without arguments:</p>
+<pre><code class="c++">#pragma once
+#include&quot;Blob.h&quot;
+
+template &lt;typename T&gt; class BlobPtr &#123;
+public:
+ BlobPtr() : curr(0) &#123;&#125;
+ BlobPtr(Blob&lt;T&gt;&amp; a, size_t sz = 0) :
+  wptr(a.data), curr(sz) &#123;
+ &#125;
+ T&amp; operator*() const &#123;
+  auto p = check(curr, &quot;dereference past end&quot;);
+  return (*p)[curr]; // (*p) is the vector to which this object points
+ &#125;
+ // increment and decrement
+ BlobPtr&amp; operator++(); // prefix operators
+ BlobPtr&amp; operator--();
+private:
+ // check returns a shared_ptr to the vector if the check succeeds
+ std::shared_ptr&lt;std::vector&lt;T&gt;&gt;
+  check(std::size_t, const std::string&amp;) const;
+ // store a weak_ptr, which means the underlying vector might be destroyed
+ std::weak_ptr&lt;std::vector&lt;T&gt;&gt; wptr;
+ std::size_t curr; // current position within the array
+&#125;;
+</code></pre>
+<p>Notice: the prefix increment and decrement members of <code>BlobPtr</code> return <code>BlobPtr&amp;</code>, not <code>BlobPtr&lt;T&gt;&amp;</code>. When we are inside the scope of a class template, the compiler treats references to the template itself as if we had supplied template arguments matching the template’s own parameters. That is, it is as if we had written:</p>
+<pre><code class="c++">BlobPtr&lt;T&gt;&amp; operator++();
+BlobPtr&lt;T&gt;&amp; operator--();
+</code></pre>
+<p>When we define members outside the body of a class template, we must remember that we are not in the scope of the class until the class name is seen:</p>
+<pre><code class="c++">template&lt;typename T&gt;
+inline BlobPtr&lt;T&gt;&amp; BlobPtr&lt;T&gt;::operator++() &#123;
+ BlobPtr ret = *this; // save the current value
+ ++* this; // advance one element; prefix ++ checks the increment
+ return ret; // return the saved state
+&#125;
+
+template&lt;typename T&gt;
+inline BlobPtr&lt;T&gt;&amp; BlobPtr&lt;T&gt;::operator--() &#123;
+ BlobPtr ret = *this; // save the current value
+ --* this; // advance one element; prefix ++ checks the increment
+ return ret; // return the saved state
+&#125;
+</code></pre>
+<p>Because the return type appears outside the scope of the class, we must specify that the return type returns a <code>BlobPtr</code> instantiated with the same type as the class. Inside the function body, we are in the scope of the class so do not need to repeat the template argument when we define ret. When we do not supply template arguments, the compiler assumes that we are using the same type as the member’s instantiation. Hence, the definition of ret is as if we had written:</p>
+<pre><code class="c++">BlobPtr&lt;T&gt; ret = *this;
+</code></pre>
+<p>When a class contains a friend declaration, the class and the friend can independently be templates or not. A class template that has a nontemplate friend grants that friend access to all the instantiations of the template. When the friend is itself a template, the class granting friendship controls whether friendship includes all instantiations of the template or only specific instantiation(s).</p>
+
         </div>
-        <div class="info">
-          <h3>Sakura</h3>
-          <p>本站 hexo 主题</p>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://morning.eu.org/images/custom/donate/404.jpg"></li>
+                <li class="wechat-code"><img src="https://morning.eu.org/images/custom/donate/404.jpg"></li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </a>
-    </div>
-  </div>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="https://www.cnblogs.com/cs-Miscellaneous/" target="_blank">
-        <div class="img">
-          <img src="https://morning.eu.org/images/startdash/cnblog.jpg">
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2022/07/01/Qt/essay_01_use%20cmake%20settting%20up%20Qt%20project/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="" data-src="/images/cover/QtWithTorch.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/QtWithTorch.webp">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                Setting up Qt Projects with CMake and Linking External</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2021/12/11/Cpp%20primer/Cpp_c11/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="" data-src="/images/cover/C_background.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/C_background.webp">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                (ch11) Object-Oriented Programming</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+
+
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="morning.eu.org" class="profile gravatar"><img src="/images/custom/avatar.jpg" itemprop="image" alt="Noah" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="morning.eu.org" itemprop="url" rel="author">Noah</a>
+            </h3>
+          </div>
         </div>
-        <div class="info">
-          <h3>博客园</h3>
-          <p>博主的博客园(已停止维护)</p>
-        </div>
-      </a>
-    </div>
-  </div>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="https://steamcommunity.com/profiles/76561199087248993/" target="_blank">
-        <div class="img">
-          <img src="https://morning.eu.org/images/startdash/wanshiwu.jpg">
-        </div>
-        <div class="info">
-          <h3>Steam</h3>
-          <p>来玩</p>
-        </div>
-      </a>
-    </div>
-  </div>
-  
+        <hr>
+        <p><i class="iconfont icon-write"></i>life is perfact</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
-        <div id="primary" class="content-area">
-          <main id="main" class="site-main" role="main">
-            <h1 class="main-title" style="font-family: 'Ubuntu', sans-serif;">
-              <i class="fa fa-envira" aria-hidden="true"></i>
-              Discovery
-            </h1>
-            
-  <!-- 首页默认取最最新文章集 -->
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2022/07/01/Qt/essay_01_use%20cmake%20settting%20up%20Qt%20project/">
-      <img class="lazyload" src="" data-src="/images/cover/QtWithTorch.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2022-7-1 21:07</div>
-      <a href="/2022/07/01/Qt/essay_01_use%20cmake%20settting%20up%20Qt%20project/" class="post-title">
-        <h3>Setting up Qt Projects with CMake and Linking External</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/Qt/">Qt<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2022/07/01/Qt/essay_01_use%20cmake%20settting%20up%20Qt%20project/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/12/Cpp%20primer/Cpp_c12/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-12 21:12</div>
-      <a href="/2021/12/12/Cpp%20primer/Cpp_c12/" class="post-title">
-        <h3>(ch12) Templates and Generic Programming (Not completed yet)</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/12/Cpp%20primer/Cpp_c12/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/11/Cpp%20primer/Cpp_c11/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-11 21:12</div>
-      <a href="/2021/12/11/Cpp%20primer/Cpp_c11/" class="post-title">
-        <h3>(ch11) Object-Oriented Programming</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/11/Cpp%20primer/Cpp_c11/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/10/Cpp%20primer/Cpp_c10/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-10 21:12</div>
-      <a href="/2021/12/10/Cpp%20primer/Cpp_c10/" class="post-title">
-        <h3>(ch10) Overloaded Operations and Conversions</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/10/Cpp%20primer/Cpp_c10/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/09/Cpp%20primer/Cpp_c09/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-9 21:12</div>
-      <a href="/2021/12/09/Cpp%20primer/Cpp_c09/" class="post-title">
-        <h3>(ch9) Copy Control</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/09/Cpp%20primer/Cpp_c09/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/08/Cpp%20primer/Cpp_c08/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-8 21:12</div>
-      <a href="/2021/12/08/Cpp%20primer/Cpp_c08/" class="post-title">
-        <h3>(ch8) Dynamic Memory</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/08/Cpp%20primer/Cpp_c08/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/07/Cpp%20primer/Cpp_c07/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-7 21:12</div>
-      <a href="/2021/12/07/Cpp%20primer/Cpp_c07/" class="post-title">
-        <h3>(ch7) Associative Containers</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/07/Cpp%20primer/Cpp_c07/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/06/Cpp%20primer/Cpp_c06/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-6 21:12</div>
-      <a href="/2021/12/06/Cpp%20primer/Cpp_c06/" class="post-title">
-        <h3>(ch6) Generic Algorithms</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/06/Cpp%20primer/Cpp_c06/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/05/Cpp%20primer/Cpp_c05/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-5 21:12</div>
-      <a href="/2021/12/05/Cpp%20primer/Cpp_c05/" class="post-title">
-        <h3>(ch5) Sequential Containers</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/05/Cpp%20primer/Cpp_c05/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/04/Cpp%20primer/Cpp_c04/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-4 21:12</div>
-      <a href="/2021/12/04/Cpp%20primer/Cpp_c04/" class="post-title">
-        <h3>(ch4) The C++ IO Library</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/04/Cpp%20primer/Cpp_c04/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
 
 
-          </main>
-          <!-- 首页默认取最最新文章集 -->
-          <!-- 
-      <nav class="navigator">
-        
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">&lt;i class&#x3D;&quot;iconfont icon-right&quot;&gt;&lt;&#x2F;i&gt;</a>
-      </nav>
-     -->
-        </div>
-        
-          <div id="pagination"><a href="/page/2/" class="">Previous</a></div>
-          
-</div>
+
     </div>    
     <div class="ins-search">
     <div class="ins-search-mask"></div>

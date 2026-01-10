@@ -7,6 +7,7 @@
 	
 		<title itemprop="name">
 			
+				(ch4) The C++ IO Library | 
 						うさぎの手帳
 		</title>
 		
@@ -423,492 +424,400 @@
   </div>
 </header>
 
-      <div class="blank" style="padding-top: 0px;"></div>
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/C_background.webp');" src="" data-src="/images/cover/C_background.webp">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      (ch4) The C++ IO Library</h1>
+      <p class="entry-census">
+        <span>
+          <a href="morning.eu.org">
+            <img src="/images/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="morning.eu.org">Noah</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2021-12-4<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
 <div id="content" class="site-content">
-  
-      <div class="top-feature-row">
-  <h1 class="fes-title" style="font-family: 'Ubuntu', sans-serif;">
-  <i class="fa fa-anchor" aria-hidden="true">
-  </i>
-  START:DASH!!</h1>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="https://morning.eu.org/theme-sakura/" target="_blank">
-        <div class="img">
-          <img src="https://morning.eu.org/images/startdash/sakura.jpg">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h1 id="The-IO-Library"><a href="#The-IO-Library" class="headerlink" title="The IO Library"></a>The IO Library</h1><h2 id="The-IO-Classes"><a href="#The-IO-Classes" class="headerlink" title="The IO Classes"></a>The IO Classes</h2><p>The IO types and objects that we have used so far manipulate char data. By default these objects are connected to the user’s console window. Of course, real programs cannot be limited to doing IO solely to or from a console window. Programs often need to read or write named files. Moreover, it can be convenient to use IO operations to process the characters in a string. Applications also may have to read and write languages that require wide-character support.</p>
+<p>To support these different kinds of IO processing, the library defines a collection of IO types in addition to the istream and ostream types that we have already used. These types are defined in three separate headers:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Header</th>
+<th>use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">iostream</td>
+<td>read from and write to a stream</td>
+</tr>
+<tr>
+<td style="text-align:center">fstream</td>
+<td>read and write named files</td>
+</tr>
+<tr>
+<td style="text-align:center">sstream</td>
+<td>read and write in-memory strings</td>
+</tr>
+</tbody>
+</table>
+<p>As we saw in previous, we cannot copy or assign objects of the IO types, so we cannot have a parameter or return type that is one of the stream types. Functions that do IO typically pass and return the stream through references.</p>
+<p>Inherent in doing IO is the fact that errors can occur. Some errors are recoverable; others occur deep within the system and are beyond the scope of a program to correct. The IO classes define functions and flags let us access and manipulate the condition state of a stream.(*stream represent one of streams in previous table)</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*stream::iostate</td>
+<td>Type for stream state flags</td>
+</tr>
+<tr>
+<td>*stream::eofbit</td>
+<td>End-Of-File reached while performing an extracting operation on an input stream.</td>
+</tr>
+<tr>
+<td>*stream::failbit</td>
+<td>The last input operation failed because of an error related to the internal logic of the operation itself.</td>
+</tr>
+<tr>
+<td>*stream::badbit</td>
+<td>Error due to the failure of an input/output operation on the stream buffer.</td>
+</tr>
+<tr>
+<td>*stream::goodbit</td>
+<td>No error. Represents the absence of all the above (the value zero).</td>
+</tr>
+</tbody>
+</table>
+<p>The more details you can read in <a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/istream/iostream/">here</a>.</p>
+<p>As an example of an IO error, consider the following code:<code>int ival;</code> <code>cin &gt;&gt; ival;</code>, If we enter Boo on the standard input, the read will fail. The input operator expected to read an int but got the character B instead. As a result, cin will be put in an error state. Similarly, cin will be in an error state if we enter an end-of-file. Once an error has occurred, subsequent IO operations on that stream will <strong>fail</strong>. We can read from or write to a stream only when it is in a non-error state.</p>
+<h2 id="File-Input-and-Output"><a href="#File-Input-and-Output" class="headerlink" title="File Input and Output"></a>File Input and Output</h2><p>The <strong>fstream</strong> header defines three types to support file IO: <strong>ifstream</strong> to read from a given file, <strong>ofstream</strong> to write to a given file, and <strong>fstream</strong>, which reads and writes a given file. These types provide the same operations as those we have previously used on the objects cin and cout. In particular, we can use the IO operators (&lt;&lt; and &gt;&gt;) to read and write files, we can use getline to read an ifstream.</p>
+<p>In addition to the behavior that they inherit from the iostream types, the types defined in fstream add members to manage the file associated with the stream. These operations, listed in next table, can be called on objects of fstream, ifstream, or ofstream but not on the other IO types.</p>
+<table>
+<thead>
+<tr>
+<th>use</th>
+<th>meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fstream fstrm;</code></td>
+<td>created a unbound file stream.</td>
+</tr>
+<tr>
+<td><code>fstream fstrm(s);</code></td>
+<td>created a file stream and open file called s</td>
+</tr>
+<tr>
+<td><code>fstream fstrm(s,mode);</code></td>
+<td>like previous, but with special mode.</td>
+</tr>
+<tr>
+<td><code>fstrm.open(s)</code></td>
+<td>Opens the file identified by argument filename</td>
+</tr>
+<tr>
+<td><code>fstrm.open(s,mode)</code></td>
+<td>like previous, but with special mode.</td>
+</tr>
+<tr>
+<td><code>fstrm.close()</code></td>
+<td>Closes the file currently associated with the object, disassociating it from the stream.</td>
+</tr>
+<tr>
+<td><code>fstrm.is_open()</code></td>
+<td>Returns whether the stream is currently associated to a file.</td>
+</tr>
+</tbody>
+</table>
+<p>When we want to read or write a file, we define a file stream object and associate that object with the file. Each file stream class defines a member function named open that does whatever system-specific operations are required to locate the given file and open it for reading or writing as appropriate.</p>
+<p>When we create a file stream, we can (optionally) provide a file name. When we supply a file name, open is called automatically, this is a simple example that create question and answer question program, the question and answer will be save in file.</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+
+int main() &#123;
+    //file path
+    std::string ans_file = &quot;Answer.txt&quot;;
+    std::string que_file = &quot;Question.txt&quot;;
+
+    // created question
+    std::ifstream in;
+    std::ofstream out;
+    out.open(que_file);
+    out &lt;&lt; 300 &lt;&lt; &quot; &quot; &lt;&lt; 400;
+    out.close();
+
+    //answer the question
+    in.open(que_file);
+    int num1, num2, sum;
+    in &gt;&gt; num1 &gt;&gt; num2;
+    sum = num1 + num2;
+    out.open(ans_file);
+    out &lt;&lt; sum;
+
+    //read answer
+    in.close();
+    in.open(ans_file);
+    in &gt;&gt; sum;
+    std::cout &lt;&lt; sum &lt;&lt; std::endl;
+    return 0;
+&#125;
+</code></pre>
+<p>When we define an empty file stream object, we can subsequently associate that object with a file by calling open, If a call to open fails, failbit is set. Because a call to open might fail, it is usually a good idea to verify that the open succeeded:</p>
+<pre><code class="c++">if(out)&#123;
+    /**/
+&#125;
+</code></pre>
+<p>Once a file stream has been opened, it remains associated with the specified file. Indeed, calling open on a file stream that is already open will fail and set failbit. Subsequent attempts to use that file stream will fail. To associate a file stream with a different file, we must first close the existing file. Once the file is closed, we can open a new one.</p>
+<p>Each stream has an associated file mode that represents how the file may be used. Next table lists the file modes and their meanings.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">member constant</th>
+<th>stands for</th>
+<th>access</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">in</td>
+<td><strong>input</strong></td>
+<td>File open for reading: the <em><a target="_blank" rel="noopener" href="http://www.cplusplus.com/fstream::rdbuf">internal stream buffer</a></em> supports input operations.</td>
+</tr>
+<tr>
+<td style="text-align:center">out</td>
+<td><strong>output</strong></td>
+<td>File open for writing: the <em><a target="_blank" rel="noopener" href="http://www.cplusplus.com/fstream::rdbuf">internal stream buffer</a></em> supports output operations.</td>
+</tr>
+<tr>
+<td style="text-align:center">binary</td>
+<td><strong>binary</strong></td>
+<td>Operations are performed in binary mode rather than text.</td>
+</tr>
+<tr>
+<td style="text-align:center">ate</td>
+<td><strong>at end</strong></td>
+<td>The <em>output position</em> starts at the end of the file.</td>
+</tr>
+<tr>
+<td style="text-align:center">app</td>
+<td><strong>append</strong></td>
+<td>All output operations happen at the end of the file, appending to its existing contents.</td>
+</tr>
+<tr>
+<td style="text-align:center">trunc</td>
+<td><strong>trunc ate</strong></td>
+<td>Any contents that existed in the file before it is open are discarded.</td>
+</tr>
+</tbody>
+</table>
+<p>We can supply a file mode whenever we open a file—either when we call open or when we indirectly open the file when we initialize a stream from a file name. The modes that we can specify have the following restrictions:</p>
+<ol>
+<li><strong>out</strong> may be set only for an <strong>ofstream</strong> or <strong>fstream</strong> object.</li>
+<li><strong>in</strong> may be set only for an <strong>ifstream</strong> or <strong>fstream</strong> object.</li>
+<li><strong>trunc</strong> may be set only when <strong>out</strong> is also specified</li>
+<li><strong>app</strong> mode may be specified so long as trunc is not. If app is specified, the file is always opened in output mode, even if out was not explicitly specified.</li>
+<li>The <strong>ate</strong> and <strong>binary</strong> modes may be specified on any file stream object type and in combination with any other file modes.</li>
+</ol>
+<p>By default, when we open an ofstream, the contents of the file are discarded. The only way to prevent an ostream from emptying the given file is to specify app.</p>
+<h2 id="string-Streams"><a href="#string-Streams" class="headerlink" title="string Streams"></a>string Streams</h2><p>The <strong>sstream</strong> header defines three types to support in-memory IO; these types read from or write to a string as if the string were an IO stream.</p>
+<p>The <strong>istringstream</strong> type reads a string, <strong>ostringstream</strong> writes a string, and <strong>stringstream</strong> reads and writes the string. Like the fstream types, the types defined in sstream inherit from the types we have used from the iostream header. In addition to the operations they inherit, the types defined in sstream add members to manage the string associated with the stream. These operations are listed in next table. They may be called on stringstream objects but not on the other IO types.</p>
+<table>
+<thead>
+<tr>
+<th>use</th>
+<th>meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sstream strm;</code></td>
+<td>unbound string stream</td>
+</tr>
+<tr>
+<td><code>sstream strm(s);</code></td>
+<td>string stream bound to string s</td>
+</tr>
+<tr>
+<td><code>strm.str()</code></td>
+<td>return a string that strm holds</td>
+</tr>
+<tr>
+<td><code>strm.str(s)</code></td>
+<td>copy string s to strm</td>
+</tr>
+</tbody>
+</table>
+<p>An <strong>istringstream</strong> is often used when we have some work to do on an entire line, and other work to do with individual words within a line.</p>
+<p>As one example, assume we have a file that lists people and their associated phone numbers. Some people have only one number, but others have several—a home phone, work phone, cell number, and so on. Our input file might look like the following:<code>morgan 2015552368 8625550123</code>, <code>drew 9735550130</code>, <code>lee 6095550132 2015550175 8005550000</code>.</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;sstream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+class Info &#123;
+    public:
+    //constructor
+    Info(std::string n) : name(n) &#123;&#125;
+
+    //add more phone number
+    void add_phone(std::string ph) &#123;
+        phone.push_back(ph);
+    &#125;
+
+    //print information
+    void print(std::ostream&amp; os) &#123;
+        os &lt;&lt; &quot;Name: &quot; &lt;&lt; &quot;\n&quot;;
+        int count = 1;
+        for (auto i = phone.begin(); i &lt; phone.end(); i++) &#123;
+            os &lt;&lt; &quot;phone&quot; &lt;&lt; count &lt;&lt; &quot;: &quot; &lt;&lt; *i &lt;&lt; &quot;\n&quot;;
+        &#125;
+        os &lt;&lt; &quot;\n&quot;;
+    &#125;
+    private:
+    std::string name;
+    std::vector&lt;std::string&gt; phone;
+&#125;;
+
+int main() &#123;
+    std::istringstream in;
+    std::string info;
+    std::vector&lt;Info&gt; contacts;
+    while (getline(std::cin,info)) &#123;
+        in.str(info);
+        std::string name;
+        std::string phone_number;
+        // read name and create contact
+        in &gt;&gt; name;
+        Info peo(name);
+        //read phone number
+        while (in &gt;&gt; phone_number) &#123;
+            peo.add_phone(phone_number);
+        &#125;
+        contacts.push_back(peo);
+        for (auto i = contacts.begin(); i &lt; contacts.end(); i++) &#123;
+            i-&gt;print(std::cout);
+        &#125;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+
         </div>
-        <div class="info">
-          <h3>Sakura</h3>
-          <p>本站 hexo 主题</p>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://morning.eu.org/images/custom/donate/404.jpg"></li>
+                <li class="wechat-code"><img src="https://morning.eu.org/images/custom/donate/404.jpg"></li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </a>
-    </div>
-  </div>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="https://www.cnblogs.com/cs-Miscellaneous/" target="_blank">
-        <div class="img">
-          <img src="https://morning.eu.org/images/startdash/cnblog.jpg">
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2021/12/05/Cpp%20primer/Cpp_c05/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="" data-src="/images/cover/C_background.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/C_background.webp">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                (ch5) Sequential Containers</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2021/12/03/Cpp%20primer/Cpp_c03/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="" data-src="/images/cover/C_background.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/C_background.webp">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                (ch3) C++ Basic Features - Operators And Statements</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+
+
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="morning.eu.org" class="profile gravatar"><img src="/images/custom/avatar.jpg" itemprop="image" alt="Noah" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="morning.eu.org" itemprop="url" rel="author">Noah</a>
+            </h3>
+          </div>
         </div>
-        <div class="info">
-          <h3>博客园</h3>
-          <p>博主的博客园(已停止维护)</p>
-        </div>
-      </a>
-    </div>
-  </div>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="https://steamcommunity.com/profiles/76561199087248993/" target="_blank">
-        <div class="img">
-          <img src="https://morning.eu.org/images/startdash/wanshiwu.jpg">
-        </div>
-        <div class="info">
-          <h3>Steam</h3>
-          <p>来玩</p>
-        </div>
-      </a>
-    </div>
-  </div>
-  
+        <hr>
+        <p><i class="iconfont icon-write"></i>life is perfact</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
-        <div id="primary" class="content-area">
-          <main id="main" class="site-main" role="main">
-            <h1 class="main-title" style="font-family: 'Ubuntu', sans-serif;">
-              <i class="fa fa-envira" aria-hidden="true"></i>
-              Discovery
-            </h1>
-            
-  <!-- 首页默认取最最新文章集 -->
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2022/07/01/Qt/essay_01_use%20cmake%20settting%20up%20Qt%20project/">
-      <img class="lazyload" src="" data-src="/images/cover/QtWithTorch.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2022-7-1 21:07</div>
-      <a href="/2022/07/01/Qt/essay_01_use%20cmake%20settting%20up%20Qt%20project/" class="post-title">
-        <h3>Setting up Qt Projects with CMake and Linking External</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/Qt/">Qt<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2022/07/01/Qt/essay_01_use%20cmake%20settting%20up%20Qt%20project/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/12/Cpp%20primer/Cpp_c12/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-12 21:12</div>
-      <a href="/2021/12/12/Cpp%20primer/Cpp_c12/" class="post-title">
-        <h3>(ch12) Templates and Generic Programming (Not completed yet)</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/12/Cpp%20primer/Cpp_c12/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/11/Cpp%20primer/Cpp_c11/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-11 21:12</div>
-      <a href="/2021/12/11/Cpp%20primer/Cpp_c11/" class="post-title">
-        <h3>(ch11) Object-Oriented Programming</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/11/Cpp%20primer/Cpp_c11/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/10/Cpp%20primer/Cpp_c10/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-10 21:12</div>
-      <a href="/2021/12/10/Cpp%20primer/Cpp_c10/" class="post-title">
-        <h3>(ch10) Overloaded Operations and Conversions</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/10/Cpp%20primer/Cpp_c10/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/09/Cpp%20primer/Cpp_c09/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-9 21:12</div>
-      <a href="/2021/12/09/Cpp%20primer/Cpp_c09/" class="post-title">
-        <h3>(ch9) Copy Control</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/09/Cpp%20primer/Cpp_c09/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/08/Cpp%20primer/Cpp_c08/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-8 21:12</div>
-      <a href="/2021/12/08/Cpp%20primer/Cpp_c08/" class="post-title">
-        <h3>(ch8) Dynamic Memory</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/08/Cpp%20primer/Cpp_c08/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/07/Cpp%20primer/Cpp_c07/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-7 21:12</div>
-      <a href="/2021/12/07/Cpp%20primer/Cpp_c07/" class="post-title">
-        <h3>(ch7) Associative Containers</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/07/Cpp%20primer/Cpp_c07/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/06/Cpp%20primer/Cpp_c06/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-6 21:12</div>
-      <a href="/2021/12/06/Cpp%20primer/Cpp_c06/" class="post-title">
-        <h3>(ch6) Generic Algorithms</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/06/Cpp%20primer/Cpp_c06/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/05/Cpp%20primer/Cpp_c05/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-5 21:12</div>
-      <a href="/2021/12/05/Cpp%20primer/Cpp_c05/" class="post-title">
-        <h3>(ch5) Sequential Containers</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/05/Cpp%20primer/Cpp_c05/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/04/Cpp%20primer/Cpp_c04/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-4 21:12</div>
-      <a href="/2021/12/04/Cpp%20primer/Cpp_c04/" class="post-title">
-        <h3>(ch4) The C++ IO Library</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/04/Cpp%20primer/Cpp_c04/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
 
 
-          </main>
-          <!-- 首页默认取最最新文章集 -->
-          <!-- 
-      <nav class="navigator">
-        
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">&lt;i class&#x3D;&quot;iconfont icon-right&quot;&gt;&lt;&#x2F;i&gt;</a>
-      </nav>
-     -->
-        </div>
-        
-          <div id="pagination"><a href="/page/2/" class="">Previous</a></div>
-          
-</div>
+
     </div>    
     <div class="ins-search">
     <div class="ins-search-mask"></div>

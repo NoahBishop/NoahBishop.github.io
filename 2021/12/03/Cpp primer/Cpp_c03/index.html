@@ -1,0 +1,2003 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	
+		<title itemprop="name">
+			
+				(ch3) C++ Basic Features - Operators And Statements | 
+						うさぎの手帳
+		</title>
+		
+			<link rel="shortcut icon" href="/images/favicon.ico">
+			
+				<meta http-equiv="x-dns-prefetch-control" content="on">
+				<link rel="stylesheet"
+					href="https://fonts.googleapis.com/css?family=Noto+SerifMerriweather|Merriweather+Sans|Source+Code+Pro|Ubuntu:400,700|Noto+Serif+SC"
+					media="all">
+				<link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+				<link rel="stylesheet" id="saukra_css-css" href="/css/style.css" type="text/css" media="all">
+				<link rel="stylesheet" href="/css/lib.min.css" media="all">
+				<link rel="stylesheet" href="/css/font.css" media="all">
+				<link rel="stylesheet" href="/css/insight.css" media="all">
+				<link rel="stylesheet" href="/css/jquery.fancybox.min.css" media="all">
+				<link rel="stylesheet" href="/css/zoom.css" media="all">
+				<link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+				<!--   <link rel="stylesheet" id="saukra_css-css" href="https://2heng.xin/wp-content/cache/autoptimize/css/autoptimize_ad42a61f4c7d4bdd9f91afcff6b5dda5.css
+" type="text/css" media="all"> -->
+				<script>
+					/*Initial Variables*/
+					var mashiro_option = new Object();
+					var mashiro_global = new Object();
+					mashiro_option.NProgressON = true;
+					/* 
+					* 邮箱信息之类的东西可以填在这里，这些js变量基本都作用于sakura-app.js
+					* 这样的设置仅是为了方便在基于PHP开发的主题中设置js变量，既然移植到了Node上，我想或许可以精简这一逻辑吧
+					*/
+					mashiro_option.email_domain = "";
+					mashiro_option.email_name = "";
+					mashiro_option.cookie_version_control = "";
+					mashiro_option.qzone_autocomplete = false;
+					mashiro_option.site_name = "桜荘そのうさぎ";
+					mashiro_option.author_name = "うさぎ";
+					mashiro_option.site_url = "https://morning.eu.org";
+					mashiro_option.v_appId = "EAyicHJhXmxJNEeuhACVujd4-gzGzoHsz";
+					mashiro_option.v_appKey = "09Tjj4It5DOhgboduuM40u7y";
+					mashiro_option.mathjax = "0";
+	//mashiro_option.qq_api_url = "https://api.mashiro.top/qqinfo/";
+	//mashiro_option.qq_avatar_api_url = "https://api.mashiro.top/qqinfo/";
+
+	// mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/moezx/cdn@3.4.5/css/lib.min.css";
+	// mashiro_option.float_player_on = true;
+
+					/*End of Initial Variables*/
+				</script>
+				<script type="text/javascript">
+					var bg = "https://morning.eu.org/images/cover/(1).jpg.webp,https://morning.eu.org/images/cover/(2).jpg.webp,https://morning.eu.org/images/cover/(3).jpg.webp,https://morning.eu.org/images/cover/(4).jpg.webp".split(",");
+					var bgindex = Math.floor(Math.random() * bg.length);
+					if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
+						alert('朋友，IE浏览器未适配哦~');
+					}
+				</script>
+				<script src="//code.bdstatic.com/npm/leancloud-storage@4.12.0/dist/av-min.js"></script>
+				<script src='//unpkg.com/valine@1.3.9/dist/Valine.min.js'></script>
+				<style type="text/css">
+					.hljs-ln {
+						border-collapse: collapse
+					}
+
+					.hljs-ln td {
+						padding: 0
+					}
+
+					.hljs-ln-n:before {
+						content: attr(data-line-number)
+					}
+				</style>
+				<style type="text/css">
+					.site-top .lower nav {
+						display: block !important;
+					}
+
+					.author-profile i,
+					.post-like a,
+					.post-share .show-share,
+					.sub-text,
+					.we-info a,
+					span.sitename,
+					.post-more i:hover,
+					#pagination a:hover,
+					.post-content a:hover,
+					.float-content i:hover {
+						color: #FE9600
+					}
+
+					.feature i,
+					.download,
+					.navigator i:hover,
+					.links ul li:before,
+					.ar-time i,
+					span.ar-circle,
+					.object,
+					.comment .comment-reply-link,
+					.siren-checkbox-radio:checked+.siren-checkbox-radioInput:after {
+						background: #FE9600
+					}
+
+					::-webkit-scrollbar-thumb {
+						background: #FE9600
+					}
+
+					.download,
+					.navigator i:hover,
+					.link-title,
+					.links ul li:hover,
+					#pagination a:hover,
+					.comment-respond input[type='submit']:hover {
+						border-color: #FE9600
+					}
+
+					.entry-content a:hover,
+					.site-info a:hover,
+					.comment h4 a,
+					#comments-navi a.prev,
+					#comments-navi a.next,
+					.comment h4 a:hover,
+					.site-top ul li a:hover,
+					.entry-title a:hover,
+					#archives-temp h3,
+					span.page-numbers.current,
+					.sorry li a:hover,
+					.site-title a:hover,
+					i.iconfont.js-toggle-search.iconsearch:hover,
+					.comment-respond input[type='submit']:hover {
+						color: #FE9600
+					}
+
+					.comments .comments-main {
+						display: block !important;
+					}
+
+					.comments .comments-hidden {
+						display: none !important;
+					}
+
+					background-position:center center;
+					background-attachment:inherit;
+					}
+				</style>
+<meta name="generator" content="Hexo 5.4.2"></head>
+<body class="page-template page-template-user page-template-page-analytics page-template-userpage-analytics-php page page-id-1297 chinese-font serif isWebKit">
+  <div class="scrollbar" id="bar">
+  </div>
+  <a href="#" class="cd-top faa-float animated"></a>
+  <section id="main-container">
+    <div class="headertop filter-dot">
+  <div id="banner_wave_1"></div>
+  <div id="banner_wave_2"></div>
+  <figure id="centerbg" class="centerbg">
+    <div class="focusinfo no-select">
+      <div class="header-tou">
+        <a target="_blank" rel="noopener" href="https://morning.eu.org">
+          <img src="https://morning.eu.org/images/custom/avatar.jpg">
+        </a>
+      </div>
+      <div class="header-info">
+        <p>
+          Live your life with passion! With some drive!
+        </p>
+        <div class="top-social_v2">
+          <li id="bg-pre">
+            <img class="flipx" src="/images/other/next-b.svg">
+          </li>
+          
+            
+              
+                  <li>
+                    <a href="https://github.com/NoahBishop" target="_blank" class="social-github" title="github">
+                      <img src="https://morning.eu.org/images/social/github.png">
+                    </a>
+                  </li>
+                  
+                    
+              
+                  <li>
+                    <a href="https://t.me/mega1037" target="_blank" class="social-github" title="telegram">
+                      <img src="https://morning.eu.org/images/social/telegram.png">
+                    </a>
+                  </li>
+                  
+                    
+              
+                  <li>
+                    <a href="https://music.163.com/#/user/home?id=305378376" target="_blank" class="social-github" title="netease">
+                      <img src="https://morning.eu.org/images/social/wangyiyun.png">
+                    </a>
+                  </li>
+                  
+                    
+              
+                  <li>
+                    <a href="https://www.twitter.com/noah_bishop_z" target="_blank" class="social-github" title="twitter">
+                      <img src="https://morning.eu.org/images/social/twitter.png">
+                    </a>
+                  </li>
+                  
+                    
+              
+                  <li>
+                    <a href="mailto:beiloquuw@gamil.com" target="_blank" class="social-github" title="email">
+                      <img src="https://morning.eu.org/images/social/email.svg">
+                    </a>
+                  </li>
+                  
+                    
+                      
+                        <li id="bg-next">
+                          <img src="/images/other/next-b.svg">
+                        </li>
+        </div>
+      </div>
+    </div>
+  </figure>
+  <div id="video-container" style="">
+    <video style="object-fit: fill" id="bgvideo" class="video" video-name="" src="" width="auto" preload="auto">
+    </video>
+    <div id="video-btn" class="loadvideo videolive">
+    </div>
+    <div id="video-add">
+    </div>
+    <div class="video-stu">
+    </div>
+  </div>
+  <div class="headertop-down faa-float animated" onclick="headertop_down()">
+    <span>
+      <i class="fa fa-chevron-down" aria-hidden="true">
+      </i>
+    </span>
+  </div>
+</div>
+    <div id="page" class="site wrapper">
+      <header class="site-header no-select gizle sabit" role="banner">
+  <div class="site-top">
+    <div class="site-branding">
+      <span class="site-title">
+        <span class="logolink moe-mashiro">
+          <a href="/">
+            <span class="sakurasono">桜荘その</span>
+            <span class="shironeko">うさぎ</span>
+          </a>
+        </span>
+      </span>
+    </div>
+    <div class="searchbox search-form-submit">
+      <i class="iconfont js-toggle-search iconsearch icon-search">
+      </i>
+    </div>
+    <div id="show-nav" class="showNav mobile-fit">
+      <div class="line line1">
+      </div>
+      <div class="line line2">
+      </div>
+      <div class="line line3">
+      </div>
+    </div>
+    <div class="lower-cantiner">
+      <div class="lower">
+        <nav class="mobile-fit-control hide">
+          <ul id="menu-new" class="menu">
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+                    首页
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+                    归档
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/categories/%E6%8A%80%E6%9C%AF/">
+                          <i class="fa fa-code" aria-hidden="true"></i>
+                          技术
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/%E7%94%9F%E6%B4%BB/">
+                          <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                          生活
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/%E8%B5%84%E6%BA%90/">
+                          <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                          资源
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/%E9%9A%8F%E6%83%B3/">
+                          <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                          随想
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/%E8%BD%AC%E8%BD%BD/">
+                          <i class="fa fa-book" aria-hidden="true"></i>
+                          转载
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/tags/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-tag" aria-hidden="true"></i>
+                    标签
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="javascript:;">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+                    清单
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/music/">
+                          <i class="fa fa-headphones" aria-hidden="true"></i>
+                          歌单
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/comment/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+                    留言板
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/links/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+                    友人帐
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-leaf faa-wrench" aria-hidden="true"></i>
+                    关于
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/about/">
+                          <i class="fa fa-meetup" aria-hidden="true"></i>
+                          我？
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/theme-sakura/">
+                          <i class="fa iconfont icon-sakura" aria-hidden="true"></i>
+                          主题
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/atom.xml">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-rss faa-pulse" aria-hidden="true"></i>
+                    RSS
+                  </span>
+                </a>
+                
+              </li>
+            
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/C_background.webp');" src="" data-src="/images/cover/C_background.webp">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      (ch3) C++ Basic Features - Operators And Statements</h1>
+      <p class="entry-census">
+        <span>
+          <a href="morning.eu.org">
+            <img src="/images/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="morning.eu.org">Noah</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2021-12-3<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h1 id="C-Basic-Features-Operators-And-Statements"><a href="#C-Basic-Features-Operators-And-Statements" class="headerlink" title="C++ Basic Features - Operators And Statements"></a>C++ Basic Features - Operators And Statements</h1><h2 id="Expressions"><a href="#Expressions" class="headerlink" title="Expressions"></a>Expressions</h2><p>C++ provides a rich set of operators and defines what these operators do when applied to operands of built-in type. It also allows us to define the meaning of most of the operators when applied to operands of class types. This chapter focuses on the operators as defined in the language and applied to operands of built-in type.</p>
+<p>An expression is composed of one or more operands and yields a result when it is evaluated. The simplest form of an expression is a single literal or variable. The result of such an expression is the value of the variable or literal. More complicated expressions are formed from an operator and one or more operands.</p>
+<h3 id="Fundamentals"><a href="#Fundamentals" class="headerlink" title="Fundamentals"></a>Fundamentals</h3><p>The basic concept of expressions are operator and operands, the operator can be classified by operands, <strong>Unary</strong> operators, such as address-of (<code>&amp;</code>) and dereference (<code>*</code>), act on <strong>one</strong> operand. <strong>Binary</strong> operators, such as equality (<code>==</code>) and multiplication (<code>*</code>), act on <strong>two</strong> operands. There is also one ternary operator that takes <strong>three</strong> operands, and one operator, function call, that takes an unlimited number of operands.</p>
+<p>Understanding expressions with multiple operators requires understanding the precedence and associativity of the operators and may depend on the order of evaluation of the operands. For example, <code>5 + 7 * 9</code>, the <code>*</code> has high precedence.</p>
+<p>The language defines what the operators mean when applied to built-in and compound types. We can also define what most operators mean when applied to class types. Because such definitions give an alternative meaning to an existing operator symbol, we refer to them as overloaded operators. The IO library &gt;&gt; and &lt;&lt; operators and the operators we used with strings, vectors, and iterators are all overloaded operators.</p>
+<p>When you write compound expressions, two rules of thumb can be helpful:</p>
+<ol>
+<li>When in doubt, parenthesize expressions to force the grouping that the logic of your program requires.</li>
+<li>If you change the value of an operand, don’t use that operand elsewhere in the same expression.</li>
+</ol>
+<h3 id="Arithmetic-Operators"><a href="#Arithmetic-Operators" class="headerlink" title="Arithmetic Operators"></a>Arithmetic Operators</h3><p>The next table show arithmetic operators in c++ order by precedence.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Operator</th>
+<th>function</th>
+<th>expression</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">+</td>
+<td>unary plus</td>
+<td>+ operand1</td>
+</tr>
+<tr>
+<td style="text-align:center">-</td>
+<td>unary minus</td>
+<td>- operand1</td>
+</tr>
+<tr>
+<td style="text-align:center">*</td>
+<td>multiplication</td>
+<td>operand1 * operand2</td>
+</tr>
+<tr>
+<td style="text-align:center">/</td>
+<td>division</td>
+<td>operand1 / operand2</td>
+</tr>
+<tr>
+<td style="text-align:center">%</td>
+<td>reminder</td>
+<td>operand1 % operand2</td>
+</tr>
+<tr>
+<td style="text-align:center">+</td>
+<td>addition</td>
+<td>operand1 + operand2</td>
+</tr>
+<tr>
+<td style="text-align:center">-</td>
+<td>subtraction</td>
+<td>operand1 - operand2</td>
+</tr>
+</tbody>
+</table>
+<p>Note same operator has different meaning with different type of operand, when division a integer, like <code>5 / 2</code>, the result is 2 rather than 2.5.</p>
+<h3 id="Logical-and-Relational-Operators"><a href="#Logical-and-Relational-Operators" class="headerlink" title="Logical and Relational Operators"></a>Logical and Relational Operators</h3><p>The relational operators take operands of arithmetic or pointer type; the logical operators take operands of any type that can be converted to bool. These operators all return values of type bool. Arithmetic and pointer operand(s) with a value of zero are false; all other values are true. The operands to these operators are rvalues and the result is an rvalue. (notice: because my blog convert sheet have error, I replace  | symbol with ⏐)</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Operator</th>
+<th>function</th>
+<th>expression</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">!</td>
+<td>logical not</td>
+<td>! operand</td>
+</tr>
+<tr>
+<td style="text-align:center">&gt;</td>
+<td>greater than</td>
+<td>operand1 &gt; operand2</td>
+</tr>
+<tr>
+<td style="text-align:center">&gt;=</td>
+<td>greater than or equal</td>
+<td>operand1 &gt;= operand2</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;</td>
+<td>less than</td>
+<td>operand1 &lt; operand2</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;=</td>
+<td>less than or equal</td>
+<td>operand1 &lt;= operand2</td>
+</tr>
+<tr>
+<td style="text-align:center">==</td>
+<td>equal</td>
+<td>operand1 == operand2</td>
+</tr>
+<tr>
+<td style="text-align:center">!=</td>
+<td>unequal</td>
+<td>operand1 != operand2</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;&amp;</td>
+<td>logical and</td>
+<td>operand1 &amp;&amp; operand2</td>
+</tr>
+<tr>
+<td style="text-align:center">⏐⏐</td>
+<td>logical or</td>
+<td>operand1 ⏐⏐ operand2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="The-Member-Access-Operators"><a href="#The-Member-Access-Operators" class="headerlink" title="The Member Access Operators"></a>The Member Access Operators</h3><p>The dot <code>.</code> and arrow <code>-&gt;</code> operators provide for member access. The dot operator fetches a member from an object of class type; arrow is defined so that ptr-&gt;mem is a synonym for (*ptr).mem:</p>
+<h3 id="The-Conditional-Operator"><a href="#The-Conditional-Operator" class="headerlink" title="The Conditional Operator"></a>The Conditional Operator</h3><p>The conditional operator (the <code>?:</code> operator) lets us embed simple if-else logic inside an expression. The conditional operator has the following form: <code>cond ? expr1 : expr2;</code>. where cond is an expression that is used as a condition and expr1 and expr2 are expressions of the same type (or types that can be converted to a common type). This operator executes by evaluating cond. If the condition is true, then expr1 is evaluated; otherwise, expr2 is evaluated. As one example, we can use a conditional operator to determine whether a grade is pass or fail:</p>
+<h3 id="The-Bitwise-Operators"><a href="#The-Bitwise-Operators" class="headerlink" title="The Bitwise Operators"></a>The Bitwise Operators</h3><p>The bitwise operators take operands of integral type that they use as a collection of bits. These operators let us test and set individual bits. We can also use these operators on a library type named bitset that represents a flexibly sized collection of bits (notice: because my blog convert sheet have error, I replace  | symbol with ⏐)</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Operator</th>
+<th>function</th>
+<th>expression</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">~</td>
+<td>bitwise not</td>
+<td>~ operand</td>
+</tr>
+<tr>
+<td style="text-align:center">&gt;&gt;</td>
+<td>right shift</td>
+<td>operand1 &gt;&gt; operand2</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;&lt;</td>
+<td>left shift</td>
+<td>operand1 &lt;&lt; operand2</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;</td>
+<td>bitwise and</td>
+<td>operand1 &amp; operand2</td>
+</tr>
+<tr>
+<td style="text-align:center">^</td>
+<td>bitwise xor</td>
+<td>operand1 ^ operand2</td>
+</tr>
+<tr>
+<td style="text-align:center">⏐</td>
+<td>bitwise or</td>
+<td>operand1 ⏐ operand2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="The-sizeof-Operator"><a href="#The-sizeof-Operator" class="headerlink" title="The sizeof Operator"></a>The sizeof Operator</h3><p>The sizeof operator returns the size, in bytes, of an expression or a type name. The operator is right associative. The result of sizeof is a constant expression of type size_t. The operator takes one of two forms: <code>sizeof (type)</code>  and <code>sizeof expr</code>.</p>
+<pre><code class="c++">sizeof(int);
+int a = 10;
+sizeof a;
+</code></pre>
+<h3 id="Type-Explicit-Conversions"><a href="#Type-Explicit-Conversions" class="headerlink" title="Type Explicit Conversions"></a>Type Explicit Conversions</h3><p>A named cast has the following form:<code>cast-name&lt;type&gt;(expression);</code> where type is the target type of the conversion, and expression is the value to be cast. If type is a reference, then the result is an lvalue. The cast-name may be one of static_cast, dynamic_cast, const_cast, and reinterpret_cast.</p>
+<p>A static_cast is often useful when a larger arithmetic type is assigned to a smaller type. The cast informs both the reader of the program and the compiler that we are aware of and are not concerned about the potential loss of precision.</p>
+<p>A static_cast is also useful to perform a conversion that the compiler will not generate automatically. For example, we can use a static_cast to retrieve a pointer value that was stored in a void* pointer:</p>
+<pre><code class="c++">float a = 1;
+void* p = &amp;a;
+// *k equal to 1065353216 (IEEE 754)
+// *l equal to 1
+int *k = static_cast&lt;int*&gt;(p);
+float *l = static_cast&lt;float*&gt;(p);
+</code></pre>
+<p>A const_cast changes only a low-level const in its operand:</p>
+<pre><code class="c++">const int *a;
+auto p = const_cast&lt;int*&gt;(a);
+*p = 10; // ok
+*a = 10; // error
+</code></pre>
+<p>Conventionally we say that a cast that converts a const object to a nonconst type “casts away the const.” Once we have cast away the const of an object, the compiler will no longer prevent us from writing to that object. If the object was originally not a const, using a cast to obtain write access is legal. However, using a const_cast in order to write to a const object is undefined.</p>
+<h2 id="Statements"><a href="#Statements" class="headerlink" title="Statements"></a>Statements</h2><p>Like most languages, C++ provides statements for conditional execution, loops that repeatedly execute the same body of code, and jump statements that interrupt the flow of control. This chapter looks in detail at the statements supported by C++. The almost statements are same as other language like java, and be used in previous code, so the next only show some new features.</p>
+<h3 id="try-Blocks-and-Exception-Handling"><a href="#try-Blocks-and-Exception-Handling" class="headerlink" title="try Blocks and Exception Handling"></a>try Blocks and Exception Handling</h3><p>Exceptions are run-time anomalies—such as losing a database connection or encountering unexpected input—that exist outside the normal functioning of a program. Dealing with anomalous behavior can be one of the most difficult parts of designing any system.</p>
+<p>In C++, exception handling involves:</p>
+<ul>
+<li><strong>throw</strong> <em>expressions</em>, which the detecting part uses to indicate that it encountered something it can’t handle. We say that a throw raises an exception.</li>
+<li><strong>try</strong> <em>blocks</em>, which the handling part uses to deal with an exception. A try block starts with the keyword try and ends with one or more <strong>catch</strong> <em>clauses</em>.</li>
+<li>A set of <strong>exception</strong> <em>classes</em> that are used to pass information about what happened between a throw and an associated catch.</li>
+</ul>
+<p>Supposed wo want write a program that need read two numbers and then will do division, as we know, zero can’t be divisor. We need throw a arithmetic error if divisor is zero.</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+
+int main()
+&#123;
+    int num1, num2;
+    while (std::cin &gt;&gt; num1 &gt;&gt; num2)&#123;
+        if (num2 == 0)&#123;
+            throw std::runtime_error(&quot;divisor can&#39;t be zero!&quot;);
+        &#125;else&#123;
+            std::cout &lt;&lt; num1 &lt;&lt; &quot;/&quot; &lt;&lt; num2 &lt;&lt; &quot;=&quot; &lt;&lt; num1 / num2 &lt;&lt; std::endl;
+        &#125;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+<p>Only throw error is no a good idea, we also need catch the error so that program will continued running, and report the error to user:</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+
+int main()
+&#123;
+    int num1, num2;
+    while (std::cin &gt;&gt; num1 &gt;&gt; num2) &#123;
+        try&#123;
+            if (num2 == 0) &#123;
+                throw std::runtime_error(&quot;divisor can&#39;t be zero!&quot;);
+            &#125;
+            else &#123;
+                std::cout &lt;&lt; num1 &lt;&lt; &quot;/&quot; &lt;&lt; num2 &lt;&lt; &quot;=&quot; &lt;&lt; num1 / num2 &lt;&lt; std::endl;
+            &#125;
+        &#125;
+        catch (std::runtime_error err)&#123;
+            std::cout &lt;&lt; err.what() &lt;&lt; std::endl;
+            std::cout &lt;&lt; &quot;please input a correct divisor&quot; &lt;&lt; std::endl;
+        &#125;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+<p>If no appropriate catch is found, execution is transferred to a library function named terminate. The behavior of that function is system dependent but is guaranteed to stop further execution of the program.</p>
+<p>Exceptions that occur in programs that do not define any try blocks are handled in the same manner: After all, if there are no try blocks, there can be no handlers. If a program has no try blocks and an exception occurs, then terminate is called and the program is exited.</p>
+<p>The C++ library defines several classes that it uses to report problems encountered in the functions in the standard library. These exception classes are also intended to be used in the programs we write. These classes are defined in four headers:</p>
+<ul>
+<li>The <strong>exception</strong> header defines the most general kind of exception class named exception. It communicates only that an exception occurred but provides no additional information.</li>
+<li>The <strong>stdexcept</strong> header defines several general-purpose exception classes.</li>
+<li>The <strong>new</strong> header defines the bad_alloc exception type.</li>
+<li>The <strong>type_info</strong> header defines the bad_cast exception type.</li>
+</ul>
+<hr>
+<h1 id="Functions-And-Classes"><a href="#Functions-And-Classes" class="headerlink" title="Functions And Classes"></a>Functions And Classes</h1><h2 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h2><p>A function is a block of code with a name. We execute the code by calling the function. A function may take zero or more arguments and (usually) yields a result. Functions can be overloaded, meaning that the same name may refer to several different functions.</p>
+<h3 id="Function-Basics"><a href="#Function-Basics" class="headerlink" title="Function Basics"></a>Function Basics</h3><p>A <strong>function</strong> definition typically consists of a <strong>return type</strong>, a <strong>name</strong>, a list of zero or more <strong>parameters</strong>, and a <strong>body</strong>. The parameters are specified in a comma-separated list enclosed in parentheses. The actions that the function performs are specified in a statement block, referred to as the function body. example:</p>
+<pre><code class="c++">int fact(int n) &#123;
+    //The factorial of n
+    int sum = 1;
+    while (n&gt;0)
+    &#123;
+        sum *= n--;
+    &#125;
+    return sum;
+&#125;
+</code></pre>
+<p>To <strong>call</strong> fact, we must supply an int value. The result of the call is also an int:</p>
+<pre><code class="c++">int main()
+&#123;
+    int f = 0;
+    std::cin &gt;&gt; f;
+    std::cout &lt;&lt; fact(f) &lt;&lt; std::endl;
+    return 0;
+&#125;
+</code></pre>
+<p>A function call does two things:</p>
+<ul>
+<li>It initializes the function’s parameters from the corresponding arguments.</li>
+<li>It transfers control to that function. Execution of the calling function is suspended and execution of the called function begins.</li>
+</ul>
+<p>Most <strong>types</strong> can be used as the return type of a function. In particular, the return type can be <strong>void</strong>, which means that the function does not return a value. However, the return type may <strong>not</strong> be an array type or a function type. However, a function may return a <strong>pointer</strong> to an array or a function.</p>
+<p>In C++, names have scope, and objects have lifetimes. It is important to understand both of these concepts.</p>
+<ul>
+<li>The scope of a name is the part of the program’s text in which that name is visible.</li>
+<li>The lifetime of an object is the time during the program’s execution that the object exists.</li>
+</ul>
+<p>Parameters and variables defined inside a function body are referred to as local variables. They are “local” to that function and hide declarations of the same name made in an outer scope.</p>
+<p>The objects that correspond to ordinary local variables are created when the function’s control path passes through the variable’s definition. They are destroyed when control passes through the end of the block in which the variable is defined. Objects that exist only while a block is executing are known as <strong>automatic objects</strong>. After execution exits a block, the values of the automatic objects created in that block are undefined.</p>
+<p>It can be useful to have a local variable whose lifetime continues across calls to the function. We obtain such objects by defining a local variable as static. Each <strong>local static object</strong> is initialized <strong>before</strong> the first time execution passes through the object’s definition. Local statics are not destroyed when a function ends; they are destroyed when the program terminates. This program will print the numbers from 1 through 10 inclusive:</p>
+<pre><code class="c++">size_t count_calls()&#123;
+    static size_t ctr = 0; // value will persist across calls
+    return ++ctr;
+&#125;
+int main()&#123;
+    for (size_t i = 0; i != 10; ++i)
+        cout &lt;&lt; count_calls() &lt;&lt; endl;
+    return 0;
+&#125;
+</code></pre>
+<p>Like any other name, the name of a function must be declared before we can use it. As with variables, a function may be defined only once but may be declared multiple times. A function declaration is just like a function definition except that a declaration has no function body. In a declaration, a semicolon replaces the function body.</p>
+<h3 id="Argument-Passing"><a href="#Argument-Passing" class="headerlink" title="Argument Passing"></a>Argument Passing</h3><p>As we’ve seen, each time we call a function, its parameters are created and initialized by the arguments passed in the call. As with any other variable, the type of a parameter determines the interaction between the parameter and its argument. If the parameter is a reference, then the parameter is bound to its argument. Otherwise, the argument’s value is copied.</p>
+<p>When a parameter is a <strong>reference</strong>, we say that its corresponding argument is “<strong>passed by reference</strong>” or that the function is “<strong>called by reference</strong>.”When the argument value is <strong>copied</strong>, the parameter and argument are independent objects. We say such arguments are “<strong>passed by value</strong>” or alternatively that the function is “<strong>called by value</strong>.”</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+using std::cin; using std::cout; using std::endl;
+
+void toUper1(char c) &#123;
+    c = toupper(c);
+&#125;
+
+void toUper2(char &amp;c) &#123;
+    c = toupper(c);
+&#125;
+
+int main()&#123;
+    char c = &#39;a&#39;;
+    //no effect, because c in to toUper1 is a copy of c in in to main
+    toUper1(c);
+    cout &lt;&lt; c &lt;&lt; endl;// print a
+    //effect, because c in to toUper1 is bound to c in in to main
+    toUper2(c);
+    cout &lt;&lt; c &lt;&lt; endl;//print A
+    return 0;
+&#125;
+</code></pre>
+<p>Pointers behave like any other nonreference type. When we copy a pointer, the value of the pointer is copied. After the copy, the two pointers are distinct. However, a pointer also gives us indirect access to the object to which that pointer points. We can change the value of that object by assigning through the pointer:</p>
+<pre><code class="c++">void toUper3(char *c) &#123;
+    *c = toupper(*c);
+&#125;
+//note in mian wo call this function need pass the address of c
+//toUper3(&amp;c)
+</code></pre>
+<p>It can be <strong>inefficient</strong> to copy objects of <strong>large</strong> class types or large containers. Moreover, some class types (including the IO types) cannot be copied. Functions must use reference parameters to operate on objects of a type that cannot be copied. As an example, we’ll write a function to compare the length of two strings. Because strings can be long, we’d like to avoid copying them, so we’ll make our parameters references.</p>
+<p>Arrays have two special properties that affect how we define and use functions that operate on arrays: We <strong>cannot</strong> <strong>copy</strong> <strong>an</strong> <strong>array</strong>, and when we use an array it is (usually) converted to a pointer. Because we cannot copy an array, we cannot pass an array by value. Because arrays are converted to pointers, when we pass an array to a function, we are actually passing a pointer to the array’s first element.</p>
+<p>Even though we cannot pass an array by value, we can write a parameter that looks array: Regardless of appearances, these declarations are equivalent: Each declares a function with a single parameter of type const <code>int*</code>. When the compiler checks a call to print, it checks only that the argument has type const <code>int*</code>:</p>
+<pre><code class="c++">void print(const int*);
+void print(const int[]); // shows the intent that the function takes an array
+void print(const int[10]); // dimension for documentation purposes (at best)
+</code></pre>
+<p>Because arrays are passed as pointers, functions ordinarily <strong>don’t know the size of the array</strong> they are given. They must rely on <strong>additional information</strong> provided by the caller. There are three common techniques used to manage pointer parameters.</p>
+<p>A technique used to manage array arguments is to pass pointers to the first and one past the last element in the array. This approach is inspired by techniques used in the standard library. Using this approach, we’ll print the elements in an array as follows:</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+using std::cin; using std::cout; using std::endl;
+
+void print(const int *beg, const int *end) &#123;
+    while (beg != end)
+    &#123;
+        cout &lt;&lt; *beg++ &lt;&lt; endl;
+    &#125;
+&#125;
+
+int main()&#123;
+    int arr[4] = &#123; 2,4,2,4 &#125;;
+    print(std::begin(arr), std::end(arr));
+    return 0;
+&#125;
+</code></pre>
+<p>Another approach for array arguments, which is common in C programs and older C++ programs, is to define a second parameter that indicates the size of the array. Using this approach, we’ll rewrite print as follows:</p>
+<pre><code class="c++">void print(const int ia[], size_t size)
+&#123;
+    for (size_t i = 0; i != size; ++i) &#123;
+        cout &lt;&lt; ia[i] &lt;&lt; endl;
+    &#125;
+&#125;
+</code></pre>
+<p>In c++ multidimensional array is an array of arrays. As with any array, a multidimensional array is passed as a pointer to its first element. Because we are dealing with an array of arrays, that <strong>element</strong> is an <strong>array</strong>, so the <strong>pointer</strong> is <strong>a pointer to an array</strong>. The size of the second (and any subsequent) dimension is part of the element type and must be specified:</p>
+<pre><code class="c++">void print(int (*arr)[2], size_t size) &#123;
+    for (size_t i = 0; i &lt; size; i++)
+    &#123;
+        auto beg = std::begin(*arr), end = std::end(*arr);
+        while (beg != end)
+        &#123;
+            cout &lt;&lt; *beg++ &lt;&lt; endl;
+        &#125;
+        arr += 1;
+    &#125;
+&#125;
+//We can also define our function using array syntax.
+void print(int arr[][2], size_t size) &#123; /* . . . */ &#125;
+</code></pre>
+<p>Up to now, we have defined main with an empty parameter list: <code>int main() &#123; ... &#125;</code>, However, we sometimes need to pass arguments to main. The most common use of arguments to main is to let the user specify a set of options to guide the operation of the program. For example, assuming our main program is in an executable file named prog, we might pass options to the program as follows:<code>prog -d -o ofile data0</code>.</p>
+<p>Such command-line options are passed to main in two (optional) parameters: <code>int main(int argc, char *argv[]) &#123; ... &#125;</code>, The second parameter, argv, is an array of pointers to C-style character strings. The<br>first parameter, argc, passes the number of strings in that array.</p>
+<p>Sometimes we do not know in advance <strong>how many arguments we need to pass</strong> to a function. For example, we might want to write a routine to print error messages generated from our program. We’d like to use a single function to print these error messages in order to handle them in a uniform way. However, different calls to our error-printing function might pass different arguments, corresponding to different kinds of error messages.</p>
+<p>The <strong>new standard</strong> provides two primary ways to write a function that takes a varying number of arguments: If all the arguments have the same type, we can pass a library type named initializer_list. An <strong>initializer_list</strong> is a library type that represents an array of values of the specified type. This type is defined in the <strong>initializer_list</strong> <strong>header</strong>. You can see all details in <a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/initializer_list/initializer_list/">here</a>.</p>
+<pre><code class="c++">void error_msg(std::initializer_list&lt;std::string&gt; il)&#123;
+    for (auto beg = il.begin(); beg != il.end(); ++beg)
+        cout &lt;&lt; *beg &lt;&lt; &quot; &quot;;
+    cout &lt;&lt; endl;
+&#125;
+</code></pre>
+<p>When we pass a sequence of values to an initializer_list parameter, we must enclose the sequence in curly braces:</p>
+<pre><code class="c++">error_msg(&#123; &quot;4tw&quot;, &quot;98ty8w&quot; &#125;);
+</code></pre>
+<h3 id="Return-Types-and-the-return-Statement"><a href="#Return-Types-and-the-return-Statement" class="headerlink" title="Return Types and the return Statement"></a>Return Types and the return Statement</h3><p>A return statement terminates the function that is currently executing and returns control to the point from which the function was called. There are two forms of return statements: <code>return;</code> and <code>return expression;</code>.</p>
+<p>A return with no value may be used only in a function that has a return type of void. Functions that return void are not required to contain a return. In a void function, an implicit return takes place after the function’s last statement. The second form of the return statement provides the function’s result. Every return in a function with a return type other than void must return a value.</p>
+<p>Note never return a reference or pointer to a local object, When a function completes, its storage is freed. After a function terminates, references to local objects refer to memory that is no longer valid:</p>
+<pre><code class="c++">//don&#39;t do this
+std::string&amp; em() &#123;
+    std::string str = &quot;iecbvasj&quot;;
+    return str;
+&#125;
+</code></pre>
+<p>A function that calls itself, either directly or indirectly, is a recursive function. As an example, we can rewrite our factorial function to use recursion:</p>
+<pre><code class="c++">int factorial(int val)&#123;
+    if (val &gt; 1)
+        return factorial(val-1) * val;
+    return 1;
+&#125;
+</code></pre>
+<p>Because we cannot copy an array, a function cannot return an array. However, a function can return a pointer or a reference to an array. There are some ways to simplify such declarations, the most straightforward way is to use a type alias:</p>
+<pre><code class="c++">typedef int arrT[10];  // arrT is a synonym for the type array of ten ints
+using arrT = int[10]; // equivalent declaration of arrT;
+</code></pre>
+<p>arrT is a synonym for an array of ten ints. Because we cannot return an array, we define the return type as a pointer to this type.</p>
+<pre><code class="c++">// a function that initiated a array
+arrT *init_arr(arrT *t)&#123;
+    for (auto i = std::begin(*t); i != std::end(*t); i++)&#123;
+        *i = 1;
+    &#125;
+    return t;
+&#125;
+</code></pre>
+<p>To declare function without using a type alias, we must remember that the dimension of an array follows the name being defined:</p>
+<pre><code class="c++">int (*init_arr1(int (*t)[10]))[10] &#123;
+    for (auto i = std::begin(*t); i != std::end(*t); i++) &#123;
+        *i = 1;
+    &#125;
+    return t;
+&#125;
+</code></pre>
+<p>Under the new standard, another way to simplify the declaration of func is by using a trailing return type. Trailing returns can be defined for any function, but are most useful for functions with complicated return types, such as pointers (or references) to arrays.</p>
+<pre><code class="c++">auto init_arr(arrT* t) -&gt; int(*)[10]&#123;
+    for (auto i = std::begin(*t); i != std::end(*t); i++) &#123;
+        *i = 1;
+    &#125;
+    return t;
+&#125;
+</code></pre>
+<h3 id="Overloaded-Functions"><a href="#Overloaded-Functions" class="headerlink" title="Overloaded Functions"></a>Overloaded Functions</h3><p>Functions that have the same name but different parameter lists and that appear in the same scope are overloaded. For example, we want write a print function that print array with different parameter:</p>
+<pre><code class="c++">void print(const char *cp);
+void print(const int *beg, const int *end);
+void print(const int ia[], size_t size);
+</code></pre>
+<p>When we call these functions, the compiler can deduce which function we want based on the argument type we pass, Overloaded functions must differ in the number or the type(s) of their parameters.</p>
+<p>As we saw in previous top-level const has no effect on the objects that can be passed to the function. A parameter that has a top-level const is <strong>indistinguishable</strong> from one without a <strong>top-level</strong> const:</p>
+<pre><code class="c++">int f1(const int a);
+int f1(int a);      //same
+int f1(int *const a);
+int f1(int* a);     //same
+</code></pre>
+<p>In these declarations, the second declaration declares the same function as the first.But we can overload based on whether the parameter is a reference (or pointer) to the const or nonconst version of a given type; such consts are <strong>low-level</strong>: because a low level pointer or reference refer a const object, In these cases, the compiler can use the constness of the argument to distinguish which function to call:</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+using std::cin; using std::cout; using std::endl;
+
+int f1(const int* a) &#123;
+    return 1;
+&#125;
+
+int f1(int* a) &#123;
+    return 2;
+&#125;
+
+int f1(const int&amp; a) &#123;
+    return 3;
+&#125;
+
+int f1(int&amp; a) &#123;
+    return 4;
+&#125;
+
+int main() &#123;
+    const int a = 0;
+    int b = 0;
+    cout &lt;&lt; f1(&amp;a) &lt;&lt; endl;  //print 1
+    cout &lt;&lt; f1(&amp;b) &lt;&lt; endl;  //print 2
+    cout &lt;&lt; f1(a) &lt;&lt; endl;   //print 3
+    cout &lt;&lt; f1(b) &lt;&lt; endl;   //print 4
+    return 0;
+&#125;
+</code></pre>
+<p>Note overloading has no special properties with respect to scope: As usual, if we declare a name in an inner scope, that name hides uses of that name declared in an outer scope. Names do not overload across scopes:</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+using std::cin; using std::cout; using std::endl;
+
+int z() &#123;
+    return 10;
+&#125;
+
+int p() &#123;
+    return 1;
+&#125;
+
+int main() &#123;
+    bool z;
+    int r = z();    //error: z is a bool object
+    double p(int a);
+    p();            //error: previous function is hided
+    p(1);           //ok
+    return 0;
+&#125;
+</code></pre>
+<h3 id="Features-for-Specialized-Uses"><a href="#Features-for-Specialized-Uses" class="headerlink" title="Features for Specialized Uses"></a>Features for Specialized Uses</h3><p>In this section we’ll cover <strong>three</strong> function-related features that are useful in many, but not all, programs: <strong>default arguments</strong>, <strong>inline</strong> and <strong>constexpr functions</strong>.</p>
+<p>Some functions have parameters that are given a particular value in most, but not all. In such cases, we can declare that common value as a default argument for the function. Functions with default arguments can be called with or without thatargument.</p>
+<p>For example, we want say hello to different program languages, in default case we say hello to c++ once:</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using std::cin; using std::cout; using std::endl;
+
+void hello(std::string s = &quot;C++&quot;, size_t n = 1) &#123;
+    for (size_t i = 0; i &lt; n; i++)
+    &#123;
+        cout &lt;&lt; &quot;Hello &quot; &lt;&lt; s &lt;&lt; endl;
+    &#125;
+&#125;
+
+int main() &#123;
+    hello();       // say hello C++ once
+    hello(&quot;Java&quot;); // say hello Java once
+    hello(&quot;C#&quot;, 2);// say hello C# twice
+    hello(3);      // error: can omit only trailing arguments
+    return 0;
+&#125;
+</code></pre>
+<p>Sometimes we defining a function with such a small operation, the benefit of function are:</p>
+<ol>
+<li>It is easier to read and understand a call to function than it would be to read and understand the equivalent conditional expression.</li>
+<li>Using a function ensures uniform behavior. Each test is guaranteed to be done the same way.</li>
+<li>If we need to change the computation, it is easier to change the function than to find and change every occurrence of the equivalent expression.</li>
+<li>The function can be reused rather than rewritten for other applications.</li>
+</ol>
+<p>However, Calling a function is apt to be slower than evaluating the equivalent expression. On most machines, a function call does a lot of work: Registers are saved before the call and restored after the return; arguments may be copied; and the program branches to a new location. Fortunately we have a good way to fix it disadvantage. <strong>The Inline Functions</strong></p>
+<p>A function specified as <strong>inline</strong> (usually) is expanded “in line” at each call. If function were defined as inline, then this call (probably) would be expanded during compilation into expression.</p>
+<pre><code class="c++">inline const string &amp;shorterString(const string &amp;s1, const string &amp;s2)&#123;
+    return s1.size() &lt;= s2.size() ? s1 : s2;
+&#125;
+cout &lt;&lt; shorterString(s1, s2) &lt;&lt; endl;
+//may be compilation into expression. 
+//cout &lt;&lt; (s1.size() &lt; s2.size() ? s1 : s2) &lt;&lt; endl;
+</code></pre>
+<p>In general, the inline mechanism is meant to optimize small, straight-line functions that are called frequently.</p>
+<h3 id="Function-Matching"><a href="#Function-Matching" class="headerlink" title="Function Matching"></a>Function Matching</h3><p>In many (if not most) cases, it is easy to figure out which overloaded function matches a given call. However, it is not so simple when the overloaded functions have the same number of parameters and when one or more of the parameters have types that are related by conversions.</p>
+<p>The step of function matching as follow:</p>
+<ol>
+<li>The first step of function matching identifies the set of overloaded functions considered for the call. The functions in this set are the candidate functions. A candidate function is a function with the same name as the called function and for which a declaration is visible at the point of the call.</li>
+<li>The second step selects from the set of candidate functions those functions that can be called with the arguments in the given call. The selected functions are the viable functions. To be viable, a function must have the same number of parameters as there are arguments in the call, and the type of each argument must match—or be convertible to—the type of its corresponding parameter.</li>
+<li>The third step of function matching determines which viable function provides the best match for the call. This process looks at each argument in the call and selects the viable function (or functions) for which the corresponding parameter best matches the argument. The idea is that the closer the types of the argument and parameter are to each other, the better the match.</li>
+</ol>
+<p>In order to determine the best match, the compiler ranks the conversions that could be used to convert each argument to the type of its corresponding parameter. Conversions are ranked as follows:</p>
+<ol>
+<li>An exact match.</li>
+<li>Match through a const conversion</li>
+<li>Match through a promotion</li>
+<li>Match through an arithmetic or pointer conversion</li>
+<li>Match through a class-type conversion.</li>
+</ol>
+<h3 id="Pointers-to-Functions"><a href="#Pointers-to-Functions" class="headerlink" title="Pointers to Functions"></a>Pointers to Functions</h3><p>A function pointer is just that—a pointer that denotes a function rather than an object. Like any other pointer, a function pointer points to a particular type. A function’s type is determined by its return type and the types of its parameters. The function’s name is not part of its type. For example:</p>
+<pre><code class="c++">// compare two int
+bool cmp(int a, int b) &#123;
+    return a &gt; b;
+&#125;
+// pf points to a function returning bool that takes two int
+bool (*pf)(int a, int b);
+</code></pre>
+<p>When we use the name of a function as a value, the function is automatically <strong>converted</strong> to a <strong>pointer</strong>. For example, we can assign the address of cmp to pf as follows:</p>
+<pre><code class="c++">pf = cmp;
+pf = &amp;cmp;
+</code></pre>
+<p>Moreover, we can use a pointer to a function to call the function to which the pointer points. We can do so directly—there is no need to dereference the pointer:</p>
+<pre><code class="c++">bool a = (*cmp)(1, 2);
+bool b = cmp(1, 2);
+bool c = (*pf)(1, 2);
+bool d = pf(1, 2);
+</code></pre>
+<p>As usual, when we use an overloaded function, the context must make it clear which version is being used. When we declare a pointer to an overloaded function the compiler uses the type of the pointer to determine which overloaded function to use. The type of the pointer must match one of the overloaded functions exactly:</p>
+<pre><code class="c++">void ff(int*);
+void ff(unsigned int);
+void (*pf1)(unsigned int) = ff; // ok: pf1 points to ff(unsigned int)
+void (*pf2)(int) = ff;          // error: no ff with a matching parameter list
+double (*pf3)(int*) = ff;       // error: return type of ff and pf3 don&#39;t match
+</code></pre>
+<p>Just as with arrays, we cannot define parameters of function type but can have a parameter that is a pointer to function. As with arrays, we can write a parameter that looks like a function type, but it will be treated as a pointer:</p>
+<pre><code class="c++">void useBigger(const string&amp; s1, const string&amp; s2,
+               bool pf(const string&amp;, const string&amp;));
+// equivalent declaration: explicitly define the parameter as a pointer to function
+void useBigger(const string&amp; s1, const string&amp; s2,
+               bool (*pf)(const string&amp;, const string&amp;));
+</code></pre>
+<p>When we pass a function as an argument, we can do so directly. It will be automatically converted to a pointer.</p>
+<p>As with arrays, we can’t return a function type but can return a pointer to a function type. Similarly, we must write the return type as a pointer type; the compiler will not automatically treat a function return type as the corresponding pointer type. Also as with array returns, by far the easiest way to declare a function that returns a pointer to function is by using a type alias:</p>
+<pre><code class="c++">using F = int(int, int);    // F is a function type, not a pointer
+using pF = int(*)(int, int);// pF is a pointer
+pF f1(int); // ok: pF is a pointer to function; f1 returns a pointer to function
+F f2(int);  // error: F is a function type; f1 can&#39;t return a function
+F *f3(int); // ok: explicitly specify that the return type is a pointer to function
+</code></pre>
+<p>For completeness, it’s worth noting that we can simplify declarations of functions that return pointers to function by using a trailing return:</p>
+<pre><code class="c++">auto f1(int) -&gt; int (*)(int*, int);
+</code></pre>
+<hr>
+<h2 id="Classes"><a href="#Classes" class="headerlink" title="Classes"></a>Classes</h2><p>In C++ we use classes to define our own data types. By defining types that mirror concepts in the problems we are trying to solve, we can make our programs easier to write, debug, and modify.</p>
+<h3 id="Defining-Abstract-Data-Types"><a href="#Defining-Abstract-Data-Types" class="headerlink" title="Defining Abstract Data Types"></a>Defining Abstract Data Types</h3><p>Our Sales_data class(in previous note) is not an <strong>abstract data type</strong>. It lets users of the class <strong>access</strong> its data members and forces users to write their own operations. To make Sales_data an abstract type, we need to define operations for users of Sales_data to use. Once Sales_data defines its own operations, we can <strong>encapsulate</strong> (that is, hide) its data members.</p>
+<p>Ultimately, we want Sales_data to support the same set of operations as the Sales_item class. The Sales_item class had one member function named isbn, and supported the +, =, +=, &lt;&lt;, and &gt;&gt; operators. We’ll learn how to define our own operators in the next post. For now, we’ll define ordinary (named) functions for these operations.</p>
+<p>Thus, the interface to Sales_data consists of the following operations:</p>
+<ul>
+<li>An <strong>isbn</strong> member function to return the object’s ISBN</li>
+<li>A <strong>combine</strong> member function to add one Sales_data object into another</li>
+<li>A function named <strong>add</strong> to add two Sales_data objects</li>
+<li>A <strong>read</strong> function to read data from an istream into a Sales_data object</li>
+<li>A <strong>print</strong> function to print the value of a Sales_data object on an ostream</li>
+</ul>
+<p>Before we think about how to implement our class, let’s look at how we can use our interface functions. As one example, we can use these functions to write a version of the bookstore program that works with Sales_data objects rather than Sales_items:</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &quot;Sales_data.h&quot;
+using std::cin; using std::cout; using std::endl;
+
+int main() &#123;
+    Sales_data total; // variable to hold the running sum
+    if (read(cin, total)) &#123; // read the first transaction
+        Sales_data trans; // variable to hold data for the next transaction
+        while (read(cin, trans)) &#123; // read the remaining transactions
+            if (total.isbn() == trans.isbn()) // check the isbns
+                total.combine(trans); // update the running total
+            else &#123;
+                print(cout, total) &lt;&lt; endl; // print the results
+                total = trans; // process the next book
+            &#125;
+        &#125;
+        print(cout, total) &lt;&lt; endl; // print the last transaction
+    &#125;
+    else &#123; // there was no input
+        std::cerr &lt;&lt; &quot;No data?!&quot; &lt;&lt; endl; // notify the user
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+<p>Our revised class will have the same data members as the version we defined in previous: bookNo, a string representing the ISBN; units_sold, an unsigned that says how many copies of the book were sold; and revenue, a double representing the total revenue for those sales.</p>
+<p>As we’ve seen, our class will also have two member functions, <strong>combine</strong> and <strong>isbn</strong>. In addition, we’ll give Sales_data another member function to return the average price at which the books were sold. This function, which we’ll name <strong>avg_price</strong>, isn’t intended for general use. It will be part of the implementation, not part of the interface.</p>
+<p>We define and declare member functions similarly to ordinary functions. Member functions must be <strong>declared inside the class</strong>. Member functions may be <strong>defined</strong> <strong>inside</strong> the class itself or <strong>outside</strong> the class body. Nonmember functions that are part of the interface, such as add, read, and print, are declared and defined outside the class.</p>
+<pre><code class="c++">#ifndef SALES_DATA_H
+#define SALES_DATA_H
+#include &lt;string&gt;
+struct Sales_data &#123;
+    // new members: operations on Sales_data objects
+    std::string isbn() const &#123; return bookNo; &#125;
+    Sales_data&amp; combine(const Sales_data&amp;);
+    double avg_price() const;
+    std::string bookNo;
+    unsigned units_sold = 0;
+    double revenue = 0.0;
+&#125;;
+// nonmember Sales_data interface functions
+Sales_data add(const Sales_data&amp;, const Sales_data&amp;);
+std::ostream&amp; print(std::ostream&amp;, const Sales_data&amp;);
+std::istream&amp; read(std::istream&amp;, Sales_data&amp;);
+#endif
+</code></pre>
+<p>We’ll start by explaining the <strong>isbn</strong> function, which returns a string and has an empty parameter list. As with any function, the body of a member function is a block. In this case, the block contains a single return statement that returns the bookNo data member of a Sales_data object. The interesting thing about this function is how it gets the object from which to fetch the bookNo member.</p>
+<p>Let’s look again at a call to the isbn member function: <code>total.isbn()</code>,Here we use the dot operator to fetch the isbn member of the object named total, which we then call. When isbn refers to members of<br>Sales_data, it is referring <strong>implicitly</strong> to the members of the object on which the function was called. In this call, when isbn returns bookNo, it is implicitly returning <strong>total.bookNo</strong>.</p>
+<p>Member functions access the object on which they were called through an extra, implicit parameter named <strong>this</strong>. When we call a member function, this is initialized with the address of the object on which the function was invoked. For example, when we call <code>total.isbn()</code>, the compiler passes the address of total to the implicit this parameter in isbn. It is as if the compiler rewrites this call as <code>Sales_data::isbn(&amp;total)</code>, which calls the isbn member of Sales_data passing the address of total.</p>
+<p>The this parameter is defined for us implicitly. Indeed, it is illegal for us to define a parameter or variable named this. Inside the body of a member function, we can use this. It would be legal, although unnecessary, to define isbn as:</p>
+<pre><code class="c++">std::string isbn() const &#123; return this-&gt;bookNo; &#125;
+</code></pre>
+<p>The other <strong>important</strong> part about the isbn function is the keyword <strong>const</strong> that follows the parameter list. The purpose of <em>that const is to modify the type of the implicit this pointer.</em></p>
+<p>By default, the type of this is a <strong>const pointer to the nonconst version of the class type</strong>. For example, by default, the type of this in a Sales_data member function is Sales_data *const. Although this is implicit, it follows the normal initialization rules, which means that (by default) we cannot bind this to a const object. This fact, in turn, means that we cannot call an ordinary member function on a const object.</p>
+<p>If isbn were an ordinary function and if this were an ordinary pointer parameter, we would declare this as const Sales_data *const. After all, the body of isbn doesn’t change the object to which this points, so our function would be more flexible if this were a pointer to const. Member functions that use const in this way are const member functions.</p>
+<p>The fact that this is a pointer to const means that const member functions cannot change the object on which they are called. Thus, isbn may <strong>read</strong> but not <strong>write</strong> to the data members of the objects on which it is called.</p>
+<p>The definitions of the member functions of a class are nested inside the scope of the class itself. Hence, isbn’s use of the name bookNo is resolved as the data member defined inside Sales_data. It is worth noting that isbn can use bookNo even though bookNo is defined after isbn. Because the compiler processes classes in two steps— the member declarations are compiled first, after which the member function bodies, if any, are processed. Thus, member function bodies may use other members of their class regardless of where in the class those members appear.</p>
+<p>As with any other function, when we <strong>define</strong> a member function <strong>outside</strong> the class body, the member’s definition must <strong>match</strong> its <strong>declaration</strong>. That is, the return type, parameter list, and name must match the declaration in the class body.</p>
+<pre><code class="c++">// define avg price function
+double Sales_data::avg_price() const &#123;
+    if (units_sold)
+        return revenue / units_sold;
+    else
+        return 0;
+&#125;
+</code></pre>
+<p>The function name, Sales_data::avg_price, uses the <strong>scope operator</strong> to say that we are defining the function named avg_price that is declared in the scope of the Sales_data class. Once the compiler sees the function name, the rest of the code is interpreted as being inside the scope of the class. Thus, when avg_price refers to revenue and units_sold, it is implicitly referring to the members of Sales_data.</p>
+<p>The <strong>combine</strong> function is intended to act like the compound assignment operator, <code>+=</code>. The object on which this function is called represents the left-hand operand of the assignment. The right-hand operand is passed as an explicit argument:</p>
+<pre><code class="c++">// define combine function
+Sales_data&amp; Sales_data::combine(const Sales_data&amp; rhs) &#123;
+    units_sold += rhs.units_sold; // add the members of rhs into
+    revenue += rhs.revenue; // the members of &#39;&#39;this&#39;&#39; object
+    return *this; // return the object on which the function was called
+&#125;
+</code></pre>
+<p>When our transaction-processing program calls <code>total.combine(trans);</code>, the address of total is bound to the implicit this parameter and rhs is bound to trans. At the end, Here the return statement dereferences this to obtain the object on which the function is executing. That is, for the call above, we return a reference to total.</p>
+<p>Class authors often define auxiliary functions, such as our add, read, and print functions. Although such functions <strong>define operations</strong> that are conceptually part of the interface of the class, they are <strong>not</strong> part of the class itself.</p>
+<p>We define nonmember functions as we would any other function. As with any other function, we normally separate the declaration of the function from its definition. Functions that are conceptually part of a class, but not defined inside the class, are typically declared (but not defined) in the same header as the class itself. That way users need to include only one file to use any part of the interface.</p>
+<p>The read and print functions do the same job as the code in previous code:</p>
+<pre><code class="c++">std::ostream&amp; print(std::ostream&amp; os, const Sales_data&amp; item) &#123;
+    os &lt;&lt; item.isbn() &lt;&lt; &quot; &quot; &lt;&lt; item.units_sold &lt;&lt; &quot; &quot;
+        &lt;&lt; item.revenue &lt;&lt; &quot; &quot; &lt;&lt; item.avg_price();
+    return os;
+&#125;
+std::istream&amp; read(std::istream&amp; is, Sales_data&amp; item) &#123;
+    double price = 0;
+    is &gt;&gt; item.bookNo &gt;&gt; item.units_sold &gt;&gt; price;
+    item.revenue = item.units_sold * price;
+    return is;
+&#125;
+</code></pre>
+<p>The add function takes two Sales_data objects and returns a new Sales_data representing their sum:</p>
+<pre><code class="c++">Sales_data add(const Sales_data&amp; lhs, const Sales_data&amp; rhs) &#123;
+    Sales_data sum = lhs;
+    sum.combine(rhs);
+    return sum;
+&#125;
+</code></pre>
+<p>Each class defines how objects of its type can be initialized. Classes control object initialization by defining one or more special member functions known as <strong>constructors</strong>. The job of a constructor is to initialize the data members of a class object. A constructor is run whenever an object of a class type is created.</p>
+<p>Constructors have the same name as the class. Unlike other functions, constructors have no return type. Like other functions, constructors have a (possibly empty) parameter list and a (possibly empty) function body. A class can have multiple constructors. Like any other overloaded function, the constructors must differ from each other in the number or types of their parameters.</p>
+<p>Our Sales_data class does not define any constructors, yet the programs we’ve written that use Sales_data objects compile and run correctly. So, How are they initialized? The answer is if our class does not explicitly define any constructors, the compiler will implicitly define the default constructor for us.</p>
+<p>For our Sales_data class we’ll define four constructors with the following parameters:</p>
+<ol>
+<li>An istream&amp; from which to read a transaction.</li>
+<li>A const string&amp; representing an ISBN, an unsigned representing the count of how many books were sold, and a double representing the price at which the books sold.</li>
+<li>A const string&amp; representing an ISBN. This constructor will use default values for the other members.</li>
+<li>An empty parameter list (i.e., the default constructor) which as we’ve just seen we must define because we have defined other constructors.</li>
+</ol>
+<pre><code class="c++">// constructors added
+// means default constructor
+Sales_data() = default;
+Sales_data(std::string&amp; s) : bookNo(s) &#123;&#125;
+Sales_data(std::string&amp; s, unsigned n, double p) :
+bookNo(s), units_sold(n), revenue(p* n) &#123;&#125;
+Sales_data(std::istream&amp;);
+</code></pre>
+<p>It is worth noting that both constructors have empty function bodies. The only work these constructors need to do is give the data members their values. If there is no further work, then the function body is empty.</p>
+<p>Unlike our other constructors, the constructor that takes an istream does have work to do. Inside its function body, this constructor calls read to give the data members new values:</p>
+<pre><code class="c++">Sales_data::Sales_data(std::istream&amp; is) &#123;
+    read(is, *this);
+&#125;
+</code></pre>
+<p>There are something need to notice:</p>
+<ol>
+<li>As with any other member function, when we define a constructor outside of the class body, we must specify the class of which the constructor is a member.</li>
+<li>In this constructor there is no constructor initializer list, although technically speaking, it would be more correct to say that the constructor initializer list is empty. Even though the constructor initializer list is empty, the members of this object are still <strong>initialized before the constructor body is executed.</strong></li>
+</ol>
+<h3 id="Access-Control-and-Encapsulation"><a href="#Access-Control-and-Encapsulation" class="headerlink" title="Access Control and Encapsulation"></a>Access Control and Encapsulation</h3><p>At this point, we have defined an interface for our class; but nothing forces users to use that interface. Our class is not yet encapsulated—users can reach inside a Sales_data object and meddle with its implementation. In C++ we use access specifiers to enforce encapsulation:</p>
+<ol>
+<li>Members defined after a <strong>public</strong> specifier are accessible to all parts of the program. The public members define the interface to the class.</li>
+<li>Members defined after a <strong>private</strong> specifier are accessible to the member functions of the class but are not accessible to code that uses the class.</li>
+</ol>
+<pre><code class="c++">struct Sales_data &#123;
+    public:
+    // constructors added
+    Sales_data() = default;
+    Sales_data(std::string&amp; s) : bookNo(s) &#123;&#125;
+    Sales_data(std::string&amp; s, unsigned n, double p) :
+    bookNo(s), units_sold(n), revenue(p* n) &#123;&#125;
+    Sales_data(std::istream&amp;);
+    // new members: operations on Sales_data objects
+    std::string isbn() const;
+    Sales_data&amp; combine(const Sales_data&amp;);
+    private:
+    double avg_price() const;
+    std::string bookNo;
+    unsigned units_sold = 0;
+    double revenue = 0.0;
+&#125;;
+</code></pre>
+<p>A class may contain zero or more access specifiers, and there are no restrictions on how often an access specifier may appear. Each access specifier specifies the access level of the succeeding members. The specified access level remains in effect until the next access specifier or the end of the class body.</p>
+<p>We also made another, more subtle, change: We used the <strong>class</strong> keyword <strong>rather</strong> <strong>than</strong> <strong>struct</strong> to open the class definition. This change is strictly stylistic; we can define a class type using either keyword. The only difference between struct and class is the default access level.</p>
+<p>A class may define members before the first access specifier. Access to such members depends on how the class is defined. If we use the <strong>struct</strong> keyword, the members defined before the first access specifier are <strong>public</strong>; if we use <strong>class</strong>, then the members are <strong>private</strong>.</p>
+<p>Now that the data members of Sales_data are private, our read, print, and add functions will no longer compile. The problem is that although these functions are part of the Sales_data interface, they are not <strong>members</strong> of the class.</p>
+<p>A class can allow another class or function to access its nonpublic members by making that class or function a <strong>friend</strong>. A class makes a function its friend by including a declaration for that function preceded by the keyword <strong>friend</strong>:</p>
+<pre><code class="c++">// add into class
+friend Sales_data add(const Sales_data&amp;, const Sales_data&amp;);
+friend std::ostream&amp; print(std::ostream&amp;, const Sales_data&amp;);
+friend std::istream&amp; read(std::istream&amp;, Sales_data&amp;);
+</code></pre>
+<p>Encapsulation provides two important advantages:</p>
+<ul>
+<li>User code cannot inadvertently corrupt the state of an encapsulated object.</li>
+<li>The implementation of an encapsulated class can change over time without requiring changes in user-level code.</li>
+</ul>
+<h3 id="Additional-Class-Features"><a href="#Additional-Class-Features" class="headerlink" title="Additional Class Features"></a>Additional Class Features</h3><p>The Sales_data class is pretty simple, in the next we’ll cover some additional class-related features that Sales_data doesn’t need to use. These features include <strong>type members</strong>, in-class initializers for members of class type, <strong>mutable data members</strong>, <strong>inline member functions</strong>, returning <strong>*this</strong> from a member function, more about how we define and use class types, and <strong>class friendship</strong>.</p>
+<p>First we will talk about type members, suppose we want use a class called Screen represents a window on a display. Each Screen has a string member that holds the Screen’s contents, and three string::size_type members that represent the position of the <strong>cursor</strong>, and the <strong>height</strong> and <strong>width</strong> of the screen.</p>
+<p>In addition to defining data and function members, a class can define its own local names for types. Type names defined by a class are subject to the same access controls as any other member and may be either public or private:</p>
+<pre><code class="c++">class Screen &#123;
+public:
+    using pos = std::string::size_type;
+private:
+    std::string contents;
+    pos height;
+    pos height;
+    pos cursor;
+&#125;;
+</code></pre>
+<p>We defined pos in the public part of Screen because we want users to use that name. we can use <code>Screen::pos k = 10;</code> after include header file.</p>
+<pre><code class="c++">#ifndef Screen_H
+#define Screen_H
+#include &lt;string&gt;
+class Screen &#123;
+public:
+    using pos = std::string::size_type;
+    // default constructor and another constructor
+    Screen() = default;
+    Screen(pos ht, pos wd, char c) : height(ht), width(wd), contents(ht* wd, c) &#123;&#125;
+
+    // get the character at the cursor
+    // implicitly inline
+    char get() const &#123;
+        return contents[cursor];
+    &#125;
+    // explicitly inline
+    inline char get(pos r, pos c) const &#123;
+        pos row = r * width;
+        return contents[row + c];
+    &#125;
+    // move cursor position
+    Screen&amp; move(pos r, pos c) &#123;
+        pos row = r * width;
+        cursor = row + c;
+        return *this;
+    &#125;
+    // test
+    void test_mutable() const &#123;
+        ++access_ctr;
+    &#125;
+private:
+    mutable pos access_ctr = 0;
+    std::string contents;
+    pos height = 0;
+    pos width = 0;
+    pos cursor = 0;
+&#125;;
+#endif // !Screen_H
+</code></pre>
+<p>Classes often have small functions that can benefit from being inlined. Member functions defined inside the class are automatically inline.</p>
+<p>As with nonmember functions, member functions may be overloaded so long as the functions differ by the number and/or types of parameters. In the screen class, the second get function is a overload function.</p>
+<pre><code class="c++">Screen::pos h = 10;
+Screen::pos w = 10;
+Screen myscreen(h,w,&#39;A&#39;);
+cout &lt;&lt; myscreen.get(0,0) &lt;&lt; endl;
+cout &lt;&lt; myscreen.get() &lt;&lt; endl;
+</code></pre>
+<p>It sometimes (but not very often) happens that a class has a data member that we want to be able to modify, even inside a const member function. We indicate such members by including the <strong>mutable</strong> keyword in their declaration.</p>
+<p><strong>A mutable data member is never const</strong>, even when it is a member of a const object. Accordingly, a const member function may change a mutable member. As an example, we’ll give Screen a mutable member named access_ctr, and  a const member function that change the value of mutable member. The function can be correct use.</p>
+<p>Next we’ll add functions to set the character at the cursor or at a given location:</p>
+<pre><code class="c++">#ifndef Screen_H
+#define Screen_H
+#include &lt;string&gt;
+class Screen
+&#123;
+public:
+    // other members function as before
+    // set char in screen
+    Screen &amp;set(char c)
+    &#123;
+        contents[cursor] = c;
+        return *this;
+    &#125;
+    Screen &amp;set(pos r, pos col, char c)
+    &#123;
+        contents[r * width + col] = c;
+        return *this;
+    &#125;
+    // other members as before
+&#125;;
+#endif // !Screen_H
+</code></pre>
+<p>Like the move operation, our set members return a reference to the object on which they are called. Functions that return a reference are lvalues, which means that they return the object itself, not a copy of the object. If we concatenate a sequence of these actions into a single expression:</p>
+<pre><code class="c++">myscreen.move(4, 0).set(&#39;B&#39;);
+</code></pre>
+<p>That is, this statement is equivalent to:</p>
+<pre><code class="c++">myscreen.move(4, 0);
+myscreen.set(&#39;B&#39;);
+</code></pre>
+<p>Next, we’ll add an operation, which we’ll name display, to print the contents of the Screen. We’d like to be able to include this operation in a sequence of set and move operations. Therefore, like set and move, our display function will return a reference to the object on which it executes.</p>
+<p>Logically, displaying a Screen doesn’t change the object, so we should make display a const member. If display is a const member, then this is a pointer to const and *this is a const object. Hence, the return type of display must be const Sales_data&amp;. However, if display returns a reference to const, we won’t be able to embed display into a series of actions:</p>
+<pre><code class="c++">myScreen.display(std::cout).set(&#39;B&#39;);
+</code></pre>
+<p>We can overload a member function based on whether it is const for the same reasons that we can overload a function based on whether a pointer parameter points to const. The nonconst version will not be viable for const objects; we can only call const member functions on a const object. We can call either version on a nonconst object, but the nonconst version will be a better match.</p>
+<pre><code class="c++">public:
+//print screen
+const Screen&amp; print(std::ostream&amp; os)const &#123;
+    do_display(os);
+    return *this;
+&#125;
+Screen&amp; print(std::ostream&amp; os) &#123;
+    do_display(os);
+    return *this;
+&#125;
+private:
+void do_display(std::ostream&amp; os) const &#123;
+    for (size_t i = 0; i &lt; height; i++) &#123;
+        for (size_t j = 0; j &lt; width; j++) &#123;
+            os &lt;&lt; get(i, j);
+        &#125;
+        os &lt;&lt; std::endl;
+    &#125;
+&#125;
+</code></pre>
+<p>Our Sales_data class defined three ordinary nonmember functions as friends. A class can also make another class its friend or it can declare specific member functions of another (previously defined) class as friends. In addition, a friend function can be defined inside the class body. Such functions are implicitly inline.</p>
+<p>For example, we want use a class called Windows_mgr to control a set of screen, such as clear screen. To do this job, our function called clear needs to access the private data members of Screen. To allow this access, Screen can designate Window_mgr as its friend:</p>
+<pre><code class="c++">class Screen &#123;
+    // Window_mgr members can access the private parts of class Screen
+    friend class Windows_mgr;
+    // ... rest of the Screen class
+&#125;;
+class Windows_mgr &#123;
+    public:
+    using ScreenIndex = std::vector&lt;Screen&gt;::size_type;
+    Windows_mgr() = default;
+
+    // clear screen
+    void clear(ScreenIndex i) &#123;
+        Screen&amp; s = screens[i];
+        s.contents = std::string(s.width * s.height, &#39; &#39;);
+    &#125;
+
+    private:
+    std::vector&lt;Screen&gt; screens&#123; Screen(10,10,&#39; &#39;) &#125;;
+&#125;;
+</code></pre>
+<p>Rather than making the entire Window_mgr class a friend, Screen can instead specify that only the clear member is allowed access. When we declare a member function to be a friend, we must specify the class of which that function is a member:</p>
+<pre><code class="c++">class Screen &#123;
+    // clear function in Windoes_mgr can access the private parts of class Screen
+    friend void Windows_mgr::clear(ScreenIndex i);
+    // ... rest of the Screen class
+&#125;;
+</code></pre>
+<p>Making a member function a friend requires careful structuring of our programs to accommodate interdependencies among the declarations and definitions. In this example, we must order our program as follows:</p>
+<ol>
+<li>First, define the Window_mgr class, which declares, but cannot define, clear. Screen must be declared before clear can use the members of Screen.</li>
+<li>Next, define class Screen, including a friend declaration for clear.</li>
+<li>Finally, define clear, which can now refer to the members in Screen.</li>
+</ol>
+<p>The full code:</p>
+<pre><code class="c++">#ifndef Screen_H
+#define Screen_H
+#include &lt;string&gt;
+#include &lt;vector&gt;
+
+class Screen;
+
+class Windows_mgr &#123;
+    public:
+    using ScreenIndex = std::vector&lt;Screen&gt;::size_type;
+    Windows_mgr() = default;
+
+    // clear screen
+    void clear(ScreenIndex i);
+    // add a new screen
+    void add();
+
+    private:
+    std::vector&lt;Screen&gt; screens;
+&#125;;
+
+class Screen &#123;
+    public:
+    friend void Windows_mgr::clear(ScreenIndex i);
+    using pos = std::string::size_type;
+    // default constructor and another constructor
+    Screen() = default;
+    Screen(pos ht, pos wd, char c) : height(ht), width(wd), contents(ht* wd, c) &#123;&#125;
+
+    // get the character at the cursor
+    // implicitly inline
+    char get() const &#123;
+        return contents[cursor];
+    &#125;
+    // explicitly inline
+    inline char get(pos r, pos c) const &#123;
+        pos row = r * width;
+        return contents[row + c];
+    &#125;
+
+    // move cursor position
+    Screen&amp; move(pos r, pos c) &#123;
+        pos row = r * width;
+        cursor = row + c;
+        return *this;
+    &#125;
+
+    // test mutable mumber
+    void test_mutable() const &#123;
+        ++access_ctr;
+    &#125;
+
+    //set char in screen
+    Screen&amp; set(char c) &#123;
+        contents[cursor] = c;
+        return *this;
+    &#125;
+    Screen&amp; set(pos r, pos col, char c) &#123;
+        contents[r * width + col] = c;
+        return *this;
+    &#125;
+
+    //print screen
+    const Screen&amp; print(std::ostream&amp; os)const &#123;
+        do_display(os);
+        return *this;
+    &#125;
+    Screen&amp; print(std::ostream&amp; os) &#123;
+        do_display(os);
+        return *this;
+    &#125;
+
+    private:
+    mutable pos access_ctr = 0;
+    std::string contents;
+    pos height = 0;
+    pos width = 0;
+    pos cursor = 0;
+
+    void do_display(std::ostream&amp; os) const &#123;
+        for (size_t i = 0; i &lt; height; i++) &#123;
+            for (size_t j = 0; j &lt; width; j++) &#123;
+                os &lt;&lt; get(i, j);
+            &#125;
+            os &lt;&lt; &#39;\n&#39;;
+        &#125;
+    &#125;
+&#125;;
+
+void Windows_mgr::clear(ScreenIndex i) &#123;
+    Screen&amp; s = screens[i];
+    s.contents = std::string(s.width * s.height, &#39; &#39;);
+&#125;
+
+void Windows_mgr::add() &#123;
+    Screen new_s(10, 10, &#39; &#39;);
+    screens.push_back(new_s);
+&#125;
+
+#endif // !Screen_H
+</code></pre>
+<h3 id="Class-Scope"><a href="#Class-Scope" class="headerlink" title="Class Scope"></a>Class Scope</h3><p>In the programs we’ve written so far, name lookup (the process of finding which declarations match the use of a name) has been relatively straightforward:</p>
+<ul>
+<li>First, look for a declaration of the name in the block in which the name was used. Only names declared before the use are considered.</li>
+<li>If the name isn’t found, look in the enclosing scope(s).</li>
+<li>If no declaration is found, then the program is in error.</li>
+</ul>
+<p>The way names are resolved inside member functions defined inside the class may seem to behave differently than these lookup rules. However, in this case, appearances are deceiving. Class definitions are processed in two phases:</p>
+<ul>
+<li>First, the member declarations are compiled.</li>
+<li>Function bodies are compiled only after the entire class has been seen.</li>
+</ul>
+<p>Because member function bodies are not processed until the entire class is seen, they can use any name defined inside the class. If function definitions were processed at the same time as the member declarations, then we would have to order the member functions so that they referred only to names already seen.</p>
+<h3 id="Constructors-Revisited"><a href="#Constructors-Revisited" class="headerlink" title="Constructors Revisited"></a>Constructors Revisited</h3><p>Constructors are a crucial part of any C++ class. In this section we’ll cover some additional capabilities of constructors, and deepen our coverage of the material introduced earlier.</p>
+<p>When we define variables, we typically initialize them immediately rather than defining them and then assigning to them, exactly the same distinction between initialization and assignment applies to the data<br>members of objects. If we do not explicitly initialize a member in the constructor initializer list, that member is default initialized before the constructor body starts executing. For example:</p>
+<pre><code class="c++">// legal but sloppier way to write the Sales_data constructor: no constructor initializers
+Sales_data::Sales_data(const string&amp; s,
+                       unsigned cnt, double price) &#123;
+    bookNo = s;
+    units_sold = cnt;
+    revenue = cnt * price;
+&#125;
+</code></pre>
+<p>This version and our original definition in previous have the same effect: When the constructor finishes, the data members will hold the same values. The difference is that the original version initializes its data members, whereas this version assigns values to the data members. How significant this distinction is depends on the type of the data member.</p>
+<p>We can often, but not always, ignore the distinction between whether a member is initialized or assigned. Members that are const or references must be initialized.</p>
+<pre><code class="c++">#pragma once
+class test &#123;
+    public:
+    //ok:
+    test(int n) : a(n) &#123;&#125;
+    //error:
+    test(int n)&#123;
+        a = n;
+    &#125;
+
+    private:
+    const int a;
+&#125;;
+</code></pre>
+<p>By the time the body of the constructor begins executing, initialization is complete. Our only chance to initialize const or reference data members is in the constructor initializer.</p>
+<p>Another need notice in c++ is <strong>Order of Member Initialization</strong>, Members are initialized in the order in which they appear in the class definition: The first member is initialized first, then the next, and so on. The order in which initializers appear in the constructor initializer list does not change the order of initialization. The order of initialization often doesn’t matter. However, if one member is initialized in terms of another, then the order in which members are initialized is crucially important.</p>
+<p>We can set default arguments in constructors:</p>
+<pre><code class="c++">test(int n = 10) : a(n) &#123;&#125;
+</code></pre>
+<p>The new standard extends the use of constructor initializers to let us define so-called delegating constructors. A delegating constructor uses another constructor from its own class to perform its initialization. It is said to “delegate” some (or all) of its work to this other constructor.</p>
+<p>As an example, we’ll rewrite the Sales_data class to use delegating constructors as follows:</p>
+<pre><code class="c++">class Sales_data &#123;
+    public:
+    // nondelegating constructor initializes members from corresponding arguments
+    Sales_data(std::string s, unsigned cnt, double price) :
+    bookNo(s), units_sold(cnt), revenue(cnt* price) &#123;
+    &#125;
+    // remaining constructors all delegate to another constructor
+    Sales_data() : Sales_data(&quot;&quot;, 0, 0) &#123;&#125;
+    Sales_data(std::string s) : Sales_data(s, 0, 0) &#123;&#125;
+    Sales_data(std::istream&amp; is) : Sales_data() &#123;
+        read(is, *this);
+    &#125;
+    // other members as before
+&#125;;
+</code></pre>
+<h3 id="static-Class-Members"><a href="#static-Class-Members" class="headerlink" title="static Class Members"></a>static Class Members</h3><p>Classes sometimes need members that are associated with the class, rather than with individual objects of the class type. We say a member is associated with the class by adding the keyword <strong>static</strong> to its declaration. Like any other member, static members can be public or private. The type of a static data member can be const, reference, array, class type, and so forth.</p>
+<p>As an example, we’ll define a class to represent an account record at a bank:</p>
+<pre><code class="c++">#ifndef Account_H
+#define Account_H
+#include &lt;string&gt;
+class Account &#123;
+    public:
+    Account() = default;
+
+    static double get_rate() &#123;
+        return rate;
+    &#125;
+
+    static void set_rate(double r) &#123;
+        rate = r;
+    &#125;
+
+    private:
+    std::string user;
+    double amount;
+    static double rate;
+&#125;;
+//define static member
+double Account::rate = 0.001;
+#endif
+</code></pre>
+<p>The static members of a class exist outside any object. Objects do not contain data associated with static data members. Thus, each Account object will contain two data members—user and amount. There is only one rate object that will be shared by all the Account objects.</p>
+<p>How could we use a class static member? First, we can directly through the scope operator:</p>
+<pre><code class="c++">double r;
+r = Account::get_rate(); // access a static member using the scope operator
+</code></pre>
+<p>Even though static members are not part of the objects of its class, we can use an object, reference, or pointer of the class type to access a static member:</p>
+<pre><code class="c++">Account s;
+double r;
+r = s.get_rate();
+</code></pre>
+<p>Member functions can use static members directly, without the scope operator.</p>
+<p>As with any other member function, we can define a static member function inside or outside of the class body. When we define a static member <strong>outside</strong> the class, we do <strong>not</strong> <strong>repeat</strong> the <strong>static</strong> keyword. The keyword appears only with the declaration inside the class body.</p>
+<p>Because static data members are not part of individual objects of the class type, <strong>they are not defined when we create objects of the class</strong>. As a result, they are not initialized by the class’ constructors. Moreover, in general, we may not initialize a static member inside the class. Instead, <strong>we must define and initialize each static data member outside the class body</strong>. Like any other object, a static data member may be defined only once.</p>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://morning.eu.org/images/custom/donate/404.jpg"></li>
+                <li class="wechat-code"><img src="https://morning.eu.org/images/custom/donate/404.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2021/12/04/Cpp%20primer/Cpp_c04/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="" data-src="/images/cover/C_background.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/C_background.webp">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                (ch4) The C++ IO Library</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2021/12/02/Cpp%20primer/Cpp_c02/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="" data-src="/images/cover/C_background.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/C_background.webp">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                (ch2) C++ Basic Features - Type</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+
+
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="morning.eu.org" class="profile gravatar"><img src="/images/custom/avatar.jpg" itemprop="image" alt="Noah" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="morning.eu.org" itemprop="url" rel="author">Noah</a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i>life is perfact</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
+</div>
+
+
+
+    </div>    
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            // PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+    <footer id="colophon" class="site-footer" role="contentinfo">
+  <div class="site-info">
+    <div class="footertext">
+      <div class="img-preload">
+        <img src="https://morning.eu.org/images/other/wordpress-rotating-ball-o.svg">
+        <img src="https://morning.eu.org/images/other/disqus-preloader.svg">
+      </div>
+      <p style="color: #666666;">&copy 2019-2026
+      </p>
+    </div>
+    <div class="footer-device">
+      <p style="font-family: 'Ubuntu', sans-serif;">
+        <span style="color: #b9b9b9;">Theme <a href="https://github.com/honjun/hexo-theme-sakura" target="_blank"
+            style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Sakura</a> <i
+            class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i> by <a
+            href="https://2heng.xin/" target="_blank"
+            style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Mashiro</a>&<a
+            href="https://www.hojun.cn/" target="_blank"
+            style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Hojun</a>, Powered by Hexo,
+          Hosted by Coding Pages</a>
+        </span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+
+<!-- <script src="/js/tocbot.js"></script> -->
+<script type="text/javascript" src="/js/lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/InsightSearch.js"></script>
+<script type="text/javascript" src="/js/jquery.fancybox.min.js"></script>
+<script type="text/javascript" src="/js/zoom.min.js"></script>
+<script type="text/javascript" src="/js/sakura-app.js"></script>
+<script src="/js/botui.js"></script>
+<!-- 不蒜子 网页计数器 -->
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script type="text/javascript">
+  /* <![CDATA[ */
+  if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+    var Poi = { "pjax": "1", "movies": { "url": "", "name": "", "live": "close" }, "windowheight": "fixed", "codelamp": "close", "ajaxurl": "", "order": "asc", "formpostion": "bottom" };
+  } else {
+    var Poi = { "pjax": "1", "movies": { "url": "", "name": "", "live": "open" }, "windowheight": "auto", "codelamp": "close", "ajaxurl": "", "order": "asc", "formpostion": "bottom" };
+  }
+  /* ]]> */
+
+</script>
+<script>
+  $(document).ready(function () {
+    if ($(".toc").length > 0 && document.body.clientWidth > 1200) {
+      if ($(".pattern-center").length > 0) { //有图的情况
+        tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -400,
+          scrollSmoothOffset: -85
+        });
+      } else {
+        tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -85,
+          scrollSmoothOffset: -85
+        });
+      }
+      var offsetTop = $('.toc').offset().top - 95;
+      window.onscroll = function () {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+        if (scrollTop >= offsetTop) {
+          $('.toc').addClass('toc-fixed');
+        } else {
+          $('.toc').removeClass('toc-fixed');
+        }
+      }
+    }
+  });
+</script>
+    <div class="openNav no-select" style="height: 50px;">
+      <div class="iconflat no-select" style="width: 50px; height: 50px;">
+        <div class="icon"></div>
+      </div>
+      <div class="site-branding search-form-submit">
+        <i class="iconfont js-toggle-search iconsearch icon-search"></i>
+      </div>
+    </div>
+  </section>
+  <div id="mo-nav" class="">
+  <div class="m-avatar">
+    <img src="https://morning.eu.org/images/custom/avatar.jpg">
+  </div>
+  <p style="text-align: center; color: #333; font-weight: 900; font-family: 'Ubuntu', sans-serif; letter-spacing: 1.5px">桜荘そのうさぎ</p>
+  <p style="text-align: center; word-spacing: 20px;">
+    
+      
+        <a href="https://github.com/NoahBishop" class="fa fa-github" target="_blank" style="color: #333; margin-left:20px"></a>
+      
+        <a href="https://t.me/mega1037" class="fa fa-telegram" target="_blank" style="color: #25c6fe; margin-left:20px"></a>
+      
+        <a href="https://mailto:beiloquuw@gamil.com" class="fa fa-google" target="_blank" style="color: #dd4b39; margin-left:20px"></a>
+      
+    
+  </p>
+  <ul id="menu-new-1" class="menu">
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+            首页
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/archives">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+            归档
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/categories/%E6%8A%80%E6%9C%AF/">
+                  <i class="fa fa-code" aria-hidden="true"></i>
+                  技术
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/%E7%94%9F%E6%B4%BB/">
+                  <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                  生活
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/%E8%B5%84%E6%BA%90/">
+                  <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                  资源
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/%E9%9A%8F%E6%83%B3/">
+                  <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                  随想
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/%E8%BD%AC%E8%BD%BD/">
+                  <i class="fa fa-book" aria-hidden="true"></i>
+                  转载
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/tags/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-tag" aria-hidden="true"></i>
+            标签
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="javascript:;">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+            清单
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/music/">
+                  <i class="fa fa-headphones" aria-hidden="true"></i>
+                  歌单
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/comment/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+            留言板
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/links/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+            友人帐
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-leaf faa-wrench" aria-hidden="true"></i>
+            关于
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/about/">
+                  <i class="fa fa-meetup" aria-hidden="true"></i>
+                  我？
+                </a>
+              </li>
+            
+              <li>
+                <a href="/theme-sakura/">
+                  <i class="fa iconfont icon-sakura" aria-hidden="true"></i>
+                  主题
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/atom.xml">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-rss faa-pulse" aria-hidden="true"></i>
+            RSS
+          </span>
+        </a>
+        
+      </li>
+    
+  </ul>
+  <p style="text-align: center; font-size: 13px; color: #b9b9b9;">&copy 2019 hexo-sakura</p>
+</div>
+<button onclick="topFunction()" class="mobile-cd-top" id="moblieGoTop" title="Go to top" style="display: none;"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<style>
+  .aplayer .aplayer-lrc {
+    height: 35px;
+  }
+  .aplayer .aplayer-lrc p{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18px !important;
+  }
+  .aplayer .aplayer-lrc p.aplayer-lrc-current{
+    color: #FF1493;
+  }
+  .aplayer.aplayer-narrow .aplayer-body{
+    left: -66px !important;
+  }
+  .aplayer.aplayer-fixed .aplayer-lrc {
+    display: none;
+  }
+  .aplayer .aplayer-lrc.aplayer-lrc-hide {
+      display:none !important;
+  }
+  .aplayer.aplayer-fixed .lrc-show {
+    display: block;
+    background: rgba(255, 255, 255, 0.8);
+  }
+</style>
+<meting-js
+
+</meting-js>
+<script>
+  $(function(){
+    $('body').on('click', '.aplayer', function(){
+      if($('.aplayer-button').hasClass('aplayer-play')) {
+        $('.aplayer-lrc').removeClass('lrc-show');
+      } else {
+        $('.aplayer-lrc').addClass('lrc-show');
+      }
+    })
+  });
+</script>
+</body>
+</html>

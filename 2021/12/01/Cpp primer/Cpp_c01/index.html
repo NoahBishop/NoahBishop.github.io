@@ -7,6 +7,7 @@
 	
 		<title itemprop="name">
 			
+				(ch1) Getting Started C++ | 
 						うさぎの手帳
 		</title>
 		
@@ -423,492 +424,222 @@
   </div>
 </header>
 
-      <div class="blank" style="padding-top: 0px;"></div>
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/C_background.webp');" src="" data-src="/images/cover/C_background.webp">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      (ch1) Getting Started C++</h1>
+      <p class="entry-census">
+        <span>
+          <a href="morning.eu.org">
+            <img src="/images/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="morning.eu.org">Noah</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2021-12-1<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
 <div id="content" class="site-content">
-  
-      <div class="top-feature-row">
-  <h1 class="fes-title" style="font-family: 'Ubuntu', sans-serif;">
-  <i class="fa fa-anchor" aria-hidden="true">
-  </i>
-  START:DASH!!</h1>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="https://morning.eu.org/theme-sakura/" target="_blank">
-        <div class="img">
-          <img src="https://morning.eu.org/images/startdash/sakura.jpg">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h1 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h1><p><em>This chapter introduces most of the basic elements of C++: types, variables,expressions, statements, and functions.</em></p>
+<p><em>I write this post in 2021, today there are many powerful tools can help you write program more efficiently and quickly, I recommend you use vs2019 and create a “Linux project” and running in a virtual machine. you can simply create a virtual machine by VMware.</em></p>
+<p><em>this post is based on c plus plus primer.</em></p>
+<h2 id="write-a-simple-c-program"><a href="#write-a-simple-c-program" class="headerlink" title="write a simple c++ program"></a>write a simple c++ program</h2><p>Every c++ program contains one or more <strong>functions</strong>, one of which must be named <strong>main</strong>. The operating system runs a C++ program by calling <strong>main</strong>, this is a simple c++ program.</p>
+<pre><code class="c++">#include&lt;cstdio&gt;
+int main()
+&#123;
+ printf(&quot;hello world!\n&quot;);
+ return 0;
+&#125;
+</code></pre>
+<p>A function definition has four elements: a <strong>return type</strong>, a <strong>function name</strong>, a (possibly empty) <strong>parameter list</strong> enclosed in parentheses, and a <strong>function body</strong>.</p>
+<p>In previous example, the <em>int</em> is return type, <em>main</em> is function name, and don’t have parameter. The function body is a block of statements starting with an open curly brace and ending with a close curly.</p>
+<p>Note the semicolon at the end of statement, it can lead to compiler error messages when forgotten.</p>
+<h2 id="Input-and-output"><a href="#Input-and-output" class="headerlink" title="Input and output"></a>Input and output</h2><p>The c++ don’t define any statement to do input and output, but c++ include a extensive standard library that provide input and output. In previous case, we print the string “hello world” by use the “printf” function that define in <strong>cstdio</strong> standard library. Actually,  you are recommend use the <strong><em>iostream</em></strong> standard library, the cstdio is from the stdio.h in c language.</p>
+<p>Fundamental to iostream are istream and ostream, which represent input and output streams. The library defines four IO objects.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>in where</th>
+<th>referred</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cin</td>
+<td>istream</td>
+<td>standard input</td>
+</tr>
+<tr>
+<td>cout</td>
+<td>ostream</td>
+<td>standard output</td>
+</tr>
+<tr>
+<td>cerr</td>
+<td>ostream</td>
+<td>standard error</td>
+</tr>
+<tr>
+<td>clog</td>
+<td>ostream</td>
+<td>general information about the execution of the program</td>
+</tr>
+</tbody>
+</table>
+<p><em>This is a sample case, read two numbers form standard input and print the sum by standard output.</em></p>
+<pre><code class="c++">#include &lt;iostream&gt;
+
+int main()
+&#123;
+    int num1, num2;
+    std::cout &lt;&lt; &quot;Enter two numbers:&quot; &lt;&lt; std::endl;
+    std::cin &gt;&gt; num1 &gt;&gt; num2;
+    std::cout &lt;&lt; &quot;the sum is:&quot; &lt;&lt; num1 + num2 &lt;&lt; std::endl;
+    return 0;
+&#125;
+//running
+//Enter two numbers:
+//10 20
+//the sum is:30
+</code></pre>
+<p>The first line in the previous case is <code>#include &lt;iostream&gt;</code> tell the compiler that wo want use the iostream library, we called it header in c++ program. And we notice that the program use the std::cin and std::cout rather than cin and cout, the profix <code>std::</code> mean the cin and cout are defined in the namespace called <code>std</code>. The namespace allow us to use  function that has same name in a program.</p>
+<h2 id="comments"><a href="#comments" class="headerlink" title="comments"></a>comments</h2><p>Comments help human reading program, the often to summarize a algorithm and explain what the variable’s mean,  the compiler ignore the comments, so they need be identified by special way.</p>
+<pre><code class="c++">//this is a comment
+/*
+  you can also write conmment is this way
+*/
+/*Comment Pairs Do Not Nest
+/*Comment Pairs Do Not Nest, the end of a comment is */
+compler think this line is a statement, because the comments is end*/
+</code></pre>
+<h2 id="Flow-of-Control"><a href="#Flow-of-Control" class="headerlink" title="Flow of Control"></a>Flow of Control</h2><p>Statement normally execute sequentially, the first statement at main block execute first, follow by second, the most important control ways in program are while loop, for loop and if branch. the following program add all even numbers between 0 to 20.</p>
+<pre><code class="c++">#include &lt;iostream&gt;
+
+int main()
+&#123;
+    /*
+     * this is a simple program that
+     * add all even numbers between 0 to 20
+     */
+    int n = 0, sum = 0;
+    // while loop end when n greater than 20
+    while (n &lt;= 20)
+    &#123;
+        // if n is a even number
+        if (n % 2 == 0)
+        &#123;
+            sum += n;
+        &#125;
+        n++;
+    &#125;
+    std::cout &lt;&lt; &quot;the sum of even numbers between 0 to 20 is &quot; &lt;&lt; sum &lt;&lt; std::endl;
+
+    sum = 0;
+    // for loop end when i greater than 20
+    for (int i = 0; i &lt;= 20; i++)
+    &#123;
+        // if i is a even number
+        if (i % 2 == 0)
+        &#123;
+            sum += i;
+        &#125;
+    &#125;
+    std::cout &lt;&lt; &quot;the sum of even numbers between 0 to 20 is &quot; &lt;&lt; sum &lt;&lt; std::endl;
+    return 0;
+&#125;
+</code></pre>
+<h2 id="Introducing-Classes"><a href="#Introducing-Classes" class="headerlink" title="Introducing Classes"></a>Introducing Classes</h2><p>one of the most difference between c language and c++ language is the c++ has classes. In c++, we define our data structure by define a classes, a class defines a type along with many operations that are related to this type. We will discuss more details in the next post.</p>
+
         </div>
-        <div class="info">
-          <h3>Sakura</h3>
-          <p>本站 hexo 主题</p>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://morning.eu.org/images/custom/donate/404.jpg"></li>
+                <li class="wechat-code"><img src="https://morning.eu.org/images/custom/donate/404.jpg"></li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </a>
-    </div>
-  </div>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="https://www.cnblogs.com/cs-Miscellaneous/" target="_blank">
-        <div class="img">
-          <img src="https://morning.eu.org/images/startdash/cnblog.jpg">
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre full previous">
+          
+            <a href="/2021/12/02/Cpp%20primer/Cpp_c02/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="" data-src="/images/cover/C_background.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/C_background.webp">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                (ch2) C++ Basic Features - Type</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+      </section>
+      
+
+
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="morning.eu.org" class="profile gravatar"><img src="/images/custom/avatar.jpg" itemprop="image" alt="Noah" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="morning.eu.org" itemprop="url" rel="author">Noah</a>
+            </h3>
+          </div>
         </div>
-        <div class="info">
-          <h3>博客园</h3>
-          <p>博主的博客园(已停止维护)</p>
-        </div>
-      </a>
-    </div>
-  </div>
-  
-  <div class="top-feature-v2">
-    <div class="the-feature square from_left_and_right">
-      <a href="https://steamcommunity.com/profiles/76561199087248993/" target="_blank">
-        <div class="img">
-          <img src="https://morning.eu.org/images/startdash/wanshiwu.jpg">
-        </div>
-        <div class="info">
-          <h3>Steam</h3>
-          <p>来玩</p>
-        </div>
-      </a>
-    </div>
-  </div>
-  
+        <hr>
+        <p><i class="iconfont icon-write"></i>life is perfact</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
-        <div id="primary" class="content-area">
-          <main id="main" class="site-main" role="main">
-            <h1 class="main-title" style="font-family: 'Ubuntu', sans-serif;">
-              <i class="fa fa-envira" aria-hidden="true"></i>
-              Discovery
-            </h1>
-            
-  <!-- 首页默认取最最新文章集 -->
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2022/07/01/Qt/essay_01_use%20cmake%20settting%20up%20Qt%20project/">
-      <img class="lazyload" src="" data-src="/images/cover/QtWithTorch.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2022-7-1 21:07</div>
-      <a href="/2022/07/01/Qt/essay_01_use%20cmake%20settting%20up%20Qt%20project/" class="post-title">
-        <h3>Setting up Qt Projects with CMake and Linking External</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/Qt/">Qt<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2022/07/01/Qt/essay_01_use%20cmake%20settting%20up%20Qt%20project/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/12/Cpp%20primer/Cpp_c12/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-12 21:12</div>
-      <a href="/2021/12/12/Cpp%20primer/Cpp_c12/" class="post-title">
-        <h3>(ch12) Templates and Generic Programming (Not completed yet)</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/12/Cpp%20primer/Cpp_c12/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/11/Cpp%20primer/Cpp_c11/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-11 21:12</div>
-      <a href="/2021/12/11/Cpp%20primer/Cpp_c11/" class="post-title">
-        <h3>(ch11) Object-Oriented Programming</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/11/Cpp%20primer/Cpp_c11/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/10/Cpp%20primer/Cpp_c10/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-10 21:12</div>
-      <a href="/2021/12/10/Cpp%20primer/Cpp_c10/" class="post-title">
-        <h3>(ch10) Overloaded Operations and Conversions</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/10/Cpp%20primer/Cpp_c10/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/09/Cpp%20primer/Cpp_c09/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-9 21:12</div>
-      <a href="/2021/12/09/Cpp%20primer/Cpp_c09/" class="post-title">
-        <h3>(ch9) Copy Control</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/09/Cpp%20primer/Cpp_c09/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/08/Cpp%20primer/Cpp_c08/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-8 21:12</div>
-      <a href="/2021/12/08/Cpp%20primer/Cpp_c08/" class="post-title">
-        <h3>(ch8) Dynamic Memory</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/08/Cpp%20primer/Cpp_c08/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/07/Cpp%20primer/Cpp_c07/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-7 21:12</div>
-      <a href="/2021/12/07/Cpp%20primer/Cpp_c07/" class="post-title">
-        <h3>(ch7) Associative Containers</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/07/Cpp%20primer/Cpp_c07/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/06/Cpp%20primer/Cpp_c06/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-6 21:12</div>
-      <a href="/2021/12/06/Cpp%20primer/Cpp_c06/" class="post-title">
-        <h3>(ch6) Generic Algorithms</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/06/Cpp%20primer/Cpp_c06/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/05/Cpp%20primer/Cpp_c05/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-5 21:12</div>
-      <a href="/2021/12/05/Cpp%20primer/Cpp_c05/" class="post-title">
-        <h3>(ch5) Sequential Containers</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/05/Cpp%20primer/Cpp_c05/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2021/12/04/Cpp%20primer/Cpp_c04/">
-      <img class="lazyload" src="" data-src="/images/cover/C_background.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2021-12-4 21:12</div>
-      <a href="/2021/12/04/Cpp%20primer/Cpp_c04/" class="post-title">
-        <h3>(ch4) The C++ IO Library</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/C-C-basic/">C/C++ basic<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2021/12/04/Cpp%20primer/Cpp_c04/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
 
 
-          </main>
-          <!-- 首页默认取最最新文章集 -->
-          <!-- 
-      <nav class="navigator">
-        
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">&lt;i class&#x3D;&quot;iconfont icon-right&quot;&gt;&lt;&#x2F;i&gt;</a>
-      </nav>
-     -->
-        </div>
-        
-          <div id="pagination"><a href="/page/2/" class="">Previous</a></div>
-          
-</div>
+
     </div>    
     <div class="ins-search">
     <div class="ins-search-mask"></div>
