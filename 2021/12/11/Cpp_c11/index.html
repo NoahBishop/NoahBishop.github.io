@@ -55,7 +55,7 @@
 					/*End of Initial Variables*/
 				</script>
 				<script type="text/javascript">
-					var bg = "https://morning.eu.org/images/cover/(1).jpg.webp,https://morning.eu.org/images/cover/(2).jpg.webp,https://morning.eu.org/images/cover/(3).jpg.webp,https://morning.eu.org/images/cover/(4).jpg.webp,https://morning.eu.org/images/cover/(5).jpg.webp,https://morning.eu.org/images/cover/(6).jpg.webp,https://morning.eu.org/images/cover/(7).jpg.webp,https://morning.eu.org/images/cover/(8).jpg.webp".split(",");
+					var bg = "https://morning.eu.org/images/cover/(1).jpg.webp,https://morning.eu.org/images/cover/(2).jpg.webp,https://morning.eu.org/images/cover/(3).jpg.webp,https://morning.eu.org/images/cover/(4).jpg.webp".split(",");
 					var bgindex = Math.floor(Math.random() * bg.length);
 					if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
 						alert('朋友，IE浏览器未适配哦~');
@@ -430,7 +430,7 @@
 
   <div class="pattern-center single-center">
     <!-- 有配图默认渲染第一张 -->
-    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/(3).jpg.webp');" src="" data-src="/images/cover/(3).jpg.webp">
+    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/C_background.webp');" src="" data-src="/images/cover/C_background.webp">
     </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
@@ -472,13 +472,13 @@
 <p>In C++, a base class distinguishes functions that are type dependent from those that it expects its derived classes to inherit without change. The base class defines as <code>virtual</code> those functions it expects its derived classes to define for themselves. Using this knowledge, we can start to write our Quote class:</p>
 <pre><code class="c++">class Quote &#123;
 public:
-    std::string isbn() const;
-    virtual double net_price(std::size_t n) const;
+ std::string isbn() const;
+ virtual double net_price(std::size_t n) const;
 &#125;;
 
 class Bulk_quote : public Quote &#123; // Bulk_quote inherits from Quote
 public:
-    double net_price(std::size_t) const override;
+ double net_price(std::size_t) const override;
 &#125;;
 </code></pre>
 <p>A derived class must specify the class(es) from which it intends to inherit. It does so in a class derivation list, which is a colon followed by a comma-separated list of base classes each of which may have an optional access specifier.</p>
@@ -487,13 +487,13 @@ public:
 <h3 id="Dynamic-Binding"><a href="#Dynamic-Binding" class="headerlink" title="Dynamic Binding"></a>Dynamic Binding</h3><p>Through dynamic binding, we can use the same code to process objects of either type <code>Quote</code> or <code>Bulk_quote</code> interchangeably. For example, the following function prints the total price for purchasing the given number of copies of a given book:</p>
 <pre><code class="c++">// calculate and print the price for the given number of copies, applying any discounts
 double print_total(ostream&amp; os,
-    const Quote&amp; item, size_t n) &#123;
-    // depending on the type of the object bound to the item parameter
-    // calls either Quote::net_price or Bulk_quote::net_price
-    double ret = item.net_price(n);
-    os &lt;&lt; &quot;ISBN: &quot; &lt;&lt; item.isbn() // calls Quote::isbn
-        &lt;&lt; &quot; # sold: &quot; &lt;&lt; n &lt;&lt; &quot; total due: &quot; &lt;&lt; ret &lt;&lt; endl;
-    return ret;
+ const Quote&amp; item, size_t n) &#123;
+ // depending on the type of the object bound to the item parameter
+ // calls either Quote::net_price or Bulk_quote::net_price
+ double ret = item.net_price(n);
+ os &lt;&lt; &quot;ISBN: &quot; &lt;&lt; item.isbn() // calls Quote::isbn
+  &lt;&lt; &quot; # sold: &quot; &lt;&lt; n &lt;&lt; &quot; total due: &quot; &lt;&lt; ret &lt;&lt; endl;
+ return ret;
 &#125;
 </code></pre>
 <h2 id="Defining-Base-and-Derived-Classes"><a href="#Defining-Base-and-Derived-Classes" class="headerlink" title="Defining Base and Derived Classes"></a>Defining Base and Derived Classes</h2><p>In many, but not all, ways base and derived classes are defined like other classes we have already seen. In this section, we’ll cover the basic features used to define classes related by inheritance.</p>
@@ -503,17 +503,17 @@ double print_total(ostream&amp; os,
 #include&lt;string&gt;
 class Quote &#123;
 public:
-    Quote() = default;
-    Quote(std::string s, double p) :bookNo(s), price(p) &#123;&#125;
-    virtual ~Quote() = default;
+ Quote() = default;
+ Quote(std::string s, double p) :bookNo(s), price(p) &#123;&#125;
+ virtual ~Quote() = default;
 
-    std::string isbn();
-    virtual double net_price(std::size_t n);
+ std::string isbn();
+ virtual double net_price(std::size_t n);
 
 private:
-    std::string bookNo;
+ std::string bookNo;
 protected:
-    double price = 0.0;
+ double price = 0.0;
 &#125;;
 
 
@@ -521,11 +521,11 @@ protected:
 #include &quot;Quote.h&quot;
 
 std::string Quote::isbn() &#123;
-    return bookNo;
+ return bookNo;
 &#125;
 
 double Quote::net_price(std::size_t n) &#123;
-    return n * price;
+ return n * price;
 &#125;
 </code></pre>
 <p>Derived classes inherit the members of their base class. However, a derived class needs to be able to provide its own definition for operations, such as net_price, that are type dependent. In such cases, the derived class needs to <strong>override</strong> the definition it inherits from the base class, by providing its own definition.</p>
@@ -538,18 +538,18 @@ double Quote::net_price(std::size_t n) &#123;
 #include&lt;string&gt;
 class Quote &#123;
 public:
-    Quote() = default;
+ Quote() = default;
     // isbn, price , minimum quantity, discount
-    Quote(std::string s, double p) :bookNo(s), price(p) &#123;&#125;
-    virtual ~Quote() = default;
+ Quote(std::string s, double p) :bookNo(s), price(p) &#123;&#125;
+ virtual ~Quote() = default;
 
-    std::string isbn();
-    virtual double net_price(std::size_t n) const;
+ std::string isbn();
+ virtual double net_price(std::size_t n) const;
 
 private:
-    std::string bookNo;
+ std::string bookNo;
 protected:
-    double price = 0.0;
+ double price = 0.0;
 &#125;;
 </code></pre>
 <p>Our <code>Bulk_quote</code> class <strong>inherits</strong> the <code>isbn</code> function and the <code>bookNo</code> and <code>price</code> data members of its Quote base class. It defines its own version of net_price and has two additional data members, <code>min_qty</code> and <code>discount</code>. These members specify the minimum quantity and the discount to apply once that number of copies are purchased.</p>
@@ -558,14 +558,14 @@ protected:
 <pre><code class="c++">#include &quot;Bulk_quote.h&quot;
 
 Bulk_quote::Bulk_quote(const std::string&amp; is, double pr, std::size_t min_n, double dis)
-    :Quote(is, pr), min_qty(min_n), discount(dis) &#123;
+ :Quote(is, pr), min_qty(min_n), discount(dis) &#123;
 &#125;
 
 double Bulk_quote::net_price(std::size_t n) const &#123;
-    if (n &gt;= min_qty) &#123;
-        return (1 - discount) * price * n;
-    &#125;
-    return price * n;
+ if (n &gt;= min_qty) &#123;
+  return (1 - discount) * price * n;
+ &#125;
+ return price * n;
 &#125;
 </code></pre>
 <h3 id="Some-details"><a href="#Some-details" class="headerlink" title="Some details"></a>Some details</h3><p>A derived class is declared like any other class. The declaration contains the class name but does not include its derivation list:</p>
@@ -590,18 +590,18 @@ class Bulk_quote : public Quote &#123; ... &#125;;
 
 
 int main() &#123;
-    std::string s = &quot;54742675&quot;;
-    Bulk_quote b(s, 10, 8, 0.2);
-    // by refreance, out put is 80
-    Quote&amp; p1 = b;
-    std::cout &lt;&lt; p1.net_price(10) &lt;&lt; std::endl;
-    // by pointer, out put is 80
-    Quote* p2 = &amp;b;
-    std::cout &lt;&lt; p2-&gt;net_price(10) &lt;&lt; std::endl;
-    // either, out put is 100
-    Quote p3 = b;
-    std::cout &lt;&lt; p3.net_price(10) &lt;&lt; std::endl;
-    return 0;
+ std::string s = &quot;54742675&quot;;
+ Bulk_quote b(s, 10, 8, 0.2);
+ // by refreance, out put is 80
+ Quote&amp; p1 = b;
+ std::cout &lt;&lt; p1.net_price(10) &lt;&lt; std::endl;
+ // by pointer, out put is 80
+ Quote* p2 = &amp;b;
+ std::cout &lt;&lt; p2-&gt;net_price(10) &lt;&lt; std::endl;
+ // either, out put is 100
+ Quote p3 = b;
+ std::cout &lt;&lt; p3.net_price(10) &lt;&lt; std::endl;
+ return 0;
 &#125;
 </code></pre>
 <p><strong>dynamic binding happens only when a virtual function is called through a pointer or a reference.</strong> When we call a virtual function on an expression that has a plain—nonreference and nonpointer—type, that call is bound at compile time.</p>
@@ -609,25 +609,25 @@ int main() &#123;
 <p>it is legal for a derived class to define a function with the same name as a virtual in its base class but with a different parameter list. The compiler considers such a function to be independent from the base-class function. In such cases, the derived version does not override the version in the base class. In practice, such declarations often are a mistake—the class author intended to override a virtual from the base class but made a mistake in specifying the parameter list.</p>
 <p>Under the new standard we can specify override on a virtual function in a derived class. Doing so makes our intention clear and (more importantly) enlists the compiler in finding such problems for us. The compiler will reject a program if a function marked override does not override an existing virtual function:</p>
 <pre><code class="c++">struct B &#123;
-    virtual void f1(int) const;
-    virtual void f2();
-    void f3();
+ virtual void f1(int) const;
+ virtual void f2();
+ void f3();
 &#125;;
 struct D1 : B &#123;
-    void f1(int) const override; // ok: f1 matches f1 in the base
-    void f2(int) override; // error: B has no f2(int) function
-    void f3() override; // error: f3 not virtual
-    void f4() override; // error: B doesn&#39;t have a function named f4
+ void f1(int) const override; // ok: f1 matches f1 in the base
+ void f2(int) override; // error: B has no f2(int) function
+ void f3() override; // error: f3 not virtual
+ void f4() override; // error: B doesn&#39;t have a function named f4
 &#125;;
 </code></pre>
 <p>We can also designate a function as final. Any attempt to override a function that has been defined as final will be flagged as an error:</p>
 <pre><code class="c++">struct D2 : B &#123;
-    // inherits f2() and f3() from B and overrides f1(int)
-    void f1(int) const final; // subsequent classes can&#39;t override f1(int)
+ // inherits f2() and f3() from B and overrides f1(int)
+ void f1(int) const final; // subsequent classes can&#39;t override f1(int)
 &#125;;
 struct D3 : D2 &#123;
-    void f2(); // ok: overrides f2 inherited from the indirect base,B
-    void f1(int) const; // error: D2 declared f2 as final
+ void f2(); // ok: overrides f2 inherited from the indirect base,B
+ void f1(int) const; // error: D2 declared f2 as final
 &#125;;
 </code></pre>
 <h3 id="Some-detail"><a href="#Some-detail" class="headerlink" title="Some detail"></a>Some detail</h3><p>Like any other function, a virtual function can have default arguments. If a call uses a default argument, the value that is used is the one defined by the static type through which the function is called. That is, when a call is made through a reference or pointer to base, the <strong>default argument(s) will be those defined in the base class</strong>. The base-class arguments will be used even when the derived version of the function is run. In this case, the derived function will be passed the default arguments defined for the base-class version of the function. If the derived function relies on being passed different arguments, the<br>program will not execute as expected.</p>
@@ -645,16 +645,16 @@ std::cout &lt;&lt; p2-&gt;Quote::net_price(10) &lt;&lt; std::endl;
 #include &quot;Quote.h&quot;
 class Disc_Quote : public Quote &#123;
 public:
-    Disc_Quote() = default;
-    Disc_Quote(const std::string&amp; book, double price,
-        std::size_t qty, double disc) :
-        Quote(book, price),
-        quantity(qty), discount(disc) &#123;
-    &#125;
-    double net_price(std::size_t) const = 0;
+ Disc_Quote() = default;
+ Disc_Quote(const std::string&amp; book, double price,
+  std::size_t qty, double disc) :
+  Quote(book, price),
+  quantity(qty), discount(disc) &#123;
+ &#125;
+ double net_price(std::size_t) const = 0;
 protected:
-    std::size_t quantity = 0; // purchase size for the discount to apply
-    double discount = 0.0; // fractional discount to apply
+ std::size_t quantity = 0; // purchase size for the discount to apply
+ double discount = 0.0; // fractional discount to apply
 &#125;;
 </code></pre>
 <p>A class containing (or inheriting without overriding) a pure virtual function is an <strong>abstract base class</strong>. An abstract base class defines an interface for subsequent classes to override. <strong>We cannot (directly) create objects of a type that is an abstract base class</strong>. Because <code>Disc_quote</code> defines <code>net_price</code> as a pure virtual, we cannot define objects of type <code>Disc_quote</code>. We can define objects of classes that inherit from <code>Disc_quote</code>, so long as those classes override <code>net_price</code>:</p>
@@ -665,24 +665,24 @@ protected:
 #include &quot;Disc_Quote.h&quot;
 class Bulk_quote : public Disc_Quote &#123;
 public:
-    Bulk_quote() = default;
-    // isbn, price , minimum quantity, discount
-    Bulk_quote(const std::string&amp;, double, std::size_t, double);
-    double net_price(std::size_t n) const override;
+ Bulk_quote() = default;
+ // isbn, price , minimum quantity, discount
+ Bulk_quote(const std::string&amp;, double, std::size_t, double);
+ double net_price(std::size_t n) const override;
 &#125;;
 
 #include &quot;Bulk_quote.h&quot;
 
 // isbn, price , minimum quantity, discount
 Bulk_quote::Bulk_quote(const std::string&amp; is, double pr, std::size_t min_n, double dis)
-    :Disc_Quote(is, pr, min_n, dis) &#123;
+ :Disc_Quote(is, pr, min_n, dis) &#123;
 &#125;
 
 double Bulk_quote::net_price(std::size_t n) const &#123;
-    if (n &gt;= quantity) &#123;
-        return (1 - discount) * price * n;
-    &#125;
-    return price * n;
+ if (n &gt;= quantity) &#123;
+  return (1 - discount) * price * n;
+ &#125;
+ return price * n;
 &#125;
 </code></pre>
 <h2 id="Access-Control-and-Inheritance"><a href="#Access-Control-and-Inheritance" class="headerlink" title="Access Control and Inheritance"></a>Access Control and Inheritance</h2><p>Just as each class controls the initialization of its own members, each class also controls whether its members are accessible to a derived class.</p>
@@ -698,21 +698,21 @@ double Bulk_quote::net_price(std::size_t n) const &#123;
 <h3 id="public-private-and-protected-Inheritance"><a href="#public-private-and-protected-Inheritance" class="headerlink" title="public, private, and protected Inheritance"></a>public, private, and protected Inheritance</h3><p>Access to a member that a class inherits is controlled by a combination of the access specifier for that member in the base class, and the access specifier in the derivation list of the derived class. As an example, consider the following hierarchy:</p>
 <pre><code class="c++">class Base &#123;
 public:
-    void pub_mem(); // public member
+ void pub_mem(); // public member
 protected:
-    int prot_mem; // protected member
+ int prot_mem; // protected member
 private:
-    char priv_mem; // private member
+ char priv_mem; // private member
 &#125;;
 struct Pub_Derv : public Base &#123;
-    // ok: derived classes can access protected members
-    int f() &#123; return prot_mem; &#125;
-    // error: private members are inaccessible to derived classes
-    char g() &#123; return priv_mem; &#125;
+ // ok: derived classes can access protected members
+ int f() &#123; return prot_mem; &#125;
+ // error: private members are inaccessible to derived classes
+ char g() &#123; return priv_mem; &#125;
 &#125;;
 struct Priv_Derv : private Base &#123;
-    // private derivation doesn&#39;t affect access in the derived class
-    int f1() const &#123; return prot_mem; &#125;
+ // private derivation doesn&#39;t affect access in the derived class
+ int f1() const &#123; return prot_mem; &#125;
 &#125;;
 </code></pre>
 <p>The derivation access specifier has no effect on whether members (and friends) of a derived class may access the members of its own direct base class. Access to the members of a base class is controlled by the access specifiers in the base class itself. Both <code>Pub_Derv</code> and <code>Priv_Derv</code> may access the protected member <code>prot_mem</code>. Neither may access the private member <code>priv_mem</code>.</p>
@@ -724,41 +724,41 @@ d2.pub_mem(); // error: pub_mem is private in the derived class
 </code></pre>
 <p>The derivation access specifier used by a derived class also controls access from classes that inherit from that derived class:</p>
 <pre><code class="c++">struct Derived_from_Public : public Pub_Derv &#123;
-    // ok: Base::prot_mem remains protected in Pub_Derv
-    int use_base() &#123; return prot_mem; &#125;
+ // ok: Base::prot_mem remains protected in Pub_Derv
+ int use_base() &#123; return prot_mem; &#125;
 &#125;;
 struct Derived_from_Private : public Priv_Derv &#123;
-    // error: Base::prot_mem is private in Priv_Derv
-    int use_base() &#123; return prot_mem; &#125;
+ // error: Base::prot_mem is private in Priv_Derv
+ int use_base() &#123; return prot_mem; &#125;
 &#125;;
 </code></pre>
 <p>Classes derived from <code>Pub_Derv</code> may access <code>prot_mem</code> from <code>Base</code> because that member remains a protected member in <code>Pub_Derv</code>. In contrast, classes derived from <code>Priv_Derv</code> have no such access. To them, all the members that <code>Priv_Derv</code> inherited from Base are <code>private</code>.</p>
 <h3 id="Friendship-and-Inheritance"><a href="#Friendship-and-Inheritance" class="headerlink" title="Friendship and Inheritance"></a>Friendship and Inheritance</h3><p>Just as friendship is not transitive, friendship is also not inherited. Friends of the base have no special access to members of its derived classes, and friends of a derived class have no special access to the base class:</p>
 <pre><code class="c++">class Base &#123;
-    // added friend declaration; other members as before
-    friend class Pal; // Pal has no access to classes derived from Base
+ // added friend declaration; other members as before
+ friend class Pal; // Pal has no access to classes derived from Base
 &#125;;
 class Pal &#123;
 public:
-    int f(Base b) &#123; return b.prot_mem; &#125; // ok: Pal is a friend of Base
-    int f2(Sneaky s) &#123; return s.j; &#125; // error: Pal not friend of Sneaky
-    // access to a base class is controlled by the base class, even inside a derived object
-    int f3(Sneaky s) &#123; return s.prot_mem; &#125; // ok: Pal is a friend
+ int f(Base b) &#123; return b.prot_mem; &#125; // ok: Pal is a friend of Base
+ int f2(Sneaky s) &#123; return s.j; &#125; // error: Pal not friend of Sneaky
+ // access to a base class is controlled by the base class, even inside a derived object
+ int f3(Sneaky s) &#123; return s.prot_mem; &#125; // ok: Pal is a friend
 &#125;;
 </code></pre>
 <h3 id="Exempting-Individual-Members"><a href="#Exempting-Individual-Members" class="headerlink" title="Exempting Individual Members"></a>Exempting Individual Members</h3><p>Sometimes we need to change the access level of a name that a derived class inherits. We can do so by providing a using declaration:</p>
 <pre><code class="c++">class Base &#123;
 public:
-    std::size_t size() const &#123; return n; &#125;
+ std::size_t size() const &#123; return n; &#125;
 protected:
-    std::size_t n;
+ std::size_t n;
 &#125;;
 class Derived : private Base &#123; // note: private inheritance
 public:
-    // maintain access levels for members related to the size of the object
-    using Base::size;
+ // maintain access levels for members related to the size of the object
+ using Base::size;
 protected:
-    using Base::n;
+ using Base::n;
 &#125;;
 </code></pre>
 <p>Because Derived uses <strong>private</strong> inheritance, the inherited members, size and n, are (by default) private members of Derived. The using declarations adjust the accessibility of these members. Users of Derived can <strong>access</strong> the size member, and classes subsequently derived from Derived can access n.</p>
@@ -767,9 +767,9 @@ protected:
 <h3 id="Name-Lookup-Happens-at-Compile-Time"><a href="#Name-Lookup-Happens-at-Compile-Time" class="headerlink" title="Name Lookup Happens at Compile Time"></a>Name Lookup Happens at Compile Time</h3><p>The static type of an object, reference, or pointer determines which members of that object are visible. Even when the static and dynamic types might differ (as can happen when a reference or pointer to a base class is used), the static type determines what members can be used. As an example, we might add a member to the Disc_quote class that returns a pair holding the minimum (or maximum) quantity and the discounted price:</p>
 <pre><code class="c++">class Disc_quote : public Quote &#123;
 public:
-    std::pair&lt;size_t, double&gt; discount_policy() const
-    &#123; return &#123;quantity, discount&#125;; &#125;
-    // other members as before
+ std::pair&lt;size_t, double&gt; discount_policy() const
+ &#123; return &#123;quantity, discount&#125;; &#125;
+ // other members as before
 &#125;;
 </code></pre>
 <p>We can use <code>discount_policy</code> only through an object, pointer, or reference of type <code>Disc_quote</code> or of a class derived from <code>Disc_quote</code>:</p>
@@ -782,16 +782,16 @@ itemP-&gt;discount_policy(); // error: itemP has type Quote*
 <p>Even though bulk has a member named discount_policy, that member is not visible through itemP. The type of itemP is a pointer to Quote, which means that the search for discount_policy starts in class Quote. The Quote class has no member named discount_policy, so we cannot call that member on an object, reference, or pointer of type Quote.</p>
 <h3 id="Name-Collisions-and-Inheritance"><a href="#Name-Collisions-and-Inheritance" class="headerlink" title="Name Collisions and Inheritance"></a>Name Collisions and Inheritance</h3><p>Like any other scope, a derived class can reuse a name defined in one of its direct or indirect base classes. As usual, names defined in an inner scope hide uses of that name in the outer scope:</p>
 <pre><code class="c++">struct Base &#123;
-    Base() : mem(0) &#123;&#125;
+ Base() : mem(0) &#123;&#125;
 public:
-    int mem;
+ int mem;
 &#125;;
 struct Derived : Base &#123;
-    Derived(int i) : mem(i) &#123;&#125; // initializes Derived::mem to i
-    // Base::mem is default initialized
-    int get_mem() &#123; return mem; &#125; // returns Derived::mem
+ Derived(int i) : mem(i) &#123;&#125; // initializes Derived::mem to i
+ // Base::mem is default initialized
+ int get_mem() &#123; return mem; &#125; // returns Derived::mem
 public:
-    int mem; // hides mem in the base
+ int mem; // hides mem in the base
 &#125;;
 </code></pre>
 <p>We use the <code>::</code> select scope:</p>
@@ -801,10 +801,10 @@ std::cout &lt;&lt; p.Base::mem &lt;&lt; std::endl;// output is 0
 </code></pre>
 <p>As we’ve seen, functions declared in an inner scope do not overload functions declared in an outer scope. As a result, functions defined in a derived class do not overload members defined in its base class(es). As in any other scope, if a member in a derived class (i.e., in an inner scope) has the same name as a base class member (i.e., a name defined in an outer scope), then the derived member hides the base-class member within the scope of the derived class. The base member is hidden even if the functions have different parameter lists:</p>
 <pre><code class="c++">struct Base &#123;
-    int memfcn();
+ int memfcn();
 &#125;;
 struct Derived : Base &#123;
-    int memfcn(int); // hides memfcn in the base
+ int memfcn(int); // hides memfcn in the base
 &#125;;
 Derived d; Base b;
 b.memfcn(); // calls Base::memfcn
@@ -815,20 +815,20 @@ d.Base::memfcn(); // ok: calls Base::memfcn
 <h3 id="Virtual-Functions-and-Scope"><a href="#Virtual-Functions-and-Scope" class="headerlink" title="Virtual Functions and Scope"></a>Virtual Functions and Scope</h3><p>We can now understand why virtual functions must have the same parameter list in the base and derived classes. If the base and derived members took arguments that differed from one another, there would be no way to call the derived version through a reference or pointer to the base class. For example:</p>
 <pre><code class="c++">class Base &#123;
 public:
-    virtual int fcn();
+ virtual int fcn();
 &#125;;
 class D1 : public Base &#123;
 public:
-    // hides fcn in the base; this fcn is not virtual
-    // D1 inherits the definition of Base::fcn()
-    int fcn(int); // parameter list differs from fcn in Base
-    virtual void f2(); // new virtual function that does not exist in Base
+ // hides fcn in the base; this fcn is not virtual
+ // D1 inherits the definition of Base::fcn()
+ int fcn(int); // parameter list differs from fcn in Base
+ virtual void f2(); // new virtual function that does not exist in Base
 &#125;;
 class D2 : public D1 &#123;
 public:
-    int fcn(int); // nonvirtual function hides D1::fcn(int)
-    int fcn(); // overrides virtual fcn from Base
-    void f2(); // overrides virtual f2 from D1
+ int fcn(int); // nonvirtual function hides D1::fcn(int)
+ int fcn(); // overrides virtual fcn from Base
+ void f2(); // overrides virtual f2 from D1
 &#125;;
 </code></pre>
 <h2 id="Constructors-and-Copy-Control"><a href="#Constructors-and-Copy-Control" class="headerlink" title="Constructors and Copy Control"></a>Constructors and Copy Control</h2><p>Like any other class, a class in an inheritance hierarchy controls what happens when objects of its type are created, copied, moved, assigned, or destroyed. As for any other class, if a class (base or derived) does not itself define one of the copy-control operations, the compiler will synthesize that operation. Also, as usual, the synthesized version of any of these members might be a deleted function.</p>
@@ -851,12 +851,12 @@ delete itemP; // destructor for Bulk_quote called
 </ol>
 <pre><code class="c++">class B &#123;
 public:
-    B();
-    B(const B&amp;) = delete;
-    // other members, not including a move constructor
+ B();
+ B(const B&amp;) = delete;
+ // other members, not including a move constructor
 &#125;;
 class D : public B &#123;
-    // no constructors
+ // no constructors
 &#125;;
 D d; // ok: D&#39;s synthesized default constructor uses B&#39;s default constructor
 D d2(d); // error: D&#39;s synthesized copy constructor is deleted
@@ -866,31 +866,31 @@ D d3(std::move(d)); // error: implicitly uses D&#39;s deleted copy constructor
 <pre><code class="c++">class Base &#123; /* ... */ &#125;;
 class D : public Base &#123;
 public:
-    // by default, the base class default constructor initializes the base part of an object
-    // to use the copy or move constructor, we must explicitly call that
-    // constructor in the constructor initializer list
-    D(const D&amp; d) : Base(d) // copy the base members
-        /* initializers for members of D */ &#123; /* ... */
-    &#125;
-    D(D&amp;&amp; d) : Base(std::move(d)) // move the base members
-        /* initializers for members of D */ &#123; /* ... */
-    &#125;
+ // by default, the base class default constructor initializes the base part of an object
+ // to use the copy or move constructor, we must explicitly call that
+ // constructor in the constructor initializer list
+ D(const D&amp; d) : Base(d) // copy the base members
+  /* initializers for members of D */ &#123; /* ... */
+ &#125;
+ D(D&amp;&amp; d) : Base(std::move(d)) // move the base members
+  /* initializers for members of D */ &#123; /* ... */
+ &#125;
 &#125;;
 </code></pre>
 <p>Like the copy and move constructors, a derived-class assignment operator, must assign its base part explicitly:</p>
 <pre><code class="c++">// Base::operator=(const Base&amp;) is not invoked automatically
 D&amp; D::operator=(const D&amp; rhs) &#123;
-    Base::operator=(rhs); // assigns the base part
-    // assign the members in the derived class, as usual,
-    // handling self-assignment and freeing existing resources as appropriate
-    return *this;
+ Base::operator=(rhs); // assigns the base part
+ // assign the members in the derived class, as usual,
+ // handling self-assignment and freeing existing resources as appropriate
+ return *this;
 &#125;
 </code></pre>
 <p>Recall that the data members of an object are implicitly destroyed after the destructor body completes. Similarly, the base-class parts of an object are also implicitly destroyed. As a result, unlike the constructors and assignment operators, <strong>a derived destructor is responsible only for destroying the resources allocated by the derived class</strong>:</p>
 <pre><code class="c++">class D: public Base &#123;
 public:
-    // Base::~Base invoked automatically
-     ~D() &#123; /* do what it takes to clean up derived members */ &#125;
+ // Base::~Base invoked automatically
+  ~D() &#123; /* do what it takes to clean up derived members */ &#125;
 &#125;;
 </code></pre>
 <p>Objects are destroyed in the opposite order from which they are constructed: <strong>The derived destructor is run first</strong>, and then the <strong>base-class destructors are invoked</strong>, back up through the inheritance hierarchy.</p>
@@ -898,8 +898,8 @@ public:
 <p>A derived class inherits its base-class constructors by providing a using declaration that names its (direct) base class. As an example, we can redefine our <code>Bulk_quote</code> class to inherit its constructors from <code>Disc_quote</code>:</p>
 <pre><code class="c++">class Bulk_quote : public Disc_quote &#123;
 public:
-    using Disc_quote::Disc_quote; // inherit Disc_quote&#39;s constructors
-    double net_price(std::size_t) const;
+ using Disc_quote::Disc_quote; // inherit Disc_quote&#39;s constructors
+ double net_price(std::size_t) const;
 &#125;;
 </code></pre>
 <h2 id="Containers-and-Inheritance"><a href="#Containers-and-Inheritance" class="headerlink" title="Containers and Inheritance"></a>Containers and Inheritance</h2><p>When we use a container to store objects from an inheritance hierarchy, we generally must store those objects indirectly. We cannot put objects of types related by inheritance directly into a container, because there is no way to define a container that holds elements of differing types.</p>
@@ -930,18 +930,18 @@ cout &lt;&lt; basket.back()-&gt;net_price(15) &lt;&lt; endl;
 
 class Basket &#123;
 public:
-    // Basket uses synthesized default constructor and copy-control members
-    void add_item(const std::shared_ptr&lt;Quote&gt;&amp; sale) &#123;
-        items.insert(sale);
-    &#125;
-    // prints the total price for each book and the overall total for all items in the basket
-    double total_receipt(std::ostream&amp;) const;
+ // Basket uses synthesized default constructor and copy-control members
+ void add_item(const std::shared_ptr&lt;Quote&gt;&amp; sale) &#123;
+  items.insert(sale);
+ &#125;
+ // prints the total price for each book and the overall total for all items in the basket
+ double total_receipt(std::ostream&amp;) const;
 private:
-    static bool compare(const std::shared_ptr&lt;Quote&gt;&amp; lhs,
-        const std::shared_ptr&lt;Quote&gt;&amp; rhs) &#123;
-        return lhs-&gt;isbn() &lt; rhs-&gt;isbn();
-    &#125;
-    std::multiset&lt;std::shared_ptr&lt;Quote&gt;, decltype(compare)*&gt; items&#123; compare &#125;;
+ static bool compare(const std::shared_ptr&lt;Quote&gt;&amp; lhs,
+  const std::shared_ptr&lt;Quote&gt;&amp; rhs) &#123;
+  return lhs-&gt;isbn() &lt; rhs-&gt;isbn();
+ &#125;
+ std::multiset&lt;std::shared_ptr&lt;Quote&gt;, decltype(compare)*&gt; items&#123; compare &#125;;
 &#125;;
 </code></pre>
 <p>The elements in our multiset are <code>shared_ptrs</code> and there is no less-than operator for <code>shared_ptr</code>. As a result, we must provide our own comparison operation to order the elements. Here, we define a private<br>static member, named compare, that compares the <code>isbns</code> of the objects to which the <code>shared_ptrs</code> point. We initialize our multiset to use this comparison function through an in-class initializer.</p>
@@ -950,29 +950,29 @@ private:
 #include &quot;Basket.h&quot;
 
 double print_total(std::ostream&amp; os,
-    const Quote&amp; item, size_t n) &#123;
-    // depending on the type of the object bound to the item parameter
-    // calls either Quote::net_price or Bulk_quote::net_price
-    double ret = item.net_price(n);
-    os &lt;&lt; &quot;ISBN: &quot; &lt;&lt; item.isbn() // calls Quote::isbn
-        &lt;&lt; &quot; # sold: &quot; &lt;&lt; n &lt;&lt; &quot; total due: &quot; &lt;&lt; ret &lt;&lt; std::endl;
-    return ret;
+ const Quote&amp; item, size_t n) &#123;
+ // depending on the type of the object bound to the item parameter
+ // calls either Quote::net_price or Bulk_quote::net_price
+ double ret = item.net_price(n);
+ os &lt;&lt; &quot;ISBN: &quot; &lt;&lt; item.isbn() // calls Quote::isbn
+  &lt;&lt; &quot; # sold: &quot; &lt;&lt; n &lt;&lt; &quot; total due: &quot; &lt;&lt; ret &lt;&lt; std::endl;
+ return ret;
 &#125;
 
 double Basket::total_receipt(std::ostream&amp; os) const &#123;
-    double sum = 0.0;
-    // holds the running total
-    // iter refers to the first element in a batch of elements with the same ISBN
-    // upper_bound returns an iterator to the element just past the end of that batch
-    for (auto iter = items.cbegin();
-        iter != items.cend();
-        iter = items.upper_bound(*iter)) &#123;
-        // we know there&#39;s at least one element with this key in the Basket
-        // print the line item for this book
-        sum += print_total(os, **iter, items.count(*iter));
-    &#125;
-    os &lt;&lt; &quot;Total Sale: &quot; &lt;&lt; sum &lt;&lt; std::endl; // print the final overall total
-    return sum;
+ double sum = 0.0;
+ // holds the running total
+ // iter refers to the first element in a batch of elements with the same ISBN
+ // upper_bound returns an iterator to the element just past the end of that batch
+ for (auto iter = items.cbegin();
+  iter != items.cend();
+  iter = items.upper_bound(*iter)) &#123;
+  // we know there&#39;s at least one element with this key in the Basket
+  // print the line item for this book
+  sum += print_total(os, **iter, items.count(*iter));
+ &#125;
+ os &lt;&lt; &quot;Total Sale: &quot; &lt;&lt; sum &lt;&lt; std::endl; // print the final overall total
+ return sum;
 &#125;
 </code></pre>
 <p>The interesting bit is the “increment” expression in the for. Rather than the usual loop that reads each element, we advance iter to refer to the next key. We skip over all the elements that match the current key by calling upper_bound. The call to upper_bound returns the iterator that refers to the element just past the last one with the same key as in iter. The iterator we get back denotes either the end of the set or the next book.</p>
@@ -988,43 +988,43 @@ void add_item(Quote&amp;&amp; sale); // move the given object
 <p>The only problem is that add_item doesn’t know what type to allocate. When it does its memory allocation, add_item will copy (or move) its sale parameter. We’ll solve this problem by giving our Quote classes a virtual member that allocates a copy of itself.</p>
 <pre><code class="c++">class Quote &#123;
 public:
-    // virtual function to return a dynamically allocated copy of itself
-    // these members use reference qualifiers; see §13.6.3 (p. 546)
-    virtual Quote* clone() const&amp; &#123;
-        return new
-            Quote(*this);
-    &#125;
-    virtual Quote* clone()&amp;&amp; &#123;
-        return new
-            Quote(std::move(*this));
-    &#125;
-    // other members as before
+ // virtual function to return a dynamically allocated copy of itself
+ // these members use reference qualifiers; see §13.6.3 (p. 546)
+ virtual Quote* clone() const&amp; &#123;
+  return new
+   Quote(*this);
+ &#125;
+ virtual Quote* clone()&amp;&amp; &#123;
+  return new
+   Quote(std::move(*this));
+ &#125;
+ // other members as before
 &#125;;
 class Bulk_quote : public Quote &#123;
-    Bulk_quote* clone() const&amp; &#123;
-        return new
-            Bulk_quote(*this);
-    &#125;
-    Bulk_quote* clone()&amp;&amp; &#123;
-        return new
-            Bulk_quote(std::move(*this));
-    &#125;
-    // other members as before
+ Bulk_quote* clone() const&amp; &#123;
+  return new
+   Bulk_quote(*this);
+ &#125;
+ Bulk_quote* clone()&amp;&amp; &#123;
+  return new
+   Bulk_quote(std::move(*this));
+ &#125;
+ // other members as before
 &#125;;
 </code></pre>
 <p>Using clone, it is easy to write our new versions of add_item:</p>
 <pre><code class="c++">class Basket &#123;
 public:
-    void add_item(const Quote&amp; sale) // copy the given object
-    &#123;
-        items.insert(std::shared_ptr&lt;Quote&gt;(sale.clone()));
-    &#125;
-    void add_item(Quote&amp;&amp; sale) // move the given object
-    &#123;
-        items.insert(
-            std::shared_ptr&lt;Quote&gt;(std::move(sale).clone()));
-    &#125;
-    // other members as before
+ void add_item(const Quote&amp; sale) // copy the given object
+ &#123;
+  items.insert(std::shared_ptr&lt;Quote&gt;(sale.clone()));
+ &#125;
+ void add_item(Quote&amp;&amp; sale) // move the given object
+ &#123;
+  items.insert(
+   std::shared_ptr&lt;Quote&gt;(std::move(sale).clone()));
+ &#125;
+ // other members as before
 &#125;;
 </code></pre>
 
@@ -1060,7 +1060,7 @@ public:
           
             <a href="/2021/12/12/Cpp_c12/" rel="prev">
               <div class="background">
-                <img class="lazyload" src="" data-src="/images/cover/(4).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/(4).jpg.webp">
+                <img class="lazyload" src="" data-src="/images/cover/C_background.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/C_background.webp">
               </div>
               <span class="label">
               Previous Post</span>
@@ -1078,7 +1078,7 @@ public:
           
             <a href="/2021/12/10/Cpp_c10/" rel="next">
               <div class="background">
-                <img class="lazyload" src="" data-src="/images/cover/(2).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/(2).jpg.webp">
+                <img class="lazyload" src="" data-src="/images/cover/C_background.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/C_background.webp">
               </div>
               <span class="label">
               Next Post</span>
@@ -1092,21 +1092,6 @@ public:
         
       </section>
       
-<div id="vcomments"></div>
-<script>
-	window.onload = function(){
-		var valine = new Valine();
-		valine.init({
-			el: '#vcomments',
-			appId: "EAyicHJhXmxJNEeuhACVujd4-gzGzoHsz",
-			appKey: "09Tjj4It5DOhgboduuM40u7y",
-			avatar: 'wavatar',
-			path: window.location.pathname,
-			placeholder: "有什么想说的吗.."
-		})
-	}
-</script>
-
 
 
 
@@ -1161,7 +1146,7 @@ public:
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2023 Noah Bishop<br>
+      &copy; 2026 Noah Bishop<br>
       powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
@@ -1464,26 +1449,6 @@ public:
   }
 </style>
 <meting-js
-
-    id="7225712775"
-
-    server="netease"
-
-    type="playlist"
-
-    fixed="true"
-
-    autoplay="true"
-
-    loop="all"
-
-    order="random"
-
-    preload="auto"
-
-    volume="0.5"
-
-    mutex="true"
 
 </meting-js>
 <script>

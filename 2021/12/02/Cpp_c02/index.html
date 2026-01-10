@@ -55,7 +55,7 @@
 					/*End of Initial Variables*/
 				</script>
 				<script type="text/javascript">
-					var bg = "https://morning.eu.org/images/cover/(1).jpg.webp,https://morning.eu.org/images/cover/(2).jpg.webp,https://morning.eu.org/images/cover/(3).jpg.webp,https://morning.eu.org/images/cover/(4).jpg.webp,https://morning.eu.org/images/cover/(5).jpg.webp,https://morning.eu.org/images/cover/(6).jpg.webp,https://morning.eu.org/images/cover/(7).jpg.webp,https://morning.eu.org/images/cover/(8).jpg.webp".split(",");
+					var bg = "https://morning.eu.org/images/cover/(1).jpg.webp,https://morning.eu.org/images/cover/(2).jpg.webp,https://morning.eu.org/images/cover/(3).jpg.webp,https://morning.eu.org/images/cover/(4).jpg.webp".split(",");
 					var bgindex = Math.floor(Math.random() * bg.length);
 					if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
 						alert('朋友，IE浏览器未适配哦~');
@@ -430,7 +430,7 @@
 
   <div class="pattern-center single-center">
     <!-- 有配图默认渲染第一张 -->
-    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/(2).jpg.webp');" src="" data-src="/images/cover/(2).jpg.webp">
+    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/C_background.webp');" src="" data-src="/images/cover/C_background.webp">
     </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
@@ -513,7 +513,7 @@
 
 int main()
 &#123;
-    //you can use this statement check how many bytes for the type
+ //you can use this statement check how many bytes for the type
     //change int to another type you want
     std::cout &lt;&lt; sizeof(int) &lt;&lt; std::endl;
     return 0;
@@ -581,15 +581,15 @@ int main()
 int reused = 42; // reused has global scope
 int main()
 &#123;
-     int unique = 0; // unique has block scope
-     // output #1: uses global reused; prints 42 0
-     std::cout &lt;&lt; reused &lt;&lt; &quot; &quot; &lt;&lt; unique &lt;&lt; std::endl;
-     int reused = 0; // new, local object named reused hides global reused
-     // output #2: uses local reused; prints 0 0
-     std::cout &lt;&lt; reused &lt;&lt; &quot; &quot; &lt;&lt; unique &lt;&lt; std::endl;
-     // output #3: explicitly requests the global reused; prints 42 0
-     std::cout &lt;&lt; ::reused &lt;&lt; &quot; &quot; &lt;&lt; unique &lt;&lt; std::endl;
-     return 0;
+  int unique = 0; // unique has block scope
+  // output #1: uses global reused; prints 42 0
+  std::cout &lt;&lt; reused &lt;&lt; &quot; &quot; &lt;&lt; unique &lt;&lt; std::endl;
+  int reused = 0; // new, local object named reused hides global reused
+  // output #2: uses local reused; prints 0 0
+  std::cout &lt;&lt; reused &lt;&lt; &quot; &quot; &lt;&lt; unique &lt;&lt; std::endl;
+  // output #3: explicitly requests the global reused; prints 42 0
+  std::cout &lt;&lt; ::reused &lt;&lt; &quot; &quot; &lt;&lt; unique &lt;&lt; std::endl;
+  return 0;
 &#125;
 </code></pre>
 <h3 id="Compound-Types"><a href="#Compound-Types" class="headerlink" title="Compound Types"></a>Compound Types</h3><p>A compound type is a type that is defined in terms of another type. C++ has several compound types, two of which—<strong>references</strong> and <strong>pointers</strong>—we’ll cover in this chapter.</p>
@@ -637,7 +637,7 @@ int main()
 &#125;
 </code></pre>
 <p>(notice: Because references are not objects, they don’t have addresses. Hence, we may not define a pointer to a reference.)</p>
-<p>The type <strong>void*</strong> is a special pointer type that can hold the address of <strong>any object</strong>. Like any other pointer, a void<em> pointer holds an address, but the type of the object at that address is <strong>unknown</strong>, so we <strong>cannot</strong> use a void</em>to operate on the object it addresses—we don’t know that object’s type, and the type determines what operations we can perform on the object. Generally, we use a void* pointer to deal with memory as memory, rather than using the pointer to access the object stored in that memory.</p>
+<p>The type <strong>void*</strong>is a special pointer type that can hold the address of <strong>any object</strong>. Like any other pointer, a void<em> pointer holds an address, but the type of the object at that address is <strong>unknown</strong>, so we <strong>cannot</strong> use a void</em>to operate on the object it addresses—we don’t know that object’s type, and the type determines what operations we can perform on the object. Generally, we use a void* pointer to deal with memory as memory, rather than using the pointer to access the object stored in that memory.</p>
 <h3 id="const-Qualifier"><a href="#const-Qualifier" class="headerlink" title="const Qualifier"></a>const Qualifier</h3><p>Sometimes we want to define a variable whose value we know cannot be changed. We can make a variable unchangeable by defining the variable’s type as <strong>const</strong>. Because we can’t change the value of a const object after we create it, it must be <strong>initialized</strong>.</p>
 <pre><code class="c++">const int n = 512;
 n = 1024;  // error: attempt to write to const object
@@ -906,28 +906,28 @@ string s7 = &quot;hello&quot; + &quot;, &quot; + s2; // error: can&#39;t add str
 <p>If we want to do something to every character in a string, by far the best approach is to use a statement introduced by the new standard: the <strong>range for</strong> statement.</p>
 <pre><code class="c++">string str = &quot;hello!!!&quot;;
 for (auto c : str) &#123;   // for every char in str
-     cout &lt;&lt; c &lt;&lt; endl; // print the current character followed by a newline
+  cout &lt;&lt; c &lt;&lt; endl; // print the current character followed by a newline
 &#125;
 //count the number of punctuation
 decltype(str.size()) punct = 0;
 for (auto c : str) &#123;
-     if (ispunct(c))&#123; // if the character is punctuation
-          ++punct;
-     &#125;
+  if (ispunct(c))&#123; // if the character is punctuation
+    ++punct;
+  &#125;
 &#125;
 cout &lt;&lt; punct &lt;&lt; endl;
 </code></pre>
 <p>If we want to change the value of the characters in a string, we must define the loop variable as a reference type, Remember that a reference is just another name for a given object.</p>
 <pre><code class="c++">string str = &quot;hello!!!&quot;;
 for (auto &amp;c : str) &#123;
-     c = toupper(c); // c is a reference, so the assignment changes the char in str
+  c = toupper(c); // c is a reference, so the assignment changes the char in str
 &#125;
 cout &lt;&lt; str &lt;&lt; endl;
 </code></pre>
 <p>A range for works well when we need to <strong>process every character</strong>. However, sometimes we need to access only a single character or to access characters until some condition is reached. There are two ways to access individual characters in a string: We can use a <strong>subscript</strong> or an <strong>iterator</strong>. The subscript operator (the [ ] operator) takes a <strong>string::size_type</strong> value that denotes the position of the character we want to access. Subscripts for strings start at zero, so str[0] is the first character, and the last character is in str[str.size() - 1]. we can rewrite previous as this:</p>
 <pre><code class="c++">for (decltype(str.size()) i = 0; i &lt; str.size(); i++)
 &#123;
-     str[i] = toupper(str[i]);
+  str[i] = toupper(str[i]);
 &#125;
 cout &lt;&lt; str &lt;&lt; endl;
 </code></pre>
@@ -972,16 +972,16 @@ vector&lt;string&gt; ivec9&#123;10&#125;;       // ivec9 has ten default-initial
 <p>Directly initializing the element of a vector just feasible only if we have a small number of known initial values or we want make a copy of a vector. More commonly, we use the <code>push_back</code> method <strong>add elements</strong> when running. The <code>push_back</code> operation takes a value and “pushes” that value as a new last<br>element onto the “back” of the vector. This code will add 0 to 99 to a vector in sequence:</p>
 <pre><code class="c++">vector&lt;int&gt; ivec1; //default initlization, ivec1 is empty
 for (int i = 0; i &lt; 100; i++)&#123;
-     ivec1.push_back(i); // add to ivec1
+  ivec1.push_back(i); // add to ivec1
 &#125;
 </code></pre>
 <p>The standard requires that vector implementations can efficiently add elements at run time. Because vectors grow efficiently, it is often unnecessary and can result in poorer performance to define a vector of a specific size. Note we cannot use a range for if the body of the loop adds elements to the vector. The body of a range for must not change the size of the sequence over which it is iterating.</p>
 <p>In addition to push_back, vector provides only a few other operations, most of which are similar to the corresponding operations on strings. we can get full operations in <a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/vector/vector/">here</a>. We access the elements of a vector the same way that we access the characters in a string:</p>
 <pre><code class="c++">vector&lt;int&gt; v&#123;1,2,3,4,5,6,7,8,9&#125;;
 for (auto &amp;i : v) // for each element in v (note: i is a reference)
-     i *= i; // square the element value
+  i *= i; // square the element value
 for (auto i : v) // for each element in v
-     cout &lt;&lt; i &lt;&lt; &quot; &quot;; // print the element
+  cout &lt;&lt; i &lt;&lt; &quot; &quot;; // print the element
 cout &lt;&lt; endl;
 </code></pre>
 <p>The <strong>empty</strong> and <strong>size</strong> members behave as do the corresponding string members: empty returns a bool indicating whether the vector has any elements, and size returns the number of elements in the vector. The size member returns a value of the <strong>size_type</strong> defined by the corresponding <strong>vector</strong> type.</p>
@@ -992,7 +992,7 @@ vector::size_type      // error
 <p>Programmers new to C++ sometimes think that subscripting a vector adds elements; it does not. The following code intends to add ten elements to ivec:</p>
 <pre><code class="c++">vector&lt;int&gt; ivec; // empty vector
 for (decltype(ivec.size()) ix = 0; ix != 10; ++ix)
-      ivec[ix] = ix; // disaster: ivec has no elements
+   ivec[ix] = ix; // disaster: ivec has no elements
 </code></pre>
 <p>However, it is in error: ivec is an empty vector; there are no elements to subscript! As we’ve seen, the right way to write this loop is to use push_back like previous.</p>
 <h3 id="Introducing-Iterators"><a href="#Introducing-Iterators" class="headerlink" title="Introducing Iterators"></a>Introducing Iterators</h3><p>Although we can use subscripts to access the characters of a string or the elements in a vector, there is a more general mechanism—known as <strong>iterators</strong>—that we can use for the same purpose. All of the library containers have iterators, but only a few of them support the <strong>subscript</strong> operator.</p>
@@ -1148,7 +1148,7 @@ int main()
           
             <a href="/2021/12/03/Cpp_c03/" rel="prev">
               <div class="background">
-                <img class="lazyload" src="" data-src="/images/cover/(3).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/(3).jpg.webp">
+                <img class="lazyload" src="" data-src="/images/cover/C_background.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/C_background.webp">
               </div>
               <span class="label">
               Previous Post</span>
@@ -1166,7 +1166,7 @@ int main()
           
             <a href="/2021/12/01/Cpp_c01/" rel="next">
               <div class="background">
-                <img class="lazyload" src="" data-src="/images/cover/(1).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/(1).jpg.webp">
+                <img class="lazyload" src="" data-src="/images/cover/C_background.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/C_background.webp">
               </div>
               <span class="label">
               Next Post</span>
@@ -1180,21 +1180,6 @@ int main()
         
       </section>
       
-<div id="vcomments"></div>
-<script>
-	window.onload = function(){
-		var valine = new Valine();
-		valine.init({
-			el: '#vcomments',
-			appId: "EAyicHJhXmxJNEeuhACVujd4-gzGzoHsz",
-			appKey: "09Tjj4It5DOhgboduuM40u7y",
-			avatar: 'wavatar',
-			path: window.location.pathname,
-			placeholder: "有什么想说的吗.."
-		})
-	}
-</script>
-
 
 
 
@@ -1249,7 +1234,7 @@ int main()
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2023 Noah Bishop<br>
+      &copy; 2026 Noah Bishop<br>
       powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
@@ -1552,26 +1537,6 @@ int main()
   }
 </style>
 <meting-js
-
-    id="7225712775"
-
-    server="netease"
-
-    type="playlist"
-
-    fixed="true"
-
-    autoplay="true"
-
-    loop="all"
-
-    order="random"
-
-    preload="auto"
-
-    volume="0.5"
-
-    mutex="true"
 
 </meting-js>
 <script>

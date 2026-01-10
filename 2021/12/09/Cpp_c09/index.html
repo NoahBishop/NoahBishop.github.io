@@ -55,7 +55,7 @@
 					/*End of Initial Variables*/
 				</script>
 				<script type="text/javascript">
-					var bg = "https://morning.eu.org/images/cover/(1).jpg.webp,https://morning.eu.org/images/cover/(2).jpg.webp,https://morning.eu.org/images/cover/(3).jpg.webp,https://morning.eu.org/images/cover/(4).jpg.webp,https://morning.eu.org/images/cover/(5).jpg.webp,https://morning.eu.org/images/cover/(6).jpg.webp,https://morning.eu.org/images/cover/(7).jpg.webp,https://morning.eu.org/images/cover/(8).jpg.webp".split(",");
+					var bg = "https://morning.eu.org/images/cover/(1).jpg.webp,https://morning.eu.org/images/cover/(2).jpg.webp,https://morning.eu.org/images/cover/(3).jpg.webp,https://morning.eu.org/images/cover/(4).jpg.webp".split(",");
 					var bgindex = Math.floor(Math.random() * bg.length);
 					if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
 						alert('朋友，IE浏览器未适配哦~');
@@ -430,7 +430,7 @@
 
   <div class="pattern-center single-center">
     <!-- 有配图默认渲染第一张 -->
-    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/(1).jpg.webp');" src="" data-src="/images/cover/(1).jpg.webp">
+    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/C_background.webp');" src="" data-src="/images/cover/C_background.webp">
     </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
@@ -464,22 +464,22 @@
 <h2 id="Copy-Assign-and-Destroy"><a href="#Copy-Assign-and-Destroy" class="headerlink" title="Copy, Assign, and Destroy"></a>Copy, Assign, and Destroy</h2><h3 id="The-Copy-Constructor"><a href="#The-Copy-Constructor" class="headerlink" title="The Copy Constructor"></a>The Copy Constructor</h3><p>A constructor is the copy constructor if its first parameter is a reference to the class type and any additional parameters have default values:</p>
 <pre><code class="c++">class Temp &#123;
 public:
-    Temp() = default; // default constructor
-    Temp(const Temp&amp;);// copy constructor
+ Temp() = default; // default constructor
+ Temp(const Temp&amp;);// copy constructor
 &#125;;
 </code></pre>
 <p>For reasons we’ll explain shortly, the first parameter must be a reference type. That parameter is almost always a reference to const, although we can define the copy constructor to take a reference to nonconst. The copy constructor is used implicitly in several circumstances. Hence, the copy constructor usually should not be explicit.</p>
-<p>When we do not define a copy constructor for a class, the compiler synthesizes one for us. Unlike the synthesized default constructor, a copy constructor is synthesized even if we define other constructors. The type of each member determines how that member is copied: Members of class type are copied by the copy constructor for that class; members of built-in type are copied directly. Although we cannot directly copy an array, the synthesized copy constructor copies members of array type by copying each element. Elements of class type are copied by using the elements’ copy constructor. </p>
+<p>When we do not define a copy constructor for a class, the compiler synthesizes one for us. Unlike the synthesized default constructor, a copy constructor is synthesized even if we define other constructors. The type of each member determines how that member is copied: Members of class type are copied by the copy constructor for that class; members of built-in type are copied directly. Although we cannot directly copy an array, the synthesized copy constructor copies members of array type by copying each element. Elements of class type are copied by using the elements’ copy constructor.</p>
 <p>As an example, the synthesized copy constructor for our Sales_data class is equivalent to:</p>
 <pre><code class="c++">class Sales_data &#123;
 public:
-    // other members and constructors as before
-    // declaration equivalent to the synthesized copy constructor
+ // other members and constructors as before
+ // declaration equivalent to the synthesized copy constructor
     //copy constructors
-    Sales_data(const Sales_data&amp; org) :
-        bookNo(org.bookNo), units_sold(org.units_sold), revenue(org.revenue) &#123;
-        //empty
-    &#125;
+ Sales_data(const Sales_data&amp; org) :
+  bookNo(org.bookNo), units_sold(org.units_sold), revenue(org.revenue) &#123;
+  //empty
+ &#125;
 &#125;
 </code></pre>
 <p>We are now in a position to fully understand the differences between <strong>direct</strong> initialization and <strong>copy</strong> initialization:</p>
@@ -503,25 +503,25 @@ public:
 <p>To be consistent with assignment for the built-in types, assignment operators usually return a reference to their left-hand operand. It is also worth noting that the library generally requires that types stored in a container have assignment operators that return a reference to the left-hand operand.</p>
 <p>Just as it does for the copy constructor, the compiler generates a synthesized copy-assignment operator for a class if the class does not define its own. Otherwise, it assigns each nonstatic member of the right-hand object to the corresponding member of the left-hand object using the copy-assignment operator for the type of that member. Array members are assigned by assigning each element of the array. The synthesized copy-assignment operator returns a reference to its left-hand object.</p>
 <pre><code class="c++">Temp&amp; Temp::operator=(const Temp&amp; org) &#123;
-    data = org.data + 2;
-    return *this;
+ data = org.data + 2;
+ return *this;
 &#125;
 </code></pre>
 <pre><code class="c++">#include&quot;Temp.h&quot;
 
 int main() &#123;
-    Temp p(10); //p.data = 10
-    Temp q = p; //q.data = 11
-    Temp r;
-    r = p;      //r.data = 12
-    return 0;
+ Temp p(10); //p.data = 10
+ Temp q = p; //q.data = 11
+ Temp r;
+ r = p;      //r.data = 12
+ return 0;
 &#125;
 </code></pre>
 <h3 id="The-Destructor"><a href="#The-Destructor" class="headerlink" title="The Destructor"></a>The Destructor</h3><p>The destructor operates inversely to the constructors: Constructors initialize the nonstatic data members of an object and may do other work; destructors do whatever work is needed to free the resources used by an object and destroy the nonstatic data members of the object.</p>
 <p>The destructor is a member function with the name of the class prefixed by a tilde <code>~</code>. It has no return value and takes no parameters:</p>
 <pre><code class="c++">class Temp&#123;
 public:
-    ~Temp(); // destructor
+ ~Temp(); // destructor
 &#125;
 </code></pre>
 <p>Because it takes <strong>no</strong> parameters, it cannot be <strong>overloaded</strong>. There is always only one destructor for a given class.</p>
@@ -541,7 +541,7 @@ public:
 <p>One rule of thumb to use when you decide whether a class needs to define its own versions of the copy-control members is to decide first whether the class needs a destructor. Often, the need for a destructor is more obvious than the need for the copy constructor or assignment operator. If the class needs a destructor, it almost surely needs a copy constructor and copy-assignment operator as well.</p>
 <p>As a example, we need allocate allocates dynamic memory to save a string in the class, when we call constructor. We also need free the memory when call destructor.</p>
 <pre><code class="c++">Temp::~Temp() &#123;
-    delete s;
+ delete s;
 &#125;
 </code></pre>
 <p>In this version of the class, the memory allocated in the constructor will be freed when a object is destroyed. Unfortunately, we have introduced a serious bug! This version of the class uses the synthesized versions of copy and assignment. Those functions copy the pointer member, meaning that multiple objects may be pointing to the same memory:</p>
@@ -549,29 +549,29 @@ public:
 #include &lt;string&gt;
 class Temp &#123;
 public:
-    Temp() = default; // default constructor
-    Temp(int num) :data(num), s(new std::string(10, &#39;A&#39;)) &#123;
+ Temp() = default; // default constructor
+ Temp(int num) :data(num), s(new std::string(10, &#39;A&#39;)) &#123;
 
-    &#125;
+ &#125;
 
-    ~Temp(); // destructor
-    const int a = 10;
+ ~Temp(); // destructor
+ const int a = 10;
 
 private:
-    int data;
-    std::string* s;
+ int data;
+ std::string* s;
 &#125;;
 Temp::~Temp() &#123;
-    delete s;
+ delete s;
 &#125;
 </code></pre>
 <pre><code class="c++">#include&quot;Temp.h&quot;
 
 int main() &#123;
-    Temp p(10); //p-&gt;s = AAAAAAAAAA
-    Temp q = p; //q-&gt;s = AAAAAAAAAA
-    // p.s and q.s point to same address
-    return 0;
+ Temp p(10); //p-&gt;s = AAAAAAAAAA
+ Temp q = p; //q-&gt;s = AAAAAAAAAA
+ // p.s and q.s point to same address
+ return 0;
 &#125;
 </code></pre>
 <p>This code will delete that pointer twice.</p>
@@ -581,12 +581,12 @@ int main() &#123;
 <pre><code class="c++">#pragma once
 class NoCopy &#123;
 public:
-    NoCopy() = default;
-    ~NoCopy() = default;
+ NoCopy() = default;
+ ~NoCopy() = default;
 
-    NoCopy(const NoCopy&amp;) = delete; // no copy
+ NoCopy(const NoCopy&amp;) = delete; // no copy
 private:
-    int a = 10;
+ int a = 10;
 &#125;;
 </code></pre>
 <p>It is worth noting that we did not delete the destructor. If the destructor is deleted, then there is no way to destroy objects of that type.</p>
@@ -605,32 +605,32 @@ private:
 #include&lt;string&gt;
 class TestStr &#123;
 public:
-    // constructor
-    TestStr(const std::string&amp; os = &quot;&quot;) : s(new std::string(os)) &#123;&#125;
+ // constructor
+ TestStr(const std::string&amp; os = &quot;&quot;) : s(new std::string(os)) &#123;&#125;
 
-    // copy constructor
-    TestStr(const TestStr&amp; org) :
-        s(new std::string(*(org.s))) &#123;
-        // empty
-    &#125;
+ // copy constructor
+ TestStr(const TestStr&amp; org) :
+  s(new std::string(*(org.s))) &#123;
+  // empty
+ &#125;
 
-    // copy-assignment operator
-    TestStr&amp; operator=(const TestStr&amp; org);
+ // copy-assignment operator
+ TestStr&amp; operator=(const TestStr&amp; org);
 
-    // destructor
-    ~TestStr() &#123;
-        delete s;
-    &#125;
+ // destructor
+ ~TestStr() &#123;
+  delete s;
+ &#125;
 
 private:
-    std::string* s;
+ std::string* s;
 &#125;;
 
 TestStr&amp; TestStr::operator=(const TestStr&amp; org) &#123;
-    auto newp = new std::string(*org.s);
-    delete s;
-    s = newp;
-    return *this;
+ auto newp = new std::string(*org.s);
+ delete s;
+ s = newp;
+ return *this;
 &#125;
 </code></pre>
 <p>In <code>operator=</code> we write <code>auto newp = new std::string(*org.s);</code> and the <code>s = newp</code>, could we straightforward use <code>s = new std::string(*org.s);</code>, the answer is certainly not. To illustrate the importance of guarding against self-assignment, consider what would happen if run this code:</p>
@@ -659,56 +659,56 @@ TestStr r(p);
 
 class TestStr &#123;
 public:
-    // constructor
-    TestStr(const std::string&amp; os = &quot;&quot;)
-        : s(new std::string(os)), counter(new std::size_t(1)) &#123;
-        //empty
-    &#125;
+ // constructor
+ TestStr(const std::string&amp; os = &quot;&quot;)
+  : s(new std::string(os)), counter(new std::size_t(1)) &#123;
+  //empty
+ &#125;
 
-    // copy constructor
-    TestStr(const TestStr&amp; org) :
-        s(org.s), counter(org.counter) &#123;
-        // counter++
-        (*counter)++;
-    &#125;
+ // copy constructor
+ TestStr(const TestStr&amp; org) :
+  s(org.s), counter(org.counter) &#123;
+  // counter++
+  (*counter)++;
+ &#125;
 
-    // copy-assignment operator
-    TestStr&amp; operator=(const TestStr&amp; org);
+ // copy-assignment operator
+ TestStr&amp; operator=(const TestStr&amp; org);
 
-    // destructor
-    ~TestStr() &#123;
-        if (--(*counter) == 0) &#123;
-            delete s;
-        &#125;
-    &#125;
+ // destructor
+ ~TestStr() &#123;
+  if (--(*counter) == 0) &#123;
+   delete s;
+  &#125;
+ &#125;
 
 private:
-    std::string* s;
-    std::size_t* counter;
+ std::string* s;
+ std::size_t* counter;
 &#125;;
 
 TestStr&amp; TestStr::operator=(const TestStr&amp; org) &#123;
-    // increment the use count of the right-hand operand
-    (*org.counter)++;
-    // if no other users
-    if (--(*counter) == 0) &#123;
-        delete s;
-        delete counter;
-    &#125;
-    // copy data from org into this object
-    s = org.s;
-    counter = org.counter;
-    return *this;
+ // increment the use count of the right-hand operand
+ (*org.counter)++;
+ // if no other users
+ if (--(*counter) == 0) &#123;
+  delete s;
+  delete counter;
+ &#125;
+ // copy data from org into this object
+ s = org.s;
+ counter = org.counter;
+ return *this;
 &#125;
 </code></pre>
 <h2 id="Swap"><a href="#Swap" class="headerlink" title="Swap"></a>Swap</h2><p>In addition to defining the copy-control members, classes that manage resources often also define a function named <code>swap</code>. Defining <code>swap</code> is particularly important for classes that we plan to use with algorithms that <strong>reorder</strong> elements. Such algorithms call swap whenever they need to exchange two elements.</p>
 <pre><code class="c++">#include&lt;iostream&gt;
 
 int main() &#123;
-    int a = 1, b = 2;
-    std::swap(a, b);
-    std::cout &lt;&lt; a &lt;&lt; &quot; &quot; &lt;&lt; b &lt;&lt; std::endl; // 2 1
-    return 0;
+ int a = 1, b = 2;
+ std::swap(a, b);
+ std::cout &lt;&lt; a &lt;&lt; &quot; &quot; &lt;&lt; b &lt;&lt; std::endl; // 2 1
+ return 0;
 &#125;
 </code></pre>
 <p>If a class defines its own <code>swap</code>, then the algorithm uses that class-specific version. Otherwise, it uses the swap function defined by the library. Although, as usual, we don’t know how swap is implemented, conceptually it’s easy to see that swapping two objects involves a copy and two assignments. For example, code to swap two objects of our value-like TestStr class might look something like:</p>
@@ -726,13 +726,13 @@ v2.ps = temp; // assign the saved pointer in v1.ps to v2.ps
 // note in the case wo rename TestStr to TestStr_swap
 class TestStr &#123;
 public:
-    friend void swap(TestStr_swap&amp;, TestStr_swap&amp;);
-    // same as before
+ friend void swap(TestStr_swap&amp;, TestStr_swap&amp;);
+ // same as before
 &#125;;
 
 // write in TestStr.cpp file
 void swap(TestStr_swap&amp; p1, TestStr_swap&amp; p2) &#123;
-    std::swap(p1.s, p2.s);
+ std::swap(p1.s, p2.s);
 &#125;
 </code></pre>
 <p>NOTICE: If you use vs2019 create a class, don’t write methods in <code>*.h</code> file, plz write in the corresponding <code>*.cpp</code> file.</p>
@@ -740,8 +740,8 @@ void swap(TestStr_swap&amp; p1, TestStr_swap&amp; p2) &#123;
 <h3 id="Using-swap-in-Assignment-Operators"><a href="#Using-swap-in-Assignment-Operators" class="headerlink" title="Using swap in Assignment Operators"></a>Using swap in Assignment Operators</h3><p>Classes that define swap often use swap to define their assignment operator. These operators use a technique known as <strong>copy and swap</strong>. This technique swaps the left-hand operand with a copy of the right-hand operand:</p>
 <pre><code class="c++">// note this version pass value rather than reference
 TestStr_swap&amp; TestStr_swap::operator=(TestStr_swap org) &#123;
-    swap(*this, org);
-    return *this;
+ swap(*this, org);
+ return *this;
 &#125;
 </code></pre>
 <p>In the body of the assignment operator, we call <code>swap</code>, which swaps the data members of <code>org</code> with those in <code>*this</code>. Because we pass org by value the org will automatically call its destroy function when this function end.</p>
@@ -757,37 +757,37 @@ TestStr_swap&amp; TestStr_swap::operator=(TestStr_swap org) &#123;
 #include&quot;Folder.h&quot;
 class Folder;
 class Message &#123;
-    friend class Folder;
+ friend class Folder;
 public:
-    friend void swap(Message&amp;, Message&amp;);
-    // constructor
-    explicit Message(std::string s = &quot;&quot;) :contents(s) &#123;
-        //empty
-    &#125;
+ friend void swap(Message&amp;, Message&amp;);
+ // constructor
+ explicit Message(std::string s = &quot;&quot;) :contents(s) &#123;
+  //empty
+ &#125;
 
-    // copy constructor
-    Message(Message&amp; org);
+ // copy constructor
+ Message(Message&amp; org);
 
-    // copy assignment
-    Message&amp; operator=(const Message&amp; org);
+ // copy assignment
+ Message&amp; operator=(const Message&amp; org);
 
-    // destructor
-    ~Message();
+ // destructor
+ ~Message();
 
-    // add/remove this Message from the specified Folder&#39;s set of messages
-    void save(Folder&amp;);
-    void remove(Folder&amp;);
+ // add/remove this Message from the specified Folder&#39;s set of messages
+ void save(Folder&amp;);
+ void remove(Folder&amp;);
 
-    // get message
-    std::string&amp; getMsg();
+ // get message
+ std::string&amp; getMsg();
 
 private:
-    std::string contents;
-    std::set&lt;Folder*&gt; folders;
-    // add this Message to the Folders that point to the parameter
-    void add_to_Folders(const Message&amp;);
-    // remove this Message from every Folder in folders
-    void remove_from_Folders();
+ std::string contents;
+ std::set&lt;Folder*&gt; folders;
+ // add this Message to the Folders that point to the parameter
+ void add_to_Folders(const Message&amp;);
+ // remove this Message from every Folder in folders
+ void remove_from_Folders();
 &#125;;
 
 
@@ -795,63 +795,63 @@ private:
 #include &quot;Message.h&quot;
 
 Message::Message(Message&amp; org)
-    :contents(org.contents), folders(org.folders) &#123;
-    // add this Message to the Folders that point to org
-    add_to_Folders(org);
+ :contents(org.contents), folders(org.folders) &#123;
+ // add this Message to the Folders that point to org
+ add_to_Folders(org);
 &#125;
 
 Message&amp; Message::operator=(const Message&amp; org) &#123;
-    remove_from_Folders();
-    contents = org.contents;
-    folders = org.folders;
-    add_to_Folders(*this);
-    return *this;
+ remove_from_Folders();
+ contents = org.contents;
+ folders = org.folders;
+ add_to_Folders(*this);
+ return *this;
 &#125;
 
 Message::~Message() &#123;
-    // remove message pointer in folder
-    remove_from_Folders();
+ // remove message pointer in folder
+ remove_from_Folders();
 &#125;
 
 void Message::save(Folder&amp; f) &#123;
-    // add the given Folder to our list of Folders
-    folders.insert(&amp;f);
-    // add this Message to f&#39;s set of Messages
-    f.addMsg(this);
+ // add the given Folder to our list of Folders
+ folders.insert(&amp;f);
+ // add this Message to f&#39;s set of Messages
+ f.addMsg(this);
 &#125;
 
 void Message::remove(Folder&amp; f) &#123;
-    // remove the given Folder from our list of Folders
-    folders.erase(&amp;f);
-    // remove this Message from f&#39;s set of Messages
-    f.remMsg(this);
+ // remove the given Folder from our list of Folders
+ folders.erase(&amp;f);
+ // remove this Message from f&#39;s set of Messages
+ f.remMsg(this);
 &#125;
 
 std::string&amp; Message::getMsg() &#123;
-    return this-&gt;contents;
+ return this-&gt;contents;
 &#125;
 
 void Message::add_to_Folders(const Message&amp; org) &#123;
-    for (auto&amp; f : org.folders) &#123;
-        f-&gt;addMsg(this);
-    &#125;
+ for (auto&amp; f : org.folders) &#123;
+  f-&gt;addMsg(this);
+ &#125;
 &#125;
 
 void Message::remove_from_Folders() &#123;
-    for (auto&amp; f : folders) &#123;
-        f-&gt;remMsg(this);
-    &#125;
+ for (auto&amp; f : folders) &#123;
+  f-&gt;remMsg(this);
+ &#125;
 &#125;
 
 void swap(Message&amp; m1, Message&amp; m2) &#123;
-    m1.remove_from_Folders();
-    m2.remove_from_Folders();
+ m1.remove_from_Folders();
+ m2.remove_from_Folders();
 
-    std::swap(m1.contents, m2.contents);
-    std::swap(m1.folders, m2.folders);
+ std::swap(m1.contents, m2.contents);
+ std::swap(m1.folders, m2.folders);
 
-    m1.add_to_Folders(m1);
-    m2.add_to_Folders(m2);
+ m1.add_to_Folders(m1);
+ m2.add_to_Folders(m2);
 &#125;
 </code></pre>
 <h3 id="The-Folder-class"><a href="#The-Folder-class" class="headerlink" title="The Folder class"></a>The Folder class</h3><pre><code class="c++">// in  Folder.h
@@ -861,18 +861,18 @@ void swap(Message&amp; m1, Message&amp; m2) &#123;
 #include&lt;iostream&gt;
 class Message;
 class Folder &#123;
-    friend class Message;
-    friend void listall(Folder&amp; f);
+ friend class Message;
+ friend void listall(Folder&amp; f);
 public:
-    Folder() = default;
-    ~Folder();
+ Folder() = default;
+ ~Folder();
 
 private:
-    std::set&lt;Message*&gt; messages;
+ std::set&lt;Message*&gt; messages;
 
-    // add and remove message to folder
-    void addMsg(Message*);
-    void remMsg(Message*);
+ // add and remove message to folder
+ void addMsg(Message*);
+ void remMsg(Message*);
 &#125;;
 
 
@@ -884,21 +884,21 @@ Folder::~Folder() &#123;
 &#125;
 
 void Folder::addMsg(Message* m) &#123;
-    messages.insert(m);
+ messages.insert(m);
 &#125;
 
 void Folder::remMsg(Message* m) &#123;
-    messages.erase(m);
+ messages.erase(m);
 &#125;
 
 void listall(Folder&amp; f) &#123;
-    for (auto&amp; m : f.messages) &#123;
-        std::cout &lt;&lt; m-&gt;getMsg() &lt;&lt; &quot; &quot;;
-    &#125;
-    std::cout &lt;&lt; std::endl;
+ for (auto&amp; m : f.messages) &#123;
+  std::cout &lt;&lt; m-&gt;getMsg() &lt;&lt; &quot; &quot;;
+ &#125;
+ std::cout &lt;&lt; std::endl;
 &#125;
 </code></pre>
-<h2 id="Classes-That-Manage-Dynamic-Memory"><a href="#Classes-That-Manage-Dynamic-Memory" class="headerlink" title="Classes That Manage Dynamic Memory"></a>Classes That Manage Dynamic Memory</h2><p>Some classes need to allocate a varying amount of storage at run time. Such classes often can (and if they can, generally should) use a library container to hold their data. For example, our <code>StrBlob</code> class uses a <code>vector</code> to manage the underlying storage for its elements. </p>
+<h2 id="Classes-That-Manage-Dynamic-Memory"><a href="#Classes-That-Manage-Dynamic-Memory" class="headerlink" title="Classes That Manage Dynamic Memory"></a>Classes That Manage Dynamic Memory</h2><p>Some classes need to allocate a varying amount of storage at run time. Such classes often can (and if they can, generally should) use a library container to hold their data. For example, our <code>StrBlob</code> class uses a <code>vector</code> to manage the underlying storage for its elements.</p>
 <p>However, this strategy does not work for every class; some classes need to do their own allocation. Such classes generally must define their own copy-control members to manage the memory they allocate.</p>
 <p>As an example, we’ll implement a simplification of the library vector class. Among the simplifications we’ll make is that our class will not be a template. Instead, our class will hold <code>strings</code>. Thus, we’ll call our class <code>StrVec</code>.</p>
 <h3 id="Class-StrVec-design"><a href="#Class-StrVec-design" class="headerlink" title="Class StrVec design"></a>Class StrVec design</h3><p>Recall that the vector class stores its elements in contiguous storage. To obtain acceptable performance, vector pre-allocates enough storage to hold more elements than are needed. Each vector member that adds elements checks whether there is space available for another element. If so, the member constructs an object in the next available spot. If there isn’t space left, then the vector is reallocated: The vector obtains new space, moves the existing elements into that space, frees the old space, and adds the new element.</p>
@@ -929,109 +929,109 @@ void listall(Folder&amp; f) &#123;
 #include&lt;string&gt;
 class StrVec &#123;
 public:
-    StrVec() :elements(nullptr), first_free(nullptr), cap(nullptr) &#123;
-        //empty
-    &#125;
-    StrVec(const StrVec&amp;);
-    StrVec&amp; operator=(const StrVec&amp;);
-    ~StrVec();
+ StrVec() :elements(nullptr), first_free(nullptr), cap(nullptr) &#123;
+  //empty
+ &#125;
+ StrVec(const StrVec&amp;);
+ StrVec&amp; operator=(const StrVec&amp;);
+ ~StrVec();
 
-    void push_back(std::string&amp;);
-    size_t size();
-    size_t capacity();
-    std::string* begin() const;
-    std::string* end() const;
+ void push_back(std::string&amp;);
+ size_t size();
+ size_t capacity();
+ std::string* begin() const;
+ std::string* end() const;
 
-    std::string&amp; at(size_t idx);
+ std::string&amp; at(size_t idx);
 
 private:
-    // private methods
-    void free();
-    void chk_n_alloc();
-    void reallocate();
-    std::pair&lt; std::string*, std::string*&gt; alloc_n_copy(std::string*, std::string*);
+ // private methods
+ void free();
+ void chk_n_alloc();
+ void reallocate();
+ std::pair&lt; std::string*, std::string*&gt; alloc_n_copy(std::string*, std::string*);
 
-    // private attributes
-    std::allocator&lt;std::string&gt; alloc;
-    std::string* elements;
-    std::string* first_free;
-    std::string* cap;
+ // private attributes
+ std::allocator&lt;std::string&gt; alloc;
+ std::string* elements;
+ std::string* first_free;
+ std::string* cap;
 &#125;;
 </code></pre>
 <pre><code class="c++">// in StrVec.cpp file
 #include &quot;StrVec.h&quot;
 
 StrVec::StrVec(const StrVec&amp; v) &#123;
-    auto newdata = alloc_n_copy(v.begin(), v.end());
-    elements = newdata.first;
-    first_free = cap = newdata.second;
+ auto newdata = alloc_n_copy(v.begin(), v.end());
+ elements = newdata.first;
+ first_free = cap = newdata.second;
 &#125;
 
 StrVec&amp; StrVec::operator=(const StrVec&amp; v) &#123;
-    auto newdata = alloc_n_copy(v.begin(), v.end());
-    free();
-    elements = newdata.first;
-    first_free = cap = newdata.second;
-    return *this;
+ auto newdata = alloc_n_copy(v.begin(), v.end());
+ free();
+ elements = newdata.first;
+ first_free = cap = newdata.second;
+ return *this;
 &#125;
 
 StrVec::~StrVec() &#123;
-    free();
+ free();
 &#125;
 
 void StrVec::push_back(std::string&amp; s) &#123;
-    chk_n_alloc();
-    alloc.construct(first_free++, s);
+ chk_n_alloc();
+ alloc.construct(first_free++, s);
 &#125;
 
 size_t StrVec::size() &#123;
-    return first_free - elements;
+ return first_free - elements;
 &#125;
 
 size_t StrVec::capacity() &#123;
-    return cap - elements;
+ return cap - elements;
 &#125;
 
 std::string* StrVec::begin() const &#123;
-    return elements;
+ return elements;
 &#125;
 
 std::string* StrVec::end() const &#123;
-    return first_free;
+ return first_free;
 &#125;
 
 std::string&amp; StrVec::at(size_t idx) &#123;
-    return *(elements + idx);
+ return *(elements + idx);
 &#125;
 
 void StrVec::free() &#123;
-    if (elements) &#123;
-        alloc.deallocate(elements, cap - elements);
-    &#125;
+ if (elements) &#123;
+  alloc.deallocate(elements, cap - elements);
+ &#125;
 &#125;
 
 void StrVec::chk_n_alloc() &#123;
-    if (size() == capacity()) &#123;
-        reallocate();
-    &#125;
+ if (size() == capacity()) &#123;
+  reallocate();
+ &#125;
 &#125;
 
 void StrVec::reallocate() &#123;
-    auto newcap = size() ? 2 * size() : 1;
-    auto newdata = alloc.allocate(newcap);
-    auto dest = newdata, org = elements;
-    for (auto i = 0; i != size(); i++) &#123;
-        alloc.construct(dest++, std::move(*org++));
-    &#125;
-    free();
-    elements = newdata;
-    cap = elements + newcap;
-    first_free = dest;
+ auto newcap = size() ? 2 * size() : 1;
+ auto newdata = alloc.allocate(newcap);
+ auto dest = newdata, org = elements;
+ for (auto i = 0; i != size(); i++) &#123;
+  alloc.construct(dest++, std::move(*org++));
+ &#125;
+ free();
+ elements = newdata;
+ cap = elements + newcap;
+ first_free = dest;
 &#125;
 
 std::pair&lt;std::string*, std::string*&gt; StrVec::alloc_n_copy(std::string* b, std::string* e) &#123;
-    auto data = alloc.allocate(e - b);
-    return &#123; data, std::uninitialized_copy(b,e,data) &#125;;
+ auto data = alloc.allocate(e - b);
+ return &#123; data, std::uninitialized_copy(b,e,data) &#125;;
 &#125;
 </code></pre>
 <pre><code class="c++">#include&lt;iostream&gt;
@@ -1039,27 +1039,27 @@ std::pair&lt;std::string*, std::string*&gt; StrVec::alloc_n_copy(std::string* b,
 #include&lt;string&gt;
 
 void check(StrVec&amp; m) &#123;
-    for (size_t i = 0; i &lt; m.size(); i++) &#123;
-        std::cout &lt;&lt; m.at(i) &lt;&lt; std::endl;
-    &#125;
-    std::cout &lt;&lt; &quot;size: &quot; &lt;&lt; m.size() &lt;&lt; std::endl;
-    std::cout &lt;&lt; &quot;cap: &quot; &lt;&lt; m.capacity() &lt;&lt; std::endl;
+ for (size_t i = 0; i &lt; m.size(); i++) &#123;
+  std::cout &lt;&lt; m.at(i) &lt;&lt; std::endl;
+ &#125;
+ std::cout &lt;&lt; &quot;size: &quot; &lt;&lt; m.size() &lt;&lt; std::endl;
+ std::cout &lt;&lt; &quot;cap: &quot; &lt;&lt; m.capacity() &lt;&lt; std::endl;
 &#125;
 
 int main() &#123;
-    StrVec m1;
-    for (size_t i = 0; i &lt; 5; i++) &#123;
-        std::string s = std::to_string(i);
-        m1.push_back(s);
-    &#125;
+ StrVec m1;
+ for (size_t i = 0; i &lt; 5; i++) &#123;
+  std::string s = std::to_string(i);
+  m1.push_back(s);
+ &#125;
     StrVec m2;
-    m2 = m1;
-    StrVec m3(m1);
+ m2 = m1;
+ StrVec m3(m1);
 
-    check(m1);
-    check(m2);
-    check(m3);
-    return 0;
+ check(m1);
+ check(m2);
+ check(m3);
+ return 0;
 &#125;
 </code></pre>
 <h2 id="Moving-Objects"><a href="#Moving-Objects" class="headerlink" title="Moving Objects"></a>Moving Objects</h2><p>One of the major features in the new standard is the ability to move rather than copy an object. Copies are made in many circumstances. In some of these circumstances, an object is immediately destroyed after it is copied. In those cases, moving, rather than copying, the object can provide a significant performance boost.</p>
@@ -1091,13 +1091,13 @@ int &amp;&amp;rr2 = rr1; // error: the expression rr1 is an lvalue!
 <p>In addition to moving resources, the move constructor must ensure that the moved from object is left in a state such that destroying that object will be harmless. In particular, once its resources are moved, the original object must no longer point to those moved resources—responsibility for those resources has been assumed by the newly created object.</p>
 <p>As an example, we’ll define the <code>StrVec</code> move constructor to move rather than copy the elements from one <code>StrVec</code> to another:</p>
 <pre><code class="c++">StrVec::StrVec(StrVec&amp;&amp; v)
-    :elements(v.elements), first_free(v.first_free), cap(v.cap) &#123;
-    v.elements = v.first_free = v.cap = nullptr;
+ :elements(v.elements), first_free(v.first_free), cap(v.cap) &#123;
+ v.elements = v.first_free = v.cap = nullptr;
 &#125;
 </code></pre>
 <p>Unlike the copy constructor, the move constructor does not allocate any new memory; it takes over the memory in the given <code>StrVec</code>. Having taken over the memory from its argument, the constructor body sets the pointers in the given object to <code>nullptr</code>.</p>
 <p>Because a move operation executes by “stealing” resources, it ordinarily does not itself allocate any resources. As a result, move operations ordinarily will not throw any exceptions. When we write a move operation that cannot throw, we should inform the library of that fact. As we’ll see, unless the library knows that our move constructor won’t throw, it will do extra work to cater to the possibility that moving an object of our class type might throw. One way inform the library is to specify <code>noexcept</code> on our constructor.</p>
-<p>Understanding why <code>noexcept</code> is needed can help deepen our understanding of how the library <strong>interacts</strong> with objects of the types we write. We need to indicate that a move operation doesn’t throw because of two interrelated facts: </p>
+<p>Understanding why <code>noexcept</code> is needed can help deepen our understanding of how the library <strong>interacts</strong> with objects of the types we write. We need to indicate that a move operation doesn’t throw because of two interrelated facts:</p>
 <ol>
 <li>First, although move operations usually don’t throw exceptions, they are permitted to do so.</li>
 <li>Second, the library containers provide guarantees as to what they do if an exception happens. As one example, vector guarantees that if an exception happens when we call push_back, the vector itself will be left unchanged.</li>
@@ -1105,27 +1105,27 @@ int &amp;&amp;rr2 = rr1; // error: the expression rr1 is an lvalue!
 <p>As we’ve just seen, moving an object generally changes the value of the moved from object. If reallocation uses a move constructor and that constructor throws an <code>exception</code> after moving some but not all of the elements, there would be a problem. The moved-from elements in the old space would have been changed, and the unconstructed elements in the new space would not yet exist. In this case, vector would be unable to meet its requirement that the vector is left unchanged.</p>
 <p>The <code>move-assignment operator</code> does the same work as the destructor and the move constructor. As with the move constructor, if our move-assignment operator won’t throw any exceptions, we should make it <code>noexcept</code>. Like a copy-assignment operator, a move-assignment operator must guard against self-assignment:</p>
 <pre><code class="c++">StrVec&amp; StrVec::operator=(StrVec&amp;&amp; org) noexcept &#123;
-    if (this != &amp;org) &#123;
-        free();
-        elements = org.elements;
-        first_free = org.first_free;
-        cap = org.cap;
-        org.elements = org.first_free = org.cap = nullptr;
-    &#125;
-    return *this;
+ if (this != &amp;org) &#123;
+  free();
+  elements = org.elements;
+  first_free = org.first_free;
+  cap = org.cap;
+  org.elements = org.first_free = org.cap = nullptr;
+ &#125;
+ return *this;
 &#125;
 </code></pre>
 <p>As it does for the copy constructor and copy-assignment operator, the compiler will synthesize the move constructor and move-assignment operator. However, the conditions under which it <strong>synthesizes a move operation</strong> are quite different from those in which it synthesizes a copy operation.</p>
 <p>The <code>reallocate</code> member of <code>StrVec</code> used a for loop to call construct to copy the elements from the old memory to the new. As an alternative to writing that loop, it would be easier if we could call <code>uninitialized_copy</code> to construct the newly allocated space. However, <code>uninitialized_copy</code> does what it says: It <strong>copies</strong> the elements. There is no analogous library function to “<code>move</code>” objects into unconstructed memory.</p>
 <p>Instead, the new library defines a <code>move iterator adaptor</code>. A move iterator adapts its given iterator by changing the behavior of the iterator’s dereference operator. Ordinarily, an iterator dereference operator returns an <code>lvalue</code> reference to the element. Unlike other iterators, the dereference operator of a move iterator yields an <code>rvalue</code> reference.</p>
 <pre><code class="c++">void StrVec::reallocate() &#123;
-    auto newcap = size() ? 2 * size() : 1;
-    auto first = alloc.allocate(newcap);
-    auto last = uninitialized_copy(make_move_iterator(begin()), make_move_iterator(end()), first);
-    free();
-    elements = first;
-    cap = elements + newcap;
-    first_free = last;
+ auto newcap = size() ? 2 * size() : 1;
+ auto first = alloc.allocate(newcap);
+ auto last = uninitialized_copy(make_move_iterator(begin()), make_move_iterator(end()), first);
+ free();
+ elements = first;
+ cap = elements + newcap;
+ first_free = last;
 &#125;
 </code></pre>
 <h3 id="Rvalue-References-and-Member-Functions"><a href="#Rvalue-References-and-Member-Functions" class="headerlink" title="Rvalue References and Member Functions"></a>Rvalue References and Member Functions</h3><p>Member functions other than constructors and assignment can benefit from providing both copy and move versions. Such move-enabled members typically use the same parameter pattern as the copy/move constructor and the assignment operators—one version takes an lvalue reference to const, and the second takes an rvalue reference to nonconst.</p>
@@ -1135,8 +1135,8 @@ void push_back(X&amp;&amp;); // move: binds only to modifiable rvalues of type X
 </code></pre>
 <p>Note in our test program, first use <code>std::string s = std::to_string(i);</code> and then <code>m1.push_back(s);</code>. after we write this version of <code>push_back</code> that parameter is a <code>rvalue</code>. We can abbreviation previous two statements to <code>m1.push_back(std::to_string(i));</code>.</p>
 <pre><code class="c++">void StrVec::push_back(std::string&amp;&amp; s) &#123;
-    chk_n_alloc();
-    alloc.construct(first_free++, std::move(s));
+ chk_n_alloc();
+ alloc.construct(first_free++, std::move(s));
 &#125;
 </code></pre>
 
@@ -1172,7 +1172,7 @@ void push_back(X&amp;&amp;); // move: binds only to modifiable rvalues of type X
           
             <a href="/2021/12/10/Cpp_c10/" rel="prev">
               <div class="background">
-                <img class="lazyload" src="" data-src="/images/cover/(2).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/(2).jpg.webp">
+                <img class="lazyload" src="" data-src="/images/cover/C_background.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/C_background.webp">
               </div>
               <span class="label">
               Previous Post</span>
@@ -1190,7 +1190,7 @@ void push_back(X&amp;&amp;); // move: binds only to modifiable rvalues of type X
           
             <a href="/2021/12/08/Cpp_c08/" rel="next">
               <div class="background">
-                <img class="lazyload" src="" data-src="/images/cover/(8).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/(8).jpg.webp">
+                <img class="lazyload" src="" data-src="/images/cover/C_background.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/C_background.webp">
               </div>
               <span class="label">
               Next Post</span>
@@ -1204,21 +1204,6 @@ void push_back(X&amp;&amp;); // move: binds only to modifiable rvalues of type X
         
       </section>
       
-<div id="vcomments"></div>
-<script>
-	window.onload = function(){
-		var valine = new Valine();
-		valine.init({
-			el: '#vcomments',
-			appId: "EAyicHJhXmxJNEeuhACVujd4-gzGzoHsz",
-			appKey: "09Tjj4It5DOhgboduuM40u7y",
-			avatar: 'wavatar',
-			path: window.location.pathname,
-			placeholder: "有什么想说的吗.."
-		})
-	}
-</script>
-
 
 
 
@@ -1273,7 +1258,7 @@ void push_back(X&amp;&amp;); // move: binds only to modifiable rvalues of type X
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2023 Noah Bishop<br>
+      &copy; 2026 Noah Bishop<br>
       powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
@@ -1576,26 +1561,6 @@ void push_back(X&amp;&amp;); // move: binds only to modifiable rvalues of type X
   }
 </style>
 <meting-js
-
-    id="7225712775"
-
-    server="netease"
-
-    type="playlist"
-
-    fixed="true"
-
-    autoplay="true"
-
-    loop="all"
-
-    order="random"
-
-    preload="auto"
-
-    volume="0.5"
-
-    mutex="true"
 
 </meting-js>
 <script>

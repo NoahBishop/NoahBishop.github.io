@@ -55,7 +55,7 @@
 					/*End of Initial Variables*/
 				</script>
 				<script type="text/javascript">
-					var bg = "https://morning.eu.org/images/cover/(1).jpg.webp,https://morning.eu.org/images/cover/(2).jpg.webp,https://morning.eu.org/images/cover/(3).jpg.webp,https://morning.eu.org/images/cover/(4).jpg.webp,https://morning.eu.org/images/cover/(5).jpg.webp,https://morning.eu.org/images/cover/(6).jpg.webp,https://morning.eu.org/images/cover/(7).jpg.webp,https://morning.eu.org/images/cover/(8).jpg.webp".split(",");
+					var bg = "https://morning.eu.org/images/cover/(1).jpg.webp,https://morning.eu.org/images/cover/(2).jpg.webp,https://morning.eu.org/images/cover/(3).jpg.webp,https://morning.eu.org/images/cover/(4).jpg.webp".split(",");
 					var bgindex = Math.floor(Math.random() * bg.length);
 					if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
 						alert('朋友，IE浏览器未适配哦~');
@@ -429,7 +429,8 @@
 </div>
 <div class="pattern-center ">
   <div class="pattern-attachment-img">
-    <img src="/images/background/night.jpg" src="" data-src="/images/background/night.jpg" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+    <img src="/images/background/night.jpg" src="" data-src="/images/background/night.jpg" class="lazyload"
+      onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
   </div>
   <header class="pattern-header ">
     <h1 class="entry-title">谢谢~</h1>
@@ -437,10 +438,11 @@
 </div>
 <div id="content" class="site-content">
   <article class="post-item post-301 page type-page status-publish has-post-thumbnail hentry">
-  如果喜欢我的博客，可以考虑资助一下哦~非常感激！
+    如果喜欢我的博客，可以考虑资助一下哦~非常感激！
     <div id="root">
       <div class="root">
-        <a href="https://github.com/Kaiyuan/donate-page" target="_blank" class="pos-f tr3" title="Github"><span id="github"></span></a>
+        <a href="https://github.com/Kaiyuan/donate-page" target="_blank" class="pos-f tr3" title="Github"><span
+            id="github"></span></a>
         <ul id="donateBox" class="list pos-f tr3">
           <!-- <li id="BTC" data-footnote="Copy addres and show QRCod"><button id="BTCBn"  data-clipboard-target="#btc-key" alt="Copy to clipboard">Bitcoin</button></li> -->
           <li id="PayPal"><a href="" target="_blank">PayPal</a></li>
@@ -451,13 +453,14 @@
         <div id="QRBox" class="pos-f left-100">
           <div id="MainBox"></div>
         </div>
-        <!-- Bitcoin 账号 -->
-        <!-- <input id="btc-key" type="text" value="14JkMR68n4PBASB3TgvpjtaPTbfffSwFbW" readonly="readonly"> -->
       </div>
     </div>
-    <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+    <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent">
+    </div>
     <footer class="post-footer">
-      <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+      <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank"
+          rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+      </div>
       <div class="post-tags">
       </div>
       <div class="post-share">
@@ -468,11 +471,12 @@
   </article>
   <section class="author-profile">
     <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
-      <a href="/about/" class="profile gravatar"><img src="https://morning.eu.org/images/custom/avatar.jpg" itemprop="image" alt="hojun" height="70" width="70"></a>
+      <a href="/about/" class="profile gravatar"><img src="https://morning.eu.org/images/custom/avatar.jpg" itemprop="image"
+          alt="hojun" height="70" width="70"></a>
       <div class="meta">
         <span class="title">Author</span>
         <h3 itemprop="name">
-        <a target="_blank" href="https://morning.eu.org" itemprop="url" rel="author noopener">Noah</a>
+          <a target="_blank" href="https://morning.eu.org" itemprop="url" rel="author noopener">Noah</a>
         </h3>
       </div>
     </div>
@@ -480,28 +484,27 @@
     <p><i class="iconfont icon-write"></i>Live your life with passion! With some drive!</p>
   </section>
 </div>
-  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script> -->
-  <script>
-    jQuery(document).ready(function() {
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+<script>
+  jQuery(document).ready(function () {
     var QRBox = $('#QRBox');
     var MainBox = $('#MainBox');
     var BTCQR = '/images/donate/BTCQR.png'; // 二维码路径
-    var AliPayQR  = 'https://morning.eu.org/images/custom/donate/404.jpg';
-    var WeChanQR  = 'https://morning.eu.org/images/custom/donate/404.jpg';
+    var AliPayQR = 'https://morning.eu.org/images/custom/donate/404.jpg';
+    var WeChanQR = 'https://morning.eu.org/images/custom/donate/404.jpg';
 
     function showQR(QR) {
       if (QR) {
-        MainBox.css('background-image','url('+QR+')');
+        MainBox.css('background-image', 'url(' + QR + ')');
       }
       $('#DonateText,#donateBox,#github').addClass('blur');
-      QRBox.fadeIn(300,function(argument) {
+      QRBox.fadeIn(300, function (argument) {
         MainBox.addClass('showQR');
       });
     }
 
-    $('#donateBox>li').click(function(event) {
-      var thisID  = $(this).attr('id');
+    $('#donateBox>li').click(function (event) {
+      var thisID = $(this).attr('id');
       if (thisID === 'BTC') {
         new ClipboardJS('#BTCBn');
         new ClipboardJS('.btnsss');
@@ -513,19 +516,18 @@
       }
     });
 
-    MainBox.click(function(event) {
+    MainBox.click(function (event) {
       MainBox.removeClass('showQR').addClass('hideQR');
-      setTimeout (function(a) {
-        QRBox.fadeOut(300,function(argument) {
+      setTimeout(function (a) {
+        QRBox.fadeOut(300, function (argument) {
           MainBox.removeClass('hideQR');
         });
         $('#DonateText,#donateBox,#github').removeClass('blur');
-      },600);
+      }, 600);
 
     });
   });
-  </script>
-
+</script>
     </div>    
     <div class="ins-search">
     <div class="ins-search-mask"></div>
@@ -558,7 +560,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2023 Noah Bishop<br>
+      &copy; 2026 Noah Bishop<br>
       powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
@@ -861,26 +863,6 @@
   }
 </style>
 <meting-js
-
-    id="7225712775"
-
-    server="netease"
-
-    type="playlist"
-
-    fixed="true"
-
-    autoplay="true"
-
-    loop="all"
-
-    order="random"
-
-    preload="auto"
-
-    volume="0.5"
-
-    mutex="true"
 
 </meting-js>
 <script>

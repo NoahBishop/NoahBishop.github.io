@@ -55,7 +55,7 @@
 					/*End of Initial Variables*/
 				</script>
 				<script type="text/javascript">
-					var bg = "https://morning.eu.org/images/cover/(1).jpg.webp,https://morning.eu.org/images/cover/(2).jpg.webp,https://morning.eu.org/images/cover/(3).jpg.webp,https://morning.eu.org/images/cover/(4).jpg.webp,https://morning.eu.org/images/cover/(5).jpg.webp,https://morning.eu.org/images/cover/(6).jpg.webp,https://morning.eu.org/images/cover/(7).jpg.webp,https://morning.eu.org/images/cover/(8).jpg.webp".split(",");
+					var bg = "https://morning.eu.org/images/cover/(1).jpg.webp,https://morning.eu.org/images/cover/(2).jpg.webp,https://morning.eu.org/images/cover/(3).jpg.webp,https://morning.eu.org/images/cover/(4).jpg.webp".split(",");
 					var bgindex = Math.floor(Math.random() * bg.length);
 					if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
 						alert('朋友，IE浏览器未适配哦~');
@@ -430,7 +430,7 @@
 
   <div class="pattern-center single-center">
     <!-- 有配图默认渲染第一张 -->
-    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/(4).jpg.webp');" src="" data-src="/images/cover/(4).jpg.webp">
+    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/C_background.webp');" src="" data-src="/images/cover/C_background.webp">
     </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
@@ -473,13 +473,13 @@ int compare(const double &amp;v1, const double &amp;v2)
 <h3 id="Function-Templates"><a href="#Function-Templates" class="headerlink" title="Function Templates"></a>Function Templates</h3><p>Rather than defining a new function for each type, we can define a <strong>function template</strong>. A function template is a formula from which we can generate type-specific versions of that function. The template version of compare looks like:</p>
 <pre><code class="c++">template &lt;typename T&gt;
 int compare(const T&amp; l, const T&amp; r) &#123;
-    if (r &lt; l) &#123;
-        return 1;
-    &#125;
-    if (l &lt; r) &#123;
-        return -1;
-    &#125;
-    return 0;
+ if (r &lt; l) &#123;
+  return 1;
+ &#125;
+ if (l &lt; r) &#123;
+  return -1;
+ &#125;
+ return 0;
 &#125;
 </code></pre>
 <p>A template definition starts with the keyword template followed by a <strong>template parameter list</strong>, which is a comma-separated list of one or more template parameters bracketed by the <code>&lt;</code> and <code>&gt;</code> .</p>
@@ -490,9 +490,9 @@ int compare(const T&amp; l, const T&amp; r) &#123;
 <p>the arguments have type double. The compiler will deduce int as the template argument and will bind that argument to the template parameter T.</p>
 <p>Our compare function has one <strong>template type parameter</strong>. In general, we can use a type parameter as a type specifier in the same way that we use a built-in or class type specifier. In particular, a type parameter can be used to name the return type or a function parameter type, and for variable declarations or casts inside the function body:</p>
 <pre><code class="c++">template &lt;typename T&gt; T foo(T* p) &#123;
-    T tmp = *p; // tmp will have the type to which p points
-    // ...
-    return tmp;
+ T tmp = *p; // tmp will have the type to which p points
+ // ...
+ return tmp;
 &#125;
 </code></pre>
 <p>Each type parameter must be preceded by the keyword class or typename:</p>
@@ -508,8 +508,8 @@ template &lt;typename T, class U&gt; calc (const T&amp;, const U&amp;);
 <p>As an example, we can write a version of compare that will handle string literals. Such literals are arrays of const char. Because we cannot copy an array, we’ll define our parameters as references to an array. Because we’d like to be able to compare literals of different lengths, we’ll give our template two nontype parameters. The first template parameter will represent the size of the first array, and the second parameter will represent the size of the second array:</p>
 <pre><code class="c++">template&lt;unsigned N, unsigned M&gt;
 int compare(const char(&amp;p1)[N], const char(&amp;p2)[M]) &#123;
-    // note need incloude string.h first
-    return strcmp(p1, p2);
+ // note need incloude string.h first
+ return strcmp(p1, p2);
 &#125;
 </code></pre>
 <p>A function template can be declared <strong>inline</strong> or <strong>constexpr</strong> in the same ways as nontemplate functions. The inline or constexpr specifier follows the template parameter list and precedes the return type:</p>
@@ -527,13 +527,13 @@ inline template &lt;typename T&gt; T min(const T&amp;, const T&amp;);
 <p>In fact, if we were truly concerned about type independence and portability, we probably should have defined our function using the <code>less</code></p>
 <pre><code class="c++">template &lt;class T&gt;
 int compare(const T&amp; l, const T&amp; r) &#123;
-    if (std::less&lt;T&gt;()(l, r)) &#123;
-        return -1;
-    &#125;
-    if (std::less&lt;T&gt;()(r, l)) &#123;
-        return 1;
-    &#125;
-    return 0;
+ if (std::less&lt;T&gt;()(l, r)) &#123;
+  return -1;
+ &#125;
+ if (std::less&lt;T&gt;()(r, l)) &#123;
+  return 1;
+ &#125;
+ return 0;
 &#125;
 </code></pre>
 <p>The problem with our original version is that if a user calls it with two pointers and those pointers do not point to the same array, then our code is undefined.</p>
@@ -546,60 +546,60 @@ int compare(const T&amp; l, const T&amp; r) &#123;
 
 template &lt;typename T&gt; class Blob &#123;
 public:
-    typedef T value_type;
-    typedef typename std::vector&lt;T&gt;::size_type size_type;
-    // constructors
-    Blob();
-    Blob(std::initializer_list&lt;T&gt; il);
-    // number of elements in the Blob
-    size_type size() const &#123;
-        return data-&gt;size();
-    &#125;
-    bool empty() const &#123;
-        return data-&gt;empty();
-    &#125;
-    // add and remove elements
-    void push_back(const T&amp; t) &#123;
-        data-&gt;push_back(t);
-    &#125;
-    // move version;
-    void push_back(T&amp;&amp; t) &#123;
-        data-&gt;push_back(std::move(t));
-    &#125;
-    void pop_back() &#123;
-        data-&gt;pop_back();
-    &#125;
-    // element access
-    T&amp; back() &#123;
-        return data-&gt;back();
-    &#125;
+ typedef T value_type;
+ typedef typename std::vector&lt;T&gt;::size_type size_type;
+ // constructors
+ Blob();
+ Blob(std::initializer_list&lt;T&gt; il);
+ // number of elements in the Blob
+ size_type size() const &#123;
+  return data-&gt;size();
+ &#125;
+ bool empty() const &#123;
+  return data-&gt;empty();
+ &#125;
+ // add and remove elements
+ void push_back(const T&amp; t) &#123;
+  data-&gt;push_back(t);
+ &#125;
+ // move version;
+ void push_back(T&amp;&amp; t) &#123;
+  data-&gt;push_back(std::move(t));
+ &#125;
+ void pop_back() &#123;
+  data-&gt;pop_back();
+ &#125;
+ // element access
+ T&amp; back() &#123;
+  return data-&gt;back();
+ &#125;
 
-    T&amp; operator[](size_type i) &#123;
-        std::string msg = &quot;error&quot;;
-        check(i, msg);
-        return (*data)[i];
-    &#125;
+ T&amp; operator[](size_type i) &#123;
+  std::string msg = &quot;error&quot;;
+  check(i, msg);
+  return (*data)[i];
+ &#125;
 private:
-    std::shared_ptr&lt;std::vector&lt;T&gt;&gt; data;
-    void check(size_type i, const std::string&amp; msg) const;
+ std::shared_ptr&lt;std::vector&lt;T&gt;&gt; data;
+ void check(size_type i, const std::string&amp; msg) const;
 &#125;;
 
 
 template&lt;typename T&gt;
 Blob&lt;T&gt;::Blob()
-    :data(std::make_shared&lt;std::vector&lt;T&gt;&gt;()) &#123;
+ :data(std::make_shared&lt;std::vector&lt;T&gt;&gt;()) &#123;
 &#125;
 
 template&lt;typename T&gt;
 Blob&lt;T&gt;::Blob(std::initializer_list&lt;T&gt; il)
-    : data(std::make_shared&lt;std::vector&lt;T&gt;&gt;(il)) &#123;
+ : data(std::make_shared&lt;std::vector&lt;T&gt;&gt;(il)) &#123;
 &#125;
 
 template&lt;typename T&gt;
 void Blob&lt;T&gt;::check(size_type i, const std::string&amp; msg) const &#123;
-    if (i &gt; data-&gt;size()) &#123;
-        throw std::out_of_range(msg);
-    &#125;
+ if (i &gt; data-&gt;size()) &#123;
+  throw std::out_of_range(msg);
+ &#125;
 &#125;
 </code></pre>
 <p>it’s worth to note in this program, I define the function in <code>Blob.h</code> file instead of <code>bolb.cpp</code>, you can try write template functions in <code>bolb.cpp</code> file see what happened.</p>
@@ -615,24 +615,24 @@ Blob&lt;double&gt; prices;// different element type
 
 template &lt;typename T&gt; class BlobPtr &#123;
 public:
-    BlobPtr() : curr(0) &#123;&#125;
-    BlobPtr(Blob&lt;T&gt;&amp; a, size_t sz = 0) :
-        wptr(a.data), curr(sz) &#123;
-    &#125;
-    T&amp; operator*() const &#123;
-        auto p = check(curr, &quot;dereference past end&quot;);
-        return (*p)[curr]; // (*p) is the vector to which this object points
-    &#125;
-    // increment and decrement
-    BlobPtr&amp; operator++(); // prefix operators
-    BlobPtr&amp; operator--();
+ BlobPtr() : curr(0) &#123;&#125;
+ BlobPtr(Blob&lt;T&gt;&amp; a, size_t sz = 0) :
+  wptr(a.data), curr(sz) &#123;
+ &#125;
+ T&amp; operator*() const &#123;
+  auto p = check(curr, &quot;dereference past end&quot;);
+  return (*p)[curr]; // (*p) is the vector to which this object points
+ &#125;
+ // increment and decrement
+ BlobPtr&amp; operator++(); // prefix operators
+ BlobPtr&amp; operator--();
 private:
-    // check returns a shared_ptr to the vector if the check succeeds
-    std::shared_ptr&lt;std::vector&lt;T&gt;&gt;
-        check(std::size_t, const std::string&amp;) const;
-    // store a weak_ptr, which means the underlying vector might be destroyed
-    std::weak_ptr&lt;std::vector&lt;T&gt;&gt; wptr;
-    std::size_t curr; // current position within the array
+ // check returns a shared_ptr to the vector if the check succeeds
+ std::shared_ptr&lt;std::vector&lt;T&gt;&gt;
+  check(std::size_t, const std::string&amp;) const;
+ // store a weak_ptr, which means the underlying vector might be destroyed
+ std::weak_ptr&lt;std::vector&lt;T&gt;&gt; wptr;
+ std::size_t curr; // current position within the array
 &#125;;
 </code></pre>
 <p>Notice: the prefix increment and decrement members of <code>BlobPtr</code> return <code>BlobPtr&amp;</code>, not <code>BlobPtr&lt;T&gt;&amp;</code>. When we are inside the scope of a class template, the compiler treats references to the template itself as if we had supplied template arguments matching the template’s own parameters. That is, it is as if we had written:</p>
@@ -642,16 +642,16 @@ BlobPtr&lt;T&gt;&amp; operator--();
 <p>When we define members outside the body of a class template, we must remember that we are not in the scope of the class until the class name is seen:</p>
 <pre><code class="c++">template&lt;typename T&gt;
 inline BlobPtr&lt;T&gt;&amp; BlobPtr&lt;T&gt;::operator++() &#123;
-    BlobPtr ret = *this; // save the current value
-    ++* this; // advance one element; prefix ++ checks the increment
-    return ret; // return the saved state
+ BlobPtr ret = *this; // save the current value
+ ++* this; // advance one element; prefix ++ checks the increment
+ return ret; // return the saved state
 &#125;
 
 template&lt;typename T&gt;
 inline BlobPtr&lt;T&gt;&amp; BlobPtr&lt;T&gt;::operator--() &#123;
-    BlobPtr ret = *this; // save the current value
-    --* this; // advance one element; prefix ++ checks the increment
-    return ret; // return the saved state
+ BlobPtr ret = *this; // save the current value
+ --* this; // advance one element; prefix ++ checks the increment
+ return ret; // return the saved state
 &#125;
 </code></pre>
 <p>Because the return type appears outside the scope of the class, we must specify that the return type returns a <code>BlobPtr</code> instantiated with the same type as the class. Inside the function body, we are in the scope of the class so do not need to repeat the template argument when we define ret. When we do not supply template arguments, the compiler assumes that we are using the same type as the member’s instantiation. Hence, the definition of ret is as if we had written:</p>
@@ -691,7 +691,7 @@ inline BlobPtr&lt;T&gt;&amp; BlobPtr&lt;T&gt;::operator--() &#123;
           
             <a href="/2022/07/01/essay_01_use%20cmake%20settting%20up%20Qt%20project/" rel="prev">
               <div class="background">
-                <img class="lazyload" src="" data-src="/images/cover/(1).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/(1).jpg.webp">
+                <img class="lazyload" src="" data-src="/images/cover/QtWithTorch.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/QtWithTorch.webp">
               </div>
               <span class="label">
               Previous Post</span>
@@ -709,7 +709,7 @@ inline BlobPtr&lt;T&gt;&amp; BlobPtr&lt;T&gt;::operator--() &#123;
           
             <a href="/2021/12/11/Cpp_c11/" rel="next">
               <div class="background">
-                <img class="lazyload" src="" data-src="/images/cover/(3).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/(3).jpg.webp">
+                <img class="lazyload" src="" data-src="/images/cover/C_background.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/C_background.webp">
               </div>
               <span class="label">
               Next Post</span>
@@ -723,21 +723,6 @@ inline BlobPtr&lt;T&gt;&amp; BlobPtr&lt;T&gt;::operator--() &#123;
         
       </section>
       
-<div id="vcomments"></div>
-<script>
-	window.onload = function(){
-		var valine = new Valine();
-		valine.init({
-			el: '#vcomments',
-			appId: "EAyicHJhXmxJNEeuhACVujd4-gzGzoHsz",
-			appKey: "09Tjj4It5DOhgboduuM40u7y",
-			avatar: 'wavatar',
-			path: window.location.pathname,
-			placeholder: "有什么想说的吗.."
-		})
-	}
-</script>
-
 
 
 
@@ -792,7 +777,7 @@ inline BlobPtr&lt;T&gt;&amp; BlobPtr&lt;T&gt;::operator--() &#123;
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2023 Noah Bishop<br>
+      &copy; 2026 Noah Bishop<br>
       powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
@@ -1095,26 +1080,6 @@ inline BlobPtr&lt;T&gt;&amp; BlobPtr&lt;T&gt;::operator--() &#123;
   }
 </style>
 <meting-js
-
-    id="7225712775"
-
-    server="netease"
-
-    type="playlist"
-
-    fixed="true"
-
-    autoplay="true"
-
-    loop="all"
-
-    order="random"
-
-    preload="auto"
-
-    volume="0.5"
-
-    mutex="true"
 
 </meting-js>
 <script>

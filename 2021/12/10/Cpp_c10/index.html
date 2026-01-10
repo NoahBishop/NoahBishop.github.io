@@ -55,7 +55,7 @@
 					/*End of Initial Variables*/
 				</script>
 				<script type="text/javascript">
-					var bg = "https://morning.eu.org/images/cover/(1).jpg.webp,https://morning.eu.org/images/cover/(2).jpg.webp,https://morning.eu.org/images/cover/(3).jpg.webp,https://morning.eu.org/images/cover/(4).jpg.webp,https://morning.eu.org/images/cover/(5).jpg.webp,https://morning.eu.org/images/cover/(6).jpg.webp,https://morning.eu.org/images/cover/(7).jpg.webp,https://morning.eu.org/images/cover/(8).jpg.webp".split(",");
+					var bg = "https://morning.eu.org/images/cover/(1).jpg.webp,https://morning.eu.org/images/cover/(2).jpg.webp,https://morning.eu.org/images/cover/(3).jpg.webp,https://morning.eu.org/images/cover/(4).jpg.webp".split(",");
 					var bgindex = Math.floor(Math.random() * bg.length);
 					if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
 						alert('朋友，IE浏览器未适配哦~');
@@ -430,7 +430,7 @@
 
   <div class="pattern-center single-center">
     <!-- 有配图默认渲染第一张 -->
-    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/(2).jpg.webp');" src="" data-src="/images/cover/(2).jpg.webp">
+    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/C_background.webp');" src="" data-src="/images/cover/C_background.webp">
     </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
@@ -493,32 +493,32 @@ data1.operator+=(data2); // equivalent call to a member operator function
 <h3 id="Overloading-the-Output-Operator-lt-lt"><a href="#Overloading-the-Output-Operator-lt-lt" class="headerlink" title="Overloading the Output Operator &lt;&lt;"></a>Overloading the Output Operator &lt;&lt;</h3><p>Ordinarily, the first parameter of an output operator is a reference to a nonconst <code>ostream</code> object. The second parameter ordinarily should be a reference to const of the class type we want to print. To be consistent with other output operators, operator&lt;&lt; normally returns its ostream parameter.</p>
 <p>As an example, we’ll write the <code>Sales_data</code> output operator:(Sales_data in <a target="_blank" rel="noopener" href="https://www.morning.tk/2021/12/20/c++%20c3/#Classes">here</a>)</p>
 <pre><code class="c++">&#123;
-    // in class scope 
-    friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp;, const Sales_data&amp;);
+ // in class scope 
+ friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp;, const Sales_data&amp;);
 &#125;
 std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const Sales_data&amp; item) &#123;
-    os &lt;&lt; item.isbn() &lt;&lt; &quot; &quot; &lt;&lt; item.units_sold &lt;&lt; &quot; &quot;
-        &lt;&lt; item.revenue &lt;&lt; &quot; &quot; &lt;&lt; item.avg_price();
-    return os;
+ os &lt;&lt; item.isbn() &lt;&lt; &quot; &quot; &lt;&lt; item.units_sold &lt;&lt; &quot; &quot;
+  &lt;&lt; item.revenue &lt;&lt; &quot; &quot; &lt;&lt; item.avg_price();
+ return os;
 &#125;
 </code></pre>
 <p>Input and output operators that conform to the conventions of the iostream library must be ordinary nonmember functions. These operators cannot be members of our own class. IO Operators Must Be Nonmember Functions.</p>
 <h3 id="Overloading-the-Input-Operator-gt-gt"><a href="#Overloading-the-Input-Operator-gt-gt" class="headerlink" title="Overloading the Input Operator &gt;&gt;"></a>Overloading the Input Operator &gt;&gt;</h3><p>Ordinarily the first parameter of an input operator is a reference to the stream from which it is to read, and the second parameter is a reference to the (nonconst) object into which to read. The operator usually returns a reference to its given stream. The second parameter must be <strong>nonconst</strong> because the purpose of an input operator is to read data into this object.</p>
 <p>As an example, we’ll write the <code>Sales_data</code> input operator:</p>
 <pre><code class="c++">&#123;
-    // in class scope 
-    friend std::istream&amp; operator&gt;&gt;(std::istream&amp;, const Sales_data&amp;);
+ // in class scope 
+ friend std::istream&amp; operator&gt;&gt;(std::istream&amp;, const Sales_data&amp;);
 &#125;
 inline std::istream&amp; operator&gt;&gt;(std::istream&amp; is, Sales_data&amp; item) &#123;
-    double price = 0;
-    is &gt;&gt; item.bookNo &gt;&gt; item.units_sold &gt;&gt; price;
-    if (is) &#123;
-        item.revenue = item.units_sold * price;
-    &#125;
-    else &#123;
-        item = Sales_data();
-    &#125;
-    return is;
+ double price = 0;
+ is &gt;&gt; item.bookNo &gt;&gt; item.units_sold &gt;&gt; price;
+ if (is) &#123;
+  item.revenue = item.units_sold * price;
+ &#125;
+ else &#123;
+  item = Sales_data();
+ &#125;
+ return is;
 &#125;
 </code></pre>
 <p>Except for the if statement, this definition is similar to our earlier read function. The if checks whether the reads were successful. If an IO error occurs, the operator resets its given object to the empty <code>Sales_data</code>. That way, the object is guaranteed to be in a consistent state.</p>
@@ -527,26 +527,26 @@ inline std::istream&amp; operator&gt;&gt;(std::istream&amp; is, Sales_data&amp; 
 <pre><code class="c++">// assumes that both objects refer to the same book
 Sales_data operator+(const Sales_data &amp;lhs, const Sales_data &amp;rhs)
 &#123;
-    Sales_data sum = lhs; // copy data members from lhs into sum
-    sum += rhs; // add rhs into sum
-    return sum;
+ Sales_data sum = lhs; // copy data members from lhs into sum
+ sum += rhs; // add rhs into sum
+ return sum;
 &#125;
 </code></pre>
 <h3 id="Equality-Operators"><a href="#Equality-Operators" class="headerlink" title="Equality Operators"></a>Equality Operators</h3><p>Ordinarily, classes in C++ define the equality operator to test whether two objects are equivalent. That is, they usually compare every data member and treat two objects as equal if and only if all the corresponding members are equal. In line with this design philosophy, our Sales_data equality operator should compare the bookNo as well as the sales figures:</p>
 <pre><code class="C++">&#123;
-    // in class scope 
-    friend bool operator==(const Sales_data&amp;, const Sales_data&amp;);
-    friend bool operator!=(const Sales_data&amp;, const Sales_data&amp;);
+ // in class scope 
+ friend bool operator==(const Sales_data&amp;, const Sales_data&amp;);
+ friend bool operator!=(const Sales_data&amp;, const Sales_data&amp;);
 &#125;
 
 inline bool operator==(const Sales_data&amp; lhs, const Sales_data&amp; rhs) &#123;
-    return lhs.isbn() == rhs.isbn() &amp;&amp;
-        lhs.units_sold == rhs.units_sold &amp;&amp;
-        lhs.revenue == rhs.revenue;
+ return lhs.isbn() == rhs.isbn() &amp;&amp;
+  lhs.units_sold == rhs.units_sold &amp;&amp;
+  lhs.revenue == rhs.revenue;
 &#125;
 
 inline bool operator!=(const Sales_data&amp; lhs, const Sales_data&amp; rhs) &#123;
-    return !(lhs == rhs);
+ return !(lhs == rhs);
 &#125;
 </code></pre>
 <h3 id="Relational-Operators"><a href="#Relational-Operators" class="headerlink" title="Relational Operators"></a>Relational Operators</h3><p>Classes for which the equality operator is defined also often (but not always) have relational operators. like <code>&lt; &gt; &lt;= &gt;=</code>. We might think that we’d define <code>&lt;</code> similarly to <code>compareIsbn</code> . That function compared Sales_data objects by comparing their ISBNs. But results that are inconsistent with our definition of ==.</p>
@@ -557,16 +557,16 @@ v = &#123;&quot;a&quot;, &quot;an&quot;, &quot;the&quot;&#125;;
 </code></pre>
 <p>We can add this operator to our <code>StrVec</code> class:</p>
 <pre><code class="c++">&#123;
-    //class scope
-    StrVec&amp; operator=(std::initializer_list&lt;std::string&gt;);
+ //class scope
+ StrVec&amp; operator=(std::initializer_list&lt;std::string&gt;);
 &#125;
 StrVec&amp; StrVec::operator=(std::initializer_list&lt;std::string&gt; il) &#123;
-    // alloc_n_copy allocates space and copies elements from the given range
-    auto data = alloc_n_copy(il.begin(), il.end());
-    free(); // destroy the elements in this object and free the space
-    elements = data.first; // update data members to point to the new space
-    first_free = cap = data.second;
-    return *this;
+ // alloc_n_copy allocates space and copies elements from the given range
+ auto data = alloc_n_copy(il.begin(), il.end());
+ free(); // destroy the elements in this object and free the space
+ elements = data.first; // update data members to point to the new space
+ first_free = cap = data.second;
+ return *this;
 &#125;
 </code></pre>
 <p>Notice: In pervious version, the <code>alloc_n_copy</code> parameters are <code>string*</code>, but <code>il.begin()</code> return a <code>const string*</code>, we need change to:</p>
@@ -577,23 +577,23 @@ StrVec&amp; StrVec::operator=(std::initializer_list&lt;std::string&gt; il) &#123
 #include&lt;iostream&gt;
 
 int main() &#123;
-    StrVec p;
-    p = &#123; &quot;a&quot;, &quot;an&quot;, &quot;the&quot; &#125;;
-    for (size_t i = 0; i &lt; p.size(); i++) &#123;
-        std::cout &lt;&lt; *(p.begin() + i) &lt;&lt; std::endl;
-    &#125;
-    return 0;
+ StrVec p;
+ p = &#123; &quot;a&quot;, &quot;an&quot;, &quot;the&quot; &#125;;
+ for (size_t i = 0; i &lt; p.size(); i++) &#123;
+  std::cout &lt;&lt; *(p.begin() + i) &lt;&lt; std::endl;
+ &#125;
+ return 0;
 &#125;
 </code></pre>
 <p>Compound assignment operators are not required to be members. However, we prefer to define all assignments, including compound assignments, in the class. For consistency with the built-in compound assignment, these operators should return a reference to their left-hand operand. For example, here is the definition of the <code>Sales_data</code> compound-assignment operator:</p>
 <pre><code class="c++">&#123;
-    // in class scope
+ // in class scope
     Sales_data&amp; operator+=(Sales_data&amp;);
 &#125;
 inline Sales_data&amp; Sales_data::operator+=(Sales_data&amp; rhs) &#123;
-    this-&gt;units_sold += rhs.units_sold;
-    this-&gt;revenue += rhs.revenue;
-    return *this;
+ this-&gt;units_sold += rhs.units_sold;
+ this-&gt;revenue += rhs.revenue;
+ return *this;
 &#125;
 </code></pre>
 <p>This is a simple case to test our <code>Sales_data</code> class:</p>
@@ -602,47 +602,47 @@ inline Sales_data&amp; Sales_data::operator+=(Sales_data&amp; rhs) &#123;
 #include&lt;iostream&gt;
 
 int main() &#123;
-    std::string isbn = &quot;1-4y35&quot;;
-    Sales_data b1(isbn, 80, 18.9);
-    Sales_data b2(isbn, 20, 18.9);
-    b1 += b2;
-    std::cout &lt;&lt; b1 &lt;&lt; std::endl;
-    return 0;
+ std::string isbn = &quot;1-4y35&quot;;
+ Sales_data b1(isbn, 80, 18.9);
+ Sales_data b2(isbn, 20, 18.9);
+ b1 += b2;
+ std::cout &lt;&lt; b1 &lt;&lt; std::endl;
+ return 0;
 &#125;
 </code></pre>
 <h2 id="Subscript-Operator"><a href="#Subscript-Operator" class="headerlink" title="Subscript Operator"></a>Subscript Operator</h2><p>Classes that represent containers from which elements can be retrieved by position often define the subscript operator, operator<code>[]</code>. As an example, we’ll define subscript for <code>StrVec</code>. Consequently, it is also usually a good idea to define both <strong>const</strong> and <strong>nonconst</strong> versions of this operator. When applied to a const object, subscript should return a reference to const so that it is not possible to assign to the returned object.</p>
 <pre><code class="c++">&#123;
-    // in class scope
+ // in class scope
     std::string operator[](std::size_t idx) &#123;
-        return elements[idx];
-    &#125;
-    const std::string operator[](std::size_t idx) const &#123;
-        return elements[idx];
-    &#125;
+  return elements[idx];
+ &#125;
+ const std::string operator[](std::size_t idx) const &#123;
+  return elements[idx];
+ &#125;
 &#125;
 </code></pre>
 <p>We can use these operators similarly to how we subscript a vector or array. Because subscript returns a reference to an element, if the <code>StrVec</code> is <strong>nonconst</strong>, we can assign to that element; if we subscript a <strong>const</strong> object, we can’t.</p>
 <h2 id="Increment-and-Decrement-Operators"><a href="#Increment-and-Decrement-Operators" class="headerlink" title="Increment and Decrement Operators"></a>Increment and Decrement Operators</h2><p>The increment (++) and decrement (–) operators are most often implemented for iterator classes. These operators let the class move between the elements of a sequence. There is no language requirement that these operators be members of the class. However, because these operators change the state of the object on which they operate, our preference is to make them members.</p>
 <p>For the built-in types, there are both prefix and postfix versions of the increment and decrement operators. Not surprisingly, we can define both the prefix and postfix instances of these operators for our own classes as well. We’ll look at the prefix versions first and then implement the postfix ones.</p>
 <h3 id="Defining-Prefix-Increment-Decrement-Operators"><a href="#Defining-Prefix-Increment-Decrement-Operators" class="headerlink" title="Defining Prefix Increment/Decrement Operators"></a>Defining Prefix Increment/Decrement Operators</h3><pre><code class="c++">&#123;
-    // in class scope
-    class_name&amp; operator++();
+ // in class scope
+ class_name&amp; operator++();
     class_name&amp; operator--();
 &#125;
 </code></pre>
 <h3 id="Differentiating-Prefix-and-Postfix-Operators"><a href="#Differentiating-Prefix-and-Postfix-Operators" class="headerlink" title="Differentiating Prefix and Postfix Operators"></a>Differentiating Prefix and Postfix Operators</h3><p>There is one problem with defining both the prefix and postfix operators: Normal overloading cannot distinguish between these operators. The prefix and postfix versions use the same symbol, meaning that the overloaded versions of these operators have the same name. They also have the same number and type of operands.</p>
 <p>To solve this problem, the postfix versions take an extra (unused) parameter of type int.</p>
 <pre><code class="c++">&#123;
-    // in class scope
-    class_name&amp; operator++(int);
+ // in class scope
+ class_name&amp; operator++(int);
     class_name&amp; operator--(int);
 &#125;
 </code></pre>
 <h2 id="Function-Call-Operator"><a href="#Function-Call-Operator" class="headerlink" title="Function-Call Operator"></a>Function-Call Operator</h2><p>Classes that overload the call operator allow objects of its type to be used as if they were a function. Because such classes can also store state, they can be more flexible than ordinary functions.<br>As a simple example, the following struct, named <code>absInt</code>, has a call operator that returns the absolute value of its argument:</p>
 <pre><code class="c++">struct absInt &#123;
-     int operator()(int val) const &#123;
-    return val &lt; 0 ? -val : val;
-    &#125;
+  int operator()(int val) const &#123;
+ return val &lt; 0 ? -val : val;
+ &#125;
 &#125;;
 </code></pre>
 <p>This class defines a single operation: the function-call operator. That operator takes an argument of type int and returns the argument’s absolute value.</p>
@@ -655,24 +655,24 @@ int ui = absObj(i); // passes i to absObj.operator()
 <p>As an example, we’ll define a class that prints a string argument. By default, our class will write to cout and will print a space following each string. We’ll also let users of our class provide a different stream on which to write and provide a different separator. We can define this class as follows:</p>
 <pre><code class="c++">class PrintString &#123;
 public:
-    PrintString(ostream &amp;o = cout, char c = &#39; &#39;): os(o), sep(c) &#123; &#125;
-    void operator()(const string &amp;s) const &#123; 
-        os &lt;&lt; s &lt;&lt; sep;
-    &#125;
+ PrintString(ostream &amp;o = cout, char c = &#39; &#39;): os(o), sep(c) &#123; &#125;
+ void operator()(const string &amp;s) const &#123; 
+  os &lt;&lt; s &lt;&lt; sep;
+ &#125;
 private:
-    ostream &amp;os; // stream on which to write
-    char sep; // character to print after each output
+ ostream &amp;os; // stream on which to write
+ char sep; // character to print after each output
 &#125;;
 </code></pre>
 <h3 id="Lambdas-Are-Function-Objects"><a href="#Lambdas-Are-Function-Objects" class="headerlink" title="Lambdas Are Function Objects"></a>Lambdas Are Function Objects</h3><p>When we write a lambda, the compiler translates that expression into an unnamed object of an unnamed class. The classes generated from a lambda contain an overloaded function-call operator. For example, the lambda that we passed as the last argument to <code>stable_sort</code>:</p>
 <pre><code class="c++">// sort words by size, but maintain alphabetical order for words of the same size
 std::stable_sort(words.begin(), words.end(),
-    [](const std::string&amp; a, const std::string&amp; b) &#123; return a.size() &lt; b.size(); &#125;);
+ [](const std::string&amp; a, const std::string&amp; b) &#123; return a.size() &lt; b.size(); &#125;);
 </code></pre>
 <p>acts like an unnamed object of a class that would look something like</p>
 <pre><code class="c++">class ShorterString &#123;
 public:
-    bool operator()(const string &amp;s1, const string &amp;s2) const&#123; 
+ bool operator()(const string &amp;s1, const string &amp;s2) const&#123; 
         return s1.size() &lt; s2.size(); 
     &#125;
 &#125;;
@@ -685,14 +685,14 @@ auto wc = find_if(words.begin(), words.end(),[sz](const string &amp;a));
 </code></pre>
 <p>would generate a class that looks something like</p>
 <pre><code class="c++">class SizeComp &#123;
-    SizeComp(size_t n) : sz(n) &#123;&#125; // parameter for each captured
-    variable
-        // call operator with the same return type, parameters, and body as the lambda
-        bool operator()(const string&amp; s) const &#123;
-        return s.size() &gt;= sz;
-    &#125;
+ SizeComp(size_t n) : sz(n) &#123;&#125; // parameter for each captured
+ variable
+  // call operator with the same return type, parameters, and body as the lambda
+  bool operator()(const string&amp; s) const &#123;
+  return s.size() &gt;= sz;
+ &#125;
 private:
-    size_t sz; // a data member for each variable captured by value
+ size_t sz; // a data member for each variable captured by value
 &#125;;
 </code></pre>
 <h3 id="Library-Defined-Function-Objects"><a href="#Library-Defined-Function-Objects" class="headerlink" title="Library-Defined Function Objects"></a>Library-Defined Function Objects</h3><p>The standard library defines a set of classes that represent the arithmetic, relational, and logical operators. Each class defines a call operator that applies the named operation. For example, the plus class has a function-call operator that applies + to a pair of operands; the modulus class defines a call operator that applies the binary % operator; the equal_to class applies ==; and so on.</p>
@@ -715,16 +715,16 @@ sum = intAdd(10, intNegate(10)); // sum = 0
 #include &lt;stdexcept&gt;
 class SmallInt &#123;
 public:
-    SmallInt(int i = 0) :data(i) &#123;
-        if (data &gt; 255 || data &lt; 0) &#123;
-            throw std::out_of_range(&quot;out of range!&quot;);
-        &#125;
-    &#125;
+ SmallInt(int i = 0) :data(i) &#123;
+  if (data &gt; 255 || data &lt; 0) &#123;
+   throw std::out_of_range(&quot;out of range!&quot;);
+  &#125;
+ &#125;
 
-    operator int() const &#123; return data; &#125;
+ operator int() const &#123; return data; &#125;
 
 private:
-    int data;
+ int data;
 &#125;;
 </code></pre>
 <p>Our <code>SmallInt</code> class defines conversions to and from its type. The constructor converts values of arithmetic type to a <code>SmallInt</code>. The conversion operator converts<code>SmallInt</code> objects to int.</p>
@@ -744,13 +744,13 @@ static_cast&lt;int&gt;(si) + 3; // ok: explicitly request the conversion
 <pre><code class="c++">// usually a bad idea to have mutual conversions between two class types
 struct B;
 struct A &#123;
-    A() = default;
-    A(const B&amp;); // converts a B to an A
-    // other members
+ A() = default;
+ A(const B&amp;); // converts a B to an A
+ // other members
 &#125;;
 struct B &#123;
-    operator A() const; // also converts a B to an A
-    // other members
+ operator A() const; // also converts a B to an A
+ // other members
 &#125;;
 A f(const A&amp;);
 B b;
@@ -806,7 +806,7 @@ int i = s3 + 0; // error: ambiguous
           
             <a href="/2021/12/11/Cpp_c11/" rel="prev">
               <div class="background">
-                <img class="lazyload" src="" data-src="/images/cover/(3).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/(3).jpg.webp">
+                <img class="lazyload" src="" data-src="/images/cover/C_background.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/C_background.webp">
               </div>
               <span class="label">
               Previous Post</span>
@@ -824,7 +824,7 @@ int i = s3 + 0; // error: ambiguous
           
             <a href="/2021/12/09/Cpp_c09/" rel="next">
               <div class="background">
-                <img class="lazyload" src="" data-src="/images/cover/(1).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/(1).jpg.webp">
+                <img class="lazyload" src="" data-src="/images/cover/C_background.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/C_background.webp">
               </div>
               <span class="label">
               Next Post</span>
@@ -838,21 +838,6 @@ int i = s3 + 0; // error: ambiguous
         
       </section>
       
-<div id="vcomments"></div>
-<script>
-	window.onload = function(){
-		var valine = new Valine();
-		valine.init({
-			el: '#vcomments',
-			appId: "EAyicHJhXmxJNEeuhACVujd4-gzGzoHsz",
-			appKey: "09Tjj4It5DOhgboduuM40u7y",
-			avatar: 'wavatar',
-			path: window.location.pathname,
-			placeholder: "有什么想说的吗.."
-		})
-	}
-</script>
-
 
 
 
@@ -907,7 +892,7 @@ int i = s3 + 0; // error: ambiguous
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2023 Noah Bishop<br>
+      &copy; 2026 Noah Bishop<br>
       powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
@@ -1210,26 +1195,6 @@ int i = s3 + 0; // error: ambiguous
   }
 </style>
 <meting-js
-
-    id="7225712775"
-
-    server="netease"
-
-    type="playlist"
-
-    fixed="true"
-
-    autoplay="true"
-
-    loop="all"
-
-    order="random"
-
-    preload="auto"
-
-    volume="0.5"
-
-    mutex="true"
 
 </meting-js>
 <script>

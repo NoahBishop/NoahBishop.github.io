@@ -55,7 +55,7 @@
 					/*End of Initial Variables*/
 				</script>
 				<script type="text/javascript">
-					var bg = "https://morning.eu.org/images/cover/(1).jpg.webp,https://morning.eu.org/images/cover/(2).jpg.webp,https://morning.eu.org/images/cover/(3).jpg.webp,https://morning.eu.org/images/cover/(4).jpg.webp,https://morning.eu.org/images/cover/(5).jpg.webp,https://morning.eu.org/images/cover/(6).jpg.webp,https://morning.eu.org/images/cover/(7).jpg.webp,https://morning.eu.org/images/cover/(8).jpg.webp".split(",");
+					var bg = "https://morning.eu.org/images/cover/(1).jpg.webp,https://morning.eu.org/images/cover/(2).jpg.webp,https://morning.eu.org/images/cover/(3).jpg.webp,https://morning.eu.org/images/cover/(4).jpg.webp".split(",");
 					var bgindex = Math.floor(Math.random() * bg.length);
 					if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
 						alert('朋友，IE浏览器未适配哦~');
@@ -430,7 +430,7 @@
 
   <div class="pattern-center single-center">
     <!-- 有配图默认渲染第一张 -->
-    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/(7).jpg.webp');" src="" data-src="/images/cover/(7).jpg.webp">
+    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/C_background.webp');" src="" data-src="/images/cover/C_background.webp">
     </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
@@ -508,25 +508,25 @@
 <h2 id="Using-an-Associative-Container"><a href="#Using-an-Associative-Container" class="headerlink" title="Using an Associative Container"></a>Using an Associative Container</h2><h3 id="Using-a-map"><a href="#Using-a-map" class="headerlink" title="Using a map"></a>Using a map</h3><p>A classic example that relies on associative arrays is a word-counting program, this program reads its input and reports how often each word appears.</p>
 <pre><code class="c++">//read word from istream, when word is EOF end read
 int read_word(istream&amp; in, string&amp; word) &#123;
-    in &gt;&gt; word;
-    if (word == (&quot;EOF&quot;)) &#123;
-        return 0;
-    &#125;
-    return 1;
+ in &gt;&gt; word;
+ if (word == (&quot;EOF&quot;)) &#123;
+  return 0;
+ &#125;
+ return 1;
 &#125;
 
 int main() &#123;
-    // count the number of times each word occurs in the input
-    map&lt;string, size_t&gt; count_words;
-    string word;
-    while (read_word(cin, word)) &#123;
-        ++count_words[word];
-    &#125;
-    //in vs2019 type rfor can autofill for range
-    for (const auto&amp; w : count_words) &#123;
-        cout &lt;&lt; w.first &lt;&lt; &quot; appear &quot; &lt;&lt; w.second &lt;&lt; &quot; times.&quot; &lt;&lt; endl;
-    &#125;
-    return 0;
+ // count the number of times each word occurs in the input
+ map&lt;string, size_t&gt; count_words;
+ string word;
+ while (read_word(cin, word)) &#123;
+  ++count_words[word];
+ &#125;
+ //in vs2019 type rfor can autofill for range
+ for (const auto&amp; w : count_words) &#123;
+  cout &lt;&lt; w.first &lt;&lt; &quot; appear &quot; &lt;&lt; w.second &lt;&lt; &quot; times.&quot; &lt;&lt; endl;
+ &#125;
+ return 0;
 &#125;
 //C++
 //java
@@ -542,12 +542,12 @@ int main() &#123;
 <pre><code class="C++">//SAME------
 //save exclude word
 while (read_word(cin, word)) &#123;
-    exclude.insert(word);
+ exclude.insert(word);
 &#125;
 //count word
 while (read_word(cin, word)) &#123;
-    if (exclude.find(word) == exclude.end())
-        ++count_words[word];
+ if (exclude.find(word) == exclude.end())
+  ++count_words[word];
 &#125;
 //SAME------
 </code></pre>
@@ -561,8 +561,8 @@ set&lt;string&gt; exclude = &#123; &quot;c++&quot;,&quot;Java&quot; &#125;;
 <pre><code class="c++">// define a vector with 20 elements, holding two copies of each number from 0 to 9
 vector&lt;int&gt; ivec;
 for (vector&lt;int&gt;::size_type i = 0; i != 10; ++i) &#123;
-    ivec.push_back(i);
-    ivec.push_back(i); // duplicate copies of each number
+ ivec.push_back(i);
+ ivec.push_back(i); // duplicate copies of each number
 &#125;
 // iset holds unique elements from ivec; miset holds all 20 elements
 set&lt;int&gt; iset(ivec.cbegin(), ivec.cend());
@@ -585,11 +585,11 @@ pair&lt;string, vector&lt;int&gt;&gt; line; // holds string and vector&lt;int&gt
 </code></pre>
 <p>Imagine we have a function that needs to return a <code>pair</code>. Under the new standard we can list initialize the return value:</p>
 <pre><code class="c++">pair&lt;string, int&gt; process(vector&lt;string&gt;&amp; v) &#123;
-    // process v
-    if (!v.empty())
-        return &#123; v.back(), v.back().size() &#125;; // list initialize
-    else
-        return pair&lt;string, int&gt;(); // explicitly constructed return value
+ // process v
+ if (!v.empty())
+  return &#123; v.back(), v.back().size() &#125;; // list initialize
+ else
+  return pair&lt;string, int&gt;(); // explicitly constructed return value
 &#125;
 </code></pre>
 <p>Alternatively, we could have used <code>make_pair</code> to generate a new pair of the appropriate type from its two arguments:</p>
@@ -621,8 +621,8 @@ map_it-&gt;first = &quot;new key&quot;; // error: key is const
 <pre><code class="c++">set&lt;int&gt; iset = &#123;0,1,2,3,4,5,6,7,8,9&#125;;
 set&lt;int&gt;::iterator set_it = iset.begin();
 if (set_it != iset.end()) &#123;
-    *set_it = 42; // error: keys in a set are read-only
-    cout &lt;&lt; *set_it &lt;&lt; endl; // ok: can read the key
+ *set_it = 42; // error: keys in a set are read-only
+ cout &lt;&lt; *set_it &lt;&lt; endl; // ok: can read the key
 &#125;
 </code></pre>
 <p>In general, we do <strong>not</strong> use the <strong>generic algorithms</strong> with the associative containers. The fact that the keys are const means that we cannot pass associative container iterators to algorithms that write to or reorder container elements. Such algorithms need to write to the elements. The elements in the set types are const, and those in maps are pairs whose first element is const.</p>
@@ -644,10 +644,10 @@ word_count.insert(map&lt;string, size_t&gt;::value_type(word, 1));
 </code></pre>
 <p>The value <strong>returned by insert</strong> (or emplace) depends on the container type and the parameters. For the containers that have unique keys, the versions of insert and emplace that add a single element return a pair that lets us know whether the insertion happened. The <strong>first</strong> member of the pair is an iterator to the element with the <strong>given key</strong>; the <strong>second</strong> is a <strong>bool</strong> indicating whether that element was inserted, or was already there. If the key is already in the container, then insert does nothing, and the bool portion of the return value is false. If the key isn’t present, then the element is inserted and the bool is true.</p>
 <pre><code class="c++">while (read(cin,word)) &#123;
-    auto isSuccess = count_words.insert(&#123; word,1 &#125;);
-    if (!isSuccess.second) &#123;
-        ++isSuccess.first-&gt;second;
-    &#125;
+ auto isSuccess = count_words.insert(&#123; word,1 &#125;);
+ if (!isSuccess.second) &#123;
+  ++isSuccess.first-&gt;second;
+ &#125;
 &#125;
 </code></pre>
 <p>For each <code>word</code>, we attempt to insert it with a value 1. If word is already in the <code>map</code>, then nothing happens. In particular, the counter associated with word is unchanged. If <code>word</code> is <strong>not</strong> already in the map, then that string is added to the map and its counter value is set to 1.</p>
@@ -682,7 +682,7 @@ cout &lt;&lt; au.size() &lt;&lt; endl; // 2
 </table>
 <p>The version need parameter <code>k</code> removes all the elements, if any, with the given key and <strong>returns</strong> a count of how many elements were removed.</p>
 <pre><code class="c++">if (word_count.erase(removal_word))
-    cout &lt;&lt; &quot;ok: &quot; &lt;&lt; removal_word &lt;&lt; &quot; removed\n&quot;;
+ cout &lt;&lt; &quot;ok: &quot; &lt;&lt; removal_word &lt;&lt; &quot; removed\n&quot;;
 else cout &lt;&lt; &quot;oops: &quot; &lt;&lt; removal_word &lt;&lt; &quot; not found!\n&quot;;
 </code></pre>
 <h3 id="Subscripting-a-map"><a href="#Subscripting-a-map" class="headerlink" title="Subscripting a map"></a>Subscripting a map</h3><p>The <code>map</code> and <code>unordered_map</code> containers provide the subscript operator and a corresponding a~t function. The <code>set</code> types do not support subscripting because there is no “value” associated with a key in a set. The elements are themselves keys, so the operation of “fetching the value associated with a key” is meaningless. We <strong>can not</strong> subscript a <code>multimap</code> or an <code>unordered_multimap</code> because there may be more than one value associated with a given key.</p>
@@ -745,9 +745,9 @@ ikdn.insert(&#123; 1,7 &#125;);
 auto num = ikdn.count(1);
 auto iter = ikdn.find(1); // a iterator point to a pair
 while (num) &#123;
-    cout &lt;&lt; iter-&gt;second &lt;&lt; endl;
-    ++iter;
-    --num;
+ cout &lt;&lt; iter-&gt;second &lt;&lt; endl;
+ ++iter;
+ --num;
 &#125;
 </code></pre>
 <p>We are guaranteed that iterating across a multimap or multiset returns all the elements with a given key in sequence.</p>
@@ -757,47 +757,47 @@ ikdn.insert(&#123; 1,2 &#125;);
 ikdn.insert(&#123; 2,5 &#125;);
 ikdn.insert(&#123; 1,7 &#125;);
 for (auto i = ikdn.lower_bound(1); i != ikdn.upper_bound(1); i++) &#123;
-    cout &lt;&lt; i-&gt;second &lt;&lt; endl;
+ cout &lt;&lt; i-&gt;second &lt;&lt; endl;
 &#125;
 </code></pre>
 <p>The remaining way to solve this problem is the most direct of the three approaches: Instead of calling <code>upper_bound</code> and <code>lower_bound</code>, we can call <code>equal_range</code>. This function takes a key and returns a pair of iterators. If the key is present, then the first iterator refers to the first instance of the key and the second iterator refers one past the last instance of the key.</p>
 <pre><code class="c++">for (auto pos = ikdn.equal_range(1); pos.first != pos.second; ++pos.first) &#123;
-    cout &lt;&lt; pos.first-&gt;second &lt;&lt; endl;
+ cout &lt;&lt; pos.first-&gt;second &lt;&lt; endl;
 &#125;
 </code></pre>
 <h3 id="A-Word-Transformation-Map"><a href="#A-Word-Transformation-Map" class="headerlink" title="A Word Transformation Map"></a>A Word Transformation Map</h3><pre><code class="c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
 
 void transform(ifstream&amp; in_que, ifstream&amp; in_tran) &#123;
-    map&lt;string, string&gt; dir;
+ map&lt;string, string&gt; dir;
 
-    //read transform rules
-    string sou, con, text, word;
-    while (in_tran &gt;&gt; sou &gt;&gt; con) &#123;
-        dir[sou] = con;
-    &#125;
-    in_tran.close();
+ //read transform rules
+ string sou, con, text, word;
+ while (in_tran &gt;&gt; sou &gt;&gt; con) &#123;
+  dir[sou] = con;
+ &#125;
+ in_tran.close();
 
-    //read question
-    while (getline(in_que, text)) &#123;
-        istringstream ss(text);
-        while (ss &gt;&gt; word) &#123;
-            if (dir.find(word) != dir.end()) &#123;
-                cout &lt;&lt; dir[word] &lt;&lt; &quot; &quot;;
-            &#125;
-            else &#123;
-                cout &lt;&lt; word &lt;&lt; &quot; &quot;;
-            &#125;
-        &#125;
-        cout &lt;&lt; endl;
-    &#125;
+ //read question
+ while (getline(in_que, text)) &#123;
+  istringstream ss(text);
+  while (ss &gt;&gt; word) &#123;
+   if (dir.find(word) != dir.end()) &#123;
+    cout &lt;&lt; dir[word] &lt;&lt; &quot; &quot;;
+   &#125;
+   else &#123;
+    cout &lt;&lt; word &lt;&lt; &quot; &quot;;
+   &#125;
+  &#125;
+  cout &lt;&lt; endl;
+ &#125;
 &#125;
 
 int main() &#123;
-    ifstream in_que(&quot;ques.txt&quot;);
-    ifstream in_tran(&quot;trans.txt&quot;);
-    transform(in_que, in_tran);
-    return 0;
+ ifstream in_que(&quot;ques.txt&quot;);
+ ifstream in_tran(&quot;trans.txt&quot;);
+ transform(in_que, in_tran);
+ return 0;
 &#125;
 </code></pre>
 <h2 id="The-Unordered-Containers"><a href="#The-Unordered-Containers" class="headerlink" title="The Unordered Containers"></a>The Unordered Containers</h2><p>The new standard defines four <strong>unordered</strong> associative containers. Rather than using a comparison operation to organize their elements, these containers use a <strong>hash function</strong> and the key type’s == operator. An unordered container is most useful when we have a key type for which there is no obvious ordering relationship among the elements. These containers are also useful for applications in which the cost of maintaining the elements in order is prohibitive.</p>
@@ -809,50 +809,50 @@ using namespace std;
 
 //uppercase string
 void upperCase(string&amp; str) &#123;
-    for (auto&amp; i : str) &#123;
-        i = toupper(i);
-    &#125;
+ for (auto&amp; i : str) &#123;
+  i = toupper(i);
+ &#125;
 &#125;
 
 //read word from istream, when word is EOF end read
 int read_word(istream&amp; in, string&amp; word) &#123;
-    in &gt;&gt; word;
-    upperCase(word);
-    if (word == (&quot;EOF&quot;)) &#123;
-        return 0;
-    &#125;
-    return 1;
+ in &gt;&gt; word;
+ upperCase(word);
+ if (word == (&quot;EOF&quot;)) &#123;
+  return 0;
+ &#125;
+ return 1;
 &#125;
 
 int main() &#123;
-    // count the number of times each word occurs in the input
-    map&lt;string, size_t&gt; count_words;
-    unordered_map&lt;string, size_t&gt; unorder_count_words;
+ // count the number of times each word occurs in the input
+ map&lt;string, size_t&gt; count_words;
+ unordered_map&lt;string, size_t&gt; unorder_count_words;
 
-    set&lt;string&gt; exclude = &#123; &quot;c++&quot;,&quot;Java&quot; &#125;;
-    string word;
-    while (read_word(cin, word)) &#123;
-        // add to order map
-        auto isSuccess1 = count_words.insert(&#123; word,1 &#125;);
-        if (!isSuccess1.second) &#123;
-            ++isSuccess1.first-&gt;second;
-        &#125;
-        // add to unorder map
-        auto isSuccess2 = unorder_count_words.insert(&#123; word,1 &#125;);
-        if (!isSuccess2.second) &#123;
-            ++isSuccess2.first-&gt;second;
-        &#125;
-    &#125;
-    //order map
-    for (const auto&amp; w : count_words) &#123;
-        cout &lt;&lt; w.first &lt;&lt; &quot; appear &quot; &lt;&lt; w.second &lt;&lt; &quot; times.&quot; &lt;&lt; endl;
-    &#125;
-    cout &lt;&lt; &quot;__________&quot; &lt;&lt; endl;
-    //unorder map
-    for (const auto&amp; w : unorder_count_words) &#123;
-        cout &lt;&lt; w.first &lt;&lt; &quot; appear &quot; &lt;&lt; w.second &lt;&lt; &quot; times.&quot; &lt;&lt; endl;
-    &#125;
-    return 0;
+ set&lt;string&gt; exclude = &#123; &quot;c++&quot;,&quot;Java&quot; &#125;;
+ string word;
+ while (read_word(cin, word)) &#123;
+  // add to order map
+  auto isSuccess1 = count_words.insert(&#123; word,1 &#125;);
+  if (!isSuccess1.second) &#123;
+   ++isSuccess1.first-&gt;second;
+  &#125;
+  // add to unorder map
+  auto isSuccess2 = unorder_count_words.insert(&#123; word,1 &#125;);
+  if (!isSuccess2.second) &#123;
+   ++isSuccess2.first-&gt;second;
+  &#125;
+ &#125;
+ //order map
+ for (const auto&amp; w : count_words) &#123;
+  cout &lt;&lt; w.first &lt;&lt; &quot; appear &quot; &lt;&lt; w.second &lt;&lt; &quot; times.&quot; &lt;&lt; endl;
+ &#125;
+ cout &lt;&lt; &quot;__________&quot; &lt;&lt; endl;
+ //unorder map
+ for (const auto&amp; w : unorder_count_words) &#123;
+  cout &lt;&lt; w.first &lt;&lt; &quot; appear &quot; &lt;&lt; w.second &lt;&lt; &quot; times.&quot; &lt;&lt; endl;
+ &#125;
+ return 0;
 &#125;
 //c
 //a
@@ -903,7 +903,7 @@ int main() &#123;
           
             <a href="/2021/12/08/Cpp_c08/" rel="prev">
               <div class="background">
-                <img class="lazyload" src="" data-src="/images/cover/(8).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/(8).jpg.webp">
+                <img class="lazyload" src="" data-src="/images/cover/C_background.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/C_background.webp">
               </div>
               <span class="label">
               Previous Post</span>
@@ -921,7 +921,7 @@ int main() &#123;
           
             <a href="/2021/12/06/Cpp_c06/" rel="next">
               <div class="background">
-                <img class="lazyload" src="" data-src="/images/cover/(6).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/(6).jpg.webp">
+                <img class="lazyload" src="" data-src="/images/cover/C_background.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/C_background.webp">
               </div>
               <span class="label">
               Next Post</span>
@@ -935,21 +935,6 @@ int main() &#123;
         
       </section>
       
-<div id="vcomments"></div>
-<script>
-	window.onload = function(){
-		var valine = new Valine();
-		valine.init({
-			el: '#vcomments',
-			appId: "EAyicHJhXmxJNEeuhACVujd4-gzGzoHsz",
-			appKey: "09Tjj4It5DOhgboduuM40u7y",
-			avatar: 'wavatar',
-			path: window.location.pathname,
-			placeholder: "有什么想说的吗.."
-		})
-	}
-</script>
-
 
 
 
@@ -1004,7 +989,7 @@ int main() &#123;
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2023 Noah Bishop<br>
+      &copy; 2026 Noah Bishop<br>
       powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
@@ -1307,26 +1292,6 @@ int main() &#123;
   }
 </style>
 <meting-js
-
-    id="7225712775"
-
-    server="netease"
-
-    type="playlist"
-
-    fixed="true"
-
-    autoplay="true"
-
-    loop="all"
-
-    order="random"
-
-    preload="auto"
-
-    volume="0.5"
-
-    mutex="true"
 
 </meting-js>
 <script>

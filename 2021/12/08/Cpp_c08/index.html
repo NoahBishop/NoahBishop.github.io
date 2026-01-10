@@ -55,7 +55,7 @@
 					/*End of Initial Variables*/
 				</script>
 				<script type="text/javascript">
-					var bg = "https://morning.eu.org/images/cover/(1).jpg.webp,https://morning.eu.org/images/cover/(2).jpg.webp,https://morning.eu.org/images/cover/(3).jpg.webp,https://morning.eu.org/images/cover/(4).jpg.webp,https://morning.eu.org/images/cover/(5).jpg.webp,https://morning.eu.org/images/cover/(6).jpg.webp,https://morning.eu.org/images/cover/(7).jpg.webp,https://morning.eu.org/images/cover/(8).jpg.webp".split(",");
+					var bg = "https://morning.eu.org/images/cover/(1).jpg.webp,https://morning.eu.org/images/cover/(2).jpg.webp,https://morning.eu.org/images/cover/(3).jpg.webp,https://morning.eu.org/images/cover/(4).jpg.webp".split(",");
 					var bgindex = Math.floor(Math.random() * bg.length);
 					if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
 						alert('朋友，IE浏览器未适配哦~');
@@ -430,7 +430,7 @@
 
   <div class="pattern-center single-center">
     <!-- 有配图默认渲染第一张 -->
-    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/(8).jpg.webp');" src="" data-src="/images/cover/(8).jpg.webp">
+    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/C_background.webp');" src="" data-src="/images/cover/C_background.webp">
     </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
@@ -477,8 +477,8 @@ shared_ptr&lt;vector&lt;int&gt;&gt; s_ptr2;
 <p>We use a smart pointer in ways that are similar to using a pointer. Dereferencing a smart pointer returns the object to which the pointer points. When we use a smart pointer in a condition, the effect is to test whether the pointer is null:</p>
 <pre><code class="c++">// if p1 is not null, check whether it&#39;s the empty string
 if (s_ptr1 &amp;&amp; s_ptr1-&gt;empty()) &#123;
-    // if so, dereference p1 to assign a new value to that string
-    *s_ptr1 = &quot;hello&quot;;
+ // if so, dereference p1 to assign a new value to that string
+ *s_ptr1 = &quot;hello&quot;;
 &#125;
 </code></pre>
 <p>Next table lists operations common to <code>shared_ptr</code> and <code>unique_ptr</code>.</p>
@@ -585,35 +585,35 @@ r = q;
 <p>The fact that the <code>shared_ptr</code> class automatically frees dynamic objects when they are no longer needed makes it fairly easy to use dynamic memory. For example, we might have a function that returns a shared_ptr to a dynamically allocated object of a type named Foo that can be initialized by an argument of type T:(note this is just a abstract example, this code can not run in computer now)</p>
 <pre><code class="c++">// factory returns a shared_ptr pointing to a dynamically allocated object
 shared_ptr&lt;Foo&gt; factory(T arg)&#123;
-    // process arg as appropriate
-    // shared_ptr will take care of deleting this memory
-    return make_shared&lt;Foo&gt;(arg);
+ // process arg as appropriate
+ // shared_ptr will take care of deleting this memory
+ return make_shared&lt;Foo&gt;(arg);
 &#125;
 </code></pre>
 <p>Because <code>factory</code> returns a <code>shared_ptr</code>, we can be sure that the object allocated by factory will be freed when appropriate. For example, the following function stores the <code>shared_ptr</code> returned by factory in a local variable:</p>
 <pre><code class="c++">void use_factory(T arg)&#123;
-    shared_ptr&lt;Foo&gt; p = factory(arg);
-    // use p
+ shared_ptr&lt;Foo&gt; p = factory(arg);
+ // use p
 &#125; // p goes out of scope; the memory to which p points is automatically freed
 </code></pre>
 <p>This is simple case that show the shared_ptr and a refeence:</p>
 <pre><code class="c++">shared_ptr&lt;string&gt; getS() &#123;
-    auto s = make_shared&lt;string&gt;(&quot;hello&quot;);
-    return s;
+ auto s = make_shared&lt;string&gt;(&quot;hello&quot;);
+ return s;
 &#125;
 
 string&amp; getS(char a) &#123;
-    string s(10, a);
-    return s;
+ string s(10, a);
+ return s;
 &#125;
 
 int main()&#123;
     // ok output hello
-    auto s1 = getS();
-    cout &lt;&lt; *s1 &lt;&lt; endl;
+ auto s1 = getS();
+ cout &lt;&lt; *s1 &lt;&lt; endl;
     // Segmentation fault
-    auto s2 = getS(&#39;A&#39;);
-    return 0;
+ auto s2 = getS(&#39;A&#39;);
+ return 0;
 &#125;
 </code></pre>
 <p>Programs tend to use dynamic memory for one of three purposes:</p>
@@ -625,19 +625,19 @@ int main()&#123;
 <p>The container classes are an example of classes that use dynamic memory for the first purpose. In this section, we’ll define a class that uses dynamic memory in order to let several objects share the same underlying data.</p>
 <p>So far, the classes we’ve used allocate resources that exist only as long as the corresponding objects. For example, each vector “<strong>owns</strong>” its own elements. When we copy a vector, the elements in the original vector and in the copy are <strong>separate</strong> from one another:</p>
 <pre><code class="c++">vector&lt;string&gt; v1; // empty vector
-&#123;     // new scope
-     vector&lt;string&gt; v2 = &#123;&quot;a&quot;, &quot;an&quot;, &quot;the&quot;&#125;;
-    v1 = v2; // copies the elements from v2 into v1
-&#125;     // v2 is destroyed, which destroys the elements in v2
-    // v1 has three elements, which are copies of the ones originally in v2
+&#123;  // new scope
+  vector&lt;string&gt; v2 = &#123;&quot;a&quot;, &quot;an&quot;, &quot;the&quot;&#125;;
+ v1 = v2; // copies the elements from v2 into v1
+&#125;  // v2 is destroyed, which destroys the elements in v2
+ // v1 has three elements, which are copies of the ones originally in v2
 </code></pre>
 <p>Some classes allocate resources with a lifetime that is <strong>independent</strong> of the original object. As an example, assume we want to define a class named <code>Blob</code> that will hold a collection of elements. Unlike the containers, we want Blob objects that are copies of one another to share the same elements. That is, when we copy a Blob, the original and the copy should refer to the same underlying elements. like this:</p>
 <pre><code class="C++">Blob&lt;string&gt; b1; // empty Blob
-&#123;     // new scope
-    Blob&lt;string&gt; b2 = &#123;&quot;a&quot;, &quot;an&quot;, &quot;the&quot;&#125;;
-    b1 = b2; // b1 and b2 share the same elements
-&#125;     // b2 is destroyed, but the elements in b2 must not be destroyed
-    // b1 points to the elements originally created in b2
+&#123;  // new scope
+ Blob&lt;string&gt; b2 = &#123;&quot;a&quot;, &quot;an&quot;, &quot;the&quot;&#125;;
+ b1 = b2; // b1 and b2 share the same elements
+&#125;  // b2 is destroyed, but the elements in b2 must not be destroyed
+ // b1 points to the elements originally created in b2
 </code></pre>
 <p>Ultimately, we’ll implement our Blob class as a template, but we won’t learn how to do. For now, we’ll define a version of our class that can manage strings. As a result, we’ll name this version of our class <code>StrBlob</code>.</p>
 <p>The easiest way to implement a new collection type is to use one of the library containers to manage the elements. That way, we can let the library type manage the storage for the elements themselves. In this case, we’ll use a vector to hold our elements.</p>
@@ -654,49 +654,49 @@ int main()&#123;
 
 class StrBlob &#123;
 public:
-    typedef std::vector&lt;std::string&gt;::size_type size_type;
+ typedef std::vector&lt;std::string&gt;::size_type size_type;
 
-    StrBlob() : data(std::make_shared&lt;std::vector&lt;std::string&gt;&gt;()) &#123;
-    &#125;;
-    StrBlob(std::initializer_list&lt;std::string&gt; il)
-        : data(std::make_shared&lt;std::vector&lt;std::string&gt;&gt;(il)) &#123;
-    &#125;;
+ StrBlob() : data(std::make_shared&lt;std::vector&lt;std::string&gt;&gt;()) &#123;
+ &#125;;
+ StrBlob(std::initializer_list&lt;std::string&gt; il)
+  : data(std::make_shared&lt;std::vector&lt;std::string&gt;&gt;(il)) &#123;
+ &#125;;
 
-    size_type size() const &#123; return data-&gt;size(); &#125;
-    bool empty() const &#123; return data-&gt;empty(); &#125;
-    // add and remove elements
-    void push_back(const std::string&amp; t) &#123;
-        data-&gt;push_back(t);
-    &#125;
-    void pop_back();
-    // element access
-    std::string&amp; front();
-    std::string&amp; back();
+ size_type size() const &#123; return data-&gt;size(); &#125;
+ bool empty() const &#123; return data-&gt;empty(); &#125;
+ // add and remove elements
+ void push_back(const std::string&amp; t) &#123;
+  data-&gt;push_back(t);
+ &#125;
+ void pop_back();
+ // element access
+ std::string&amp; front();
+ std::string&amp; back();
 
 private:
-    // a shared_ptr ponint to string of vector 
-    std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt; data;
-    void check(size_type i, const std::string&amp; msg) const;
+ // a shared_ptr ponint to string of vector 
+ std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt; data;
+ void check(size_type i, const std::string&amp; msg) const;
 &#125;;
 
 void StrBlob::pop_back() &#123;
-    data-&gt;pop_back();
+ data-&gt;pop_back();
 &#125;
 
 std::string&amp; StrBlob::front() &#123;
-    // TODO: insert return statement here
-    return data-&gt;front();
+ // TODO: insert return statement here
+ return data-&gt;front();
 &#125;
 
 std::string&amp; StrBlob::back() &#123;
-    // TODO: insert return statement here
-    return data-&gt;back();
+ // TODO: insert return statement here
+ return data-&gt;back();
 &#125;
 
 void StrBlob::check(size_type i, const std::string&amp; msg) const &#123;
-    if (i &gt; data-&gt;size()) &#123;
-        throw std::out_of_range(msg);
-    &#125;
+ if (i &gt; data-&gt;size()) &#123;
+  throw std::out_of_range(msg);
+ &#125;
 &#125;
 
 #endif // !StrBlob
@@ -704,9 +704,9 @@ void StrBlob::check(size_type i, const std::string&amp; msg) const &#123;
 <p>This is test code:</p>
 <pre><code class="c++">StrBlob b1;
 &#123;
-    StrBlob b2 = &#123; &quot;a&quot;, &quot;an&quot;, &quot;the&quot; &#125;;
-    b1 = b2;
-    b2.push_back(&quot;about&quot;);
+ StrBlob b2 = &#123; &quot;a&quot;, &quot;an&quot;, &quot;the&quot; &#125;;
+ b1 = b2;
+ b2.push_back(&quot;about&quot;);
 &#125;
 cout &lt;&lt; b1.back() &lt;&lt; endl; // output about
 </code></pre>
@@ -794,24 +794,24 @@ shared_ptr&lt;int&gt; p2(new int(42)); // p2 points to an int with value 42
 <pre><code class="c++">shared_ptr&lt;int&gt; p1 = new int(1024); // error: must use direct initialization
 shared_ptr&lt;int&gt; p2(new int(1024)); // ok: uses direct initialization
 </code></pre>
-<p>By default, a pointer used to initialize a smart pointer must point to dynamic memory because, by default, smart pointers use delete to free the associated object. We can bind smart pointers to pointers to other kinds of resources. However, to do so, we must supply our own operation to use in place of <code>delete</code>. </p>
+<p>By default, a pointer used to initialize a smart pointer must point to dynamic memory because, by default, smart pointers use delete to free the associated object. We can bind smart pointers to pointers to other kinds of resources. However, to do so, we must supply our own operation to use in place of <code>delete</code>.</p>
 <p>A <code>shared_ptr</code> can coordinate destruction only with other <code>shared_ptrs</code> that are copies of itself. Indeed, this fact is one of the reasons we recommend using <code>make_shared</code> rather than <code>new</code>. That way, we bind a <code>shared_ptr</code> to the object at the same time that we allocate it. There is no way to inadvertently bind the same memory to more than one independently created <code>shared_ptr</code>.</p>
 <p>Consider the following function that operates on a <code>shared_ptr</code>:</p>
 <pre><code class="c++">// ptr is created and initialized when process is called
 void process(shared_ptr&lt;int&gt; ptr)
 &#123;
-    // use ptr
-&#125;    // ptr goes out of scope and is destroyed
+ // use ptr
+&#125; // ptr goes out of scope and is destroyed
 </code></pre>
 <p>The parameter to process is passed by value, so the argument to process is copied into ptr. Copying a shared_ptr increments its reference count. Thus, inside process the count is at least 2. When process completes, the reference count of ptr is decremented but cannot go to zero. Therefore, when the local variable ptr is destroyed, the memory to which ptr points will not be deleted.</p>
 <p>The smart pointer types define a function named <code>get</code> that returns a built-in pointer to the object that the smart pointer is managing. This function is intended for cases when we need to pass a built-in pointer to code that can’t use a smart pointer. The code that uses the return from get must not delete that pointer.</p>
 <pre><code class="c++">shared_ptr&lt;int&gt; p2(new int(10));
 auto* p3 = p2.get();
 &#123;
-    // undefined: two independent shared_ptrs point to the same memory
+ // undefined: two independent shared_ptrs point to the same memory
     shared_ptr&lt;int&gt; p4(p3);
-&#125;    // block ends, p4 is destroyed, and the memory to which q points is freed
-cout &lt;&lt; *p2 &lt;&lt; endl;    // undefined; the memory to which p2 points was freed
+&#125; // block ends, p4 is destroyed, and the memory to which q points is freed
+cout &lt;&lt; *p2 &lt;&lt; endl; // undefined; the memory to which p2 points was freed
 </code></pre>
 <p>In this case, both <code>p2</code> and <code>p4</code> point to the same memory. Because they were created independently from each other, each has a reference count of 1. When the block in which q was defined ends, q is destroyed. Destroying q frees the memory to which q points. That makes p into a dangling pointer, meaning that what happens when we attempt to use p is undefined. Moreover, when p is destroyed, the pointer to that memory will be deleted a second time.</p>
 <p>The <code>shared_ptr</code> class gives us a few other operations, which are listed in previous table. We can use reset to assign a new pointer to a <code>shared_ptr</code>:</p>
@@ -820,14 +820,14 @@ p.reset(new int(1024)); // ok: p points to a new object
 </code></pre>
 <p>Like assignment, reset updates the reference counts and, if appropriate, deletes the object to which p points. The reset member is often used together with unique to control changes to the object shared among several <code>shared_ptrs</code>. Before changing the underlying object, we check whether we’re the only user. If not, we make a new copy before making the change:</p>
 <pre><code class="c++">if (!p.unique())
-    p.reset(new string(*p)); // we aren&#39;t alone; allocate a new copy
+ p.reset(new string(*p)); // we aren&#39;t alone; allocate a new copy
 *p += newVal; // now that we know we&#39;re the only pointer, okay to change this object
 </code></pre>
 <h3 id="Smart-Pointers-and-Exceptions"><a href="#Smart-Pointers-and-Exceptions" class="headerlink" title="Smart Pointers and Exceptions"></a>Smart Pointers and Exceptions</h3><p>In previous chapter we noted that programs that use exception handling to continue processing after an exception occurs need to ensure that resources are properly freed if an exception occurs. One easy way to make sure resources are freed is to use smart pointers. When we use a smart pointer, the smart pointer class ensures that memory is freed when it is no longer needed even if the block is exited prematurely:</p>
 <pre><code class="c++">void f()&#123;
-    shared_ptr&lt;int&gt; sp(new int(42)); // allocate a new object
-    // code that throws an exception that is not caught inside f
-&#125;    // shared_ptr freed automatically when the function ends
+ shared_ptr&lt;int&gt; sp(new int(42)); // allocate a new object
+ // code that throws an exception that is not caught inside f
+&#125; // shared_ptr freed automatically when the function ends
 </code></pre>
 <p>When a function is exited, whether through normal processing or due to an exception, all the local objects are destroyed. In this case, <code>sp</code> is a <code>shared_ptr</code>, so destroying <code>sp</code> checks its reference count. Here, <code>sp</code> is the only pointer to the memory it manages; that memory will be freed as part of destroying <code>sp</code>.</p>
 <p>In contrast, memory that we manage directly is not automatically freed when an exception occurs. If we use built-in pointers to manage memory and an exception occurs after a new but before the corresponding delete, then that memory won’t be freed:</p>
@@ -888,8 +888,8 @@ p2.reset(p3.release()); // reset deletes the memory to which p2 had pointed
 </code></pre>
 <p>There is one <strong>exception</strong> to the rule that we cannot copy a <code>unique_ptr</code>: We can copy or assign a <code>unique_ptr</code> that is about to be destroyed. The most common example is when we <strong>return</strong> a <code>unique_ptr</code> from a function:</p>
 <pre><code class="c++">unique_ptr&lt;int&gt; clone(int p) &#123;
-    // ok: explicitly create a unique_ptr&lt;int&gt; from int*
-    return unique_ptr&lt;int&gt;(new int(p));
+ // ok: explicitly create a unique_ptr&lt;int&gt; from int*
+ return unique_ptr&lt;int&gt;(new int(p));
 &#125;
 </code></pre>
 <h3 id="weak-ptr"><a href="#weak-ptr" class="headerlink" title="weak_ptr"></a>weak_ptr</h3><p>A <code>weak_ptr</code> is a smart pointer that does not control the lifetime of the object to which it points. Instead, a <code>weak_ptr</code> points to an object that is managed by a <code>shared_ptr</code>. Binding a <code>weak_ptr</code> to a <code>shared_ptr</code> does <strong>not</strong> change the reference <strong>count</strong> of that shared_ptr. Once the last <code>shared_ptr</code> pointing to the object goes away, the object itself will be deleted. That object will be deleted even if there are <code>weak_ptrs</code> pointing to it—hence the name <code>weak_ptr</code>, which captures the idea that a weak_ptr shares its object “weakly.”</p>
@@ -926,7 +926,7 @@ up.release(); // automatically uses delete[] to destroy its pointer
 </code></pre>
 <p><code>unqiue_ptrs</code> that point to arrays provide slightly different operations than those we used in previous, we can use the subscript operator to access the elements in the array:</p>
 <pre><code class="c++">for (size_t i = 0; i &lt; 10; i++) &#123;
-    up[i] = i;
+ up[i] = i;
 &#125;
 </code></pre>
 <p>Unlike <code>unique_ptr</code>, <code>shared_ptrs</code> provide no direct support for managing a dynamic array. If we want to use a shared_ptr to manage a dynamic array, we must provide our own deleter:</p>
@@ -936,7 +936,7 @@ sp.reset(); // uses the lambda we supplied that uses delete[] to free the array
 </code></pre>
 <p>The fact that <code>shared_ptr</code> does not directly support managing arrays affects how we access the elements in the array:</p>
 <pre><code class="c++">for (size_t i = 0; i &lt; 10; i++) &#123;
-    *(sp.get() + i) = i;
+ *(sp.get() + i) = i;
 &#125;
 </code></pre>
 <h3 id="The-allocator-Class"><a href="#The-allocator-Class" class="headerlink" title="The allocator Class"></a>The allocator Class</h3><p>An aspect of <code>new</code> that limits its flexibility is that new combines allocating memory with constructing object(s) in that memory. Similarly, <code>delete</code> combines destruction with deallocation. Combining initialization with allocation is usually what we want when we allocate a single object. In that case, we almost certainly know the value the object should have.</p>
@@ -987,7 +987,7 @@ alloc.construct(q++, &quot;hi&quot;); // *q is hi!
 </code></pre>
 <p>When we’re finished using the objects, we must <strong>destroy</strong> the elements we constructed, which we do by calling destroy on each constructed element. The destroy function takes a pointer and runs the destructor on the pointed-to object:</p>
 <pre><code class="c++">while (q != p)
-    alloc.destroy(--q); // free the strings we actually allocated
+ alloc.destroy(--q); // free the strings we actually allocated
 </code></pre>
 <p>Once the elements have been destroyed, we can either reuse the memory to hold other strings or <strong>return</strong> the memory to the system. We free the memory by calling deallocate:</p>
 <pre><code class="c++">alloc.deallocate(p, n);
@@ -1007,7 +1007,7 @@ alloc.construct(q++, &quot;hi&quot;); // *q is hi!
 <td>Copy block of memory</td>
 </tr>
 <tr>
-<td><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/memory/uninitialized_copy_n/"><strong>uninitialized_copy_n</strong> </a></td>
+<td><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/memory/uninitialized_copy_n/"><strong>uninitialized_copy_n</strong></a></td>
 <td>Copy block of memory</td>
 </tr>
 <tr>
@@ -1022,15 +1022,15 @@ alloc.construct(q++, &quot;hi&quot;); // *q is hi!
 </table>
 <p>As an example, assume we have a <code>vector</code> of <code>ints</code> that we want to copy into dynamic memory. We’ll allocate memory for twice as many <code>ints</code> as are in the vector. We’ll construct the first half of the newly allocated memory by copying elements from the original vector. We’ll construct elements in the second half by filling them with a given value:</p>
 <pre><code class="c++">int main() &#123;
-    vector&lt;int&gt; v(2, 2);
-    allocator&lt;int&gt; alloc;
-    auto p = alloc.allocate(v.size() * 2);
-    auto q = uninitialized_copy(v.begin(), v.end(), p);
-    uninitialized_fill_n(q, v.size(), 20);
-    for (size_t i = 0; i &lt; v.size() * 2; i++) &#123;
-        cout &lt;&lt; p[i] &lt;&lt; endl;
-    &#125;
-    return 0;
+ vector&lt;int&gt; v(2, 2);
+ allocator&lt;int&gt; alloc;
+ auto p = alloc.allocate(v.size() * 2);
+ auto q = uninitialized_copy(v.begin(), v.end(), p);
+ uninitialized_fill_n(q, v.size(), 20);
+ for (size_t i = 0; i &lt; v.size() * 2; i++) &#123;
+  cout &lt;&lt; p[i] &lt;&lt; endl;
+ &#125;
+ return 0;
 &#125;
 //output
 //2
@@ -1057,80 +1057,80 @@ class QueryResult;
 
 class TextQuery &#123;
 public:
-    using line_no = std::vector&lt;std::string&gt;::size_type;
+ using line_no = std::vector&lt;std::string&gt;::size_type;
 
-    TextQuery() = default;
-    TextQuery(std::ifstream&amp; input);
-    QueryResult query(const std::string&amp; s);
+ TextQuery() = default;
+ TextQuery(std::ifstream&amp; input);
+ QueryResult query(const std::string&amp; s);
 private:
-    // input file
-    std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt; file;
-    // map of each word to the set of the lines in which that word appears
-    std::map &lt;std::string, std::shared_ptr&lt;std::set&lt;line_no&gt;&gt;&gt; wm;
+ // input file
+ std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt; file;
+ // map of each word to the set of the lines in which that word appears
+ std::map &lt;std::string, std::shared_ptr&lt;std::set&lt;line_no&gt;&gt;&gt; wm;
 &#125;;
 
 class QueryResult &#123;
-    friend std::ostream&amp; print(std::ostream&amp;, const QueryResult&amp;);
+ friend std::ostream&amp; print(std::ostream&amp;, const QueryResult&amp;);
 public:
-    QueryResult() = default;
-    QueryResult(std::string s,
-        std::shared_ptr&lt;std::set&lt;TextQuery::line_no&gt;&gt; p,
-        std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt; f) :
-        s_word(s), lines(p), file(f) &#123;
-    &#125;
+ QueryResult() = default;
+ QueryResult(std::string s,
+  std::shared_ptr&lt;std::set&lt;TextQuery::line_no&gt;&gt; p,
+  std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt; f) :
+  s_word(s), lines(p), file(f) &#123;
+ &#125;
 
 private:
-    std::string s_word;
-    std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt; file;
-    std::shared_ptr&lt;std::set&lt;TextQuery::line_no&gt;&gt; lines;
+ std::string s_word;
+ std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt; file;
+ std::shared_ptr&lt;std::set&lt;TextQuery::line_no&gt;&gt; lines;
 &#125;;
 
 // TextQuery member
 TextQuery::TextQuery(std::ifstream&amp; input)
-    :file(new std::vector&lt;std::string&gt;) &#123;
-    std::string line, text;
-    while (getline(input, line)) &#123;
-        //read a line and save to vector string
-        file-&gt;push_back(line);
+ :file(new std::vector&lt;std::string&gt;) &#123;
+ std::string line, text;
+ while (getline(input, line)) &#123;
+  //read a line and save to vector string
+  file-&gt;push_back(line);
 
-        //get current line_no
-        size_t n = file-&gt;size() - 1;
+  //get current line_no
+  size_t n = file-&gt;size() - 1;
 
-        //save one word where appeared
-        std::istringstream ss(line);
-        while (ss &gt;&gt; text) &#123;
-            // if word isn&#39;t already in wm, subscripting adds a new entry
-            auto&amp; lines = wm[text];
-            if (!lines) &#123;
-                lines.reset(new std::set&lt;line_no&gt;);
-            &#125;
-            // insert this line number
-            lines-&gt;insert(n);
-        &#125;
-    &#125;
+  //save one word where appeared
+  std::istringstream ss(line);
+  while (ss &gt;&gt; text) &#123;
+   // if word isn&#39;t already in wm, subscripting adds a new entry
+   auto&amp; lines = wm[text];
+   if (!lines) &#123;
+    lines.reset(new std::set&lt;line_no&gt;);
+   &#125;
+   // insert this line number
+   lines-&gt;insert(n);
+  &#125;
+ &#125;
 &#125;
 
 QueryResult TextQuery::query(const std::string&amp; s) &#123;
-    // we&#39;ll return a pointer to this set if we don&#39;t find s
-    static std::shared_ptr&lt;std::set&lt;line_no&gt;&gt; nodata(new std::set&lt;line_no&gt;);
+ // we&#39;ll return a pointer to this set if we don&#39;t find s
+ static std::shared_ptr&lt;std::set&lt;line_no&gt;&gt; nodata(new std::set&lt;line_no&gt;);
 
-    auto location = wm.find(s);
-    if (location != wm.end()) &#123;
-        return QueryResult(s, location-&gt;second, file);
-    &#125;
-    else &#123;
-        return QueryResult(s, nodata, file);
-    &#125;
+ auto location = wm.find(s);
+ if (location != wm.end()) &#123;
+  return QueryResult(s, location-&gt;second, file);
+ &#125;
+ else &#123;
+  return QueryResult(s, nodata, file);
+ &#125;
 &#125;
 
 // QueryResult member
 std::ostream&amp; print(std::ostream&amp; out, const QueryResult&amp; qr) &#123;
-    // TODO: insert return statement here
-    out &lt;&lt; qr.s_word &lt;&lt; &quot; appear &quot; &lt;&lt; (qr.lines)-&gt;size() &lt;&lt; &quot; times:&quot; &lt;&lt; std::endl;
-    for (auto&amp; line : *(qr.lines)) &#123;
-        out &lt;&lt; line + 1 &lt;&lt; &quot;: &quot; &lt;&lt; (qr.file)-&gt;at(line) &lt;&lt; std::endl;
-    &#125;
-    return out;
+ // TODO: insert return statement here
+ out &lt;&lt; qr.s_word &lt;&lt; &quot; appear &quot; &lt;&lt; (qr.lines)-&gt;size() &lt;&lt; &quot; times:&quot; &lt;&lt; std::endl;
+ for (auto&amp; line : *(qr.lines)) &#123;
+  out &lt;&lt; line + 1 &lt;&lt; &quot;: &quot; &lt;&lt; (qr.file)-&gt;at(line) &lt;&lt; std::endl;
+ &#125;
+ return out;
 &#125;
 </code></pre>
 <h3 id="Main-program"><a href="#Main-program" class="headerlink" title="Main program"></a>Main program</h3><pre><code class="c++">#include&lt;fstream&gt;
@@ -1139,19 +1139,19 @@ std::ostream&amp; print(std::ostream&amp; out, const QueryResult&amp; qr) &#123;
 using namespace std;
 
 int main() &#123;
-    ifstream input(&quot;text.txt&quot;);
-    TextQuery tq(input);
+ ifstream input(&quot;text.txt&quot;);
+ TextQuery tq(input);
 
-    string s;
-    while (true) &#123;
-        cout &lt;&lt; &quot;input a word you want query:&quot; &lt;&lt; endl;
-        if (!(cin &gt;&gt; s) || s == &quot;q&quot;) &#123;
-            break;
-        &#125;
-        auto qr = tq.query(s);
-        print(std::cout, qr);
-    &#125;
-    return 0;
+ string s;
+ while (true) &#123;
+  cout &lt;&lt; &quot;input a word you want query:&quot; &lt;&lt; endl;
+  if (!(cin &gt;&gt; s) || s == &quot;q&quot;) &#123;
+   break;
+  &#125;
+  auto qr = tq.query(s);
+  print(std::cout, qr);
+ &#125;
+ return 0;
 &#125;
 </code></pre>
 
@@ -1187,7 +1187,7 @@ int main() &#123;
           
             <a href="/2021/12/09/Cpp_c09/" rel="prev">
               <div class="background">
-                <img class="lazyload" src="" data-src="/images/cover/(1).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/(1).jpg.webp">
+                <img class="lazyload" src="" data-src="/images/cover/C_background.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/C_background.webp">
               </div>
               <span class="label">
               Previous Post</span>
@@ -1205,7 +1205,7 @@ int main() &#123;
           
             <a href="/2021/12/07/Cpp_c07/" rel="next">
               <div class="background">
-                <img class="lazyload" src="" data-src="/images/cover/(7).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/(7).jpg.webp">
+                <img class="lazyload" src="" data-src="/images/cover/C_background.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/C_background.webp">
               </div>
               <span class="label">
               Next Post</span>
@@ -1219,21 +1219,6 @@ int main() &#123;
         
       </section>
       
-<div id="vcomments"></div>
-<script>
-	window.onload = function(){
-		var valine = new Valine();
-		valine.init({
-			el: '#vcomments',
-			appId: "EAyicHJhXmxJNEeuhACVujd4-gzGzoHsz",
-			appKey: "09Tjj4It5DOhgboduuM40u7y",
-			avatar: 'wavatar',
-			path: window.location.pathname,
-			placeholder: "有什么想说的吗.."
-		})
-	}
-</script>
-
 
 
 
@@ -1288,7 +1273,7 @@ int main() &#123;
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2023 Noah Bishop<br>
+      &copy; 2026 Noah Bishop<br>
       powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
@@ -1591,26 +1576,6 @@ int main() &#123;
   }
 </style>
 <meting-js
-
-    id="7225712775"
-
-    server="netease"
-
-    type="playlist"
-
-    fixed="true"
-
-    autoplay="true"
-
-    loop="all"
-
-    order="random"
-
-    preload="auto"
-
-    volume="0.5"
-
-    mutex="true"
 
 </meting-js>
 <script>

@@ -55,7 +55,7 @@
 					/*End of Initial Variables*/
 				</script>
 				<script type="text/javascript">
-					var bg = "https://morning.eu.org/images/cover/(1).jpg.webp,https://morning.eu.org/images/cover/(2).jpg.webp,https://morning.eu.org/images/cover/(3).jpg.webp,https://morning.eu.org/images/cover/(4).jpg.webp,https://morning.eu.org/images/cover/(5).jpg.webp,https://morning.eu.org/images/cover/(6).jpg.webp,https://morning.eu.org/images/cover/(7).jpg.webp,https://morning.eu.org/images/cover/(8).jpg.webp".split(",");
+					var bg = "https://morning.eu.org/images/cover/(1).jpg.webp,https://morning.eu.org/images/cover/(2).jpg.webp,https://morning.eu.org/images/cover/(3).jpg.webp,https://morning.eu.org/images/cover/(4).jpg.webp".split(",");
 					var bgindex = Math.floor(Math.random() * bg.length);
 					if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
 						alert('朋友，IE浏览器未适配哦~');
@@ -430,7 +430,7 @@
 
   <div class="pattern-center single-center">
     <!-- 有配图默认渲染第一张 -->
-    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/(1).jpg.webp');" src="" data-src="/images/cover/(1).jpg.webp">
+    <div class="pattern-attachment-img lazyload" style="background-image: url('/images/cover/QtWithTorch.webp');" src="" data-src="/images/cover/QtWithTorch.webp">
     </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
@@ -461,7 +461,7 @@
         
         <div class="entry-content">
           <h1 id="Setting-up-Qt-Projects-with-CMake-and-Linking-External-Libraries"><a href="#Setting-up-Qt-Projects-with-CMake-and-Linking-External-Libraries" class="headerlink" title="Setting up Qt Projects with CMake and Linking External Libraries"></a>Setting up Qt Projects with CMake and Linking External Libraries</h1><p><em>In the past few days, I attempted to develop a Windows application that utilized the Qt libraries for the GUI portion and libtorch and OpenCV for core calculations. The project was managed using cmake and compiled using the MSVC compiler. However, during development, I encountered several issues. In this article, I will detail these problems and provide solutions to fix them.</em></p>
-<h2 id="What-is-cmake-and-Qt-libtorch…"><a href="#What-is-cmake-and-Qt-libtorch…" class="headerlink" title="What is cmake and Qt, libtorch…"></a>What is cmake and Qt, libtorch…</h2><ol>
+<h2 id="What-is-cmake-and-Qt-libtorch"><a href="#What-is-cmake-and-Qt-libtorch" class="headerlink" title="What is cmake and Qt, libtorch"></a>What is cmake and Qt, libtorch</h2><ol>
 <li>CMake is an open-source build system generator that is used to manage the build process of software projects. It is a cross-platform tool that generates build files for various operating systems, including Windows, Linux, and macOS. CMake allows developers to write build scripts in a simple and portable way, which can be used to build and manage software projects of different sizes and complexities.</li>
 <li>Qt is a cross-platform application development framework used for creating desktop, mobile, and embedded applications. One of the major advantages of Qt is its cross-platform support, allowing developers to create applications that can run on multiple operating systems such as Windows, Linux, macOS, and mobile platforms like Android and iOS. Qt also provides a rich set of GUI widgets and provides easy access to many platform-specific features.</li>
 <li>Libtorch is a C++ library for PyTorch, an open-source machine learning framework. Libtorch allows developers to use PyTorch in C++ applications, enabling high-performance machine learning inference on CPUs and GPUs. Libtorch provides a simple and flexible API for loading and running PyTorch models in C++.(In next session I will show you how to export PyTorch model and load it in C++ code)</li>
@@ -499,7 +499,7 @@ traced_script_module.save(&quot;resnet_model.pt&quot;)
 #include &lt;opencv2/opencv.hpp&gt;
 
 int main()&#123;
-    // load module from enter path
+ // load module from enter path
     torch::jit::script::Module model;
     try &#123;
         // Deserialize the ScriptModule from a file using torch::jit::load().
@@ -648,7 +648,7 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS 1)
 #define slots Q_SLOTS
 </code></pre>
 <h2 id="Package-your-application-and-make-installer"><a href="#Package-your-application-and-make-installer" class="headerlink" title="Package your application and make installer"></a>Package your application and make installer</h2><p>After finishing the project, the next step is to package it along with the necessary environment. My project uses Qt, libtorch, and OpenCV, and there are several ways to achieve this, my way is as follows:</p>
-<p>First, I copied the necessary environment libraries to the build folder📂 </p>
+<p>First, I copied the necessary environment libraries to the build folder📂</p>
 <pre><code class="cmake"># cpoy linked dll lib to build folder
 if (MSVC)
     add_custom_command(TARGET model POST_BUILD
@@ -768,7 +768,7 @@ install(SCRIPT $&#123;deploy_script&#125;)
           
             <a href="/2021/12/12/Cpp_c12/" rel="next">
               <div class="background">
-                <img class="lazyload" src="" data-src="/images/cover/(4).jpg.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/(4).jpg.webp">
+                <img class="lazyload" src="" data-src="/images/cover/C_background.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/C_background.webp">
               </div>
               <span class="label">
               Next Post</span>
@@ -782,21 +782,6 @@ install(SCRIPT $&#123;deploy_script&#125;)
         
       </section>
       
-<div id="vcomments"></div>
-<script>
-	window.onload = function(){
-		var valine = new Valine();
-		valine.init({
-			el: '#vcomments',
-			appId: "EAyicHJhXmxJNEeuhACVujd4-gzGzoHsz",
-			appKey: "09Tjj4It5DOhgboduuM40u7y",
-			avatar: 'wavatar',
-			path: window.location.pathname,
-			placeholder: "有什么想说的吗.."
-		})
-	}
-</script>
-
 
 
 
@@ -851,7 +836,7 @@ install(SCRIPT $&#123;deploy_script&#125;)
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2023 Noah Bishop<br>
+      &copy; 2026 Noah Bishop<br>
       powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
@@ -1154,26 +1139,6 @@ install(SCRIPT $&#123;deploy_script&#125;)
   }
 </style>
 <meting-js
-
-    id="7225712775"
-
-    server="netease"
-
-    type="playlist"
-
-    fixed="true"
-
-    autoplay="true"
-
-    loop="all"
-
-    order="random"
-
-    preload="auto"
-
-    volume="0.5"
-
-    mutex="true"
 
 </meting-js>
 <script>
