@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://NoahBishop.github.io/"/>
-  <updated>2026-01-11T07:23:28.193Z</updated>
+  <updated>2026-01-11T08:57:45.522Z</updated>
   <id>https://NoahBishop.github.io/</id>
   
   <author>
@@ -17,11 +17,41 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>QEMU and Spice</title>
+    <link href="https://NoahBishop.github.io/2025/01/31/USB/QEMU%E5%92%8CSPICE%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/"/>
+    <id>https://NoahBishop.github.io/2025/01/31/USB/QEMU和SPICE相关知识/</id>
+    <published>2025-01-30T16:00:00.000Z</published>
+    <updated>2026-01-11T08:57:45.522Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;QEMU-启动配置和spice新增通道&quot;&gt;&lt;a href=&quot;#QEMU-启动配置和spice新增通道&quot; class=&quot;headerlink&quot; title=&quot;QEMU 启动配置和spice新增通道&quot;&gt;&lt;/a&gt;QEMU 启动配置和spice新增通道&lt;/h1&gt;&lt;h2
+        
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="USB" scheme="https://NoahBishop.github.io/tags/USB/"/>
+    
+      <category term="Network" scheme="https://NoahBishop.github.io/tags/Network/"/>
+    
+      <category term="QEMU" scheme="https://NoahBishop.github.io/tags/QEMU/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Windows driver develop</title>
     <link href="https://NoahBishop.github.io/2024/12/31/Window%20driver%20develop/Win10_%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
     <id>https://NoahBishop.github.io/2024/12/31/Window driver develop/Win10_驱动开发环境配置/</id>
     <published>2024-12-30T16:00:00.000Z</published>
-    <updated>2026-01-11T07:23:28.193Z</updated>
+    <updated>2026-01-11T08:45:59.895Z</updated>
     
     <summary type="html">
     
@@ -38,7 +68,67 @@
       <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="Windows, Driver, USB" scheme="https://NoahBishop.github.io/tags/Windows-Driver-USB/"/>
+      <category term="Windows" scheme="https://NoahBishop.github.io/tags/Windows/"/>
+    
+      <category term="Driver" scheme="https://NoahBishop.github.io/tags/Driver/"/>
+    
+      <category term="USB" scheme="https://NoahBishop.github.io/tags/USB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Basic packet capture</title>
+    <link href="https://NoahBishop.github.io/2024/11/30/USB/%E5%9F%BA%E7%A1%80%E6%8A%93%E5%8C%85%E7%9F%A5%E8%AF%86/"/>
+    <id>https://NoahBishop.github.io/2024/11/30/USB/基础抓包知识/</id>
+    <published>2024-11-29T16:00:00.000Z</published>
+    <updated>2026-01-11T08:57:58.423Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;How-to-capture-USB-packet-by-Wireshark&quot;&gt;&lt;a href=&quot;#How-to-capture-USB-packet-by-Wireshark&quot; class=&quot;headerlink&quot; title=&quot;How to capture
+        
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="USB" scheme="https://NoahBishop.github.io/tags/USB/"/>
+    
+      <category term="Network" scheme="https://NoahBishop.github.io/tags/Network/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>USB redirection process</title>
+    <link href="https://NoahBishop.github.io/2024/11/30/USB/%E4%B8%80%E4%BA%9B%E8%AE%BE%E5%A4%87%E7%9A%84%E9%87%8D%E5%AE%9A%E5%90%91%E6%B5%81%E7%A8%8B/"/>
+    <id>https://NoahBishop.github.io/2024/11/30/USB/一些设备的重定向流程/</id>
+    <published>2024-11-29T16:00:00.000Z</published>
+    <updated>2026-01-11T09:26:05.777Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;U盘重定向读取文件流程和分析&quot;&gt;&lt;a href=&quot;#U盘重定向读取文件流程和分析&quot; class=&quot;headerlink&quot; title=&quot;U盘重定向读取文件流程和分析&quot;&gt;&lt;/a&gt;U盘重定向读取文件流程和分析&lt;/h1&gt;&lt;h2 id=&quot;U盘重定向读取文件流程&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="USB" scheme="https://NoahBishop.github.io/tags/USB/"/>
+    
+      <category term="QEMU" scheme="https://NoahBishop.github.io/tags/QEMU/"/>
     
   </entry>
   
@@ -47,7 +137,7 @@
     <link href="https://NoahBishop.github.io/2022/07/01/Qt/essay_01_use%20cmake%20settting%20up%20Qt%20project/"/>
     <id>https://NoahBishop.github.io/2022/07/01/Qt/essay_01_use cmake settting up Qt project/</id>
     <published>2022-07-01T13:52:45.000Z</published>
-    <updated>2026-01-10T16:23:53.648Z</updated>
+    <updated>2026-01-11T08:41:44.527Z</updated>
     
     <summary type="html">
     
@@ -66,6 +156,8 @@
     
       <category term="Qt" scheme="https://NoahBishop.github.io/tags/Qt/"/>
     
+      <category term="Windows" scheme="https://NoahBishop.github.io/tags/Windows/"/>
+    
   </entry>
   
   <entry>
@@ -73,7 +165,7 @@
     <link href="https://NoahBishop.github.io/2021/12/12/Cpp%20primer/Cpp_c12/"/>
     <id>https://NoahBishop.github.io/2021/12/12/Cpp primer/Cpp_c12/</id>
     <published>2021-12-12T13:52:45.000Z</published>
-    <updated>2026-01-10T15:47:58.095Z</updated>
+    <updated>2026-01-11T08:41:44.521Z</updated>
     
     <summary type="html">
     
@@ -90,7 +182,9 @@
       <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="C/C++ basic" scheme="https://NoahBishop.github.io/tags/C-C-basic/"/>
+      <category term="C/C++" scheme="https://NoahBishop.github.io/tags/C-C/"/>
+    
+      <category term="basic" scheme="https://NoahBishop.github.io/tags/basic/"/>
     
   </entry>
   
@@ -99,7 +193,7 @@
     <link href="https://NoahBishop.github.io/2021/12/11/Cpp%20primer/Cpp_c11/"/>
     <id>https://NoahBishop.github.io/2021/12/11/Cpp primer/Cpp_c11/</id>
     <published>2021-12-11T13:52:45.000Z</published>
-    <updated>2026-01-10T15:48:00.033Z</updated>
+    <updated>2026-01-11T08:41:44.581Z</updated>
     
     <summary type="html">
     
@@ -116,7 +210,9 @@
       <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="C/C++ basic" scheme="https://NoahBishop.github.io/tags/C-C-basic/"/>
+      <category term="C/C++" scheme="https://NoahBishop.github.io/tags/C-C/"/>
+    
+      <category term="basic" scheme="https://NoahBishop.github.io/tags/basic/"/>
     
   </entry>
   
@@ -125,7 +221,7 @@
     <link href="https://NoahBishop.github.io/2021/12/10/Cpp%20primer/Cpp_c10/"/>
     <id>https://NoahBishop.github.io/2021/12/10/Cpp primer/Cpp_c10/</id>
     <published>2021-12-10T13:52:45.000Z</published>
-    <updated>2026-01-10T15:47:56.520Z</updated>
+    <updated>2026-01-11T08:41:44.594Z</updated>
     
     <summary type="html">
     
@@ -142,7 +238,9 @@
       <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="C/C++ basic" scheme="https://NoahBishop.github.io/tags/C-C-basic/"/>
+      <category term="C/C++" scheme="https://NoahBishop.github.io/tags/C-C/"/>
+    
+      <category term="basic" scheme="https://NoahBishop.github.io/tags/basic/"/>
     
   </entry>
   
@@ -151,7 +249,7 @@
     <link href="https://NoahBishop.github.io/2021/12/09/Cpp%20primer/Cpp_c09/"/>
     <id>https://NoahBishop.github.io/2021/12/09/Cpp primer/Cpp_c09/</id>
     <published>2021-12-09T13:52:45.000Z</published>
-    <updated>2026-01-10T15:47:53.092Z</updated>
+    <updated>2026-01-11T08:41:44.559Z</updated>
     
     <summary type="html">
     
@@ -168,7 +266,9 @@
       <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="C/C++ basic" scheme="https://NoahBishop.github.io/tags/C-C-basic/"/>
+      <category term="C/C++" scheme="https://NoahBishop.github.io/tags/C-C/"/>
+    
+      <category term="basic" scheme="https://NoahBishop.github.io/tags/basic/"/>
     
   </entry>
   
@@ -177,7 +277,7 @@
     <link href="https://NoahBishop.github.io/2021/12/08/Cpp%20primer/Cpp_c08/"/>
     <id>https://NoahBishop.github.io/2021/12/08/Cpp primer/Cpp_c08/</id>
     <published>2021-12-08T13:52:45.000Z</published>
-    <updated>2026-01-10T15:47:51.076Z</updated>
+    <updated>2026-01-11T08:41:44.637Z</updated>
     
     <summary type="html">
     
@@ -194,7 +294,9 @@
       <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="C/C++ basic" scheme="https://NoahBishop.github.io/tags/C-C-basic/"/>
+      <category term="C/C++" scheme="https://NoahBishop.github.io/tags/C-C/"/>
+    
+      <category term="basic" scheme="https://NoahBishop.github.io/tags/basic/"/>
     
   </entry>
   
@@ -203,7 +305,7 @@
     <link href="https://NoahBishop.github.io/2021/12/07/Cpp%20primer/Cpp_c07/"/>
     <id>https://NoahBishop.github.io/2021/12/07/Cpp primer/Cpp_c07/</id>
     <published>2021-12-07T13:52:45.000Z</published>
-    <updated>2026-01-10T15:47:48.674Z</updated>
+    <updated>2026-01-11T08:41:44.613Z</updated>
     
     <summary type="html">
     
@@ -220,7 +322,9 @@
       <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="C/C++ basic" scheme="https://NoahBishop.github.io/tags/C-C-basic/"/>
+      <category term="C/C++" scheme="https://NoahBishop.github.io/tags/C-C/"/>
+    
+      <category term="basic" scheme="https://NoahBishop.github.io/tags/basic/"/>
     
   </entry>
   
@@ -229,7 +333,7 @@
     <link href="https://NoahBishop.github.io/2021/12/06/Cpp%20primer/Cpp_c06/"/>
     <id>https://NoahBishop.github.io/2021/12/06/Cpp primer/Cpp_c06/</id>
     <published>2021-12-06T13:52:45.000Z</published>
-    <updated>2026-01-10T15:47:32.170Z</updated>
+    <updated>2026-01-11T08:41:44.664Z</updated>
     
     <summary type="html">
     
@@ -246,7 +350,9 @@
       <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="C/C++ basic" scheme="https://NoahBishop.github.io/tags/C-C-basic/"/>
+      <category term="C/C++" scheme="https://NoahBishop.github.io/tags/C-C/"/>
+    
+      <category term="basic" scheme="https://NoahBishop.github.io/tags/basic/"/>
     
   </entry>
   
@@ -255,7 +361,7 @@
     <link href="https://NoahBishop.github.io/2021/12/05/Cpp%20primer/Cpp_c05/"/>
     <id>https://NoahBishop.github.io/2021/12/05/Cpp primer/Cpp_c05/</id>
     <published>2021-12-05T13:52:45.000Z</published>
-    <updated>2026-01-10T15:47:39.380Z</updated>
+    <updated>2026-01-11T08:41:44.682Z</updated>
     
     <summary type="html">
     
@@ -272,7 +378,9 @@
       <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="C/C++ basic" scheme="https://NoahBishop.github.io/tags/C-C-basic/"/>
+      <category term="C/C++" scheme="https://NoahBishop.github.io/tags/C-C/"/>
+    
+      <category term="basic" scheme="https://NoahBishop.github.io/tags/basic/"/>
     
   </entry>
   
@@ -281,7 +389,7 @@
     <link href="https://NoahBishop.github.io/2021/12/04/Cpp%20primer/Cpp_c04/"/>
     <id>https://NoahBishop.github.io/2021/12/04/Cpp primer/Cpp_c04/</id>
     <published>2021-12-04T13:52:45.000Z</published>
-    <updated>2026-01-10T15:47:41.699Z</updated>
+    <updated>2026-01-11T08:41:44.649Z</updated>
     
     <summary type="html">
     
@@ -298,7 +406,9 @@
       <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="C/C++ basic" scheme="https://NoahBishop.github.io/tags/C-C-basic/"/>
+      <category term="C/C++" scheme="https://NoahBishop.github.io/tags/C-C/"/>
+    
+      <category term="basic" scheme="https://NoahBishop.github.io/tags/basic/"/>
     
   </entry>
   
@@ -307,7 +417,7 @@
     <link href="https://NoahBishop.github.io/2021/12/03/Cpp%20primer/Cpp_c03/"/>
     <id>https://NoahBishop.github.io/2021/12/03/Cpp primer/Cpp_c03/</id>
     <published>2021-12-03T13:52:45.000Z</published>
-    <updated>2026-01-10T15:47:43.871Z</updated>
+    <updated>2026-01-11T08:41:44.747Z</updated>
     
     <summary type="html">
     
@@ -324,7 +434,9 @@
       <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="C/C++ basic" scheme="https://NoahBishop.github.io/tags/C-C-basic/"/>
+      <category term="C/C++" scheme="https://NoahBishop.github.io/tags/C-C/"/>
+    
+      <category term="basic" scheme="https://NoahBishop.github.io/tags/basic/"/>
     
   </entry>
   
@@ -333,7 +445,7 @@
     <link href="https://NoahBishop.github.io/2021/12/02/Cpp%20primer/Cpp_c02/"/>
     <id>https://NoahBishop.github.io/2021/12/02/Cpp primer/Cpp_c02/</id>
     <published>2021-12-02T13:52:45.000Z</published>
-    <updated>2026-01-10T15:47:45.405Z</updated>
+    <updated>2026-01-11T08:41:44.705Z</updated>
     
     <summary type="html">
     
@@ -350,7 +462,9 @@
       <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="C/C++ basic" scheme="https://NoahBishop.github.io/tags/C-C-basic/"/>
+      <category term="C/C++" scheme="https://NoahBishop.github.io/tags/C-C/"/>
+    
+      <category term="basic" scheme="https://NoahBishop.github.io/tags/basic/"/>
     
   </entry>
   
@@ -359,7 +473,7 @@
     <link href="https://NoahBishop.github.io/2021/12/01/Cpp%20primer/Cpp_c01/"/>
     <id>https://NoahBishop.github.io/2021/12/01/Cpp primer/Cpp_c01/</id>
     <published>2021-12-01T13:52:45.000Z</published>
-    <updated>2026-01-10T15:47:33.705Z</updated>
+    <updated>2026-01-11T08:41:44.775Z</updated>
     
     <summary type="html">
     
@@ -376,7 +490,9 @@
       <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="C/C++ basic" scheme="https://NoahBishop.github.io/tags/C-C-basic/"/>
+      <category term="C/C++" scheme="https://NoahBishop.github.io/tags/C-C/"/>
+    
+      <category term="basic" scheme="https://NoahBishop.github.io/tags/basic/"/>
     
   </entry>
   

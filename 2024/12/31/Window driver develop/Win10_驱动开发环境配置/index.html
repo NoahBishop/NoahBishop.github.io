@@ -468,7 +468,7 @@
 </ol>
 <p><img src="https://s2.loli.net/2026/01/11/fdyXDapbvsFQEH6.png" alt="Visual Studio Installer 9_14_2023 4_11_45 PM.png"></p>
 <p><img src="https://s2.loli.net/2026/01/11/GUS8omrtnkEh4lI.jpg" alt="Screenshot 2023-09-18 092026.jpg"></p>
-<ol>
+<ol start="3">
 <li>WinDk（windows driver kit）for win10：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows-hardware/drivers/other-wdk-downloads">https://learn.microsoft.com/en-us/windows-hardware/drivers/other-wdk-downloads</a></li>
 </ol>
 <p><img src="https://s2.loli.net/2026/01/11/Wzkas2l1GXmtTJc.png" alt="Previous WDK versions and other downloads - Windows drivers _ Microsoft Learn - Google Chrome 9_14_2023 4_14_56 PM.png"></p>
@@ -476,22 +476,22 @@
 <li>使用vs2019直接打开SLN项目</li>
 </ol>
 <p><img src="https://s2.loli.net/2026/01/11/tBNE7jJ8bdlc4UT.png" alt="UsbDk - Microsoft Visual Studio 9_14_2023 4_20_01 PM.png"></p>
-<ol>
+<ol start="2">
 <li>右键修改项目配置：</li>
 </ol>
 <p><img src="https://s2.loli.net/2026/01/11/pgvFwZcilTK5uIh.jpg" alt="Screenshot 2023-09-14 162329.jpg"></p>
-<ol>
+<ol start="3">
 <li>确保除了USbdk_package外的4个项目更改项目配置如下：</li>
 </ol>
 <p><img src="https://s2.loli.net/2026/01/11/NwEoI9nUeGSWFA1.jpg" alt="Screenshot 2023-09-14 162701.jpg"></p>
-<ol>
-<li>编译配置选择Win10Debug X64的版本，替换到原生的Usbdk安装目录下C:\Program Files\UsbDk Runtime Library</li>
-<li>使用UsbDkController.exe进行新版本驱动的安装</li>
+<ol start="4">
+<li><p>编译配置选择Win10Debug X64的版本，替换到原生的Usbdk安装目录下C:\Program Files\UsbDk Runtime Library</p>
+</li>
+<li><p>使用UsbDkController.exe进行新版本驱动的安装</p>
+</li>
 </ol>
 <p><img src="https://s2.loli.net/2026/01/11/S7E4hz1L6DcOIrf.jpg" alt="Screenshot 2023-09-18 092416.jpg"></p>
-<ol>
-<li>无需重启就可以直接用到新的驱动</li>
-</ol>
+<p>无需重启就可以直接用到新的驱动</p>
 <h2 id="驱动双机调试"><a href="#驱动双机调试" class="headerlink" title="驱动双机调试"></a>驱动双机调试</h2><p>双机调试是驱动开发的基本需求，对于只有一台电脑可以使用虚拟机配合软件达成双机调试功能：</p>
 <p>需要用到软件：<a target="_blank" rel="noopener" href="https://github.com/4d61726b/VirtualKD-Redux">https://github.com/4d61726b/VirtualKD-Redux</a></p>
 <p>推荐使用VMware Workstation 16的版本，搭建好虚拟机之后，根据系统位数安装目录target64或者target32下面的软件在虚拟机中。</p>
@@ -623,19 +623,36 @@ NTSTATUS UsbDkEvtDeviceAdd(
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2025/01/31/USB/QEMU%E5%92%8CSPICE%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="" data-src="/images/cover/usb.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/usb.png">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                QEMU and Spice</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
         
           
-            <div class="post-nepre full next">
+            <div class="post-nepre half next">
           
-            <a href="/2022/07/01/Qt/essay_01_use%20cmake%20settting%20up%20Qt%20project/" rel="next">
+            <a href="/2024/11/30/USB/%E5%9F%BA%E7%A1%80%E6%8A%93%E5%8C%85%E7%9F%A5%E8%AF%86/" rel="next">
               <div class="background">
-                <img class="lazyload" src="" data-src="/images/cover/QtWithTorch.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/QtWithTorch.webp">
+                <img class="lazyload" src="" data-src="/images/cover/usb.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" src="/images/cover/usb.png">
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                Setting up Qt Projects with CMake and Linking External</h3>
+                Basic packet capture</h3>
                 <hr>
               </div>
             </a>
@@ -657,7 +674,7 @@ NTSTATUS UsbDkEvtDeviceAdd(
           </div>
         </div>
         <hr>
-        <p><i class="iconfont icon-write"></i>life is perfact</p>
+        <p><i class="iconfont icon-write"></i></p>
       </section>
     </main><!-- #main -->
   </div><!-- #primary -->
