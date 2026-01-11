@@ -46,21 +46,21 @@ function bot_ui_ini() {
 
     // ========== 初始化问候 ==========
     botui.message.add({
-        delay: 800,
+        delay: 400,
         content: "Hi, there👋"
     }).then(() => botui.message.add({
-        delay: 1100,
+        delay: 400,
         content: "私は真中有希です"
     })).then(() => botui.message.add({
-        delay: 1100,
+        delay: 400,
         content: "はじめましで~"
     })).then(() => botui.action.button({
-        delay: 1600,
+        delay: 800,
         action: [{
             text: "开始聊天 💬",
             value: "chat"
         }, {
-            text: "不了，谢谢 🙄",
+            text: "不了，谢谢 🤐",
             value: "skip"
         }]
     })).then(res => {
@@ -136,7 +136,7 @@ function bot_ui_ini() {
             console.error("API Error:", error);
             await botui.message.update(loadingMsg, {
                 loading: false,
-                content: "あれ？出了点问题... 😅 再试一次吧！"
+                content: "あれ？出了点问题... 😵‍💫 再试一次吧！"
             });
         }
 
