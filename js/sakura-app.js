@@ -992,19 +992,6 @@ function get_poem(poem_ele, info_ele) {
   xhr.send()
 }
 
-// function loadBotui() {
-//     if ($('div').hasClass('popcontainer')) {
-//         if (mashiro_global.variables.has_bot_ui) {
-//             bot_ui_ini();
-//         } else {
-//             $.getScript('https://cdn.jsdelivr.net/gh/moezx/cdn@latest/js/botui/botui.js', function () {
-//                 bot_ui_ini();
-//                 mashiro_global.variables.has_bot_ui = true;
-//             });
-//         }
-//     }
-// }
-
 function mail_me() {
   var mail = 'mailto:' + mashiro_option.email_name + '@' + mashiro_option.email_domain
   window.open(mail)
