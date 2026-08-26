@@ -5,27 +5,8 @@ var _typeof = typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol
   return a && typeof Symbol === 'function' && a.constructor === Symbol && a !== Symbol.prototype ? 'symbol' : typeof a
 }
 
-function cloneObject(a) {
-  if (a == null || (typeof a === 'undefined' ? 'undefined' : _typeof(a)) != 'object') return a
-  if (a instanceof Date) {
-    var e = new Date(a.getDate())
-    return e
-  }
-  if (a instanceof Array) {
-    for (var e = [], c = 0, f = a.length; c < f; c++) e[c] = a[c]
-    return e
-  }
-  if (a instanceof Object) {
-    e = {}
-    for (c in a) a.hasOwnProperty(c) && (e[c] = cloneObject(a[c]))
-    return e
-  }
-}
-
 mashiro_global.variables = new function () {
   this.has_bot_ui = false
-  this.isNight = false
-  this.skinSecter = false
 }()
 mashiro_global.ini = new function () {
   this.normalize = function () {
@@ -291,96 +272,23 @@ function copy_code_block() {
   var clipboard = new ClipboardJS('.copy-code')
 }
 
-function attach_image() {
-  $('#upload-img-file').change(function () {
-    if (this.files.length > 10) {
-      addComment.createButterbar('每次上传上限为10张.<br>10 files max per request.')
-      return 0
+var addComment = {
+  clearButterbar: function () {
+    if (jQuery('.butterBar').length > 0) {
+      jQuery('.butterBar').remove()
     }
-    for (i = 0; i < this.files.length; i++) {
-      if (this.files[i].size >= 5242880) {
-        alert('图片上传大小限制为5 MB.\n5 MB max per file.\n\n「' + this.files[i].name + '」\n\n这张图太大啦~\nThis image is too large~')
-      }
+  },
+  createButterbar: function (message, showtime) {
+    var t = this
+    t.clearButterbar()
+    jQuery('body').append('<div class="butterBar butterBar--center"><p class="butterBar-message">' + message + '</p></div>')
+    if (showtime > 0) {
+      setTimeout("jQuery('.butterBar').remove()", showtime)
+    } else {
+      setTimeout("jQuery('.butterBar').remove()", 6000)
     }
-    for (var i = 0; i < this.files.length; i++) {
-      var f = this.files[i]
-      var formData = new FormData()
-      formData.append('smfile', f)
-      $.ajax({
-        url: 'https://sm.ms/api/upload',
-        type: 'POST',
-        processData: false,
-        contentType: false,
-        data: formData,
-        beforeSend: function (xhr) {
-          $('.insert-image-tips').html('<i class="fa fa-spinner rotating" aria-hidden="true"></i>')
-          addComment.createButterbar('上传中...<br>Uploading...')
-        }, success: function (res) {
-          $('.insert-image-tips').html('<i class="fa fa-check" aria-hidden="true"></i>')
-          setTimeout(function () {
-            $('.insert-image-tips').html('<i class="fa fa-picture-o" aria-hidden="true"></i>')
-          }, 1000)
-          var get_the_url = res.data.url.replace('https://i.loli.net/', 'https://static.shino.cc/user-upload/')
-          $('#upload-img-show').append('<img class="lazyload upload-image-preview" src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.2/img/svg/loader/trans.ajax-spinner-preloader.svg" data-src="' + get_the_url + '" onclick="window.open(\'' + get_the_url + '\')" onerror="imgError(this)" />')
-          lazyload()
-          addComment.createButterbar('图片上传成功~<br>Uploaded successfully~')
-          grin(res.data.url.replace('https://i.loli.net/', '{UPLOAD}'), type = 'Img')
-        }, error: function () {
-          $('.insert-image-tips').html('<i class="fa fa-times" aria-hidden="true" style="color:red"></i>')
-          alert('上传失败，请重试.\nUpload failed, please try again.')
-          setTimeout(function () {
-            $('.insert-image-tips').html('<i class="fa fa-picture-o" aria-hidden="true"></i>')
-          }, 1000)
-        }
-      })
-    }
-  })
+  }
 }
-
-function clean_upload_images() {
-  $('#upload-img-show').html('')
-}
-
-function add_upload_tips() {
-  $('<div class="insert-image-tips popup"><i class="fa fa-picture-o" aria-hidden="true"></i><span class="insert-img-popuptext" id="uploadTipPopup">上传图片</span></div><input id="upload-img-file" type="file" accept="image/*" multiple="multiple" class="insert-image-button">').insertAfter($('.form-submit #submit'))
-  attach_image()
-  $('#upload-img-file').hover(function () {
-    $('.insert-image-tips').addClass('insert-image-tips-hover')
-    $('#uploadTipPopup').addClass('show')
-  }, function () {
-    $('.insert-image-tips').removeClass('insert-image-tips-hover')
-    $('#uploadTipPopup').removeClass('show')
-  })
-}
-
-function click_to_view_image() {
-  $('.comment_inline_img').click(function () {
-    var temp_url = $(this).attr('src')
-    window.open(temp_url)
-  })
-}
-click_to_view_image()
-
-function original_emoji_click() {
-  $('.emoji-item').click(function () {
-    grin($(this).text(), type = 'custom', before = '`', after = '` ')
-  })
-}
-original_emoji_click()
-
-function showPopup(ele) {
-  var popup = ele.querySelector('#thePopup')
-  popup.classList.toggle('show')
-}
-
-function cmt_showPopup(ele) {
-  var popup = $(ele).find('#thePopup')
-  popup.addClass('show')
-  $(ele).find('input').blur(function () {
-    popup.removeClass('show')
-  })
-}
-
 function headertop_down() {
   var coverOffset = $('#content').offset().top
   $('html,body').animate({
@@ -415,146 +323,11 @@ function scrollBar() {
         $('#bar').css('background', 'orange')
       }
       $('.toc-container').css('height', $('.site-content').outerHeight())
-      $('.skin-menu').removeClass('show')
     })
   }
 }
 scrollBar()
-'主题切换代码好恶心，有空一定要重构'
-
-function checkBgImgCookie() {
-  var bgurl = getCookie('bgImgSetting')
-  if (!bgurl) {
-    $('#banner_wave_1').removeClass('banner_wave_hide_fit_skin')
-    $('#banner_wave_2').removeClass('banner_wave_hide_fit_skin')
-  } else {
-    $('#banner_wave_1').addClass('banner_wave_hide_fit_skin')
-    $('#banner_wave_2').addClass('banner_wave_hide_fit_skin')
-  }
-  if (bgurl != '') {
-    if (bgurl == 'https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/themebg/sakura.png' || bgurl == 'https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/themebg/plaid.jpg' || bgurl == 'https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/themebg/star.png' || bgurl == 'https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/themebg/point.png' || bgurl == 'https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/themebg/little-monster.png') {
-      mashiro_global.variables.skinSecter = true
-      mashiro_global.variables.isNight = false
-      $('#night-mode-cover').css('visibility', 'hidden')
-      $('body').css('background-image', 'url(' + bgurl + ')')
-      $('.blank').css('background-color', 'rgba(255,255,255,1)')
-      $('.pattern-center').removeClass('pattern-center').addClass('pattern-center-sakura')
-      $('.headertop-bar').removeClass('headertop-bar').addClass('headertop-bar-sakura')
-    } else if (bgurl == 'https://api.shino.cc/bing/') {
-      mashiro_global.variables.skinSecter = true
-      mashiro_global.variables.isNight = true
-      $('#night-mode-cover').css('visibility', 'hidden')
-      $('body').css('background-image', 'url(' + bgurl + ')')
-      $('.blank').css('background-color', 'rgba(255,255,255,1)')
-      $('.pattern-center').removeClass('pattern-center').addClass('pattern-center-sakura')
-      $('.headertop-bar').removeClass('headertop-bar').addClass('headertop-bar-sakura')
-    } else { }
-  } else {
-    return false
-  }
-}
-if (document.body.clientWidth > 860) {
-  checkBgImgCookie()
-}
-
-function no_right_click() {
-  $('.post-thumb img').bind('contextmenu', function (e) {
-    return false
-  })
-}
-if (mashiro_global.variables.isNight) {
-  $('.changeSkin-gear, .toc').css('background', 'rgba(255,255,255,0.8)')
-} else {
-  $('.changeSkin-gear, .toc').css('background', 'none')
-}
-$(document).ready(function () {
-  function changeBG(tagid, url) {
-    $('.skin-menu ' + tagid).click(function () {
-      mashiro_global.variables.skinSecter = true
-      mashiro_global.variables.isNight = false
-      $('#night-mode-cover').css('visibility', 'hidden')
-      $('body').css('background-image', 'url(' + url + ')')
-      $('.blank').css('background-color', 'rgba(255,255,255,1)')
-      $('.pattern-center').removeClass('pattern-center').addClass('pattern-center-sakura')
-      $('.headertop-bar').removeClass('headertop-bar').addClass('headertop-bar-sakura')
-      $('#banner_wave_1').addClass('banner_wave_hide_fit_skin')
-      $('#banner_wave_2').addClass('banner_wave_hide_fit_skin')
-      closeSkinMenu()
-      setCookie('bgImgSetting', url, 30)
-    })
-  }
-
-  function changeBGnoTrans(tagid, url) {
-    $('.skin-menu ' + tagid).click(function () {
-      mashiro_global.variables.skinSecter = true
-      mashiro_global.variables.isNight = true
-      $('#night-mode-cover').css('visibility', 'hidden')
-      $('body').css('background-image', 'url(' + url + ')')
-      $('.blank').css('background-color', 'rgba(255,255,255,1)')
-      $('.pattern-center').removeClass('pattern-center').addClass('pattern-center-sakura')
-      $('.headertop-bar').removeClass('headertop-bar').addClass('headertop-bar-sakura')
-      $('#banner_wave_1').addClass('banner_wave_hide_fit_skin')
-      $('#banner_wave_2').addClass('banner_wave_hide_fit_skin')
-      closeSkinMenu()
-      setCookie('bgImgSetting', url, 30)
-    })
-  }
-  changeBG('#sakura-bg', 'https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/themebg/sakura.png')
-  changeBG('#gribs-bg', 'https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/themebg/plaid.jpg')
-  changeBG('#pixiv-bg', 'https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/themebg/star.png')
-  changeBG('#KAdots-bg', 'https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/themebg/point.png')
-  changeBG('#totem-bg', 'https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/themebg/little-monster.png')
-  changeBGnoTrans('#bing-bg', 'https://api.shino.cc/bing/')
-  $('.skin-menu #white-bg').click(function () {
-    mashiro_global.variables.skinSecter = false
-    mashiro_global.variables.isNight = false
-    $('#night-mode-cover').css('visibility', 'hidden')
-    $('body').css('background-image', 'none')
-    $('.blank').css('background-color', 'rgba(255,255,255,.0)')
-    $('.pattern-center-sakura').removeClass('pattern-center-sakura').addClass('pattern-center')
-    $('.headertop-bar-sakura').removeClass('headertop-bar-sakura').addClass('headertop-bar')
-    $('#banner_wave_1').removeClass('banner_wave_hide_fit_skin')
-    $('#banner_wave_2').removeClass('banner_wave_hide_fit_skin')
-    closeSkinMenu()
-    setCookie('bgImgSetting', '', 30)
-  })
-  $('.skin-menu #dark-bg').click(function () {
-    mashiro_global.variables.skinSecter = true
-    mashiro_global.variables.isNight = true
-    $('body').css('background-image', 'url(https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/starry_sky.png)')
-    $('.blank').css('background-color', 'rgba(255,255,255,.8)')
-    $('#night-mode-cover').css('visibility', 'visible')
-    $('.pattern-center').removeClass('pattern-center').addClass('pattern-center-sakura')
-    $('.headertop-bar').removeClass('headertop-bar').addClass('headertop-bar-sakura')
-    $('#banner_wave_1').addClass('banner_wave_hide_fit_skin')
-    $('#banner_wave_2').addClass('banner_wave_hide_fit_skin')
-    closeSkinMenu()
-  })
-
-  function closeSkinMenu() {
-    $('.skin-menu').removeClass('show')
-    setTimeout(function () {
-      $('.changeSkin-gear').css('visibility', 'visible')
-    }, 300)
-    if (mashiro_global.variables.isNight) {
-      $('.changeSkin-gear, .toc').css('background', 'rgba(255,255,255,0.8)')
-    } else {
-      $('.changeSkin-gear, .toc').css('background', 'none')
-    }
-  }
-  $('.changeSkin-gear').click(function () {
-    $('.skin-menu').toggleClass('show')
-    if (mashiro_global.variables.isNight) {
-      $('.changeSkin').css('background', 'rgba(255,255,255,0.8)')
-    } else {
-      $('.changeSkin').css('background', 'none')
-    }
-  })
-  $('.skin-menu #close-skinMenu').click(function () {
-    closeSkinMenu()
-  })
-  add_upload_tips()
-})
+'主题切换代码已移除'
 
 function nextBG() {
   bgindex = bgindex + 1
@@ -665,32 +438,15 @@ function timeSeriesReload(flag) {
 timeSeriesReload()
 
 var pjaxInit = function () {
-  add_upload_tips()
-  click_to_view_image()
-  original_emoji_click()
   mashiro_global.font_control.ini()
   $('p').remove('.head-copyright')
   try {
     code_highlight_style()
   } catch (e) { };
-  try {
-    inlojv_js_getqqinfo()
-  } catch (e) { };
   lazyload()
-  // if ($("div").hasClass("popcontainer")) {
-  //     loadBotui();
-  // }
   try {
     reload_show_date_time()
   } catch (e) { }
-  if (mashiro_global.variables.skinSecter === true) {
-    $('.pattern-center').removeClass('pattern-center').addClass('pattern-center-sakura')
-    $('.headertop-bar').removeClass('headertop-bar').addClass('headertop-bar-sakura')
-    if (mashiro_global.variables.isNight) {
-      $('.blank').css('background-color', 'rgba(255,255,255,1)')
-      $('.toc').css('background-color', 'rgba(255,255,255,0.8)')
-    }
-  }
   $('.iconflat').css('width', '50px').css('height', '50px')
   $('.openNav').css('height', '50px')
   $('#bg-next').click(function () {
@@ -699,38 +455,9 @@ var pjaxInit = function () {
   $('#bg-pre').click(function () {
     preBG()
   })
-  smileBoxToggle()
   timeSeriesReload()
   add_copyright()
   console.log($('#myscript').text())
-}
-$(document).on('click', '.sm', function () {
-  var msg = '您真的要设为私密吗？'
-  if (confirm(msg) == true) {
-    $(this).commentPrivate()
-  } else {
-    aler('已取消')
-  }
-})
-$.fn.commentPrivate = function () {
-  if ($(this).hasClass('private_now')) {
-    alert('您之前已设过私密评论')
-    return false
-  } else {
-    $(this).addClass('private_now')
-    var idp = $(this).data('idp'),
-      actionp = $(this).data('actionp'),
-      rateHolderp = $(this).children('.has_set_private')
-    var ajax_data = {
-      action: 'siren_private',
-      p_id: idp,
-      p_action: actionp
-    }
-    $.post('/wp-admin/admin-ajax.php', ajax_data, function (data) {
-      $(rateHolderp).html(data)
-    })
-    return false
-  }
 }
 
 function show_date_time() {
@@ -760,65 +487,6 @@ function motionSwitch(ele) {
   $(ele + '-bar').addClass('on-hover')
   $(ele + '-container').css('display', 'block')
 }
-$('.comt-addsmilies').click(function () {
-  $('.comt-smilies').toggle()
-})
-$('.comt-smilies a').click(function () {
-  $(this).parent().hide()
-})
-
-function smileBoxToggle() {
-  $(document).ready(function () {
-    $('#emotion-toggle').click(function () {
-      $('.emotion-toggle-off').toggle(0)
-      $('.emotion-toggle-on').toggle(0)
-      $('.emotion-box').toggle(160)
-    })
-  })
-}
-smileBoxToggle()
-
-function grin(tag, type, before, after) {
-  var myField
-  if (type == 'custom') {
-    tag = before + tag + after
-  } else if (type == 'Img') {
-    tag = '[img]' + tag + '[/img]'
-  } else if (type == 'Math') {
-    tag = ' f(x)=∫(' + tag + ')sec²xdx '
-  } else {
-    tag = ' :' + tag + ': '
-  }
-  if (document.getElementById('comment') && document.getElementById('comment').type == 'textarea') {
-    myField = document.getElementById('comment')
-  } else {
-    return false
-  }
-  if (document.selection) {
-    myField.focus()
-    sel = document.selection.createRange()
-    sel.text = tag
-    myField.focus()
-  } else if (myField.selectionStart || myField.selectionStart == '0') {
-    var startPos = myField.selectionStart
-    var endPos = myField.selectionEnd
-    var cursorPos = endPos
-    myField.value = myField.value.substring(0, startPos) + tag + myField.value.substring(endPos, myField.value.length)
-    cursorPos += tag.length
-    myField.focus()
-    myField.selectionStart = cursorPos
-    myField.selectionEnd = cursorPos
-  } else {
-    myField.value += tag
-    myField.focus()
-  }
-}
-// if ($("div").hasClass("popcontainer")) {
-//     loadBotui();
-// }
-// $("bot-ui").click(function () {
-//     loadBotui();
-// });
 
 function add_copyright() {
   document.body.addEventListener('copy', function (e) {
@@ -841,141 +509,6 @@ function add_copyright() {
   }
 }
 add_copyright()
-$(function () {
-  inlojv_js_getqqinfo()
-})
-
-function inlojv_js_getqqinfo() {
-  var is_get_by_qq = false
-  var qq_test = /^[0-9]+$/
-  if (!getCookie('user_qq') && !getCookie('user_qq_email') && !getCookie('user_author')) {
-    $('input#qq,input#author,input#email,input#url').val('')
-  }
-  if (getCookie('user_avatar') && getCookie('user_qq') && getCookie('user_qq_email')) {
-    $('div.comment-user-avatar img').attr('src', getCookie('user_avatar'))
-    $('input#author').val(getCookie('user_author'))
-    $('input#email').val(getCookie('user_qq') + '@qq.com')
-    $('input#qq').val(getCookie('user_qq'))
-    if (mashiro_option.qzone_autocomplete) {
-      $('input#url').val('https://user.qzone.qq.com/' + getCookie('user_qq'))
-    }
-    if ($('input#qq').val()) {
-      $('.qq-check').css('display', 'block')
-      $('.gravatar-check').css('display', 'none')
-    }
-  }
-  var emailAddressFlag = $('input#email').val()
-  $('input#author').on('blur', function () {
-    var qq = $('input#author').val()
-    $.ajax({
-      type: 'get',
-      url: mashiro_option.qq_api_url + '?type=getqqnickname&qq=' + qq,
-      dataType: 'jsonp',
-      jsonp: 'callback',
-      jsonpCallback: 'portraitCallBack',
-      success: function (data) {
-        $('input#author').val(data[qq][6])
-        $('input#email').val($.trim(qq) + '@qq.com')
-        if (mashiro_option.qzone_autocomplete) {
-          $('input#url').val('https://user.qzone.qq.com/' + $.trim(qq))
-        }
-        $('div.comment-user-avatar img').attr('src', 'https://q2.qlogo.cn/headimg_dl?dst_uin=' + qq + '&spec=100')
-        is_get_by_qq = true
-        $('input#qq').val($.trim(qq))
-        if ($('input#qq').val()) {
-          $('.qq-check').css('display', 'block')
-          $('.gravatar-check').css('display', 'none')
-        }
-        setCookie('user_author', data[qq][6], 30)
-        setCookie('user_qq', qq, 30)
-        setCookie('is_user_qq', 'yes', 30)
-        setCookie('user_qq_email', qq + '@qq.com', 30)
-        setCookie('user_email', qq + '@qq.com', 30)
-        emailAddressFlag = $('input#email').val()
-      }, error: function () {
-        if (qq_test.test(qq)) {
-          addComment.createButterbar('QQ号不存在（建议不要使用纯数字昵称）')
-        }
-        $('input#qq').val('')
-        $('.qq-check').css('display', 'none')
-        $('.gravatar-check').css('display', 'block')
-        $('div.comment-user-avatar img').attr('src', get_gravatar($('input#email').val(), 80))
-        setCookie('user_qq', '', 30)
-        setCookie('user_email', $('input#email').val(), 30)
-        setCookie('user_avatar', get_gravatar($('input#email').val(), 80), 30)
-      }
-    })
-    $.ajax({
-      type: 'get',
-      url: mashiro_option.qq_avatar_api_url + '?type=getqqavatar&qq=' + qq,
-      dataType: 'jsonp',
-      jsonp: 'callback',
-      jsonpCallback: 'qqavatarCallBack',
-      beforeSend: function () {
-        if (qq_test.test(qq)) {
-          addComment.createButterbar('正在获取QQ头像...')
-        }
-      }, success: function (data) {
-        $('div.comment-user-avatar img').attr('src', data[qq])
-        addComment.createButterbar('QQ头像获取成功')
-        setCookie('user_avatar', data[qq], 30)
-      }, error: function () {
-        if (qq_test.test(qq)) {
-          addComment.createButterbar('QQ号不存在（建议不要使用纯数字昵称）')
-        }
-        $('input#qq', 'input#email', 'input#url').val('')
-        if (!$('input#qq').val()) {
-          $('.qq-check').css('display', 'none')
-          $('.gravatar-check').css('display', 'block')
-          setCookie('user_qq', '', 30)
-          $('div.comment-user-avatar img').attr('src', get_gravatar($('input#email').val(), 80))
-          setCookie('user_avatar', get_gravatar($('input#email').val(), 80), 30)
-        }
-      }
-    })
-  })
-  if (getCookie('user_avatar') && getCookie('user_email') && getCookie('is_user_qq') == 'no' && !getCookie('user_qq_email')) {
-    $('div.comment-user-avatar img').attr('src', getCookie('user_avatar'))
-    $('input#email').val(getCookie('user_email'))
-    $('input#qq').val('')
-    if (!$('input#qq').val()) {
-      $('.qq-check').css('display', 'none')
-      $('.gravatar-check').css('display', 'block')
-    }
-  }
-  $('input#email').on('blur', function () {
-    var emailAddress = $('input#email').val()
-    if (is_get_by_qq == false || emailAddressFlag != emailAddress) {
-      $('div.comment-user-avatar img').attr('src', get_gravatar(emailAddress, 80))
-      setCookie('user_avatar', get_gravatar(emailAddress, 80), 30)
-      setCookie('user_email', emailAddress, 30)
-      setCookie('user_qq_email', '', 30)
-      setCookie('is_user_qq', 'no', 30)
-      $('input#qq').val('')
-      if (!$('input#qq').val()) {
-        $('.qq-check').css('display', 'none')
-        $('.gravatar-check').css('display', 'block')
-      }
-    }
-  })
-  if (getCookie('user_url')) {
-    $('input#url').val(getCookie('user_url'))
-  }
-  $('input#url').on('blur', function () {
-    var URL_Address = $('input#url').val()
-    $('input#url').val(URL_Address)
-    setCookie('user_url', URL_Address, 30)
-  })
-  if (getCookie('user_author')) {
-    $('input#author').val(getCookie('user_author'))
-  }
-  $('input#author').on('blur', function () {
-    var user_name = $('input#author').val()
-    $('input#author').val(user_name)
-    setCookie('user_author', user_name, 30)
-  })
-}
-
 function get_poem(poem_ele, info_ele) {
   var poem = document.querySelector(poem_ele)
   var info = document.querySelector(info_ele)
@@ -992,11 +525,6 @@ function get_poem(poem_ele, info_ele) {
   xhr.send()
 }
 
-function mail_me() {
-  var mail = 'mailto:' + mashiro_option.email_name + '@' + mashiro_option.email_domain
-  window.open(mail)
-}
-
 function hearthstone_deck_iframe() {
   if ($('iframe').hasClass('hearthstone-deck')) {
     $('.hearthstone-deck').each(function () {
@@ -1008,30 +536,6 @@ function hearthstone_deck_iframe() {
     })
   }
 }
-var currentFontIsUbuntu = true
-
-// function changeFont() {
-//     if (currentFontIsUbuntu) {
-//         loadCSS("https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.8/css/cn.css");
-//         currentFontIsUbuntu = false;
-//     } else {
-//         loadCSS("https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.8/css/or.css");
-//         currentFontIsUbuntu = true;
-//     }
-// }
-
-// function convertChinese(zh) {
-//     if (zh == 'cn') {
-//         $("#zh_cn").css("display", "none");
-//         $("#zh_tw").css("display", "inline-block");
-//         loadCSS("https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.8/css/tw.css");
-//     }
-//     if (zh == 'tw') {
-//         $("#zh_tw").css("display", "none");
-//         $("#zh_cn").css("display", "inline-block");
-//         loadCSS("https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.8/css/cn.css");
-//     }
-// }
 mashiro_global.ini.normalize()
 
 var home = location.href,
@@ -1326,142 +830,6 @@ var home = location.href,
         })
         return false
       })
-    }, XCS: function () {
-      var __cancel = jQuery('#cancel-comment-reply-link'),
-        __cancel_text = __cancel.text(),
-        __list = 'commentwrap'
-      jQuery(document).on('submit', '#commentform', function () {
-        jQuery.ajax({
-          url: Poi.ajaxurl,
-          data: jQuery(this).serialize() + '&action=ajax_comment',
-          type: jQuery(this).attr('method'),
-          beforeSend: addComment.createButterbar('提交中(Commiting)....'),
-          error: function (request) {
-            var t = addComment
-            t.createButterbar(request.responseText)
-          }, success: function (data) {
-            jQuery('textarea').each(function () {
-              this.value = ''
-            })
-            var t = addComment,
-              cancel = t.I('cancel-comment-reply-link'),
-              temp = t.I('wp-temp-form-div'),
-              respond = t.I(t.respondId),
-              post = t.I('comment_post_ID').value,
-              parent = t.I('comment_parent').value
-            if (parent != '0') {
-              jQuery('#respond').before('<ol class="children">' + data + '</ol>')
-            } else if (!jQuery('.' + __list).length) {
-              if (Poi.formpostion == 'bottom') {
-                jQuery('#respond').before('<ol class="' + __list + '">' + data + '</ol>')
-              } else {
-                jQuery('#respond').after('<ol class="' + __list + '">' + data + '</ol>')
-              }
-            } else {
-              if (Poi.order == 'asc') {
-                jQuery('.' + __list).append(data)
-              } else {
-                jQuery('.' + __list).prepend(data)
-              }
-            }
-            t.createButterbar('提交成功(Succeed)')
-            lazyload()
-            code_highlight_style()
-            click_to_view_image()
-            clean_upload_images()
-            cancel.style.display = 'none'
-            cancel.onclick = null
-            t.I('comment_parent').value = '0'
-            if (temp && respond) {
-              temp.parentNode.insertBefore(respond, temp)
-              temp.parentNode.removeChild(temp)
-            }
-          }
-        })
-        return false
-      })
-      addComment = {
-        moveForm: function (commId, parentId, respondId) {
-          var t = this,
-            div, comm = t.I(commId),
-            respond = t.I(respondId),
-            cancel = t.I('cancel-comment-reply-link'),
-            parent = t.I('comment_parent'),
-            post = t.I('comment_post_ID')
-          __cancel.text(__cancel_text)
-          t.respondId = respondId
-          if (!t.I('wp-temp-form-div')) {
-            div = document.createElement('div')
-            div.id = 'wp-temp-form-div'
-            div.style.display = 'none'
-            respond.parentNode.insertBefore(div, respond)
-          } !comm ? (temp = t.I('wp-temp-form-div'), t.I('comment_parent').value = '0', temp.parentNode.insertBefore(respond, temp), temp.parentNode.removeChild(temp)) : comm.parentNode.insertBefore(respond, comm.nextSibling)
-          jQuery('body').animate({
-            scrollTop: jQuery('#respond').offset().top - 180
-          }, 400)
-          parent.value = parentId
-          cancel.style.display = ''
-          cancel.onclick = function () {
-            var t = addComment,
-              temp = t.I('wp-temp-form-div'),
-              respond = t.I(t.respondId)
-            t.I('comment_parent').value = '0'
-            if (temp && respond) {
-              temp.parentNode.insertBefore(respond, temp)
-              temp.parentNode.removeChild(temp)
-            }
-            this.style.display = 'none'
-            this.onclick = null
-            return false
-          }
-          try {
-            t.I('comment').focus()
-          } catch (e) { }
-          return false
-        }, I: function (e) {
-          return document.getElementById(e)
-        }, clearButterbar: function (e) {
-          if (jQuery('.butterBar').length > 0) {
-            jQuery('.butterBar').remove()
-          }
-        }, createButterbar: function (message, showtime) {
-          var t = this
-          t.clearButterbar()
-          jQuery('body').append('<div class="butterBar butterBar--center"><p class="butterBar-message">' + message + '</p></div>')
-          if (showtime > 0) {
-            setTimeout("jQuery('.butterBar').remove()", showtime)
-          } else {
-            setTimeout("jQuery('.butterBar').remove()", 6000)
-          }
-        }
-      }
-    }, XCP: function () {
-      $body = (window.opera) ? (document.compatMode == 'CSS1Compat' ? $('html') : $('body')) : $('html,body')
-      $('body').on('click', '#comments-navi a', function (e) {
-        e.preventDefault()
-        $.ajax({
-          type: 'GET',
-          url: $(this).attr('href'),
-          beforeSend: function () {
-            $('#comments-navi').remove()
-            $('ul.commentwrap').remove()
-            $('#loading-comments').slideDown()
-            $body.animate({
-              scrollTop: $('#comments-list-title').offset().top - 65
-            }, 800)
-          }, dataType: 'html',
-          success: function (out) {
-            result = $(out).find('ul.commentwrap')
-            nextlink = $(out).find('#comments-navi')
-            $('#loading-comments').slideUp('fast')
-            $('#loading-comments').after(result.fadeIn(500))
-            $('ul.commentwrap').after(nextlink)
-            lazyload()
-            code_highlight_style()
-            click_to_view_image()
-          }
-        })
-      })
     }, IA: function () {
       POWERMODE.colorful = true
       POWERMODE.shake = false
@@ -1474,14 +842,12 @@ var home = location.href,
       $(window).scroll(function () {
         if ($(this).scrollTop() > offset) {
           $back_to_top.addClass('cd-is-visible')
-          $('.changeSkin-gear').css('bottom', '0')
           if ($(window).height() > 950) {
             $('.cd-top.cd-is-visible').css('top', '0')
           } else {
             $('.cd-top.cd-is-visible').css('top', ($(window).height() - 950) + 'px')
           }
         } else {
-          $('.changeSkin-gear').css('bottom', '-999px')
           $('.cd-top.cd-is-visible').css('top', '-900px')
           $back_to_top.removeClass('cd-is-visible cd-fade-out')
         }
@@ -1503,8 +869,6 @@ $(function () {
   Siren.NH()
   Siren.GT()
   Siren.XLS()
-  Siren.XCS()
-  Siren.XCP()
   Siren.CE()
   Siren.MN()
   Siren.IA()
@@ -1532,13 +896,6 @@ $(function () {
       if (Poi.codelamp == 'open') {
         self.Prism.highlightAll(event)
       };
-      if ($('.ds-thread').length > 0) {
-        if (typeof DUOSHUO !== 'undefined') {
-          DUOSHUO.EmbedThread('.ds-thread')
-        } else {
-          $.getScript('//static.duoshuo.com/embed.js')
-        }
-      }
     }).on('submit', '.search-form,.s-search', function (event) {
       event.preventDefault()
       $.pjax.submit(event, '#page', {
@@ -1565,28 +922,6 @@ $(function () {
       timeSeriesReload(true)
     }, false)
   }
-  $.fn.postLike = function () {
-    if ($(this).hasClass('done')) {
-      return false
-    } else {
-      $(this).addClass('done')
-      var id = $(this).data('id'),
-        action = $(this).data('action'),
-        rateHolder = $(this).children('.count')
-      var ajax_data = {
-        action: 'specs_zan',
-        um_id: id,
-        um_action: action
-      }
-      $.post(Poi.ajaxurl, ajax_data, function (data) {
-        $(rateHolder).html(data)
-      })
-      return false
-    }
-  }
-  $(document).on('click', '.specsZan', function () {
-    $(this).postLike()
-  })
   console.log('%c Mashiro %c', 'background:#24272A; color:#ffffff', '', 'https://2heng.xin/')
   console.log('%c hojun %c', 'background:#24272A; color:#ffffff', '', 'https://www.hojun.cn/')
   console.log('%c Github %c', 'background:#24272A; color:#ffffff', '', 'https://github.com/honjun/hexo-theme-sakura')
@@ -1610,11 +945,6 @@ if ((isWebkit || isOpera || isIe) && document.getElementById && window.addEventL
     }
   }, false)
 }
-// loadCSS(mashiro_option.jsdelivr_css_src);
-// loadCSS("https://at.alicdn.com/t/font_679578_dishi1yoavm.css");
-// loadCSS("https://cdn.jsdelivr.net/gh/moezx/cdn@3.5.4/fonts/Moe-Mashiro/stylesheet.css");
-// loadCSS("https://fonts.googleapis.com/css?family=Noto+SerifMerriweather|Merriweather+Sans|Source+Code+Pro|Ubuntu:400,700");
-// loadCSS("https://cdn.jsdelivr.net/gh/moezx/cdn@3.3.9/css/sharejs.css");;
 
 function render(template, context) {
   var tokenReg = /(\\)?\{([^\{\}\\]+)(\\)?\}/g
@@ -1640,9 +970,6 @@ String.prototype.render = function (context) {
 $(document).ready(function () {
   setTimeout(function () {
     isFirstLoad = true
-    if (document.body.clientWidth > 860) {
-      $('.changeSkin-gear').css('visibility', 'visible')
-    }
     $('p').remove('.head-copyright')
   }, 0)
 })

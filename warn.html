@@ -1,35 +1,224 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- saved from url=(0024)http://yansu.org/ie.html -->
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>WARNING：Not support current brower</title>
-    <link rel="icon" href="/images/favicon.png">
-    <meta name="robots" content="noindex">
-    <style type="text/css">
-      body {
-        width:600px;
-        margin:50px auto;
-        font:14px/1.5 'Trebuchet MS', sans-serif;
-        text-align:center;
-        background-color:#fafafa;
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Browser Notice</title>
+  <link rel="icon" href="/images/favicon.ico">
+  <style>
+    :root {
+      --bg: #fff9f7;
+      --panel: rgba(255, 255, 255, 0.78);
+      --text: #43343a;
+      --muted: #7d6a73;
+      --line: rgba(255, 173, 186, 0.35);
+      --accent: #ff8ea1;
+      --accent-strong: #f46c88;
+      --shadow: 0 24px 60px rgba(190, 120, 138, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255, 211, 220, 0.8), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(255, 225, 204, 0.7), transparent 28%),
+        linear-gradient(180deg, #fffdfc 0%, #fff5f7 100%);
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: auto;
+      width: 36vmax;
+      height: 36vmax;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    body::before {
+      top: -12vmax;
+      right: -10vmax;
+      background: rgba(255, 180, 196, 0.5);
+    }
+
+    body::after {
+      bottom: -16vmax;
+      left: -12vmax;
+      background: rgba(255, 216, 189, 0.45);
+    }
+
+    .petals {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .petal {
+      position: absolute;
+      top: -10%;
+      width: 18px;
+      height: 12px;
+      background: linear-gradient(135deg, #ffd6df, #ff9db3);
+      border-radius: 70% 0 70% 0;
+      opacity: 0.75;
+      animation: fall linear infinite;
+    }
+
+    .petal:nth-child(1) { left: 8%; animation-duration: 11s; animation-delay: -2s; }
+    .petal:nth-child(2) { left: 23%; animation-duration: 13s; animation-delay: -6s; }
+    .petal:nth-child(3) { left: 39%; animation-duration: 10s; animation-delay: -4s; }
+    .petal:nth-child(4) { left: 56%; animation-duration: 14s; animation-delay: -8s; }
+    .petal:nth-child(5) { left: 74%; animation-duration: 12s; animation-delay: -5s; }
+    .petal:nth-child(6) { left: 88%; animation-duration: 15s; animation-delay: -9s; }
+
+    .card {
+      position: relative;
+      width: min(92vw, 760px);
+      padding: 48px 42px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: var(--panel);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      text-align: center;
+      z-index: 1;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      font-size: 40px;
+      color: white;
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      box-shadow: 0 16px 32px rgba(244, 108, 136, 0.28);
+    }
+
+    h1 {
+      margin: 22px 0 12px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: 0.04em;
+    }
+
+    .lead {
+      margin: 0 auto 12px;
+      max-width: 34rem;
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    .browsers {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 28px 0 10px;
+    }
+
+    .browser {
+      padding: 16px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 180, 196, 0.32);
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--text);
+      text-decoration: none;
+      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+    }
+
+    .browser:hover {
+      transform: translateY(-4px);
+      border-color: rgba(244, 108, 136, 0.45);
+      box-shadow: 0 14px 26px rgba(244, 108, 136, 0.16);
+    }
+
+    .browser strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .browser span {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .tip {
+      margin-top: 24px;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translate3d(0, -10vh, 0) rotate(0deg);
       }
-      h1 {
-        margin:0;
-        color:#7D8B99;
-        font-size:180px;
+      100% {
+        transform: translate3d(-6vw, 115vh, 0) rotate(360deg);
       }
-      h2, p {
-        color:#7D8B99;
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 36px 22px;
+        border-radius: 22px;
       }
-      a {
-        color:#2EB695;
-        text-decoration:none;
+
+      .browsers {
+        grid-template-columns: 1fr;
       }
-    </style>
+    }
+  </style>
 </head>
 <body>
-    <h1>!</h1>
-    <h2>Not support IE9 and below</h2>
-    <h2>为保持体验良好，本站禁止不支持H5的浏览器访问</h2>
-    <p>墙裂推荐使用 <a href="https://www.chrome.com/" target="_blank">Chrome</a> 或 <a href="http://www.mozilla.org/" target="_blank">Firefox</a> 浏览器访问本站。</p>
+  <div class="petals" aria-hidden="true">
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+  </div>
+
+  <main class="card">
+    <div class="badge">!</div>
+    <h1>当前浏览器版本过旧</h1>
+    <p class="lead">为了保证页面动画、排版和交互体验，这个站点不再兼容 IE 及其他过旧浏览器。换一个现代浏览器，访问会顺畅很多。</p>
+    <p class="lead">This site is designed for modern browsers. Please open it with a newer browser for the full experience.</p>
+
+    <div class="browsers">
+      <a class="browser" href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer">
+        <strong>Chrome</strong>
+        <span>Fast and stable</span>
+      </a>
+      <a class="browser" href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener noreferrer">
+        <strong>Firefox</strong>
+        <span>Open and reliable</span>
+      </a>
+      <a class="browser" href="https://www.microsoft.com/edge" target="_blank" rel="noopener noreferrer">
+        <strong>Edge</strong>
+        <span>Modern on Windows</span>
+      </a>
+    </div>
+
+    <p class="tip">升级浏览器后，重新打开本站首页即可。</p>
+  </main>
 </body>
 </html>

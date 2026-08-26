@@ -1,70 +1,284 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <title>404 - Page Not Found</title>
-    <style>
-        body {
-            background-color: #fe7676;
-            font-family: 'Lobster', cursive;
-            text-align: center;
-            color: #fdf0f0;
-            margin: 0;
-            padding: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>404 - Page Not Found</title>
+  <link rel="icon" href="/images/favicon.ico">
+  <style>
+    :root {
+      --bg-top: #fff8f6;
+      --bg-bottom: #fff0f5;
+      --panel: rgba(255, 255, 255, 0.76);
+      --text: #43343a;
+      --muted: #7a6870;
+      --accent: #ff8ba0;
+      --accent-deep: #f46886;
+      --peach: #ffd8c2;
+      --line: rgba(255, 176, 191, 0.35);
+      --shadow: 0 28px 70px rgba(199, 132, 149, 0.18);
+    }
 
-        h1 {
-            font-size: 6em;
-            margin-top: 20vh;
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        p {
-            font-size: 2em;
-            margin-top: 5vh;
-            margin-bottom: 10vh;
-        }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      overflow: hidden;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 220, 226, 0.85), transparent 24%),
+        radial-gradient(circle at 80% 15%, rgba(255, 229, 206, 0.75), transparent 20%),
+        radial-gradient(circle at 50% 100%, rgba(255, 205, 220, 0.45), transparent 26%),
+        linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+    }
 
-        a {
-            display: inline-block;
-            font-size: 1.5em;
-            padding: 10px 20px;
-            border: 3px solid #fdf0f0;
-            border-radius: 20px;
-            text-decoration: none;
-            color: #fdf0f0;
-            transition: all 0.3s ease-in-out;
-        }
+    .petals {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
 
-        a:hover {
-            background-color: #fdf0f0;
-            color: #fe7676;
-        }
+    .petal {
+      position: absolute;
+      top: -12%;
+      width: 20px;
+      height: 13px;
+      background: linear-gradient(135deg, #ffd4de, #ff97af);
+      border-radius: 70% 0 70% 0;
+      opacity: 0.78;
+      animation: drift linear infinite;
+    }
 
-        @media only screen and (max-width: 768px) {
-            h1 {
-                font-size: 4em;
-                margin-top: 15vh;
-            }
+    .petal:nth-child(1) { left: 6%; animation-duration: 12s; animation-delay: -2s; }
+    .petal:nth-child(2) { left: 18%; animation-duration: 15s; animation-delay: -8s; }
+    .petal:nth-child(3) { left: 31%; animation-duration: 11s; animation-delay: -4s; }
+    .petal:nth-child(4) { left: 47%; animation-duration: 14s; animation-delay: -9s; }
+    .petal:nth-child(5) { left: 63%; animation-duration: 13s; animation-delay: -5s; }
+    .petal:nth-child(6) { left: 77%; animation-duration: 16s; animation-delay: -10s; }
+    .petal:nth-child(7) { left: 91%; animation-duration: 12.5s; animation-delay: -6s; }
 
-            p {
-                font-size: 1.5em;
-                margin-top: 3vh;
-                margin-bottom: 7.5vh;
-            }
-        }
-    </style>
+    .shell {
+      position: relative;
+      width: min(960px, 100%);
+      padding: 42px;
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      background: var(--panel);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 28px;
+      z-index: 1;
+    }
+
+    .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.68);
+      color: var(--accent-deep);
+      font-size: 0.92rem;
+      letter-spacing: 0.08em;
+    }
+
+    .code {
+      margin: 0;
+      font-size: clamp(4.5rem, 15vw, 8rem);
+      line-height: 0.9;
+      letter-spacing: 0.04em;
+      color: var(--accent-deep);
+      text-shadow: 0 14px 30px rgba(244, 104, 134, 0.18);
+    }
+
+    h1 {
+      margin: 18px 0 12px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.15;
+    }
+
+    p {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--muted);
+      max-width: 34rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 150px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease, background 0.24s ease;
+    }
+
+    .button.primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+      box-shadow: 0 18px 30px rgba(244, 104, 134, 0.24);
+    }
+
+    .button.secondary {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.7);
+      border-color: rgba(255, 176, 191, 0.4);
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+    }
+
+    .illustration {
+      position: relative;
+      min-height: 360px;
+      border-radius: 26px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0.04)),
+        url("/images/background/sakura.jpg") center/cover no-repeat;
+    }
+
+    .illustration::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(255, 244, 247, 0.1), rgba(255, 235, 241, 0.35)),
+        radial-gradient(circle at 70% 22%, rgba(255, 255, 255, 0.65), transparent 20%);
+    }
+
+    .floating-card {
+      position: absolute;
+      right: 22px;
+      bottom: 22px;
+      left: 22px;
+      padding: 18px 18px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      z-index: 1;
+    }
+
+    .floating-card strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .floating-card span {
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.7;
+    }
+
+    .countdown {
+      margin-top: 18px;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    @keyframes drift {
+      0% {
+        transform: translate3d(0, -10vh, 0) rotate(0deg);
+      }
+      100% {
+        transform: translate3d(-7vw, 115vh, 0) rotate(380deg);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .shell {
+        padding: 24px;
+        grid-template-columns: 1fr;
+      }
+
+      .illustration {
+        min-height: 260px;
+        order: -1;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .actions {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
-
 <body>
-    <h1>Oops!</h1>
-    <p>We can't find the page you're looking for.</p>
-    <a href="/">Take me to the homepage</a>
-    <script>
-        setTimeout(function () {
-            window.location.href = '/';
-        }, 3000);
-    </script>
-</body>
+  <div class="petals" aria-hidden="true">
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+  </div>
 
+  <main class="shell">
+    <section class="left">
+      <span class="eyebrow">Lost In Sakura</span>
+      <p class="code">404</p>
+      <h1>这片花海里，没有你要找的页面</h1>
+      <p>链接可能已经失效、文章被移动，或者你只是刚好踩进了一片还没开放的小路。回到首页继续逛，通常会比停在这里更有收获。</p>
+      <p style="margin-top: 10px;">The page may have moved, expired, or never existed. The homepage is a much better place to continue.</p>
+
+      <div class="actions">
+        <a class="button primary" href="/">返回首页</a>
+        <a class="button secondary" href="/archives/">看看归档</a>
+      </div>
+
+      <p class="countdown">5 秒后会自动回到首页。</p>
+    </section>
+
+    <section class="illustration" aria-hidden="true">
+      <div class="floating-card">
+        <strong>Tip</strong>
+        <span>如果你是从旧书签或外部链接进来的，这个地址大概已经改动过了。</span>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    setTimeout(function () {
+      window.location.href = "/";
+    }, 5000);
+  </script>
+</body>
 </html>

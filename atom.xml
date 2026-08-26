@@ -38,11 +38,11 @@
       <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
+      <category term="QEMU" scheme="https://NoahBishop.github.io/tags/QEMU/"/>
+    
       <category term="USB" scheme="https://NoahBishop.github.io/tags/USB/"/>
     
       <category term="Network" scheme="https://NoahBishop.github.io/tags/Network/"/>
-    
-      <category term="QEMU" scheme="https://NoahBishop.github.io/tags/QEMU/"/>
     
   </entry>
   
@@ -70,7 +70,35 @@
     
       <category term="Windows" scheme="https://NoahBishop.github.io/tags/Windows/"/>
     
+      <category term="USB" scheme="https://NoahBishop.github.io/tags/USB/"/>
+    
       <category term="Driver" scheme="https://NoahBishop.github.io/tags/Driver/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>USB redirection process</title>
+    <link href="https://NoahBishop.github.io/2024/11/30/USB/%E4%B8%80%E4%BA%9B%E8%AE%BE%E5%A4%87%E7%9A%84%E9%87%8D%E5%AE%9A%E5%90%91%E6%B5%81%E7%A8%8B/"/>
+    <id>https://NoahBishop.github.io/2024/11/30/USB/一些设备的重定向流程/</id>
+    <published>2024-11-29T16:00:00.000Z</published>
+    <updated>2026-01-11T09:26:05.777Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;U盘重定向读取文件流程和分析&quot;&gt;&lt;a href=&quot;#U盘重定向读取文件流程和分析&quot; class=&quot;headerlink&quot; title=&quot;U盘重定向读取文件流程和分析&quot;&gt;&lt;/a&gt;U盘重定向读取文件流程和分析&lt;/h1&gt;&lt;h2 id=&quot;U盘重定向读取文件流程&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="QEMU" scheme="https://NoahBishop.github.io/tags/QEMU/"/>
     
       <category term="USB" scheme="https://NoahBishop.github.io/tags/USB/"/>
     
@@ -101,34 +129,6 @@
       <category term="USB" scheme="https://NoahBishop.github.io/tags/USB/"/>
     
       <category term="Network" scheme="https://NoahBishop.github.io/tags/Network/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>USB redirection process</title>
-    <link href="https://NoahBishop.github.io/2024/11/30/USB/%E4%B8%80%E4%BA%9B%E8%AE%BE%E5%A4%87%E7%9A%84%E9%87%8D%E5%AE%9A%E5%90%91%E6%B5%81%E7%A8%8B/"/>
-    <id>https://NoahBishop.github.io/2024/11/30/USB/一些设备的重定向流程/</id>
-    <published>2024-11-29T16:00:00.000Z</published>
-    <updated>2026-01-11T09:26:05.777Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;U盘重定向读取文件流程和分析&quot;&gt;&lt;a href=&quot;#U盘重定向读取文件流程和分析&quot; class=&quot;headerlink&quot; title=&quot;U盘重定向读取文件流程和分析&quot;&gt;&lt;/a&gt;U盘重定向读取文件流程和分析&lt;/h1&gt;&lt;h2 id=&quot;U盘重定向读取文件流程&quot;&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="USB" scheme="https://NoahBishop.github.io/tags/USB/"/>
-    
-      <category term="QEMU" scheme="https://NoahBishop.github.io/tags/QEMU/"/>
     
   </entry>
   
