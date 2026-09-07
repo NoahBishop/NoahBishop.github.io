@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://NoahBishop.github.io/"/>
-  <updated>2026-01-11T08:58:22.925Z</updated>
+  <updated>2026-09-07T12:34:30.717Z</updated>
   <id>https://NoahBishop.github.io/</id>
   
   <author>
@@ -17,9 +17,37 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Building a Video Player using Qt and FFmpeg</title>
+    <link href="https://NoahBishop.github.io/2026/09/07/Qt/Building_a_Video_Player_using_Qt_and_FFmpeg/"/>
+    <id>https://NoahBishop.github.io/2026/09/07/Qt/Building_a_Video_Player_using_Qt_and_FFmpeg/</id>
+    <published>2026-09-07T12:00:00.000Z</published>
+    <updated>2026-09-07T12:34:30.717Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Building-a-Video-Player-using-Qt-and-FFmpeg&quot;&gt;&lt;a href=&quot;#Building-a-Video-Player-using-Qt-and-FFmpeg&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="https://NoahBishop.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Qt" scheme="https://NoahBishop.github.io/tags/Qt/"/>
+    
+      <category term="FFmpeg" scheme="https://NoahBishop.github.io/tags/FFmpeg/"/>
+    
+  </entry>
+  
+  <entry>
     <title>QEMU and Spice</title>
-    <link href="https://NoahBishop.github.io/2025/01/31/USB/QEMU%E5%92%8CSPICE%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/"/>
-    <id>https://NoahBishop.github.io/2025/01/31/USB/QEMU和SPICE相关知识/</id>
+    <link href="https://NoahBishop.github.io/2025/01/31/USB/Qemu_and_spice_related_knowledge/"/>
+    <id>https://NoahBishop.github.io/2025/01/31/USB/Qemu_and_spice_related_knowledge/</id>
     <published>2025-01-30T16:00:00.000Z</published>
     <updated>2026-01-11T08:58:22.925Z</updated>
     
@@ -48,8 +76,8 @@
   
   <entry>
     <title>Windows driver develop</title>
-    <link href="https://NoahBishop.github.io/2024/12/31/Window%20driver%20develop/Win10_%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
-    <id>https://NoahBishop.github.io/2024/12/31/Window driver develop/Win10_驱动开发环境配置/</id>
+    <link href="https://NoahBishop.github.io/2024/12/31/Windows_driver_development/Win10_driver_development_environment_setup/"/>
+    <id>https://NoahBishop.github.io/2024/12/31/Windows_driver_development/Win10_driver_development_environment_setup/</id>
     <published>2024-12-30T16:00:00.000Z</published>
     <updated>2026-01-11T08:45:59.895Z</updated>
     
@@ -78,8 +106,8 @@
   
   <entry>
     <title>USB redirection process</title>
-    <link href="https://NoahBishop.github.io/2024/11/30/USB/%E4%B8%80%E4%BA%9B%E8%AE%BE%E5%A4%87%E7%9A%84%E9%87%8D%E5%AE%9A%E5%90%91%E6%B5%81%E7%A8%8B/"/>
-    <id>https://NoahBishop.github.io/2024/11/30/USB/一些设备的重定向流程/</id>
+    <link href="https://NoahBishop.github.io/2024/11/30/USB/Usb_device_redirection_process/"/>
+    <id>https://NoahBishop.github.io/2024/11/30/USB/Usb_device_redirection_process/</id>
     <published>2024-11-29T16:00:00.000Z</published>
     <updated>2026-01-11T09:26:05.777Z</updated>
     
@@ -106,8 +134,8 @@
   
   <entry>
     <title>Basic packet capture</title>
-    <link href="https://NoahBishop.github.io/2024/11/30/USB/%E5%9F%BA%E7%A1%80%E6%8A%93%E5%8C%85%E7%9F%A5%E8%AF%86/"/>
-    <id>https://NoahBishop.github.io/2024/11/30/USB/基础抓包知识/</id>
+    <link href="https://NoahBishop.github.io/2024/11/30/USB/Usb_packet_capture_basics/"/>
+    <id>https://NoahBishop.github.io/2024/11/30/USB/Usb_packet_capture_basics/</id>
     <published>2024-11-29T16:00:00.000Z</published>
     <updated>2026-01-11T08:57:58.423Z</updated>
     
@@ -134,8 +162,8 @@
   
   <entry>
     <title>Setting up Qt Projects with CMake and Linking External</title>
-    <link href="https://NoahBishop.github.io/2022/07/01/Qt/essay_01_use%20cmake%20settting%20up%20Qt%20project/"/>
-    <id>https://NoahBishop.github.io/2022/07/01/Qt/essay_01_use cmake settting up Qt project/</id>
+    <link href="https://NoahBishop.github.io/2022/07/01/Qt/Use_cmake_setting_up_qt_project/"/>
+    <id>https://NoahBishop.github.io/2022/07/01/Qt/Use_cmake_setting_up_qt_project/</id>
     <published>2022-07-01T13:52:45.000Z</published>
     <updated>2026-01-11T08:41:44.527Z</updated>
     
@@ -162,10 +190,10 @@
   
   <entry>
     <title>(ch12) Templates and Generic Programming (Not completed yet)</title>
-    <link href="https://NoahBishop.github.io/2021/12/12/Cpp%20primer/Cpp_c12/"/>
-    <id>https://NoahBishop.github.io/2021/12/12/Cpp primer/Cpp_c12/</id>
-    <published>2021-12-12T13:52:45.000Z</published>
-    <updated>2026-01-11T08:41:44.521Z</updated>
+    <link href="https://NoahBishop.github.io/2021/12/12/Cpp_primer/Chapter_12/"/>
+    <id>https://NoahBishop.github.io/2021/12/12/Cpp_primer/Chapter_12/</id>
+    <published>2021-12-11T16:00:00.000Z</published>
+    <updated>2026-08-27T06:32:51.926Z</updated>
     
     <summary type="html">
     
@@ -190,10 +218,10 @@
   
   <entry>
     <title>(ch11) Object-Oriented Programming</title>
-    <link href="https://NoahBishop.github.io/2021/12/11/Cpp%20primer/Cpp_c11/"/>
-    <id>https://NoahBishop.github.io/2021/12/11/Cpp primer/Cpp_c11/</id>
-    <published>2021-12-11T13:52:45.000Z</published>
-    <updated>2026-01-11T08:41:44.581Z</updated>
+    <link href="https://NoahBishop.github.io/2021/12/11/Cpp_primer/Chapter_11/"/>
+    <id>https://NoahBishop.github.io/2021/12/11/Cpp_primer/Chapter_11/</id>
+    <published>2021-12-10T16:00:00.000Z</published>
+    <updated>2026-08-27T06:32:55.037Z</updated>
     
     <summary type="html">
     
@@ -218,10 +246,10 @@
   
   <entry>
     <title>(ch10) Overloaded Operations and Conversions</title>
-    <link href="https://NoahBishop.github.io/2021/12/10/Cpp%20primer/Cpp_c10/"/>
-    <id>https://NoahBishop.github.io/2021/12/10/Cpp primer/Cpp_c10/</id>
-    <published>2021-12-10T13:52:45.000Z</published>
-    <updated>2026-01-11T08:41:44.594Z</updated>
+    <link href="https://NoahBishop.github.io/2021/12/10/Cpp_primer/Chapter_10/"/>
+    <id>https://NoahBishop.github.io/2021/12/10/Cpp_primer/Chapter_10/</id>
+    <published>2021-12-09T16:00:00.000Z</published>
+    <updated>2026-08-27T06:32:55.944Z</updated>
     
     <summary type="html">
     
@@ -246,10 +274,10 @@
   
   <entry>
     <title>(ch9) Copy Control</title>
-    <link href="https://NoahBishop.github.io/2021/12/09/Cpp%20primer/Cpp_c09/"/>
-    <id>https://NoahBishop.github.io/2021/12/09/Cpp primer/Cpp_c09/</id>
-    <published>2021-12-09T13:52:45.000Z</published>
-    <updated>2026-01-11T08:41:44.559Z</updated>
+    <link href="https://NoahBishop.github.io/2021/12/09/Cpp_primer/Chapter_09/"/>
+    <id>https://NoahBishop.github.io/2021/12/09/Cpp_primer/Chapter_09/</id>
+    <published>2021-12-08T16:00:00.000Z</published>
+    <updated>2026-08-27T06:32:56.611Z</updated>
     
     <summary type="html">
     
@@ -274,10 +302,10 @@
   
   <entry>
     <title>(ch8) Dynamic Memory</title>
-    <link href="https://NoahBishop.github.io/2021/12/08/Cpp%20primer/Cpp_c08/"/>
-    <id>https://NoahBishop.github.io/2021/12/08/Cpp primer/Cpp_c08/</id>
-    <published>2021-12-08T13:52:45.000Z</published>
-    <updated>2026-01-11T08:41:44.637Z</updated>
+    <link href="https://NoahBishop.github.io/2021/12/08/Cpp_primer/Chapter_08/"/>
+    <id>https://NoahBishop.github.io/2021/12/08/Cpp_primer/Chapter_08/</id>
+    <published>2021-12-07T16:00:00.000Z</published>
+    <updated>2026-08-27T06:32:57.317Z</updated>
     
     <summary type="html">
     
@@ -302,10 +330,10 @@
   
   <entry>
     <title>(ch7) Associative Containers</title>
-    <link href="https://NoahBishop.github.io/2021/12/07/Cpp%20primer/Cpp_c07/"/>
-    <id>https://NoahBishop.github.io/2021/12/07/Cpp primer/Cpp_c07/</id>
-    <published>2021-12-07T13:52:45.000Z</published>
-    <updated>2026-01-11T08:41:44.613Z</updated>
+    <link href="https://NoahBishop.github.io/2021/12/07/Cpp_primer/Chapter_07/"/>
+    <id>https://NoahBishop.github.io/2021/12/07/Cpp_primer/Chapter_07/</id>
+    <published>2021-12-06T16:00:00.000Z</published>
+    <updated>2026-08-27T06:32:57.975Z</updated>
     
     <summary type="html">
     
@@ -330,10 +358,10 @@
   
   <entry>
     <title>(ch6) Generic Algorithms</title>
-    <link href="https://NoahBishop.github.io/2021/12/06/Cpp%20primer/Cpp_c06/"/>
-    <id>https://NoahBishop.github.io/2021/12/06/Cpp primer/Cpp_c06/</id>
-    <published>2021-12-06T13:52:45.000Z</published>
-    <updated>2026-01-11T08:41:44.664Z</updated>
+    <link href="https://NoahBishop.github.io/2021/12/06/Cpp_primer/Chapter_06/"/>
+    <id>https://NoahBishop.github.io/2021/12/06/Cpp_primer/Chapter_06/</id>
+    <published>2021-12-05T16:00:00.000Z</published>
+    <updated>2026-08-27T06:32:58.650Z</updated>
     
     <summary type="html">
     
@@ -358,10 +386,10 @@
   
   <entry>
     <title>(ch5) Sequential Containers</title>
-    <link href="https://NoahBishop.github.io/2021/12/05/Cpp%20primer/Cpp_c05/"/>
-    <id>https://NoahBishop.github.io/2021/12/05/Cpp primer/Cpp_c05/</id>
-    <published>2021-12-05T13:52:45.000Z</published>
-    <updated>2026-01-11T08:41:44.682Z</updated>
+    <link href="https://NoahBishop.github.io/2021/12/05/Cpp_primer/Chapter_05/"/>
+    <id>https://NoahBishop.github.io/2021/12/05/Cpp_primer/Chapter_05/</id>
+    <published>2021-12-04T16:00:00.000Z</published>
+    <updated>2026-08-27T06:32:59.349Z</updated>
     
     <summary type="html">
     
@@ -386,10 +414,10 @@
   
   <entry>
     <title>(ch4) The C++ IO Library</title>
-    <link href="https://NoahBishop.github.io/2021/12/04/Cpp%20primer/Cpp_c04/"/>
-    <id>https://NoahBishop.github.io/2021/12/04/Cpp primer/Cpp_c04/</id>
-    <published>2021-12-04T13:52:45.000Z</published>
-    <updated>2026-01-11T08:41:44.649Z</updated>
+    <link href="https://NoahBishop.github.io/2021/12/04/Cpp_primer/Chapter_04/"/>
+    <id>https://NoahBishop.github.io/2021/12/04/Cpp_primer/Chapter_04/</id>
+    <published>2021-12-03T16:00:00.000Z</published>
+    <updated>2026-08-27T06:32:59.932Z</updated>
     
     <summary type="html">
     
@@ -414,10 +442,10 @@
   
   <entry>
     <title>(ch3) C++ Basic Features - Operators And Statements</title>
-    <link href="https://NoahBishop.github.io/2021/12/03/Cpp%20primer/Cpp_c03/"/>
-    <id>https://NoahBishop.github.io/2021/12/03/Cpp primer/Cpp_c03/</id>
-    <published>2021-12-03T13:52:45.000Z</published>
-    <updated>2026-01-11T08:41:44.747Z</updated>
+    <link href="https://NoahBishop.github.io/2021/12/03/Cpp_primer/Chapter_03/"/>
+    <id>https://NoahBishop.github.io/2021/12/03/Cpp_primer/Chapter_03/</id>
+    <published>2021-12-02T16:00:00.000Z</published>
+    <updated>2026-08-27T06:33:00.646Z</updated>
     
     <summary type="html">
     
@@ -442,10 +470,10 @@
   
   <entry>
     <title>(ch2) C++ Basic Features - Type</title>
-    <link href="https://NoahBishop.github.io/2021/12/02/Cpp%20primer/Cpp_c02/"/>
-    <id>https://NoahBishop.github.io/2021/12/02/Cpp primer/Cpp_c02/</id>
-    <published>2021-12-02T13:52:45.000Z</published>
-    <updated>2026-01-11T08:41:44.705Z</updated>
+    <link href="https://NoahBishop.github.io/2021/12/02/Cpp_primer/Chapter_02/"/>
+    <id>https://NoahBishop.github.io/2021/12/02/Cpp_primer/Chapter_02/</id>
+    <published>2021-12-01T16:00:00.000Z</published>
+    <updated>2026-08-27T06:33:01.854Z</updated>
     
     <summary type="html">
     
@@ -470,10 +498,10 @@
   
   <entry>
     <title>(ch1) Getting Started C++</title>
-    <link href="https://NoahBishop.github.io/2021/12/01/Cpp%20primer/Cpp_c01/"/>
-    <id>https://NoahBishop.github.io/2021/12/01/Cpp primer/Cpp_c01/</id>
-    <published>2021-12-01T13:52:45.000Z</published>
-    <updated>2026-01-11T08:41:44.775Z</updated>
+    <link href="https://NoahBishop.github.io/2021/12/01/Cpp_primer/Chapter_01/"/>
+    <id>https://NoahBishop.github.io/2021/12/01/Cpp_primer/Chapter_01/</id>
+    <published>2021-11-30T16:00:00.000Z</published>
+    <updated>2026-08-27T06:32:24.666Z</updated>
     
     <summary type="html">
     
